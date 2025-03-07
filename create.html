@@ -18,61 +18,292 @@
     <link rel="stylesheet" href="assets/css/color_skins.css">
     <link href="assets/css/customStyle.css">
 </head>
-<body>
-    <div class="container-fluid">    
-        <div class="row clearfix">
-            <div class="col-lg-12 col-md-12">
-                <div class="card product-report">
-                    <div class="header">
-                        <h3>Create Post:</h3>
-                    </div>
-                    <div class="body">
-                        <div class="row clearfix m-b-15">
-                            <div class="col-lg-4 col-md-6 col-sm-12">
-                                <h5>Title:</h5>
-                                <input id="title" type="text">
+<body class="theme-orange">
+    <!-- Page Loader -->
+    <div class="page-loader-wrapper">
+        <div class="loader">        
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <p>Please wait...</p>
+            <div class="m-t-30"><img src="" width="48" height="48" alt="Nexa"></div>
+        </div>
+    </div>
+    <!-- Overlay For Sidebars -->
+    <div class="overlay"></div><!-- Search  -->
+    <div class="search-bar">
+        <div class="search-icon"> <i class="material-icons">search</i> </div>
+        <input type="text" placeholder="Explore Nexa...">
+        <div class="close-search"> <i class="material-icons">close</i> </div>
+    </div>
+    
+    <!-- Top Bar -->
+    <nav class="navbar">
+        <div class="col-12">        
+            <div class="navbar-header">
+                <a href="javascript:void(0);" class="bars"></a>
+                <a class="navbar-brand" href="index.html">Website Name</a>  <!--PLACEHOLDER NAME-->
+            </div>
+            <ul class="nav navbar-nav navbar-left">
+                <li><a href="javascript:void(0);" class="ls-toggle-btn" data-close="true"><i class="material-icons">swap_horiz</i></a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="javascript:void(0);" class="js-search" data-close="true"><i class="zmdi zmdi-search"></i></a></li>
+                <li class="dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle xs-hide" data-toggle="dropdown" role="button"><i class="material-icons">notifications</i>
+                        <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
+                    </a>
+                    <ul class="dropdown-menu slideDown">
+                        <li class="header">NOTIFICATIONS</li>
+                        <li class="body">
+                            <ul class="menu list-unstyled">
+                                <li><a href="javascript:void(0);">
+                                    <div class="icon-circle l-coral"> <i class="material-icons">person_add</i> </div>
+                                    <div class="menu-info">
+                                        <h4>12 new members joined</h4>
+                                        <p> <i class="material-icons">access_time</i> 14 mins ago </p>
+                                    </div>
+                                    </a></li>
+                                <li><a href="javascript:void(0);">
+                                    <div class="icon-circle l-turquoise"> <i class="material-icons">add_shopping_cart</i> </div>
+                                    <div class="menu-info">
+                                        <h4>4 sales made</h4>
+                                        <p> <i class="material-icons">access_time</i> 22 mins ago </p>
+                                    </div>
+                                    </a></li>
+                                <li><a href="javascript:void(0);">
+                                    <div class="icon-circle g-bg-cyan"> <i class="material-icons">delete_forever</i> </div>
+                                    <div class="menu-info">
+                                        <h4><b>Nancy Doe</b> deleted account</h4>
+                                        <p> <i class="material-icons">access_time</i> 3 hours ago </p>
+                                    </div>
+                                    </a></li>
+                                <li><a href="javascript:void(0);">
+                                    <div class="icon-circle g-bg-blue"> <i class="material-icons">mode_edit</i> </div>
+                                    <div class="menu-info">
+                                        <h4><b>Nancy</b> changed name</h4>
+                                        <p> <i class="material-icons">access_time</i> 2 hours ago </p>
+                                    </div>
+                                    </a></li>
+                                <li><a href="javascript:void(0);">
+                                    <div class="icon-circle l-slategray"> <i class="material-icons">comment</i> </div>
+                                    <div class="menu-info">
+                                        <h4><b>John</b> commented your post</h4>
+                                        <p> <i class="material-icons">access_time</i> 4 hours ago </p>
+                                    </div>
+                                    </a></li>
+                                <li><a href="javascript:void(0);">
+                                    <div class="icon-circle l-seagreen"> <i class="material-icons">cached</i> </div>
+                                    <div class="menu-info">
+                                        <h4><b>John</b> updated status</h4>
+                                        <p> <i class="material-icons">access_time</i> 3 hours ago </p>
+                                    </div>
+                                    </a></li>
+                                <li><a href="javascript:void(0);">
+                                    <div class="icon-circle l-blue"> <i class="material-icons">settings</i> </div>
+                                    <div class="menu-info">
+                                        <h4>Settings updated</h4>
+                                        <p> <i class="material-icons">access_time</i> Yesterday </p>
+                                    </div>
+                                    </a></li>
+                            </ul>
+                        </li>
+                        <li class="footer"><a href="javascript:void(0);">View All Notifications</a></li>
+                    </ul>
+                </li>
+                <li><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i class="material-icons zmdi-hc-spin">settings</i></a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Left Sidebar -->
+    <aside id="leftsidebar" class="sidebar">
+        <!-- User Info -->
+        <div class="user-info">
+            <div class="image">
+                <img src="assets/images/avatar1.jpg" width="48" height="48" alt="User" />
+            </div>
+            <div class="info-container">
+                <div class="name" data-toggle="dropdown">John Doe</div>
+                <div class="btn-group user-helper-dropdown">
+                    <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" role="button"> keyboard_arrow_down </i>
+                    <ul class="dropdown-menu slideUp">
+                        <li><a href="profile.html"><i class="material-icons">person</i>Profile</a></li>
+                        <li class="divider"></li>
+                        <li><a href="javascript:void(0);"><i class="material-icons">group</i>Followers</a></li>
+                        <li><a href="javascript:void(0);"><i class="material-icons">shopping_cart</i>Sales</a></li>
+                        <li><a href="javascript:void(0);"><i class="material-icons">favorite</i>Likes</a></li>
+                        <li class="divider"></li>
+                        <li><a href="sign-in.html"><i class="material-icons">input</i>Sign Out</a></li>
+                    </ul>
+                </div>
+                <div class="email">john.doe@example.com</div>
+            </div>
+        </div>
+        <!-- #User Info --> 
+        <!-- Menu on left bar -->
+        <div class="menu">
+            <ul class="list">
+                <li class="header">MAIN NAVIGATION</li>
+                <li><a href="detail.html"><i class="zmdi zmdi-home"></i><span>Home</span> </a></li>  
+                <li class="active open"><a href="javascript:void(0);"><i class="zmdi zmdi-account"></i><span>Account</span></a></li>
+                <li><a href=""><i class="zmdi zmdi-email"></i><span>Inbox</span> </a></li>           
+                <li><a href="index.html"><i class="zmdi zmdi-navigation"></i><span>Map</span> </a></li>
+            </ul>
+        </div>
+        <!-- #Menu --> 
+    </aside>
+    
+    <!-- Right Sidebar -->
+    <aside id="rightsidebar" class="right-sidebar">
+        <ul class="nav nav-tabs">
+            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#skins">Skins</a></li>
+            <!--<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#chat">Chat</a></li>-->
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#settings">Settings</a></li>
+        </ul>
+        <!--We could use this for dark and light mode, or other options-->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane in active in active slideRight" id="skins">
+                <div class="slim_scroll">
+                    <h6>Flat Color</h6>
+                    <ul class="choose-skin">                   
+                        <li data-theme="purple"><div class="purple"></div><span>Purple</span></li>
+                        <li data-theme="blue"><div class="blue"></div><span>Blue</span></li>
+                        <li data-theme="cyan"><div class="cyan"></div><span>Cyan</span></li>
+                    </ul>                    
+                    <h6>Multi Color</h6>
+                    <ul class="choose-skin">                        
+                        <li data-theme="black"><div class="black"></div><span>Black</span></li>
+                        <li data-theme="deep-purple"><div class="deep-purple"></div><span>Deep Purple</span></li>
+                        <li data-theme="red"><div class="red"></div><span>Red</span></li>
+                    </ul>                    
+                    <h6>Gradient Color</h6>
+                    <ul class="choose-skin">
+                        <li data-theme="green"><div class="green"></div><span>Green</span> </li>
+                        <li data-theme="orange" class="active"><div class="orange"></div><span>Orange</span></li>
+                        <li data-theme="blush"><div class="blush"></div><span>Blush</span></li>
+                    </ul>
+                </div>                
+            </div>
+            <div role="tabpanel" class="tab-pane slideLeft" id="settings">
+                <div class="settings slim_scroll">
+                    <p class="text-left">General Settings</p>
+                    <ul class="setting-list">
+                        <li><span>Report Panel Usage</span>
+                            <div class="switch">
+                                <label><input type="checkbox" checked><span class="lever"></span></label>
                             </div>
-                            <div class="col-lg-4 col-md-6 col-sm-12">
-                                <h5>Content:</h5>
-                                <input id="content" type="text">
+                        </li>
+                        <li><span>Email Redirect</span>
+                            <div class="switch">
+                                <label><input type="checkbox"><span class="lever"></span></label>
                             </div>
-                            <div class="col-lg-4 col-md-6 col-sm-12">
-                                <h5>Type:</h5>                      <!--Will probably have a dropdown for this-->
-                                <input id="type" type="text"><br>
+                        </li>
+                    </ul>
+                    <p class="text-left">System Settings</p>
+                    <ul class="setting-list">
+                        <li><span>Notifications</span>
+                            <div class="switch">
+                                <label><input type="checkbox" checked><span class="lever"></span></label>
                             </div>
-                            <div class="col-lg-4 col-md-6 col-sm-12">
-                                <h5>Picture:</h5>
-                                <input id="picture" type="text"><br>
+                        </li>
+                        <li><span>Auto Updates</span>
+                            <div class="switch">
+                                <label><input type="checkbox" checked><span class="lever"></span></label>
                             </div>
-                            <div class="col-lg-4 col-md-6 col-sm-12">
-                                <h5>Location:</h5>                  <!--Might just use user location or something-->
-                                <input id="location" type="text"><br>
+                        </li>
+                    </ul>
+                    <p class="text-left">Account Settings</p>
+                    <ul class="setting-list">
+                        <li><span>Offline</span>
+                            <div class="switch">
+                                <label><input type="checkbox"><span class="lever"></span></label>
                             </div>
-                            <div class="col-lg-4 col-md-6 col-sm-12">
-                                <h5>Price:</h5>
-                                <input id="price" type="text"><br>
+                        </li>
+                        <li><span>Location Permission</span>
+                            <div class="switch">
+                                <label><input type="checkbox" checked><span class="lever"></span></label>
                             </div>
-                            <!--data that will not be inputted by user:
-                                username, date of creation...
-                            -->
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!--Main Content-->
+    <section class="content home">
+        <div class="block-header">
+            <div class="container-fluid">    
+                <div class="row clearfix">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="card product-report">
+                            <div class="header">
+                                <h3>Create Post:</h3>
+                            </div>
+                            <div class="body">
+                                <div class="row clearfix m-b-15">
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <h5>Title:</h5>
+                                        <input id="title" type="text">
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <h5>Content:</h5>
+                                        <input id="content" type="text">
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <h5>Type:</h5>                      <!--Will probably have a dropdown for this-->
+                                        <input id="type" type="text"><br>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <h5>Picture:</h5>
+                                        <input id="picture" type="text"><br>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <h5>Location:</h5>                  <!--Might just use user location or something-->
+                                        <input id="location" type="text"><br>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <h5>Price:</h5>
+                                        <input id="price" type="text"><br>
+                                    </div>
+                                    <!--data that will not be inputted by user:
+                                        username, date of creation...
+                                    -->
+                                </div>
+                            </div>
+                            <p><button style="margin-top: 20px;" type="submit">Submit</button></p>
                         </div>
                     </div>
-                    <p><button style="margin-top: 20px;" type="submit">Submit</button></p>
                 </div>
+
             </div>
         </div>
-    </div>
-</body>
-<footer>
-    <div class="container-fluid"> 
-        <div class="row clearfix">
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="body">
-                        <p class="m-b-0">By Danny Poff, Nate Brewer, and Emma Hopkins</a> </p>
+    <footer>
+        <div class="container-fluid"> 
+            <div class="row clearfix">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="body">
+                            <p class="m-b-0">By Danny Poff, Nate Brewer, and Emma Hopkins</a> </p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</footer>
+    </footer>
+</section>
+</body>
+<!-- Jquery Core Js --> 
+<script src="assets/bundles/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js --> 
+<script src="assets/bundles/vendorscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js --> 
+
+<script src="assets/bundles/jvectormap.bundle.js"></script>  <!--JVectorMap Plugin Js || I don't think we need this for anything other than the maps-->
+<script src="assets/bundles/morrisscripts.bundle.js"></script><!-- Morris Plugin Js -->
+<script src="assets/bundles/sparkline.bundle.js"></script> <!-- Sparkline Plugin Js -->
+<script src="assets/bundles/knob.bundle.js"></script> <!-- Jquery Knob Plugin Js -->
+
+<script src="assets/bundles/mainscripts.bundle.js"></script>
+<script src="assets/js/pages/index.js"></script>
+<script src="assets/js/pages/charts/jquery-knob.min.js"></script>
+</html>
