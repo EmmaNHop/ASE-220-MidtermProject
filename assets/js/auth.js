@@ -1,29 +1,21 @@
+import("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js");
+
 var storage_URL = 'https://jsonblob.com/api/jsonBlob/1342157028830928896';
-var names=["EMPTY"];
+var users=["EMPTY"];
 
-axios.get(storage_URL, {})
-.then(function (response) {
-    console.log(response.data);
-    names=response.data.names;
-    for(let i=0; i<response.data.names.length;i++) {
-        let li=document.createElement('li');
-        li.innerText=response.data.names[i];
-        document.querySelector('ul').append(li);
-    }
-})
-.catch(function (error) {
-    console.log(error);
-});
-
-
-function add(x) {
+function createNewUser(username, password, email, number, birthday) {
     axios.get(storage_URL, {})
     .then(function (response) {
         console.log(response.data);
-        names=response.data.names;
-        names.push(x);
+        console.log(username + " " + password + " " + email + " " + number + " " + birthday);
+        users=response.data.users;
+
+        let temp = [username, password, email, number, birthday];
+
+        users.push(temp);
+
         axios.put(storage_URL, {
-            names
+            users
         })
         .then(function (response) {
             console.log(response);
@@ -31,6 +23,31 @@ function add(x) {
         .catch(function (error) {
             console.log(error);
         });
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
+}
+
+function authenticate(username, password) {
+    axios.get(storage_URL, {})
+    .then(function (response) {
+        var authError="";
+        for(let i=0; i<response.data.users.length;i++) {
+            if(username == response.data.users[i][0]) {
+                if(password == response.data.users[i][1]) {
+                    window.location.replace("dashboard.html");
+                    return;
+                }
+                else {
+                    authError="password is incorrect";
+                }
+            }
+        }
+        if(authError.length==0) {
+            authError="account not found";
+        }
+            alert(authError);
     })
     .catch(function (error) {
         console.log(error);

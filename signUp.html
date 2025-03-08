@@ -25,19 +25,19 @@
                                 <input id="username" type="text" class="form-control" placeholder="Username" required />
                             </div>
                             <div class="form-group">
-                                <input id="password-field" type="password" class="form-control" placeholder="Password"
+                                <input id="password" type="password" class="form-control" placeholder="Password"
                                     required />
                                 <span toggle="#password-field"
                                     class="fa fa-fw fa-eye field-icon toggle-password"></span>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Email" required />
+                                <input id="email" type="text" class="form-control" placeholder="Email" required />
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Phone Number" required />
+                                <input id="number" type="text" class="form-control" placeholder="Phone Number" required />
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Birthday" required />
+                                <input id="birthday" type="text" class="form-control" placeholder="Birthday" required />
                             </div>
                             <div class="form-group">
                                 <a href="dashboard.html"><button type="submit" id="signUpButton" class="form-control btn btn-primary submit px-3">
@@ -60,18 +60,12 @@
                             <a href="login.html" class="px-2 py-2 mr-md-1 rounded"><span class="mr-2"></span> Sign
                                 In</a>
                         </div>
-                        <div>
-                            <ul>
-                                <li>HELLO</li>
-                            </ul>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    
     <script src="assets/js/jquery-1.9.1.min.js"></script>
     <script src="assets/js/popper.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
@@ -85,8 +79,15 @@
         crossorigin="anonymous"></script>
 
     <script>
-        document.querySelector('signUpButton').addEventListener('click', function() {
-            alert("HELLO");
+        
+        document.getElementById('signUpButton').addEventListener('click', function() {
+            let username=document.getElementById("username").value;
+            let password=document.getElementById("password").value;
+            let email=document.getElementById("email").value;
+            let number=document.getElementById("number").value;
+            let birthday=document.getElementById("birthday").value;
+
+            createNewUser(username,password,email,number,birthday);
         });
     </script>
 </body>
