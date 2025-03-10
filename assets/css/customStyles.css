@@ -17,3 +17,25 @@ height: calc(100% - 73px);
 height: 100%;
 }
 }
+
+/* Set the background color and rounded corners for the list group items */
+.list-group-item {
+    background-color:  rgba(100, 100, 100, 0.246);  /* Grey background for list items */
+    border-color: #6c757d;      /* Matching border color */
+    color: white;               /* Text color white */
+    border-radius: 0.375rem;    /* Rounded corners */
+}
+
+/* Set the hover effect for the list group items with rounded corners */
+.list-group-item:hover {
+    background-color: rgba(73, 80, 87, 0.25);  /* Darker grey on hover */
+    border-color: #495057;      /* Matching border color */
+    border-radius: 0.375rem;    /* Ensure rounded corners on hover */
+}
+
+/* Set the background for the list group container with rounded corners */
+.list-group {
+    background-color: rgba(55, 55, 55, 0.25);  /* Grey background for the whole list group */
+    border-radius: 0.375rem;    /* Rounded corners */
+}
+
