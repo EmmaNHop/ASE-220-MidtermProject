@@ -7704,6 +7704,7 @@ i:hover {
   opacity: 1;
 }
 #sns_menu .sns_menu_right .block_topsearch .icon-search {
+  color: #1d2332;
   float: right;
   line-height: 50px;
 }
