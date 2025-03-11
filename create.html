@@ -242,49 +242,53 @@
                                 <h3>Create Post:</h3>
                             </div>
                             <div class="body">
-                                <div class="row clearfix m-b-15">
-                                    <div class="col-lg-4 col-md-6 col-sm-12">
-                                        <h5>Title:</h5>
-                                        <input id="title" type="text">
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-12">
-                                        <h5>Content:</h5>
-                                        <input id="content" type="text">
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-12">
-                                        <h5>Type:</h5>                      <!--Will probably have a dropdown for this-->
-                                        <input id="type" type="text"><br>
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-12">
-                                        <h5>Picture:</h5>
-                                        <input id="picture" type="text"><br>
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-12">
-                                        <h5>Location:</h5>                  <!--Might just use user location or something-->
-                                        <input id="location" type="text"><br>
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-12">
-                                        <h5>Price:</h5>
-                                        <input id="price" type="text"><br>
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-12">
-                                        <h5>Job or Item For Sale?</h5>
-                                        <input type="radio" id="is_job" name="typeCheck" value="job" checked>
-                                        <label for="is_job">Job</label>
-                                        <input id="is_for_sale" type="radio" name="typeCheck" value="sale">
-                                        <label for="is_for_sale">Item for sale</label><br>
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-12">
-                                        <h5>Make Feature? ($2,000,000)</h5>
-                                        <input type="checkbox" id="feature" name="feature" value="t" >
-                                        <label for="feature">Yes</label>
-                                    </div>
+                                <form id="new_post">    
+                                    <div class="row clearfix m-b-15">
+                                        <div class="col-lg-4 col-md-6 col-sm-12">
+                                            <h5>Title:</h5>
+                                            <input class="form-control m-1" id="title" type="text" >
+                                        </div>
+                                        <div class="col-lg-4 col-md-6 col-sm-12">
+                                            <h5>Content:</h5>
+                                            <input class="form-control m-1" id="content" type="text" >
+                                        </div>
+                                        <div class="col-lg-4 col-md-6 col-sm-12">
+                                            <h5>Type:</h5>                      <!--Will probably have a dropdown for this-->
+                                            <input class="form-control m-1" id="type" type="text" ><br>
+                                        </div>
+                                        <div class="col-lg-4 col-md-6 col-sm-12">
+                                            <h5>Picture:</h5>
+                                            <input class="form-control m-1" id="picture" type="text" ><br>
+                                        </div>
+                                        <div class="col-lg-4 col-md-6 col-sm-12">
+                                            <h5>Location:</h5>                  <!--Might just use user location or something-->
+                                            <input class="form-control m-1" id="city" type="text" placeholder="Enter City"><br>
+                                            <input class="form-control m-1" id="state" type="text" placeholder="Enter State"><br>
+                                        </div>
+                                        <div class="col-lg-4 col-md-6 col-sm-12">
+                                            <h5>Price:</h5>
+                                            <input class="form-control m-1" id="price" type="text"><br>
+                                        </div>
+                                        <div class="col-lg-4 col-md-6 col-sm-12">
+                                            <h5>Job or Item For Sale?</h5>
+                                            <input class="form-control m-1" type="radio" id="is_job" name="typeCheck" value="job" checked>
+                                            <label for="is_job">Job</label>
+                                            <input class="form-control m-1" id="is_for_sale" type="radio" name="typeCheck" value="sale">
+                                            <label for="is_for_sale">Item for sale</label><br>
+                                        </div>
+                                        <div class="col-lg-4 col-md-6 col-sm-12">
+                                            <h5>Make Feature? ($2,000,000)</h5>
+                                            <input class="form-control m-1" type="checkbox" id="feature" name="feature" value="feature">
+                                            <label for="feature">Yes</label>
+                                        </div>
+                                    
                                     <!--data that will not be inputted by user:
                                         username, date of creation...
                                     -->
-                                </div>
+                                    </div>
+                                </form>
                             </div>
-                            <p><button style="margin-top: 20px;" type="submit">Submit</button></p>
+                            <p><button style="margin-top: 20px;" id="submit_new_post" type="submit">Submit</button></p>
                         </div>
                     </div>
                 </div>
@@ -327,27 +331,74 @@
     // Makes axios passable
     const myAxios = axios;
 
-    if(jQuery("is_job").value == "job"){
-        var isJob = true;
-    }
-    else if(jQuery("is_for_sale").value == "sale"){
+    const form = document.getElementById('new_post');
 
-    }
+    document.getElementById('submit_new_post').addEventListener('click', function() {
 
-    if(jQuery("is_for_sale").value == "t"){
-        if(isJob){
+        const post_title = form.elements.title.value;
+        const post_content = form.elements.content.value;
+        const type = form.elements.type.value;
+        const img = form.elements.picture.value;
+        const city = form.elements.city.value;
+        const state = form.elements.state.value;
+        const price = form.elements.price.value;
+        const feature = form.elements.feature.value;
 
+        // For time stamps
+        const date = new Date();
+
+        post = {
+            "id" : 2,
+            "created_by" : "Joe Schmoe",  // Will pull user name
+            "date_created" : date.getFullYear() + "-" + parseInt(date.getMonth() + 1) + "-" + date.getDate(),
+            "time_created" : date.getHours() + "-" + date.getMinutes() + "-" + date.getSeconds(),
+            "post_title" : post_title,
+            "post_content" : post_content,
+            "img" : img,
+            "type" : type,
+            "city" : city,
+            "state" : state,
+            "price" : price,
+            "post_views" : 0
+        };
+    
+        // Boolean to show either is a job or not, will deterimine where it is stored
+        var isJob;
+
+        // Boolean to show if it will be featured. will deterimine where it is stored
+        var isFeatured;
+
+        const isJobButton = document.querySelectorAll('input[name="typeCheck"]');
+
+        const featuredButton = document.querySelectorAll('input[name="feature"]');
+
+        // Job radio button
+        if(isJobButton[0].checked){
+            isJob = true;
+            
+        } // For sale radio button
+        else if(isJobButton[1].checked){
+            isJob = false;
+        }
+
+        if(!isJob){
+            if(featuredButton[0].checked){
+                addNewFeaturedPost(myAxios, post);
+            }
+            else{
+                addNewCommonPost(myAxios, post);
+            }
         }
         else{
-
+            if(featuredButton[0].checked){
+                addNewFeaturedJob(myAxios, post);
+            }
+            else{
+                addNewCommonJob(myAxios, post);
+            }
         }
-    }
-    else{
 
-    }
-
-    let commonPost = addNewPost(myAxios, data)
-
+    });
 
 </script>
 </html>

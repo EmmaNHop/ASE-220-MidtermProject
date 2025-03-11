@@ -61,13 +61,13 @@
                                 <div id="sns_mainnav">
                                     <div id="sns_custommenu" class="visible-md visible-lg">
                                         <ul class="mainnav">
-                                            <li class="level0 custom-item active">
-                                                <a class="menu-title-lv0 pd-menu116" href="detail.html" target="_self">
+                                            <li class="level0 nav-4 no-group drop-submenu last parent">
+                                                <a class="menu-title-lv0 pd-menu116" href="detail.html">
                                                     <span class="title">Home</span>
                                                 </a>
                                             </li>
-                                            <li class="level0 nav-4 no-group drop-submenu last parent">
-                                                <a class="menu-title-lv0" href="job.html">
+                                            <li class="level0 custom-item active">
+                                                <a class="menu-title-lv0" href="job.html" target="_self">
                                                     <span class="title">Jobs</span>
                                                 </a>
                                             </li>
@@ -137,6 +137,7 @@
                                                     </a>
                                                 </div>
                                             </li>
+    
                                         </ul>
                                     </div>
                                 </div>
@@ -192,50 +193,24 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                    <!-- Tab panes -->
+                                    
+                                    <div class="tab-content ">
+                                        <div id="featured">
 
-                                        <div class="tab-content ">
-                                            <div id="${i}" class="products-small owl-carousel owl-theme"
-                                                style="display: inline-block">
-                                                <div class="item-row">
-                                                    <div id="featured">
-    
-                                                <!-- INSERT FEATURED HERE -->
-                                                       
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <!-- INSERT FEATURED HERE -->
+
                                         </div>
-
                                     </div>
                                     <br>
 
-                                    <div class="sns-products-list">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="block-title list-group-item">
-                                                    <h3><a href="shop.html" >For Sale</a></h3>
-                                                </div>
-                                            </div>
-                                            <div id="${i}" class="products-small owl-carousel owl-theme"
-                                                style="display: inline-block">
-                                                <div class="item-row">
-                                                    <div id="for_sale">
-                                                
-                                                <!-- INSERT FOR SALE HERE -->
-                            
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div id="load_more_for_sale" class="load-more-wrapper">
-                                        <p>Load More For Sale</p>
-                                    </div>
                                     <div class="sns-latestblog">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="block-title list-group-item">
-                                                    <h3><a href="job.html" >Job Postings</a></h3>
+                                                    <h3><a href="#home" aria-controls="home" role="tab"
+                                                            data-toggle="tab">Job Postings</a></h3>
                                                 </div>
                                             </div>
                                             <div id="jobs">
@@ -245,7 +220,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div id="load_more_jobs" class="load-more-wrapper">
+                                    <div class="load-more-wrapper">
                                         <p>Load More Jobs</p>
                                     </div>
                                 </div>
@@ -306,7 +281,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- END FOOTER -->
+                                <!-- AND FOOTER -->
                             </div>
                         </div>
                     </div>
@@ -331,7 +306,7 @@
 
         function htmlBuilder(query, html){
             let itemContainer = document.getElementById(query);
-            itemContainer.insertAdjacentHTML("beforeend", html);
+            itemContainer.innerHTML = html;
         }
         
         // Makes axios passable
@@ -354,7 +329,9 @@
                 //console.log(posts[i]);
 
                 let htmlSegment =
-                    `
+                    `<div id="${posts[i].id}" class="products-small owl-carousel owl-theme"
+                        style="display: inline-block">
+                        <div class="item-row">
                             <div class="item list-group-item">
                                 <div class="item-inner">
                                     <div class="prd">
@@ -371,36 +348,34 @@
                                             <div class="info-inner">
                                                 <div class="item-title">
                                                     <a href="#">
-                                                    ${posts[i].post_title} 
-                                                    </a>
+                                                    ${posts[i].post_title} </a>
                                                 </div>
-                                                <div class="item-price">
-                                                    <div class="price-box">
-                                                        <span class="regular-price">
-                                                            <span class="price">
-                                                                <span
-                                                                class="price1">${posts[i].price}</span>
-                                                            </span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="action-bot">
-                                                <div class="wrap-addtocart">
-                                                    <button class="btn-cart"
-                                                        title="Add to Cart">
-                                                        <i class="fa fa-shopping-cart"></i>
-                                                        <span><a href="#home"
-                                                            aria-controls="home" role="tab"
-                                                            data-toggle="tab">Message
-                                                            ${posts[i].created_by}</a></span>
-                                                    </button>
-                                                </div>
-                                            </div>
+                                            <div class="item-price">
+                                        <div class="price-box">
+                                            <span class="regular-price">
+                                                <span class="price">
+                                                    <span
+                                                        class="price1">${posts[i].price}</span>
+                                                </span>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
-                            </div>`;
+                                <div class="action-bot">
+                                    <div class="wrap-addtocart">
+                                        <button class="btn-cart"
+                                            title="Add to Cart">
+                                            <i class="fa fa-shopping-cart"></i>
+                                            <span><a href="#home"
+                                                aria-controls="home" role="tab"
+                                                data-toggle="tab">Message
+                                            ${posts[i].created_by}</a></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
 
                 html += htmlSegment;
 
@@ -464,7 +439,7 @@
                                     <p class="text2">JAN</p>
                                 </div>
                                 <div class="blog-right">
-                                    <p class="style1"><a href="#">${jobs[i].created_by}</a></p>
+                                    <p class="style1"><a href="#">Company</a></p>
                                     <p class="style2">${jobs[i].post_title}</p>
                                     <p class="style3">${jobs[i].post_content}</p>
                                 </div>
@@ -504,47 +479,48 @@
                 if(!featured[i].isJob){
 
                     htmlSegment =
-                        `<div class="item list-group-item">
-                            <div class="item-inner">
-                                <div class="prd">
-                                    <div class="item-img clearfix">
-                                        <a class="product-image have-additional" href="#">
-                                            <span class="img-main">
-                                                <!--leaving picture empty-->
-                                                <img src="="${featured[i].img}
-                                                    style="height:7em; width:7em;">
-                                            </span>
-                                        </a>
-                                    </div>
-                                    <div class="item-info">
-                                        <div class="info-inner">
-                                            <div class="item-title">
-                                                <a href="#">
-                                                ${featured[i].post_title} 
+                        `<div id="${featured[i].id}" class="products-small owl-carousel owl-theme"
+                            style="display: inline-block">
+                            <div class="item-row">
+                                <div class="item list-group-item">
+                                    <div class="item-inner">
+                                        <div class="prd">
+                                            <div class="item-img clearfix">
+                                                <a class="product-image have-additional" href="#">
+                                                    <span class="img-main">
+                                                        <!--leaving picture empty-->
+                                                        <img src="="${featured[i].img}
+                                                            style="height:7em; width:7em;">
+                                                    </span>
                                                 </a>
                                             </div>
-                                            <div class="item-price">
-                                                <div class="price-box">
-                                                    <span class="regular-price">
-                                                        <span class="price">
-                                                            <span
+                                            <div class="item-info">
+                                                <div class="info-inner">
+                                                    <div class="item-title">
+                                                        <a href="#">
+                                                        ${featured[i].post_title} </a>
+                                                    </div>
+                                                <div class="item-price">
+                                            <div class="price-box">
+                                                <span class="regular-price">
+                                                    <span class="price">
+                                                        <span
                                                             class="price1">${featured[i].price}</span>
-                                                        </span>
                                                     </span>
-                                                </div>
+                                                </span>
                                             </div>
                                         </div>
-                                        <div class="action-bot">
-                                            <div class="wrap-addtocart">
-                                                <button class="btn-cart"
-                                                    title="Add to Cart">
-                                                    <i class="fa fa-shopping-cart"></i>
-                                                    <span><a href="#home"
-                                                        aria-controls="home" role="tab"
-                                                        data-toggle="tab">Message
-                                                        ${featured[i].created_by}</a></span>
-                                                </button>
-                                            </div>
+                                    </div>
+                                    <div class="action-bot">
+                                        <div class="wrap-addtocart">
+                                            <button class="btn-cart"
+                                                title="Add to Cart">
+                                                <i class="fa fa-shopping-cart"></i>
+                                                <span><a href="#home"
+                                                    aria-controls="home" role="tab"
+                                                    data-toggle="tab">Message
+                                                ${featured[i].created_by}</a></span>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
