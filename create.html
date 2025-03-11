@@ -347,9 +347,12 @@
         // For time stamps
         const date = new Date();
 
+        // Gets user name
+        const userName = localStorage.getItem('username');
+
         post = {
             "id" : 2,
-            "created_by" : "Joe Schmoe",  // Will pull user name
+            "created_by" : userName,  
             "date_created" : date.getFullYear() + "-" + parseInt(date.getMonth() + 1) + "-" + date.getDate(),
             "time_created" : date.getHours() + "-" + date.getMinutes() + "-" + date.getSeconds(),
             "post_title" : post_title,
@@ -397,6 +400,10 @@
                 addNewCommonJob(myAxios, post);
             }
         }
+
+        window.location.replace("detail.html");
+
+        // if no error return to window.location.replace("detail.html");
 
     });
 

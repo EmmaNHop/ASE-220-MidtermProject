@@ -17,7 +17,6 @@ async function getCommonPosts(Axios, postPerPage, pageNum){
     }
 }
 
-
 async function getJobs(Axios, jobsPerPage, pageNum){
     
     try{
@@ -47,6 +46,20 @@ async function getAll(Axios){
         const response = await Axios.get(posts_URL, {});
         //console.log(response.data);
         return response.data.json;
+    }
+    catch(error){
+        console.log(error);
+    }
+}
+
+async function getUserPosts(Axios){
+    try{
+        var userPosts;
+        const response = await Axios.get(posts_URL, {});
+        //console.log(response.data.posts);
+
+        
+
     }
     catch(error){
         console.log(error);
