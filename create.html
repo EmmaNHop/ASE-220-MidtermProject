@@ -267,6 +267,18 @@
                                         <h5>Price:</h5>
                                         <input id="price" type="text"><br>
                                     </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <h5>Job or Item For Sale?</h5>
+                                        <input type="radio" id="is_job" name="typeCheck" value="job" checked>
+                                        <label for="is_job">Job</label>
+                                        <input id="is_for_sale" type="radio" name="typeCheck" value="sale">
+                                        <label for="is_for_sale">Item for sale</label><br>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <h5>Make Feature? ($2,000,000)</h5>
+                                        <input type="checkbox" id="feature" name="feature" value="t" >
+                                        <label for="feature">Yes</label>
+                                    </div>
                                     <!--data that will not be inputted by user:
                                         username, date of creation...
                                     -->
@@ -276,23 +288,22 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
-    <footer>
-        <div class="container-fluid"> 
-            <div class="row clearfix">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="body">
-                            <p class="m-b-0">By Danny Poff, Nate Brewer, and Emma Hopkins</a> </p>
+        <footer>
+            <div class="container-fluid"> 
+                <div class="row clearfix">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="body">
+                                <p class="m-b-0">By Danny Poff, Nate Brewer, and Emma Hopkins</a> </p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </footer>
-</section>
+        </footer>
+    </section>
 </body>
 <!-- Jquery Core Js --> 
 <script src="assets/bundles/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js --> 
@@ -306,4 +317,37 @@
 <script src="assets/bundles/mainscripts.bundle.js"></script>
 <script src="assets/js/pages/index.js"></script>
 <script src="assets/js/pages/charts/jquery-knob.min.js"></script>
+
+<!-- Axios -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<!-- post API Script -->
+<script src="assets/js/post_api.js"></script>
+<script>
+
+    // Makes axios passable
+    const myAxios = axios;
+
+    if(jQuery("is_job").value == "job"){
+        var isJob = true;
+    }
+    else if(jQuery("is_for_sale").value == "sale"){
+
+    }
+
+    if(jQuery("is_for_sale").value == "t"){
+        if(isJob){
+
+        }
+        else{
+
+        }
+    }
+    else{
+
+    }
+
+    let commonPost = addNewPost(myAxios, data)
+
+
+</script>
 </html>
