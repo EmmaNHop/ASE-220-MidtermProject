@@ -14,182 +14,108 @@
     <!-- META TAGS -->
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="assets/css/customStyles.css">
-    
+    <!-- Option 1: Include in HTML -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+
 </head>
 
 <body id="bd" class="cms-index-index cms-simen-home-page-v2 default cmspage">
-    <div style="background: #1d2332">
+    <div style="background: #1d2332;">
 
         <div id="sns_wrapper">
 
             <!-- HEADER -->
-            <div id="sns_header" class="wrap">
-                <!-- Header Top -->
-                <div class="sns_header_top">
-                    <div class="container">
-                        <div class="sns_module">
-                            <div class="header-setting">
-                                <div class="module-setting">
-
-
-                                    
-                                </div>
-                            </div>
-                            <div class="header-account">
-                                <div class="myaccount">
-                                    <div>
-                                        <span><i class="bi bi-person"></i></span>
-                                    </div>
-                                    <div class="customer-ct content">
-                                        <ul class="links">
-                                            <li class="first">
-                                                <a title="My Account" href="dashboard.html">My Account</a>
-                                                <a class="top-link-myaccount" title="My Account" href="dashboard.html">My Account</a>
-                                            </li>
-                                            <li class=" last">
-                                                <a title="Log In" href="login.html">Login</a>
-                                            </li>
-                                            <li>
-                                                <a href="index.html">location</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+<div id="sns_header" class="wrap">
+    <!-- Header Top -->
+    <div class="sns_header_top">
+        <div class="container">
+            <div class="sns_module">
+                <div class="header-account">
+                    <div class="customer-ct content">
+                        <ul class="links" style="display: flex; gap: 15px; align-items: center; justify-content: flex-end; 
+                                   list-style: none; padding: 0; margin: 0;">
+                            <li>
+                                <a title="My Account" href="dashboard.html"><i class="bi bi-person"></i></a>
+                            </li>
+                            <li>
+                                <a title="Log In" href="login.html"><i class="bi bi-lock"></i></a>
+                            </li>
+                            <li>
+                                <a href="index.html"><i class="bi bi-compass"></i></a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
 
+    <!-- Menu -->
+    <div id="sns_menu">
+        <div class="container">
+            <div class="sns_mainmenu">
+                <div id="sns_mainnav">
+                    <div id="sns_custommenu">
+                        <ul class="mainnav">
+                            <li class="level0 nav-2 no-group drop-submenu parent">
+                                <a class="menu-title-lv0" href="#">
+                                    <span class="title">Jobs</span>
+                                </a>
+                            </li>
+                            <li class="level0 nav-3 no-group drop-submenu12 custom-item drop-staticblock">
+                                <a class="menu-title-lv0" href="#">
+                                    <span class="title">Shop</span>
+                                </a>
+                            </li>
+                            <li class="level0 nav-4 no-group drop-submenu last parent">
+                                <a class="menu-title-lv0" href="#">
+                                    <span class="title">Services</span>
+                                </a>
+                            </li>
+                            <li class="level0 custom-item drop-staticblock">
+                                <a class="menu-title-lv0" href="404.html">
+                                    <span class="title">Housing</span>
+                                </a>
+                            </li>
+                            <li class="level0 custom-item">
+                                <a class="menu-title-lv0" href="contact-us.html">
+                                    <span class="title">Community</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="sns_menu_right">
+                    <div class="block_topsearch">
 
-                <!-- Menu -->
-                <div id="sns_menu">
-                    <div class="container">
-                        <div class="sns_mainmenu">
-                            <div id="sns_mainnav">
-                                <div id="sns_custommenu" class="visible-md visible-lg">
-                                    <ul class="mainnav">
-                                        <li class="level0 custom-item active">
-                                            <a class="menu-title-lv0 pd-menu116" href="index.html" target="_self">
-                                                <span class="title">Home</span>
-                                            </a>
-                                        </li>
-
-                                        <li class="level0 nav-2 no-group drop-submenu parent">
-                                            <a class=" menu-title-lv0" href="#">
-                                                <span class="title">All products</span>
-                                            </a>
-
-                                        </li>
-                                        <li class="level0 nav-3 no-group drop-submenu12 custom-itemdrop-staticblock">
-                                            <a class=" menu-title-lv0" href="#">
-                                                <span class="title">Shop</span>
-                                            </a>
-
-                                        </li>
-                                        <li class="level0 nav-4 no-group drop-submenu last parent">
-                                            <a class=" menu-title-lv0" href="#">
-                                                <span class="title">Mobile</span>
-                                            </a>
-
-                                        </li>
-
-                                        <li class="level0 custom-itemdrop-staticblock">
-                                            <a class="menu-title-lv0" href="404.html">
-                                                <span class="title">Offer</span>
-                                            </a>
-
-                                        </li>
-
-                                        <li class="level0 custom-item">
-                                            <a class="menu-title-lv0" href="contact-us.html">
-                                                <span class="title">Contact Us</span>
-                                            </a>
-                                        </li>
-
-                                    </ul>
-                                </div>
-                                <div id="sns_mommenu" class="menu-offcanvas hidden-md hidden-lg">
-                                    <span class="btn2 btn-navbar leftsidebar" style="display: inline-block;">
-                                        <i class="fa fa-align-left"></i>
-                                        <span class="overlay"></span>
-                                    </span>
-                                    <span class="btn2 btn-navbar offcanvas">
-                                        <i class="fa fa-align-justify"></i>
-                                        <span class="overlay"></span>
-                                    </span>
-                                    <span class="btn2 btn-navbar rightsidebar">
-                                        <i class="fa fa-align-right"></i>
-                                        <span class="overlay"></span>
-                                    </span>
-                                    <div id="menu_offcanvas" class="offcanvas">
-                                        <ul class="mainnav">
-                                            <li class="level0 custom-item">
-                                                <div class="accr_header">
-                                                    <a class="menu-title-lv0" href="index.html">
-                                                        <span class="title">Home</span>
-                                                    </a>
-                                                </div>
-                                            </li>
-
-                                            <li class="level0 nav-6 parent">
-                                                <div class="accr_header">
-                                                    <a class=" menu-title-lv0" href="#">
-                                                        <span>All products</span>
-                                                    </a>
-                                                    <span class="btn_accor">
-
-                                                    </span>
-                                                </div>
-                                            </li>
-                                            <li class="level0 nav-7">
-                                                <div class="accr_header">
-                                                    <a class=" menu-title-lv0" href="#">
-                                                        <span>Shop</span>
-                                                    </a>
-                                                </div>
-                                            </li>
-
-                                            <li class="level0 custom-item">
-                                                <div class="accr_header">
-                                                    <a class="menu-title-lv0" href="contact-us.html">
-                                                        <span class="title">Contact Us</span>
-                                                    </a>
-                                                </div>
-                                            </li>
-
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="sns_menu_right">
-                                <div class="block_topsearch">
-
-                                    <span class="icon-search"></span>
-                                    <div class="top-search">
-                                        <div id="sns_serachbox_pro11739847651442478087" class="sns-serachbox-pro">
-                                            <div class="sns-searbox-content">
-                                                <form id="search_mini_form3703138361442478087" method="get"
-                                                    action="http://demo.snstheme.com/sns-simen/index.php/catalogsearch/result/">
-                                                    <div class="form-search">
-                                                        <input id="search3703138361442478087" class="input-text"
-                                                            type="text" value="" name="q" placeholder="Search here...."
-                                                            size="30" autocomplete="off">
-                                                        <button class="button form-button" title="Search"
-                                                            type="submit">Search</button>
-                                                        <div id="search_autocomplete3703138361442478087"
-                                                            class="search-autocomplete" style="display: none;"></div>
-                                                    </div>
-                                                </form>
-                                            </div>
+                        <span class="icon-search"><i class="bi bi-search"></i></span>
+                        <div class="top-search">
+                            <div id="sns_serachbox_pro11739847651442478087" class="sns-serachbox-pro">
+                                <div class="sns-searbox-content">
+                                    <form id="search_mini_form3703138361442478087" method="get"
+                                        action="http://demo.snstheme.com/sns-simen/index.php/catalogsearch/result/">
+                                        <div class="form-search">
+                                            <input id="search3703138361442478087" class="input-text"
+                                                type="text" value="" name="q" placeholder="Search here...."
+                                                size="30" autocomplete="off">
+                                            <button class="button form-button" title="Search"
+                                                type="submit">Search</button>
+                                            <div id="search_autocomplete3703138361442478087"
+                                                class="search-autocomplete" style="display: none;"></div>
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- AND HEADER -->
+        </div>
+    </div>
+</div>
+
+<!-- END HEADER -->
+
 
 
 
@@ -202,7 +128,7 @@
                                 <div id="sns_producttaps1" class="sns_producttaps_wraps">
                                     <div class="block-title list-group-item">
                                         <h3><a href="#home" aria-controls="home" role="tab"
-                                            data-toggle="tab">Featured</a></h3>
+                                                data-toggle="tab">Featured</a></h3>
                                     </div>
                                     <!-- Tab panes -->
                                     <div class="tab-content ">
@@ -217,6 +143,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -248,7 +175,7 @@
                                                                 <div class="item-info">
                                                                     <div class="info-inner">
                                                                         <div class="item-title">
-                                                                            <a href="#" >
+                                                                            <a href="#">
                                                                                 Product for Sale </a>
                                                                         </div>
                                                                         <div class="item-price">
@@ -267,8 +194,10 @@
                                                                             <button class="btn-cart"
                                                                                 title="Add to Cart">
                                                                                 <i class="fa fa-shopping-cart"></i>
-                                                                                <span><a href="#home" aria-controls="home" role="tab"
-                                                                                    data-toggle="tab">Message Seller</a></span>
+                                                                                <span><a href="#home"
+                                                                                        aria-controls="home" role="tab"
+                                                                                        data-toggle="tab">Message
+                                                                                        Seller</a></span>
                                                                             </button>
                                                                         </div>
                                                                     </div>
@@ -285,28 +214,35 @@
                                             <div class="col-md-12">
                                                 <div class="block-title list-group-item">
                                                     <h3><a href="#home" aria-controls="home" role="tab"
-                                                        data-toggle="tab">Job Postings</a></h3>
+                                                            data-toggle="tab">Job Postings</a></h3>
                                                 </div>
                                             </div>
                                             <div id="latestblog132" class="latestblog-content owl-carousel owl-theme"
                                                 style="display: inline-block">
                                                 <div class="item ">
-                    
+
                                                     <div class="blog-page list-group-item">
                                                         <div class="blog-left">
                                                             <p class="text1">08</p>
                                                             <p class="text2">JAN</p>
                                                         </div>
+
                                                         <div class="blog-right">
                                                             <p class="style1"><a href="#">Company</a></p>
                                                             <p class="style2">Job Title</p>
                                                             <p class="style3">Description</p>
                                                         </div>
                                                     </div>
+                                                    <\
                                                 </div>
-
+                                                
+                                                
+                                                
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="load-more-wrapper">
+                                        <p>Load More Jobs</p>
                                     </div>
                                 </div>
                             </div>
@@ -350,12 +286,11 @@
                                                             </ul>
                                                         </div>
                                                     </div>
-
-
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+
 
                                     <div id="sns_footer_bottom" class="footer">
                                         <div class="container">
