@@ -549,11 +549,7 @@
   background-position: center;
   background-repeat: repeat-x;
 }
-.block .block-title strong,
-.block .block-title span {
-  padding-right: 20px;
-  background: #fff;
-}
+
 .block .block-title h1,
 .block .block-title h2,
 .block .block-title h3,
@@ -568,7 +564,6 @@
   right: 0px;
   margin-top: -16px;
   height: 30px;
-  background: #fff;
   z-index: 3;
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
@@ -583,7 +578,6 @@
   height: 100%;
   top: 0;
   left: 29px;
-  background: #eaeaea;
   z-index: 2;
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
@@ -595,7 +589,6 @@
   position: absolute;
   width: 20px;
   height: 100%;
-  background: #fff;
   content: "";
   left: -21px;
   z-index: 1;
@@ -615,7 +608,7 @@
   -ms-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
-  border: 1px solid #eaeaea;
+  border: 1px ;
   /*&.next{border-left: none;}
 				&.prev{border-right: none;}*/
 }
@@ -623,7 +616,6 @@
   text-align: center;
   line-height: 30px;
   font-size: 16px;
-  color: #cacaca;
   background: none;
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
@@ -5852,7 +5844,7 @@ a:focus {
   text-decoration: underline;
 }
 a {
-  color: #666;
+  color: #fbceb5;
 }
 a:hover,
 span:hover,
@@ -6553,7 +6545,6 @@ i:hover {
   display: block;
   width: 100%;
   height: 1px;
-  background: #eaeaea;
   content: "";
   left: 0;
   top: 9px;
@@ -6565,7 +6556,6 @@ i:hover {
   color: #333;
   margin: 0;
   display: inline-block;
-  background: #fff;
   padding-right: 25px;
 }
 .sns-latestblog .latestblog-content {
@@ -6649,16 +6639,14 @@ i:hover {
 }
 .sns-latestblog .latestblog-content .blog-left {
   text-align: center;
-  border: 1px solid #eaeaea;
   padding: 2px 9px 0;
   display: inline-block;
   position: absolute;
-  top: 0;
   left: 0;
 }
 .sns-latestblog .latestblog-content .blog-left .text1 {
   font-size: 25px;
-  color: #333;
+  color: #e5dfcc;
   font-weight: bold;
   display: block;
   margin: 0;
@@ -6667,7 +6655,7 @@ i:hover {
   position: relative;
   bottom: 4px;
   font-size: 12px;
-  color: #666;
+  color: #bfbaaa;
   text-transform: uppercase;
   display: block;
   margin: 0;
@@ -6677,16 +6665,16 @@ i:hover {
 }
 .sns-latestblog .latestblog-content .blog-right .style1 a {
   font-size: 12px;
-  color: #e34444;
+  color: #e5dfcc;
 }
 .sns-latestblog .latestblog-content .blog-right .style2 {
   font-size: 14px;
-  color: #333;
+  color: #fbceb5;
   font-weight: bold;
   margin: 0 0 6px 0;
 }
 .sns-latestblog .latestblog-content .blog-right .style3 {
-  color: #666;
+  color: #9b9994;
   margin: 0;
 }
 #sns_content .sns_producttaps_wraps {
@@ -7009,7 +6997,6 @@ i:hover {
   display: block;
   width: 100%;
   height: 1px;
-  background: #eaeaea;
   content: "";
   left: 0;
   top: 9px;
@@ -7018,10 +7005,9 @@ i:hover {
 #sns_content .sns-products-list .block-title h3 {
   font-size: 20px;
   font-weight: bold;
-  color: #333;
+  color: white;
   margin: 0;
   display: inline-block;
-  background: #fff;
   padding-right: 25px;
 }
 #sns_content .sns-products-list .products-small {
@@ -7123,7 +7109,7 @@ i:hover {
 }
 #sns_content .sns-products-list .products-small .item .item-inner .prd .item-info .info-inner .item-title a {
   font-size: 13px;
-  color: #666;
+  color: #e5dfcc;
   transition: all 0.2s ease 0s;
 }
 #sns_content .sns-products-list .products-small .item .item-inner .prd .item-info .info-inner .item-title a:hover {
@@ -7134,7 +7120,7 @@ i:hover {
 }
 #sns_content .sns-products-list .products-small .item .item-inner .prd .item-info .info-inner .item-price .price {
   font-size: 16px;
-  color: #333;
+  color: #e5dfcc ;
   font-weight: bold;
 }
 #sns_content .sns-products-list .products-small .item .item-inner .prd .item-info .action-bot {
@@ -7337,7 +7323,7 @@ i:hover {
   padding-bottom: 20px;
 }
 #sns_footer_top h6 {
-  color: #333;
+  color: #fbceb5;
   margin-bottom: 32px;
   font-size: 16px;
   font-weight: bold;
@@ -7443,7 +7429,7 @@ i:hover {
   line-height: 20px;
   min-height: 40px;
   margin-bottom: 8px;
-  color: #666;
+  color: #fbceb5;
 }
 #sns_footer_top .contact_us .fa-ul .fa-li {
   width: 34px;
@@ -7453,7 +7439,7 @@ i:hover {
   border-radius: 100%;
   left: -45px;
   line-height: 30px;
-  color: #888888;
+  color: white;
   font-size: 13px;
   top: 4px;
 }
@@ -7463,7 +7449,6 @@ i:hover {
 #sns_footer_bottom {
   padding: 14px 0 18px 0;
   color: #666;
-  background: #fff;
   /*  .bottom-pd1 {
     padding-left: 0;
   }
