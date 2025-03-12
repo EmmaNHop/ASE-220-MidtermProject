@@ -165,6 +165,7 @@ async function getUserForSale(Axios){
         //console.log(response.data.posts);
         var posts = response.data.json.for_sale;
 
+
         posts.forEach((post) => 
             userPosts.push(post)
         )

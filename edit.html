@@ -345,7 +345,8 @@
     var post = {};
     // If Featured
     if(type == 'f'){
-        getFeaturedPosts(myAxios, 1000000)
+        getFeaturedPosts(myAxios, 1000, 1000)
+
         .then(featuredPosts => {
 
             feature = featuredPosts[postId];
@@ -363,6 +364,7 @@
         });
     }
     // If Job
+
     else if(type == 'j'){   // not permanent
         getUserJobs(myAxios, 1000, 1000)
         .then(jobs => {
@@ -383,8 +385,8 @@
     }
     // If For Sale
     else if(type == 's'){
-
         getForSale(myAxios, 10000000, 100000000000)
+
         .then(for_sale_posts => {
 
             for_sale = for_sale_posts[postId];
