@@ -40,7 +40,7 @@ async function authenticate(username, password) {
         for(let i=0; i<response.data.users.length;i++) {
             if(username == response.data.users[i][0]) {
                 if(password == response.data.users[i][1]) {
-                    return;
+                    return true;
                 }
                 else {
                     authError="password is incorrect";
