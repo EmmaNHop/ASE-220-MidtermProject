@@ -5,11 +5,25 @@ var posts_URL = "https://jsonblob.com/api/jsonBlob/1348018515168387072";
 
 //          GET METHODS         //
 
-async function getForSale(Axios){
+async function getForSale(Axios, lowerLimit, upperLimit){
 
     try{
         const response = await Axios.get(posts_URL, {});
         //console.log(response.data.posts);
+
+        var forSale = [];
+
+        for(let i = lowerLimit; i < upperLimit; i++){
+
+            //console.log(response.data.json.for_sale[i]);
+
+            if(response.data.json.for_sale[i] == undefined){
+                return forSale;
+            }
+
+            forSale.push(response.data.json.for_sale[i]);
+        }
+
         return response.data.json.for_sale;
     }
     catch(error){
@@ -33,13 +47,13 @@ async function getJobs(Axios, lowerLimit, upperLimit){
     
     try{
         const response = await Axios.get(posts_URL, {});
-        console.log(response.data.json.job);
+        //console.log(response.data.json.job);
 
         var jobs = [];
 
         for(let i = lowerLimit; i < upperLimit; i++){
 
-            console.log(response.data.json.job[i]);
+            //console.log(response.data.json.job[i]);
 
             if(response.data.json.job[i] == undefined){
                 return jobs;
@@ -48,7 +62,7 @@ async function getJobs(Axios, lowerLimit, upperLimit){
             jobs.push(response.data.json.job[i]);
         }
 
-        console.log(jobs);
+        //console.log(jobs);
 
         return jobs;
     }
@@ -61,7 +75,7 @@ async function getUserJobs(Axios, lowerLimit, upperLimit){
     
     try{
         const response = await Axios.get(posts_URL, {});
-        console.log(response.data.json.job);
+        //console.log(response.data.json.job);
 
 
         return response.data.json.jobs;
@@ -111,7 +125,7 @@ async function getFeaturedByID(Axios, id){
 async function getAll(Axios){
     try{
         const response = await Axios.get(posts_URL, {});
-        console.log(response.data.json);
+        //console.log(response.data.json);
         return response.data.json;
     }
     catch(error){
@@ -122,7 +136,7 @@ async function getAll(Axios){
 async function getUserFeatured(Axios){
     try{
         const response = await Axios.get(posts_URL, {});
-        ///console.log(response.data.json.featured);
+        //console.log(response.data.json.featured);
         var userFeatured = [];
         var featured = response.data.json.featured;
 
@@ -188,11 +202,9 @@ async function addNewForSale(Axios, data){
         fullJson = getAll(Axios)
         .then(json => {
 
-            console.log(json.for_sale[json.for_sale.length-1]);
+            //console.log(json.for_sale[json.for_sale.length-1]);
 
-            lastItem = json.for_sale[json.for_sale.length-1];
-
-            data.id = lastItem.id + 1;
+            data.id = json.for_sale.length;
 
             json.for_sale.push(data);
 
@@ -215,9 +227,9 @@ async function addNewFeaturedPost(Axios, data){
         fullJson = getAll(Axios)
         .then(json => {
 
-            console.log(json.featured.length);
-
             data.id = json.featured.length;
+
+            json.for_sale.push(data);
 
             const response = Axios.put(posts_URL, {json});
             //posts_URL = response.headers.location;
