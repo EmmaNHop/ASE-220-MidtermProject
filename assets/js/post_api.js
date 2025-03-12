@@ -1,3 +1,4 @@
+
 // POST API URL: https://jsonblob.com/1348018515168387072
 
 var posts_URL = "https://jsonblob.com/api/jsonBlob/1348018515168387072";
@@ -191,8 +192,6 @@ async function addNewFeaturedJob(Axios, data){
 
 
 //          END PUT METHODS    //
-
-
 
 
 

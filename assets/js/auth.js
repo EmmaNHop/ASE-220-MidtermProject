@@ -19,6 +19,7 @@ function createNewUser(username, password, email, number, birthday) {
         })
         .then(function (response) {
             console.log(response);
+            window.location.replace("login.html");
         })
         .catch(function (error) {
             console.log(error);
@@ -29,15 +30,53 @@ function createNewUser(username, password, email, number, birthday) {
     });
 }
 
-function authenticate(username, password) {
+async function authenticate(username, password) {
+
+    try{
+
+        const response = await axios.get(storage_URL, {})
+
+        var authError="";
+        for(let i=0; i<response.data.users.length;i++) {
+            if(username == response.data.users[i][0]) {
+                if(password == response.data.users[i][1]) {
+                    return;
+                }
+                else {
+                    authError="password is incorrect";
+                }
+            }
+        }
+        if(authError.length==0) {
+            authError="account not found";
+        }
+        // Reloads page when clicking okay on the reload to force a user credentials re-entry
+        if(alert(authError)){}
+        else {window.location.reload(); }
+    }
+    catch{
+        console.log(error)
+    }
+
+    return false;
+
+}
+
+
+/*
+    var isUser = false;
     axios.get(storage_URL, {})
     .then(function (response) {
         var authError="";
         for(let i=0; i<response.data.users.length;i++) {
             if(username == response.data.users[i][0]) {
                 if(password == response.data.users[i][1]) {
-                    window.location.replace("dashboard.html");
-                    return;
+
+                    // Keeps the user stored in local storage
+                    localStorage.setItem('username', username);
+                    //window.location.replace("dashboard.html");
+                    isUser = true;
+                    return true;
                 }
                 else {
                     authError="password is incorrect";
@@ -52,5 +91,6 @@ function authenticate(username, password) {
     .catch(function (error) {
         console.log(error);
     });
+    return isUser;
 }
-
+*/

@@ -78,7 +78,12 @@
 			let username=document.getElementById("username").value;
 			let password=document.getElementById("password").value;
 
-			authenticate(username,password);
+			let response = authenticate(username,password)
+			.then(user => {
+				localStorage.setItem('username', username);
+				
+				window.location.replace("dashboard.html");
+			});
 		});
 	</script>
 </body>
