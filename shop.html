@@ -318,7 +318,7 @@
          *      WRITE COMMON POST
          */
 
-        let commonPost = getCommonPosts(myAxios, 10, 1)
+        let commonPost = getForSale(myAxios, 10, 1)
         // This waits for the promise then plucks the array (posts) will treat the data in the html constructor as an array
         .then(posts => { 
             var html = "";

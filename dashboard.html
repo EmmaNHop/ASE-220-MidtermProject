@@ -18,384 +18,532 @@
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/color_skins.css">
     <link href="assets/css/customStyle.css">
-
-
 </head>
 
 <body class="theme-orange">
 <!-- Page Loader -->
-<div class="page-loader-wrapper">
-    <div class="loader">        
-        <div class="line"></div>
-		<div class="line"></div>
-		<div class="line"></div>
-        <p>Please wait...</p>
-    </div>
-</div>
-<!-- Overlay For Sidebars -->
-<div class="overlay"></div><!-- Search  -->
-<div class="search-bar">
-    <div class="search-icon"> <i class="material-icons">search</i> </div>
-    <input type="text" placeholder="Search">
-    <div class="close-search"> <i class="material-icons">close</i> </div>
-</div>
-
-<!-- Top Bar -->
-<nav class="navbar">
-    <div class="col-12">        
-        <div class="navbar-header">
-            <a href="javascript:void(0);" class="bars"></a>
-            <a class="navbar-brand" href="index.html">Website Name</a>  <!--PLACEHOLDER NAME-->
+    <div class="page-loader-wrapper">
+        <div class="loader">        
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <p>Please wait...</p>
         </div>
-        <ul class="nav navbar-nav navbar-left">
-            <li><a href="javascript:void(0);" class="ls-toggle-btn" data-close="true"><i class="material-icons">swap_horiz</i></a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="javascript:void(0);" class="js-search" data-close="true"><i class="zmdi zmdi-search"></i></a></li>
-            <li class="dropdown">
-                <a href="javascript:void(0);" class="dropdown-toggle xs-hide" data-toggle="dropdown" role="button"><i class="material-icons">notifications</i>
-                    <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
-                </a>
-                <ul class="dropdown-menu slideDown">
-                    <li class="header">NOTIFICATIONS</li>
-                    <li class="body">
-                        <ul class="menu list-unstyled">
-                            <li><a href="javascript:void(0);">
-                                <div class="icon-circle l-coral"> <i class="material-icons">person_add</i> </div>
-                                <div class="menu-info">
-                                    <h4>TEST NOTIFICATION</h4>
-                                    <p> <i class="material-icons">access_time</i> 14 mins ago </p>
-                                </div>
-                                </a></li>
-                        </ul>
-                    </li>
-                    <li class="footer"><a href="javascript:void(0);">View All Notifications</a></li>
-                </ul>
-            </li>
-            <li><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i class="material-icons zmdi-hc-spin">settings</i></a></li>
-        </ul>
     </div>
-</nav>
+    <!-- Overlay For Sidebars -->
+    <div class="overlay"></div><!-- Search  -->
+    <div class="search-bar">
+        <div class="search-icon"> <i class="material-icons">search</i> </div>
+        <input type="text" placeholder="Search">
+        <div class="close-search"> <i class="material-icons">close</i> </div>
+    </div>
 
-<!-- Left Sidebar -->
-<aside id="leftsidebar" class="sidebar">
-    <!-- User Info -->
-    <div class="user-info">
-        <div class="image">
-            <img src="assets/images/avatar1.jpg" width="48" height="48" alt="User" />
-        </div>
-        <div class="info-container">
-            <div class="name" data-toggle="dropdown">John Doe</div>
-            <div class="btn-group user-helper-dropdown">
-                <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" role="button"> keyboard_arrow_down </i>
-                <ul class="dropdown-menu slideUp">
-                    <li><a href="profile.html"><i class="material-icons">person</i>Profile</a></li>
-                    <li class="divider"></li>
-                    <li><a href="javascript:void(0);"><i class="material-icons">group</i>Followers</a></li>
-                    <li><a href="javascript:void(0);"><i class="material-icons">shopping_cart</i>Sales</a></li>
-                    <li><a href="javascript:void(0);"><i class="material-icons">favorite</i>Likes</a></li>
-                    <li class="divider"></li>
-                    <li><a href="sign-in.html"><i class="material-icons">input</i>Sign Out</a></li>
-                </ul>
+    <!-- Top Bar -->
+    <nav class="navbar">
+        <div class="col-12">        
+            <div class="navbar-header">
+                <a href="javascript:void(0);" class="bars"></a>
+                <a class="navbar-brand" href="index.html">Website Name</a>  <!--PLACEHOLDER NAME-->
             </div>
-            <div class="email">john.doe@example.com</div>
-        </div>
-    </div>
-    <!-- #User Info --> 
-    <!-- Menu on left bar -->
-    <div class="menu">
-        <ul class="list">
-            <li class="header">MAIN NAVIGATION</li>
-            <li><a href="detail.html"><i class="zmdi zmdi-home"></i><span>Home</span> </a></li>  
-            <li class="active open"><a href="javascript:void(0);"><i class="zmdi zmdi-account"></i><span>Account</span></a></li>
-            <li><a href=""><i class="zmdi zmdi-email"></i><span>Inbox</span> </a></li>           
-            <li><a href="index.html"><i class="zmdi zmdi-navigation"></i><span>Map</span> </a></li>
-        </ul>
-    </div>
-    <!-- #Menu --> 
-</aside>
-
-<!-- Right Sidebar -->
-<aside id="rightsidebar" class="right-sidebar">
-    <ul class="nav nav-tabs">
-        <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#skins">Skins</a></li>
-        <!--<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#chat">Chat</a></li>-->
-        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#settings">Settings</a></li>
-    </ul>
-    <!--We could use this for dark and light mode, or other options-->
-    <div class="tab-content">
-        <div role="tabpanel" class="tab-pane in active in active slideRight" id="skins">
-            <div class="slim_scroll">
-                <h6>Flat Color</h6>
-                <ul class="choose-skin">                   
-                    <li data-theme="purple"><div class="purple"></div><span>Purple</span></li>
-                    <li data-theme="blue"><div class="blue"></div><span>Blue</span></li>
-                    <li data-theme="cyan"><div class="cyan"></div><span>Cyan</span></li>
-                </ul>                    
-                <h6>Multi Color</h6>
-                <ul class="choose-skin">                        
-                    <li data-theme="black"><div class="black"></div><span>Black</span></li>
-                    <li data-theme="deep-purple"><div class="deep-purple"></div><span>Deep Purple</span></li>
-                    <li data-theme="red"><div class="red"></div><span>Red</span></li>
-                </ul>                    
-                <h6>Gradient Color</h6>
-                <ul class="choose-skin">
-                    <li data-theme="green"><div class="green"></div><span>Green</span> </li>
-                    <li data-theme="orange" class="active"><div class="orange"></div><span>Orange</span></li>
-                    <li data-theme="blush"><div class="blush"></div><span>Blush</span></li>
-                </ul>
-            </div>                
-        <div role="tabpanel" class="tab-pane slideLeft" id="settings">
-            <div class="settings slim_scroll">
-                <p class="text-left">General Settings</p>
-                <ul class="setting-list">
-                    <li><span>Report Panel Usage</span>
-                        <div class="switch">
-                            <label><input type="checkbox" checked><span class="lever"></span></label>
-                        </div>
-                    </li>
-                    <li><span>Email Redirect</span>
-                        <div class="switch">
-                            <label><input type="checkbox"><span class="lever"></span></label>
-                        </div>
-                    </li>
-                </ul>
-                <p class="text-left">System Settings</p>
-                <ul class="setting-list">
-                    <li><span>Notifications</span>
-                        <div class="switch">
-                            <label><input type="checkbox" checked><span class="lever"></span></label>
-                        </div>
-                    </li>
-                    <li><span>Auto Updates</span>
-                        <div class="switch">
-                            <label><input type="checkbox" checked><span class="lever"></span></label>
-                        </div>
-                    </li>
-                </ul>
-                <p class="text-left">Account Settings</p>
-                <ul class="setting-list">
-                    <li><span>Offline</span>
-                        <div class="switch">
-                            <label><input type="checkbox"><span class="lever"></span></label>
-                        </div>
-                    </li>
-                    <li><span>Location Permission</span>
-                        <div class="switch">
-                            <label><input type="checkbox" checked><span class="lever"></span></label>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</aside>
-
-<!-- Chat-launcher-->
-<div class="chat-launcher"></div>
-<div class="chat-wrapper">
-    <div class="card">
-        <div class="header">
-            <h2>TL Groups</h2>                    
-        </div>
-        <div class="body">
-            <div class="chat-widget">
-            <ul class="chat-scroll-list clearfix">
-                <li class="left float-left">
-                    <img src="" class="rounded-circle" alt="">
-                    <div class="chat-info">
-                        <a class="name" href="javascript:void(0);">Alexander</a>
-                        <span class="datetime">6:12</span>                            
-                        <span class="message">Hello, John </span>
-                    </div>
-                </li>
-                <li class="right">
-                    <div class="chat-info"><span class="datetime">6:15</span> <span class="message">Hi, Alexander<br> How are you!</span> </div>
-                </li>
-                <li class="right">
-                    <div class="chat-info"><span class="datetime">6:16</span> <span class="message">There are many variations of passages of Lorem Ipsum available</span> </div>
-                </li>
-                <li class="left float-left"> <img src="" class="rounded-circle" alt="">
-                    <div class="chat-info"><a class="name" href="javascript:void(0);">Elizabeth</a> <span class="datetime">6:25</span> <span class="message">Hi, Alexander,<br> John <br> What are you doing?</span> </div>
-                </li>
-                <li class="left float-left"> <img src="" class="rounded-circle" alt="">
-                    <div class="chat-info"><a class="name" href="javascript:void(0);">Michael</a> <span class="datetime">6:28</span> <span class="message">I would love to join the team.</span> </div>
-                </li>
-                    <li class="right">
-                    <div class="chat-info"><span class="datetime">7:02</span> <span class="message">Hello, <br>Michael</span> </div>
-                </li>
+            <ul class="nav navbar-nav navbar-left">
+                <li><a href="javascript:void(0);" class="ls-toggle-btn" data-close="true"><i class="material-icons">swap_horiz</i></a></li>
             </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="javascript:void(0);" class="js-search" data-close="true"><i class="zmdi zmdi-search"></i></a></li>
+                <li class="dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle xs-hide" data-toggle="dropdown" role="button"><i class="material-icons">notifications</i>
+                        <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
+                    </a>
+                    <ul class="dropdown-menu slideDown">
+                        <li class="header">NOTIFICATIONS</li>
+                        <li class="body">
+                            <ul class="menu list-unstyled">
+                                <li><a href="javascript:void(0);">
+                                    <div class="icon-circle l-coral"> <i class="material-icons">person_add</i> </div>
+                                    <div class="menu-info">
+                                        <h4>TEST NOTIFICATION</h4>
+                                        <p> <i class="material-icons">access_time</i> 14 mins ago </p>
+                                    </div>
+                                    </a></li>
+                            </ul>
+                        </li>
+                        <li class="footer"><a href="javascript:void(0);">View All Notifications</a></li>
+                    </ul>
+                </li>
+                <li><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i class="material-icons zmdi-hc-spin">settings</i></a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Left Sidebar -->
+    <aside id="leftsidebar" class="sidebar">
+        <!-- User Info -->
+        <div class="user-info">
+            <div class="image">
+                <img src="assets/images/avatar1.jpg" width="48" height="48" alt="User" />
             </div>
-            <div class="input-group">
-                <div class="form-line">
-                    <input type="text" class="form-control date" placeholder="Enter your email...">
+            <div class="info-container">
+                <div class="name" data-toggle="dropdown">John Doe</div>
+                <div class="btn-group user-helper-dropdown">
+                    <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" role="button"> keyboard_arrow_down </i>
+                    <ul class="dropdown-menu slideUp">
+                        <li><a href="profile.html"><i class="material-icons">person</i>Profile</a></li>
+                        <li class="divider"></li>
+                        <li><a href="javascript:void(0);"><i class="material-icons">group</i>Followers</a></li>
+                        <li><a href="javascript:void(0);"><i class="material-icons">shopping_cart</i>Sales</a></li>
+                        <li><a href="javascript:void(0);"><i class="material-icons">favorite</i>Likes</a></li>
+                        <li class="divider"></li>
+                        <li><a href="sign-in.html"><i class="material-icons">input</i>Sign Out</a></li>
+                    </ul>
                 </div>
-                <span class="input-group-addon"> <i class="material-icons">send</i> </span>
+                <div class="email">john.doe@example.com</div>
             </div>
         </div>
-    </div>
-</div>
+        <!-- #User Info --> 
+        <!-- Menu on left bar -->
+        <div class="menu">
+            <ul class="list">
+                <li class="header">MAIN NAVIGATION</li>
+                <li><a href="detail.html"><i class="zmdi zmdi-home"></i><span>Home</span> </a></li>  
+                <li class="active open"><a href="javascript:void(0);"><i class="zmdi zmdi-account"></i><span>Account</span></a></li>
+                <li><a href=""><i class="zmdi zmdi-email"></i><span>Inbox</span> </a></li>           
+                <li><a href="index.html"><i class="zmdi zmdi-navigation"></i><span>Map</span> </a></li>
+            </ul>
+        </div>
+        <!-- #Menu --> 
+    </aside>
 
-<!-- Main Content -->
-<section class="content home">
-    <div class="block-header">
-        <div class="row">
-            <div class="col-lg-7 col-md-6 col-sm-12">
-                <h2>Dashboard
-                <small class="text-muted">Welcome to your account page</small>
-                </h2>
+    <!-- Right Sidebar -->
+    <aside id="rightsidebar" class="right-sidebar">
+        <ul class="nav nav-tabs">
+            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#skins">Skins</a></li>
+            <!--<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#chat">Chat</a></li>-->
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#settings">Settings</a></li>
+        </ul>
+        <!--We could use this for dark and light mode, or other options-->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane in active in active slideRight" id="skins">
+                <div class="slim_scroll">
+                    <h6>Flat Color</h6>
+                    <ul class="choose-skin">                   
+                        <li data-theme="purple"><div class="purple"></div><span>Purple</span></li>
+                        <li data-theme="blue"><div class="blue"></div><span>Blue</span></li>
+                        <li data-theme="cyan"><div class="cyan"></div><span>Cyan</span></li>
+                    </ul>                    
+                    <h6>Multi Color</h6>
+                    <ul class="choose-skin">                        
+                        <li data-theme="black"><div class="black"></div><span>Black</span></li>
+                        <li data-theme="deep-purple"><div class="deep-purple"></div><span>Deep Purple</span></li>
+                        <li data-theme="red"><div class="red"></div><span>Red</span></li>
+                    </ul>                    
+                    <h6>Gradient Color</h6>
+                    <ul class="choose-skin">
+                        <li data-theme="green"><div class="green"></div><span>Green</span> </li>
+                        <li data-theme="orange" class="active"><div class="orange"></div><span>Orange</span></li>
+                        <li data-theme="blush"><div class="blush"></div><span>Blush</span></li>
+                    </ul>
+                </div>                
+            <div role="tabpanel" class="tab-pane slideLeft" id="settings">
+                <div class="settings slim_scroll">
+                    <p class="text-left">General Settings</p>
+                    <ul class="setting-list">
+                        <li><span>Report Panel Usage</span>
+                            <div class="switch">
+                                <label><input type="checkbox" checked><span class="lever"></span></label>
+                            </div>
+                        </li>
+                        <li><span>Email Redirect</span>
+                            <div class="switch">
+                                <label><input type="checkbox"><span class="lever"></span></label>
+                            </div>
+                        </li>
+                    </ul>
+                    <p class="text-left">System Settings</p>
+                    <ul class="setting-list">
+                        <li><span>Notifications</span>
+                            <div class="switch">
+                                <label><input type="checkbox" checked><span class="lever"></span></label>
+                            </div>
+                        </li>
+                        <li><span>Auto Updates</span>
+                            <div class="switch">
+                                <label><input type="checkbox" checked><span class="lever"></span></label>
+                            </div>
+                        </li>
+                    </ul>
+                    <p class="text-left">Account Settings</p>
+                    <ul class="setting-list">
+                        <li><span>Offline</span>
+                            <div class="switch">
+                                <label><input type="checkbox"><span class="lever"></span></label>
+                            </div>
+                        </li>
+                        <li><span>Location Permission</span>
+                            <div class="switch">
+                                <label><input type="checkbox" checked><span class="lever"></span></label>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="col-lg-5 col-md-6 col-sm-12">
-                <ul class="breadcrumb float-md-right">
-                    <li class="breadcrumb-item"><a href="detail.html"><i class="zmdi zmdi-home"></i> Home</a></li>
-                    <li class="breadcrumb-item active">Account</li>
+        </div>
+    </aside>
+
+    <!-- Chat-launcher-->
+    <div class="chat-launcher"></div>
+    <div class="chat-wrapper">
+        <div class="card">
+            <div class="header">
+                <h2>TL Groups</h2>                    
+            </div>
+            <div class="body">
+                <div class="chat-widget">
+                <ul class="chat-scroll-list clearfix">
+                    <li class="left float-left">
+                        <img src="" class="rounded-circle" alt="">
+                        <div class="chat-info">
+                            <a class="name" href="javascript:void(0);">Alexander</a>
+                            <span class="datetime">6:12</span>                            
+                            <span class="message">Hello, John </span>
+                        </div>
+                    </li>
+                    <li class="right">
+                        <div class="chat-info"><span class="datetime">6:15</span> <span class="message">Hi, Alexander<br> How are you!</span> </div>
+                    </li>
+                    <li class="right">
+                        <div class="chat-info"><span class="datetime">6:16</span> <span class="message">There are many variations of passages of Lorem Ipsum available</span> </div>
+                    </li>
+                    <li class="left float-left"> <img src="" class="rounded-circle" alt="">
+                        <div class="chat-info"><a class="name" href="javascript:void(0);">Elizabeth</a> <span class="datetime">6:25</span> <span class="message">Hi, Alexander,<br> John <br> What are you doing?</span> </div>
+                    </li>
+                    <li class="left float-left"> <img src="" class="rounded-circle" alt="">
+                        <div class="chat-info"><a class="name" href="javascript:void(0);">Michael</a> <span class="datetime">6:28</span> <span class="message">I would love to join the team.</span> </div>
+                    </li>
+                        <li class="right">
+                        <div class="chat-info"><span class="datetime">7:02</span> <span class="message">Hello, <br>Michael</span> </div>
+                    </li>
                 </ul>
-            </div>
-        </div>
-    </div>
-    <div class="container-fluid">    
-        <div class="row clearfix">
-            <div class="col-lg-12 col-md-12">
-                <div class="card product-report">
-                    <div class="header">
-                        <h2>Create New Post: <a class="create" href="create.html"><i class="zmdi zmdi-plus"></i></a></h2>
+                </div>
+                <div class="input-group">
+                    <div class="form-line">
+                        <input type="text" class="form-control date" placeholder="Enter your email...">
                     </div>
+                    <span class="input-group-addon"> <i class="material-icons">send</i> </span>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="container-fluid">    
-        <div class="row clearfix">
-            <div class="col-lg-12 col-md-12">
-
-                <div id="user_job">
-
-                    <!-- INSERT USER JOB HERE -->
-
+    <!-- Main Content -->
+    <section class="content home">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-lg-7 col-md-6 col-sm-12">
+                    <h2>Dashboard
+                    <small class="text-muted">Welcome to your account page</small>
+                    </h2>
                 </div>
-                
-                <!--Placeholder Post-->
-                <div class="card product-report">
-                    <div class="header">
-                        <h2>Post Name <small>Posted: MM/DD/YYYY time</small></h2>
-                        <ul class="header-dropdown m-r--5">
-                            <li class="dropdown"><a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="material-icons">more_vert</i> </a>
-                                <ul class="dropdown-menu pull-right">
-                                    <li><a href="edit.html">Edit</a></li>
-                                    <li><a href="javascript:void(0);">Delete</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="body">
-                        <div class="row clearfix m-b-15">
-                            <div class="col-lg-4 col-md-4 col-sm-4">
-                                <p>could have pictures in here</p>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-4">
-                                
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-4">
-                                <p>could have location map similar to criagslists here</p>
-                            </div>
-                        </div>
-                        <div>
-                            <p>Body of post</p>
-                        </div>
-                    </div>
+                <div class="col-lg-5 col-md-6 col-sm-12">
+                    <ul class="breadcrumb float-md-right">
+                        <li class="breadcrumb-item"><a href="detail.html"><i class="zmdi zmdi-home"></i> Home</a></li>
+                        <li class="breadcrumb-item active">Account</li>
+                    </ul>
                 </div>
-                <!--End Placeholder Post-->
-                <button class="m-b-15">Load More</button>
             </div>
-        </div>               
-    </div>     
-    <footer>
-        <div class="container-fluid">   
+        </div>
+        <div class="container-fluid">    
             <div class="row clearfix">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="body">
-                            <p class="m-b-0">By Danny Poff, Nate Brewer, and Emma Hopkins</a> </p>
+                <div class="col-lg-12 col-md-12">
+                    <div class="card product-report">
+                        <div class="header">
+                            <h2>Create New Post: <a class="create" href="create.html"><i class="zmdi zmdi-plus"></i></a></h2>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </footer>
-</section>
 
-<!-- Jquery Core Js --> 
-<script src="assets/bundles/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js --> 
-<script src="assets/bundles/vendorscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js --> 
+        <div class="container-fluid">    
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12">
 
-<script src="assets/bundles/jvectormap.bundle.js"></script>  <!--JVectorMap Plugin Js || I don't think we need this for anything other than the maps-->
-<script src="assets/bundles/morrisscripts.bundle.js"></script><!-- Morris Plugin Js -->
-<script src="assets/bundles/sparkline.bundle.js"></script> <!-- Sparkline Plugin Js -->
-<script src="assets/bundles/knob.bundle.js"></script> <!-- Jquery Knob Plugin Js -->
+                    <div id="user_featured">
 
-<script src="assets/bundles/mainscripts.bundle.js"></script>
-<script src="assets/js/pages/index.js"></script>
-<script src="assets/js/pages/charts/jquery-knob.min.js"></script>
+                        <!-- INSERT USER FEATURED HERE -->
 
-<script src="assets/js/bootstrap.min.js"></script>
-<script src="assets/js/less.min.js"></script>
-
-<!-- Axios -->
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<!-- post API Script -->
-<script src="assets/js/post_api.js"></script>
-
-<script>
-
-    function htmlBuilder(query, html){
-        let itemContainer = document.getElementById(query);
-        itemContainer.insertAdjacentHTML("beforeend", html);
-    }
-
-    `<!--Example Post-->
-                <div class="card product-report">
-                    <div class="header">
-                        <h2>Janitorial Position <small>Posted: 3/8/2025 11:23 PM</small></h2>
-                        <ul class="header-dropdown m-r--5">
-                            <li class="dropdown"><a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="material-icons">more_vert</i> </a>
-                                <ul class="dropdown-menu pull-right">
-                                    <li><a href="edit.html">Edit</a></li>
-                                    <li><a href="javascript:void(0);">Delete</a></li>
-                                </ul>
-                            </li>
-                        </ul>
                     </div>
-                    <div class="body">
-                        <div class="row clearfix m-b-15">
-                            <div class="col-lg-4 col-md-4 col-sm-4">
-                                <p>Picture(s)</p>
+
+                    <div id="user_job">
+
+                        <!-- INSERT USER JOB HERE -->
+
+                    </div>
+                    
+                    <div id="user_for_sale">
+
+                        <!-- INSERT USER FOR SALE HERE -->
+
+                    </div>
+                    <button class="m-b-15">Load More</button>
+                </div>
+            </div>               
+        </div>     
+        <footer>
+            <div class="container-fluid">   
+                <div class="row clearfix">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="body">
+                                <p class="m-b-0">By Danny Poff, Nate Brewer, and Emma Hopkins</a> </p>
                             </div>
-                            <div class="col-lg-4 col-md-4 col-sm-4">
-                                
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-4">
-                                <p>Map</p>
-                            </div>
-                        </div>
-                        <div>
-                            <p>Entry level position...
-                                <br>
-                                pay is 10$ an hour
-                                <br>
-                                contact information
-                                <br>
-                                phone number: 111-111-1111 
-                                <br>
-                                email: something@something.com
-                            </p>
                         </div>
                     </div>
                 </div>
-                <!--End Example Post-->`
+            </div>
+        </footer>
+    </section>
 
+    <!-- Jquery Core Js --> 
+    <script src="assets/bundles/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js --> 
+    <script src="assets/bundles/vendorscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js --> 
 
-</script>
+    <script src="assets/bundles/jvectormap.bundle.js"></script>  <!--JVectorMap Plugin Js || I don't think we need this for anything other than the maps-->
+    <script src="assets/bundles/morrisscripts.bundle.js"></script><!-- Morris Plugin Js -->
+    <script src="assets/bundles/sparkline.bundle.js"></script> <!-- Sparkline Plugin Js -->
+    <script src="assets/bundles/knob.bundle.js"></script> <!-- Jquery Knob Plugin Js -->
+
+    <script src="assets/bundles/mainscripts.bundle.js"></script>
+    <script src="assets/js/pages/index.js"></script>
+    <script src="assets/js/pages/charts/jquery-knob.min.js"></script>
+
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/less.min.js"></script>
+
+    <!-- Axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- post API Script -->
+    <script src="assets/js/post_api.js"></script>
+
+    <script>
+
+        // Makes axios passable
+        const myAxios = axios;
+
+        function htmlBuilder(query, html){
+            let itemContainer = document.getElementById(query);
+            itemContainer.insertAdjacentHTML("beforeend", html);
+        }
+
+        getUserFeatured(myAxios)
+        .then(userFeatured =>{
+            var html = "";
+
+            //console.log(userFeatured);
+
+            userFeatured.forEach(featured => {
+
+                if(featured.is_job == true){
+                
+                    let htmlSegment = 
+                    `
+                        <div data-bs-target="delete_target" id="${featured.id}" class="card product-report">
+                            <div class="header">
+                                <h2>${featured.post_title} <small>Posted: Date: ${featured.date_created} || Time: ${featured.time_created}</small></h2>
+                                <ul class="header-dropdown m-r--5">
+                                    <li class="dropdown"><a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="material-icons">more_vert</i> </a>
+                                        <ul class="dropdown-menu pull-right">
+                                            <li><a href="edit.html?id=${featured.id}&type=f">Edit</a></li>
+                                            <li><a id="delete_user_featured" data-value="${featured.id}">Delete</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="body">
+                                <div class="row clearfix m-b-15">
+                                    <div class="col-lg-4 col-md-4 col-sm-4">
+                                        <p>Picture(s)</p>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4">
+                                        
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4">
+                                        <p>Map</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p>
+                                        ${featured.post_content}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+
+                    html += htmlSegment;
+                }
+
+                else if(featured.is_job == false){
+
+                    let htmlSegment = 
+                    `
+                        <div data-bs-target="featured" id="${featured.id}" class="card product-report">
+                            <div class="header">
+                                <h2>${featured.post_title} <small>Posted: Date: ${featured.date_created} time: ${featured.time_created}</small></h2>
+                                <ul class="header-dropdown m-r--5">
+                                    <li class="dropdown"><a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="material-icons">more_vert</i> </a>
+                                        <ul class="dropdown-menu pull-right">
+                                            <li><a href="edit.html?id=${featured.id}&type=f">Edit</a></li>
+                                            <li><a class="delete_user_featured" data-value="${featured.id}">Delete</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="body">
+                                <div class="row clearfix m-b-15">
+                                    <div class="col-lg-4 col-md-4 col-sm-4">
+                                        <p>could have pictures in here</p>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4">
+                                        
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4">
+                                        <p>could have location map similar to criagslists here</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p>${featured.post_content}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+
+                    html += htmlSegment;
+
+                }
+
+            });
+
+            htmlBuilder("user_featured", html);
+        })
+
+        getUserJobs(myAxios)
+        .then(userJobs => {
+            var html = "";
+
+            //console.log(userJobs);
+
+            userJobs.forEach(job => {
+                
+                let htmlSegment = 
+                `
+                    <div id="${job.id}" class="card product-report">
+                        <div class="header">
+                            <h2>${job.post_title} <small>Posted: Date: ${job.date_created} || Time: ${job.time_created}</small></h2>
+                            <ul class="header-dropdown m-r--5">
+                                <li class="dropdown"><a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="material-icons">more_vert</i> </a>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li><a href="edit.html?id=${job.id}&type=j">Edit</a></li>
+                                        <li><a id="delete_user_job" data-value="${job.id}">Delete</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="body">
+                            <div class="row clearfix m-b-15">
+                                <div class="col-lg-4 col-md-4 col-sm-4">
+                                    <p>Picture(s)</p>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4">
+                                    
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4">
+                                    <p>Map</p>
+                                </div>
+                            </div>
+                            <div>
+                                <p>
+                                    ${job.post_content}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                
+
+                html += htmlSegment;
+
+            });
+
+            htmlBuilder("user_job", html);
+
+        });
+
+        getUserForSale(myAxios)
+
+        .then(userPosts => {
+
+            var html = "";
+
+            //console.log(userPosts);
+
+            userPosts.forEach(post => {
+                
+                let htmlSegment = 
+                `
+                    <div id="${post.id}" class="card product-report">
+                        <div class="header">
+                            <h2>${post.post_title} <small>Posted: Date: ${post.date_created} time: ${post.time_created}</small></h2>
+                            <ul class="header-dropdown m-r--5">
+                                <li class="dropdown"><a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="material-icons">more_vert</i> </a>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li><a href="edit.html?id=${post.id}&type=s">Edit</a></li>
+                                        <li><a class="delete_user_for_sale" data-value="${post.id}">Delete</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="body">
+                            <div class="row clearfix m-b-15">
+                                <div class="col-lg-4 col-md-4 col-sm-4">
+                                    <p>could have pictures in here</p>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4">
+                                    
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4">
+                                    <p>could have location map similar to criagslists here</p>
+                                </div>
+                            </div>
+                            <div>
+                                <p>${post.post_content}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                html += htmlSegment;
+
+            });
+
+            htmlBuilder("user_for_sale", html);
+
+        });
+
+        // DELETE BUTTONS
+        document.querySelector('#user_featured').addEventListener('click', (event) => {
+            console.log(event.target.closest('a').dataset.id);
+        })
+
+    
+
+        
+
+        
+
+            
+
+    </script>
 
 </body>
 
