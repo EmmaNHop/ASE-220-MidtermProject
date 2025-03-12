@@ -189,18 +189,19 @@
                                         </div>
 
                                         <div class="tab-content ">
-                                            <div id="${i}" class="products-small owl-carousel owl-theme"
+                                            <div class="products-small owl-carousel owl-theme"
                                                 style="display: inline-block">
-                                                <div class="item-row">
-                                                    <div id="featured">
+                                                <div id="featured">
     
                                                 <!-- INSERT FEATURED HERE -->
                                                        
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
 
+                                    </div>
+                                    <div class="load-more-wrapper">
+                                        <p id="load_more_featured">Load More Featured</p>
                                     </div>
                                     <br>
 
@@ -208,10 +209,10 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="block-title list-group-item">
-                                                    <h3><a href="shop.html" >For Sale</a></h3>
+                                                    <h3><a href="shop.html">For Sale</a></h3>
                                                 </div>
                                             </div>
-                                            <div id="${i}" class="products-small owl-carousel owl-theme"
+                                            <div class="products-small owl-carousel owl-theme"
                                                 style="display: inline-block">
                                                 <div class="item-row">
                                                     <div id="for_sale">
@@ -223,8 +224,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div id="load_more_for_sale" class="load-more-wrapper">
-                                        <p>Load More For Sale</p>
+                                    <div class="load-more-wrapper">
+                                        <p id="load_more_for_sale">Load More For Sale</p>
                                     </div>
                                     <div class="sns-latestblog">
                                         <div class="row">
@@ -325,7 +326,12 @@
     <script src="assets/js/post_api.js"></script>
     <script>
 
+        var featuredLower = 0;
+
         var jobLower = 0;
+
+        var forSaleLower = 0;
+
 
         // Makes axios passable
         const myAxios = axios;
@@ -338,9 +344,9 @@
             /*
             *      WRITE FEATURED 
             */
-        function writeFeatured(){
+        function writeFeatured(lower){
 
-            let featuredPosts = getFeaturedPosts(myAxios)
+            let featuredPosts = getFeaturedPosts(myAxios, lower, lower+5)
             .then(featured => { 
                 var html = "";
 
@@ -352,7 +358,7 @@
 
                     var htmlSegment = "";
 
-                    if(!featured[i].isJob){
+                    
 
                         htmlSegment =
                             `<div class="item list-group-item">
@@ -401,19 +407,25 @@
                                     </div>
                                 </div>
                             </div>`;
-                        }
-                        else if(featured[i].is_job){
-                            let htmlSegment =
+                        
+
+                        /*
+
+                        else if(featured[i].is_job == true){
+
+                            console.log("Featured Job");
+
+                            htmlSegment =
                                 `<div id="${featured[i].id}" class="latestblog-content owl-carousel owl-theme"
                                     style="display: inline-block">
-                                    <div class="item ">
+                                    <div class="item">
                                         <div class="blog-page list-group-item">
                                             <div class="blog-left">
                                                 <p class="text1">08</p>
                                                 <p class="text2">JAN</p>
                                             </div>
                                             <div class="blog-right">
-                                                <p class="style1"><a href="#">Company</a></p>
+                                                <p class="style1"><a href="itemDetail.html?id=${featured[i].id}&type=j">${featured[i].created_by}</a></p>
                                                 <p class="style2">${featured[i].post_title}</p>
                                                 <p class="style3">${featured[i].post_content}</p>
                                             </div>
@@ -422,6 +434,8 @@
                                 </div>`;
                         }
 
+                        */
+
                     html += htmlSegment;
 
                 }
@@ -429,19 +443,20 @@
                 htmlBuilder("featured", html);
 
             });
+            return featuredLower += 5;
         }
         /*
          *      WRITE JOBS 
          */
         function writeJobs(lower){; 
 
-            console.log(lower);
+            //console.log(lower);
 
             getJobs(myAxios, lower, lower+5)
             .then(jobs => { 
                 var html = "";
 
-                console.log(jobs);
+                //console.log(jobs);
 
                 for(let i = 0; i < jobs.length; i++){
 
@@ -503,21 +518,16 @@
                 
             });
 
-            jobLower += 5;
-
-            return jobLower;
-
+            return jobLower += 5;
         }
 
         /*
          *      WRITE COMMON POST
          */
 
-        function writeForSale(){
-
-            var commonPostLower = 0;
-                                                                // 5 per page
-            let commonPost = getForSale(myAxios, commonPostLower, commonPostLower+4)
+        function writeForSale(lower){
+                                                 // 5 per page
+            let commonPost = getForSale(myAxios, lower, lower+5)
             // This waits for the promise then plucks the array (posts) will treat the data in the html constructor as an array
             .then(posts => { 
                 var html = "";
@@ -586,14 +596,23 @@
                 //document.querySelector('#for-sale').innerHtml = html;
 
             });
+            return forSaleLower += 5;
         }
 
-        var featuredLower = writeFeatured(0);
+        featuredLower = writeFeatured(featuredLower);
         jobLower -writeJobs(jobLower);
-        var forSaleLower = writeForSale(0);
+        forSaleLower = writeForSale(forSaleLower);
+
+        document.getElementById('load_more_featured').addEventListener('click', function(){
+            featuredLower = writeJobs(featuredLower);
+        });
 
         document.getElementById('load_more_jobs').addEventListener('click', function(){
             jobLower = writeJobs(jobLower);
+        });
+
+        document.getElementById('load_more_for_sale').addEventListener('click', function(){
+            forSaleLower = writeForSale(forSaleLower);
         });
         
 

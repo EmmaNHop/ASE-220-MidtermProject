@@ -363,11 +363,8 @@
             "state" : state,
             "price" : price,
             "post_views" : 0,
-            "is_job" : ""
+            "is_job" : false
         };
-    
-        // Boolean to show either is a job or not, will deterimine where it is stored
-        var isJob;
 
         // Boolean to show if it will be featured. will deterimine where it is stored
         var isFeatured;
@@ -378,30 +375,29 @@
 
         // Job radio button
         if(isJobButton[0].checked){
-            isJob = true;
-            
-        } // For sale radio button
+            post.is_job = true;  
+        } 
+        // For sale radio button
         else if(isJobButton[1].checked){
-            isJob = false;
+            post.is_job = false;
         }
 
-        if(!isJob){
+        console.log(post.is_job);
+
+        if(post.is_job == false){
             if(featuredButton[0].checked){
-                post.is_job = false;
                 addNewFeaturedPost(myAxios, post);
             }
             else{
-                post.is_job = false;
+                console.log("here");
                 addNewForSale(myAxios, post);
             }
         }
         else{
             if(featuredButton[0].checked){
-                post.is_job = true;
                 addNewFeaturedJob(myAxios, post);
             }
             else{
-                post.is_job = true;
                 addNewCommonJob(myAxios, post);
             }
         }
