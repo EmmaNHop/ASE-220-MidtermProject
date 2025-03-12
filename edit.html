@@ -6,7 +6,7 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
 
-    <title>Edit Post</title>
+    <title>Create Post</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.x.x/font/bootstrap-icons.css"> 
 
@@ -239,60 +239,75 @@
                     <div class="col-lg-12 col-md-12">
                         <div class="card product-report">
                             <div class="header">
-                                <h3>Edit Post:</h3>
+                                <h3>Create Post:</h3>
                             </div>
                             <div class="body">
-                                <div class="row clearfix m-b-15">
-                                    <div class="col-lg-4 col-md-6 col-sm-12">
-                                        <h5>Title:</h5>
-                                        <input id="title" type="text">
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-12">
-                                        <h5>Content:</h5>
-                                        <input id="content" type="text">
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-12">
-                                        <h5>Type:</h5>                      <!--Will probably have a dropdown for this-->
-                                        <input id="type" type="text"><br>
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-12">
-                                        <h5>Picture:</h5>
-                                        <input id="picture" type="text"><br>
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-12">
-                                        <h5>Location:</h5>                  <!--Might just use user location or something-->
-                                        <input id="location" type="text"><br>
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-12">
-                                        <h5>Price:</h5>
-                                        <input id="price" type="text"><br>
-                                    </div>
+                                <form id="edit_post">    
+                                    <div class="row clearfix m-b-15">
+                                        <div class="col-lg-4 col-md-6 col-sm-12">
+                                            <h5>Title:</h5>
+                                            <input class="form-control m-1" id="title" type="text" >
+                                        </div>
+                                        <div class="col-lg-4 col-md-6 col-sm-12">
+                                            <h5>Content:</h5>
+                                            <input class="form-control m-1" id="content" type="text" >
+                                        </div>
+                                        <div class="col-lg-4 col-md-6 col-sm-12">
+                                            <h5>Type:</h5>                      <!--Will probably have a dropdown for this-->
+                                            <input class="form-control m-1" id="type" type="text" ><br>
+                                        </div>
+                                        <div class="col-lg-4 col-md-6 col-sm-12">
+                                            <h5>Picture:</h5>
+                                            <input class="form-control m-1" id="picture" type="text" ><br>
+                                        </div>
+                                        <div class="col-lg-4 col-md-6 col-sm-12">
+                                            <h5>Location:</h5>                  <!--Might just use user location or something-->
+                                            <input class="form-control m-1" id="city" type="text" placeholder="Enter City"><br>
+                                            <input class="form-control m-1" id="state" type="text" placeholder="Enter State"><br>
+                                        </div>
+                                        <div class="col-lg-4 col-md-6 col-sm-12">
+                                            <h5>Price:</h5>
+                                            <input class="form-control m-1" id="price" type="text"><br>
+                                        </div>
+                                        <div class="col-lg-4 col-md-6 col-sm-12">
+                                            <h5>Job or Item For Sale?</h5>
+                                            <input class="form-control m-1" type="radio" id="is_job" name="typeCheck" value="job" checked>
+                                            <label for="is_job">Job</label>
+                                            <input class="form-control m-1" id="is_for_sale" type="radio" name="typeCheck" value="sale">
+                                            <label for="is_for_sale">Item for sale</label><br>
+                                        </div>
+                                        <div class="col-lg-4 col-md-6 col-sm-12">
+                                            <h5>Make Feature? ($2,000,000)</h5>
+                                            <input class="form-control m-1" type="checkbox" id="feature" name="feature" value="feature">
+                                            <label for="feature">Yes</label>
+                                        </div>
+                                    
                                     <!--data that will not be inputted by user:
                                         username, date of creation...
                                     -->
-                                </div>
+                                    </div>
+                                </form>
                             </div>
-                            <p><button style="margin-top: 20px;" type="submit">Submit</button></p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    <footer>
-        <div class="container-fluid"> 
-            <div class="row clearfix">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="body">
-                            <p class="m-b-0">By Danny Poff, Nate Brewer, and Emma Hopkins</a> </p>
+                            <p><button style="margin-top: 20px;" id="edit_post_button" type="submit">Submit</button></p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </footer>
-</section>
+        <footer>
+            <div class="container-fluid"> 
+                <div class="row clearfix">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="body">
+                                <p class="m-b-0">By Danny Poff, Nate Brewer, and Emma Hopkins</a> </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </section>
 </body>
 <!-- Jquery Core Js --> 
 <script src="assets/bundles/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js --> 
@@ -306,4 +321,172 @@
 <script src="assets/bundles/mainscripts.bundle.js"></script>
 <script src="assets/js/pages/index.js"></script>
 <script src="assets/js/pages/charts/jquery-knob.min.js"></script>
+
+<!-- Axios -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<!-- post API Script -->
+<script src="assets/js/post_api.js"></script>
+<script>
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const postId = urlParams.get('id');
+    const type = urlParams.get('type');
+
+
+    const form = document.getElementById('edit_post');
+    const userName = localStorage.getItem('username');
+
+    console.log(postId);
+    console.log(type);
+
+    // Makes axios passable
+    const myAxios = axios;
+
+    var post = {};
+    // If Featured
+    if(type == 'f'){
+        getFeaturedPosts(myAxios, 1000000)
+        .then(featuredPosts => {
+
+            feature = featuredPosts[postId];
+
+            document.querySelector('#title').setAttribute('value', feature.post_title);
+            document.querySelector('#content').setAttribute('value', feature.post_content);
+            document.querySelector('#type').setAttribute('value', feature.type);
+            document.querySelector('#picture').setAttribute('value', feature.img);
+            document.querySelector('#city').setAttribute('value', feature.city);
+            document.querySelector('#state').setAttribute('value', feature.state);
+            document.querySelector('#price').setAttribute('value', feature.price);
+            document.querySelector('#is_job').setAttribute('checked', feature.is_job);
+
+
+        });
+    }
+    // If Job
+    else if(type == 'j'){   // not permanent
+        getUserJobs(myAxios, 1000, 1000)
+        .then(jobs => {
+
+            job = jobs[postId];
+
+            document.querySelector('#title').setAttribute('value', job.post_title);
+            document.querySelector('#content').setAttribute('value', job.post_content);
+            document.querySelector('#type').setAttribute('value', job.type);
+            document.querySelector('#picture').setAttribute('value', job.img);
+            document.querySelector('#city').setAttribute('value', job.city);
+            document.querySelector('#state').setAttribute('value', job.state);
+            document.querySelector('#price').setAttribute('value', job.price);
+            document.querySelector('#is_job').setAttribute('checked', true);
+
+        });
+
+    }
+    // If For Sale
+    else if(type == 's'){
+
+        getForSale(myAxios, 10000000, 100000000000)
+        .then(for_sale_posts => {
+
+            for_sale = for_sale_posts[postId];
+
+            document.querySelector('#title').setAttribute('value', for_sale.post_title);
+            document.querySelector('#content').setAttribute('value', for_sale.post_content);
+            document.querySelector('#type').setAttribute('value', for_sale.type);
+            document.querySelector('#picture').setAttribute('value', for_sale.img);
+            document.querySelector('#city').setAttribute('value', for_sale.city);
+            document.querySelector('#state').setAttribute('value', for_sale.state);
+            document.querySelector('#price').setAttribute('value', for_sale.price);
+            document.querySelector('#is_job').setAttribute('checked', false);
+
+    });
+
+}
+
+        // For time stamps
+    const date = new Date();
+
+        /*
+        var post = {
+                "id" : "",
+                "created_by" : "",//data.created_by,  
+                "date_created" : date.getFullYear() + "-" + parseInt(date.getMonth() + 1) + "-" + date.getDate(),
+                "time_created" : date.getHours() + "-" + date.getMinutes() + "-" + date.getSeconds(),
+                "post_title" : post_title,
+                "post_content" : post_content,
+                "img" : img,
+                "type" : type,
+                "city" : city,
+                "state" : state,
+                "price" : price,
+                "post_views" : 0,
+                "is_job" : ""
+            };
+        */
+
+     document.getElementById('edit_post_button').addEventListener('click', function() {
+
+
+        const post_title = form.elements.title.value;
+        const post_content = form.elements.content.value;
+        const type = form.elements.type.value;
+        const img = form.elements.picture.value;
+        const city = form.elements.city.value;
+        const state = form.elements.state.value;
+        const price = form.elements.price.value;
+        const feature = form.elements.feature.value;
+
+        post = {
+            "id" : postId,
+            "created_by" : userName,  
+            "date_created" : date.getFullYear() + "-" + parseInt(date.getMonth() + 1) + "-" + date.getDate(),
+            "time_created" : date.getHours() + "-" + date.getMinutes() + "-" + date.getSeconds(),
+            "post_title" : post_title,
+            "post_content" : post_content,
+            "img" : img,
+            "type" : type,
+            "city" : city,
+            "state" : state,
+            "price" : price,
+            "post_views" : 0,
+            "is_job": ""
+        };
+
+        const isJobButton = document.querySelectorAll('input[name="typeCheck"]');
+
+        const featuredButton = document.querySelectorAll('input[name="feature"]');
+
+        // Job radio button
+        if(isJobButton[0].checked){
+            post.is_job = true;    
+        } 
+        // For sale radio button
+        else if(isJobButton[1].checked){
+            post.is_job = false;
+        }
+
+        if(post.is_job == false){
+            if(featuredButton[0].checked){
+                addNewFeaturedPost(myAxios, post);
+            }
+            else{
+                addNewCommonPost(myAxios, post);
+            }
+        }
+        else{
+            if(featuredButton[0].checked){
+                addNewFeaturedJob(myAxios, post);
+            }
+            else{
+                addJobByID(myAxios, post);
+            }
+        }
+
+            //window.location.replace("detail.html");
+
+            // if no error return to window.location.replace("detail.html");
+
+        });
+
+
+</script>
 </html>

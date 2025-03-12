@@ -169,12 +169,7 @@
                     </div>
                 </div>
             </div>
-        
-
-<!-- END HEADER -->
-
-
-
+            <!-- END HEADER -->
 
             <!-- CONTENT -->
             <div id="sns_content" class="wrap layout-m">
@@ -245,8 +240,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div id="load_more_jobs" class="load-more-wrapper">
-                                        <p>Load More Jobs</p>
+                                    <div class="load-more-wrapper">
+                                        <p id ="load_more_jobs">
+                                        Load More Jobs
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -312,7 +309,6 @@
                     </div>
                 </div>
             </div>
-        </div>
     </div>
     <!-- Scripts -->
     <script src="assets/js/jquery-1.9.1.min.js"></script>
@@ -329,40 +325,44 @@
     <script src="assets/js/post_api.js"></script>
     <script>
 
+        var jobLower = 0;
+
+        // Makes axios passable
+        const myAxios = axios;
+
         function htmlBuilder(query, html){
             let itemContainer = document.getElementById(query);
             itemContainer.insertAdjacentHTML("beforeend", html);
         }
-        
-        // Makes axios passable
-        const myAxios = axios;
 
+            /*
+            *      WRITE FEATURED 
+            */
+        function writeFeatured(){
 
-        /*
-         *      WRITE COMMON POST
-         */
+            let featuredPosts = getFeaturedPosts(myAxios)
+            .then(featured => { 
+                var html = "";
 
-        let commonPost = getCommonPosts(myAxios, 10, 1)
-        // This waits for the promise then plucks the array (posts) will treat the data in the html constructor as an array
-        .then(posts => { 
-            var html = "";
+                //console.log(featured);
 
-            //console.log(posts);
+                for(let i = 0; i < featured.length; i++){
 
-            for(let i = 0; i < posts.length; i++){
+                    //console.log(featured[i]);
 
-                //console.log(posts[i]);
+                    var htmlSegment = "";
 
-                let htmlSegment =
-                    `
-                            <div class="item list-group-item">
+                    if(!featured[i].isJob){
+
+                        htmlSegment =
+                            `<div class="item list-group-item">
                                 <div class="item-inner">
                                     <div class="prd">
                                         <div class="item-img clearfix">
                                             <a class="product-image have-additional" href="#">
                                                 <span class="img-main">
                                                     <!--leaving picture empty-->
-                                                    <img src="="${posts[i].img}
+                                                    <img src="="${featured[i].img}
                                                         style="height:7em; width:7em;">
                                                 </span>
                                             </a>
@@ -370,8 +370,8 @@
                                         <div class="item-info">
                                             <div class="info-inner">
                                                 <div class="item-title">
-                                                    <a href="#">
-                                                    ${posts[i].post_title} 
+                                                    <a href="itemDetail.html?id=${featured[i].id}&type=f">
+                                                    ${featured[i].post_title} 
                                                     </a>
                                                 </div>
                                                 <div class="item-price">
@@ -379,7 +379,7 @@
                                                         <span class="regular-price">
                                                             <span class="price">
                                                                 <span
-                                                                class="price1">${posts[i].price}</span>
+                                                                class="price1">${featured[i].price}</span>
                                                             </span>
                                                         </span>
                                                     </div>
@@ -393,7 +393,7 @@
                                                         <span><a href="#home"
                                                             aria-controls="home" role="tab"
                                                             data-toggle="tab">Message
-                                                            ${posts[i].created_by}</a></span>
+                                                            ${featured[i].created_by}</a></span>
                                                     </button>
                                                 </div>
                                             </div>
@@ -401,183 +401,201 @@
                                     </div>
                                 </div>
                             </div>`;
+                        }
+                        else if(featured[i].is_job){
+                            let htmlSegment =
+                                `<div id="${featured[i].id}" class="latestblog-content owl-carousel owl-theme"
+                                    style="display: inline-block">
+                                    <div class="item ">
+                                        <div class="blog-page list-group-item">
+                                            <div class="blog-left">
+                                                <p class="text1">08</p>
+                                                <p class="text2">JAN</p>
+                                            </div>
+                                            <div class="blog-right">
+                                                <p class="style1"><a href="#">Company</a></p>
+                                                <p class="style2">${featured[i].post_title}</p>
+                                                <p class="style3">${featured[i].post_content}</p>
+                                            </div>
+                                        </div>
+                                    </div>                                                                                                 
+                                </div>`;
+                        }
 
-                html += htmlSegment;
+                    html += htmlSegment;
 
-            }
+                }
 
-            htmlBuilder("for_sale", html);
+                htmlBuilder("featured", html);
 
-            //document.querySelector('#for-sale').innerHtml = html;
-
-        });
-
-
+            });
+        }
         /*
          *      WRITE JOBS 
          */
+        function writeJobs(lower){; 
 
-        getJobs(myAxios, 10, 1)
-        .then(jobs => { 
-            var html = "";
+            console.log(lower);
 
-            //console.log(jobs);
+            getJobs(myAxios, lower, lower+5)
+            .then(jobs => { 
+                var html = "";
 
-            for(let i = 0; i < jobs.length; i++){
+                console.log(jobs);
 
-                let date = jobs[i].date_created;
-                let day = "";
-                var month =  "";
+                for(let i = 0; i < jobs.length; i++){
 
-                // TODO: make below into a function
+                    /*
 
-                // Gets the day and month number
-                if(date.length == 10){
+                    let date = jobs[i].date_created;
+                    let day = "";
+                    var month =  "";
 
-                    day = date.slice(8);
-                    month = date.slice(5,8);
+                    // TODO: make below into a function
+
+                    // Gets the day and month number
+                    if(date.length == 10){
+
+                        day = date.slice(8);
+                        month = date.slice(5,8);
+
+                    }
+                    else if(date.length == 9){
+
+                        // TODO: get day and month. This one needs to make use of the fact that the month could be a length of one vis a vi the day can too. 
+
+                    }
+                    else if(date.length == 8){
+
+                        day = date.slice(7);
+                        month = date.slice(5, 7);
+
+                    }   
+                    // TODO: switch for month
+
+                    */
+
+                    //console.log(jobs[i]);
+
+                    let htmlSegment =
+                        `<div id="${jobs[i].id}" class="latestblog-content owl-carousel owl-theme"
+                            style="display: inline-block">
+                            <div class="item ">
+                                <div class="blog-page list-group-item">
+                                    <div class="blog-left">
+                                        <p class="text1">08</p>
+                                        <p class="text2">JAN</p>
+                                    </div>
+                                    <div class="blog-right">
+                                        <p class="style1"><a href="itemDetail.html?id=${jobs[i].id}&type=j">${jobs[i].created_by}</a></p>
+                                        <p class="style2">${jobs[i].post_title}</p>
+                                        <p class="style3">${jobs[i].post_content}</p>
+                                    </div>
+                                </div>
+                            </div>                                                                                                 
+                        </div>`;
+
+                    html += htmlSegment;
 
                 }
-                else if(date.length == 9){
 
-                    // TODO: get day and month. This one needs to make use of the fact that the month could be a length of one vis a vi the day can too. 
+                htmlBuilder("jobs", html);
+                
+            });
 
-                }
-                else if(date.length == 8){
+            jobLower += 5;
 
-                    day = date.slice(7);
-                    month = date.slice(5, 7);
+            return jobLower;
 
-                }   
-                // TODO: switch for month
-
-
-                //console.log(jobs[i]);
-
-                let htmlSegment =
-                    `<div id="${jobs[i].id}" class="latestblog-content owl-carousel owl-theme"
-                        style="display: inline-block">
-                        <div class="item ">
-                            <div class="blog-page list-group-item">
-                                <div class="blog-left">
-                                    <p class="text1">08</p>
-                                    <p class="text2">JAN</p>
-                                </div>
-                                <div class="blog-right">
-                                    <p class="style1"><a href="#">${jobs[i].created_by}</a></p>
-                                    <p class="style2">${jobs[i].post_title}</p>
-                                    <p class="style3">${jobs[i].post_content}</p>
-                                </div>
-                            </div>
-                        </div>                                                                                                 
-                    </div>`;
-
-                html += htmlSegment;
-
-            }
-
-            htmlBuilder("jobs", html);
-
-            //document.querySelector('#for-sale').innerHtml = html;
-
-        });
-            
-        getJobs(myAxios, 1);
-
+        }
 
         /*
-         *      WRITE FEATURED 
+         *      WRITE COMMON POST
          */
 
-        let featuredPosts = getFeaturedPosts(myAxios, 10, 1)
-        .then(featured => { 
-            var html = "";
+        function writeForSale(){
 
-            //console.log(featured);
+            var commonPostLower = 0;
+                                                                // 5 per page
+            let commonPost = getForSale(myAxios, commonPostLower, commonPostLower+4)
+            // This waits for the promise then plucks the array (posts) will treat the data in the html constructor as an array
+            .then(posts => { 
+                var html = "";
 
-            for(let i = 0; i < featured.length; i++){
+                //console.log(posts);
 
-                //console.log(featured[i]);
+                for(let i = 0; i < posts.length; i++){
 
-                var htmlSegment = "";
+                    //console.log(posts[i]);
 
-                if(!featured[i].isJob){
-
-                    htmlSegment =
-                        `<div class="item list-group-item">
-                            <div class="item-inner">
-                                <div class="prd">
-                                    <div class="item-img clearfix">
-                                        <a class="product-image have-additional" href="#">
-                                            <span class="img-main">
-                                                <!--leaving picture empty-->
-                                                <img src="="${featured[i].img}
-                                                    style="height:7em; width:7em;">
-                                            </span>
-                                        </a>
-                                    </div>
-                                    <div class="item-info">
-                                        <div class="info-inner">
-                                            <div class="item-title">
-                                                <a href="#">
-                                                ${featured[i].post_title} 
+                    let htmlSegment =
+                        `
+                                <div class="item list-group-item">
+                                    <div class="item-inner">
+                                        <div class="prd">
+                                            <div class="item-img clearfix">
+                                                <a class="product-image have-additional" href="#">
+                                                    <span class="img-main">
+                                                        <!--leaving picture empty-->
+                                                        <img src="="${posts[i].img}
+                                                            style="height:7em; width:7em;">
+                                                    </span>
                                                 </a>
                                             </div>
-                                            <div class="item-price">
-                                                <div class="price-box">
-                                                    <span class="regular-price">
-                                                        <span class="price">
-                                                            <span
-                                                            class="price1">${featured[i].price}</span>
-                                                        </span>
-                                                    </span>
+                                            <div class="item-info">
+                                                <div class="info-inner">
+                                                    <div class="item-title">
+                                                        <a href="itemDetail.html?id=${posts[i].id}&type=s">
+                                                        ${posts[i].post_title} 
+                                                        </a>
+                                                    </div>
+                                                    <div class="item-price">
+                                                        <div class="price-box">
+                                                            <span class="regular-price">
+                                                                <span class="price">
+                                                                    <span
+                                                                    class="price1">${posts[i].price}</span>
+                                                                </span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="action-bot">
+                                                    <div class="wrap-addtocart">
+                                                        <button class="btn-cart"
+                                                            title="Add to Cart">
+                                                            <i class="fa fa-shopping-cart"></i>
+                                                            <span><a href="#home"
+                                                                aria-controls="home" role="tab"
+                                                                data-toggle="tab">Message
+                                                                ${posts[i].created_by}</a></span>
+                                                        </button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="action-bot">
-                                            <div class="wrap-addtocart">
-                                                <button class="btn-cart"
-                                                    title="Add to Cart">
-                                                    <i class="fa fa-shopping-cart"></i>
-                                                    <span><a href="#home"
-                                                        aria-controls="home" role="tab"
-                                                        data-toggle="tab">Message
-                                                        ${featured[i].created_by}</a></span>
-                                                </button>
-                                            </div>
-                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>`;
-                    }
-                    else if(featured[i].isJob){
-                        let htmlSegment =
-                            `<div id="${featured[i].id}" class="latestblog-content owl-carousel owl-theme"
-                                style="display: inline-block">
-                                <div class="item ">
-                                    <div class="blog-page list-group-item">
-                                        <div class="blog-left">
-                                            <p class="text1">08</p>
-                                            <p class="text2">JAN</p>
-                                        </div>
-                                        <div class="blog-right">
-                                            <p class="style1"><a href="#">Company</a></p>
-                                            <p class="style2">${featured[i].post_title}</p>
-                                            <p class="style3">${featured[i].post_content}</p>
-                                        </div>
-                                    </div>
-                                </div>                                                                                                 
-                            </div>`;
-                    }
+                                </div>`;
 
-                html += htmlSegment;
+                    html += htmlSegment;
 
-            }
+                }
 
-            htmlBuilder("featured", html);
+                htmlBuilder("for_sale", html);
 
+                //document.querySelector('#for-sale').innerHtml = html;
+
+            });
+        }
+
+        var featuredLower = writeFeatured(0);
+        jobLower -writeJobs(jobLower);
+        var forSaleLower = writeForSale(0);
+
+        document.getElementById('load_more_jobs').addEventListener('click', function(){
+            jobLower = writeJobs(jobLower);
         });
+        
 
             /*
 

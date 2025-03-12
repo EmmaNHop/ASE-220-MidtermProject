@@ -80,9 +80,13 @@
 
 			let response = authenticate(username,password)
 			.then(user => {
+
+				if(user == true){
+					window.location.replace("dashboard.html");
+				}
+
 				localStorage.setItem('username', username);
 				
-				window.location.replace("dashboard.html");
 			});
 		});
 	</script>
