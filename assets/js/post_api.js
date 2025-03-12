@@ -5,7 +5,7 @@ var posts_URL = "https://jsonblob.com/api/jsonBlob/1348018515168387072";
 
 //          GET METHODS         //
 
-async function getCommonPosts(Axios, postPerPage, pageNum){
+async function getForSale(Axios){
 
     try{
         const response = await Axios.get(posts_URL, {});
@@ -17,19 +17,74 @@ async function getCommonPosts(Axios, postPerPage, pageNum){
     }
 }
 
-async function getJobs(Axios, jobsPerPage, pageNum){
+async function getForSaleByID(Axios, id){
     
     try{
         const response = await Axios.get(posts_URL, {});
-        //console.log(response.data.jobs);
-        return response.data.json.job;
+
+        return response.data.json.for_sale[id];
     }
     catch(error){
         console.log(error);
     }
 }
 
-async function getFeaturedPosts(Axios, featuredPerPage, pageNum){
+async function getJobs(Axios, lowerLimit, upperLimit){
+    
+    try{
+        const response = await Axios.get(posts_URL, {});
+        console.log(response.data.json.job);
+
+        var jobs = [];
+
+        for(let i = lowerLimit; i < upperLimit; i++){
+
+            console.log(response.data.json.job[i]);
+
+            if(response.data.json.job[i] == undefined){
+                return jobs;
+            }
+
+            jobs.push(response.data.json.job[i]);
+        }
+
+        console.log(jobs);
+
+        return jobs;
+    }
+    catch(error){
+        console.log(error);
+    }
+}
+
+async function getUserJobs(Axios, lowerLimit, upperLimit){
+    
+    try{
+        const response = await Axios.get(posts_URL, {});
+        console.log(response.data.json.job);
+
+
+        return response.data.json.jobs;
+
+    }
+    catch(error){
+        console.log(error);
+    }
+}
+
+async function getJobByID(Axios, id){
+    
+    try{
+        const response = await Axios.get(posts_URL, {});
+
+        return response.data.json.job[id];
+    }
+    catch(error){
+        console.log(error);
+    }
+}
+
+async function getFeaturedPosts(Axios){
     
     try{
         const response = await Axios.get(posts_URL, {});
@@ -41,10 +96,22 @@ async function getFeaturedPosts(Axios, featuredPerPage, pageNum){
     }
 }
 
+async function getFeaturedByID(Axios, id){
+    
+    try{
+        const response = await Axios.get(posts_URL, {});
+
+        return response.data.json.featured[id];
+    }
+    catch(error){
+        console.log(error);
+    }
+}
+
 async function getAll(Axios){
     try{
         const response = await Axios.get(posts_URL, {});
-        //console.log(response.data);
+        console.log(response.data.json);
         return response.data.json;
     }
     catch(error){
@@ -91,12 +158,13 @@ async function getUserJobs(Axios){
     }
 }
 
-async function getUserPosts(Axios){
+async function getUserForSale(Axios){
     try{
         var userPosts = [];
         const response = await Axios.get(posts_URL, {});
         //console.log(response.data.posts);
         var posts = response.data.json.for_sale;
+
 
         posts.forEach((post) => 
             userPosts.push(post)
@@ -114,7 +182,7 @@ async function getUserPosts(Axios){
 
 //          PUT METHODS        //
 
-async function addNewCommonPost(Axios, data){
+async function addNewForSale(Axios, data){
 
     try{
         fullJson = getAll(Axios)
