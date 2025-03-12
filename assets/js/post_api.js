@@ -1,3 +1,4 @@
+
 // POST API URL: https://jsonblob.com/1348018515168387072
 
 var posts_URL = "https://jsonblob.com/api/jsonBlob/1348018515168387072";
@@ -23,6 +24,19 @@ async function getJobs(Axios, jobsPerPage, pageNum){
         const response = await Axios.get(posts_URL, {});
         //console.log(response.data.jobs);
         return response.data.json.job;
+    }
+    catch(error){
+        console.log(error);
+    }
+}
+
+async function getJobPage(Axios, id){
+    
+    try{
+        const response = await Axios.get(posts_URL, {});
+
+        console.log(response.data.json.jobPage[id]);
+        return response.data.json.jobPage[id];
     }
     catch(error){
         console.log(error);
@@ -161,6 +175,7 @@ async function addNewFeaturedJob(Axios, data){
 }
 
 
+
 //          END POST METHODS    //
 
 
@@ -177,8 +192,6 @@ async function addNewFeaturedJob(Axios, data){
 
 
 //          END PUT METHODS    //
-
-
 
 
 
