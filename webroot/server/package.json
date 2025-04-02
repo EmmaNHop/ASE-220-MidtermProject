@@ -10,6 +10,7 @@
     "body-parser": "^2.2.0",
     "cohere-ai": "^7.16.0",
     "dotenv": "^16.4.7",
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "path": "^0.12.7"
   }
 }

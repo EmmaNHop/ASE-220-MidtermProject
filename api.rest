@@ -51,13 +51,18 @@ DELETE http://127.0.0.1:3000/api
 
 ###
 
-###         Cohere API ENDPOINT
+###         TAGS API ENDPOINT
 
 POST http://127.0.0.1:3000/api/tags
 Content-Type: application/json
 
 {
-    "content" : "This is test content"
+    "content" : "I am wanting to sell my boat for 200 pounds. But you need to come and get it."
 }
+
+###
+
+GET http://127.0.0.1:3000/api/tags
+Content-Type: application/json
 
 ###
