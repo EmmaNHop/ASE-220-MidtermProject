@@ -193,7 +193,7 @@
                                     </div>
                                 </div>
 
-                                <div id="${job.id}" class="card product-report">
+                                <div id="${job._id}" class="card product-report">
                                     <div class="header">
                                         <h3>Author : <a id="created_by"></a></h3>
                                         <h2>Posted date: <small id="date"></small> Time Posted: <small id="time"></small> </h2>
@@ -273,50 +273,52 @@
         const type = urlParams.get('type');
 
         if(type == 'f'){
-            getFeaturedByID(myAxios, postId)
-            .then(featured => {
+            getPostById(myAxios, postId)
+            .then(post => {
 
-                console.log(featured);
+                post = post.data[0];
 
                 //document.getElementById("itemImage").src = job.img || "assets/images/default.jpg";
-                document.getElementById("title").innerText = featured.post_title;
-                document.getElementById("img").setAttribute("src", featured.img)
-                document.getElementById("created_by").innerText = featured.post_title;
-                document.getElementById("date").innerHTML = featured.date_created;
-                document.getElementById("time").innerText = featured.time_created;
-                document.getElementById("item_description").innerText = featured.post_content;
-                document.getElementById("state").innerHTML = featured.state;
-                document.getElementById("city").innerText = featured.city;
-                document.getElementById("price").innerText = featured.price;
+                document.getElementById("title").innerText = post.post_title;
+                document.getElementById("img").setAttribute("src", post.img)
+                document.getElementById("created_by").innerText = post.post_title;
+                document.getElementById("date").innerHTML = post.date_created;
+                document.getElementById("time").innerText = post.time_created;
+                document.getElementById("item_description").innerText = post.post_content;
+                document.getElementById("state").innerHTML = post.state;
+                document.getElementById("city").innerText = post.city;
+                document.getElementById("price").innerText = post.price;
                 
             });
         }
         else if(type == 'j'){
-            getJobByID(myAxios, postId)
-            .then(job => {
-                console.log(job);
+            getPostById(myAxios, postId)
+            .then(post => {
+
+                post = post.data[0];
 
                 //document.getElementById("itemImage").src = job.img || "assets/images/default.jpg";
-                document.getElementById("title").innerText = job.post_title;
-                document.getElementById("img").setAttribute("src", job.img)
-                document.getElementById("created_by").innerText = job.post_title;
-                document.getElementById("date").innerHTML = job.date_created;
-                document.getElementById("time").innerText = job.time_created;
-                document.getElementById("item_description").innerText = job.post_content;
-                document.getElementById("state").innerHTML = job.state;
-                document.getElementById("city").innerText = job.city;
-                document.getElementById("price").innerText = job.price;
+                document.getElementById("title").innerText = post.post_title;
+                document.getElementById("img").setAttribute("src", post.img)
+                document.getElementById("created_by").innerText = post.post_title;
+                document.getElementById("date").innerHTML = post.date_created;
+                document.getElementById("time").innerText = post.time_created;
+                document.getElementById("item_description").innerText = post.post_content;
+                document.getElementById("state").innerHTML = post.state;
+                document.getElementById("city").innerText = post.city;
+                document.getElementById("price").innerText = post.price;
 
                 if(document.getElementById("price") == "0"){}
-                else{document.getElementById("price").innerText = "$" + job.price; }
+                else{document.getElementById("price").innerText = "$" + post.price; }
 
             });
         }
         // If for_sale
         else if(type == 's'){
-            getForSaleByID(myAxios, postId)
+            getPostById(myAxios, postId)
             .then(post => {
-                console.log(post);
+
+                post = post.data[0];
 
                 //document.getElementById("itemImage").src = job.img || "assets/images/default.jpg";
                 document.getElementById("title").innerText = post.post_title;
@@ -335,6 +337,4 @@
     </script>
 
 </body>
-
-
 </html>

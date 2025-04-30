@@ -10,16 +10,17 @@ const router = express.Router();
 // Establish Handler
 const postHandler = require('../handlers/posts_handler');
 
-// R/W from cache
+// Read/Write from cache
 const cache = require('../cache/cache_functions');
 
 
 /*      ENDPOINTS       */
 
-/* Gets the default pets (Most recent) if there is no query param
+/* Gets the default posts (Most recent) if there is no query param
     if(no param)
         get posts from server Cache which is most recent
 */
+// Default route
 router.get('/', async (req, res) => {
 
     // Query Param 
@@ -28,25 +29,125 @@ router.get('/', async (req, res) => {
     var content = [];
 
     try{
-        // Check if type is set. If so, will get filtered list
-        if(type){
+        if(filter){
 
-            // TODO: post handler
+            // TODO: filtered post handler
             //content = await postHandler.getFilteredPosts();
 
             if(!content){
-                return res.status(404).json({ error: `Type: ${type} not found`});
+                return res.status(404).json({ error: `Invalid filter. Filter: ${filter} not found\n`});
             }
 
             res.status(200).send(content);
         } else{
             content = await cache.readFromServerCache();
+            console.log(content);
+            return res.status(200).json(content);
         }
     } catch(error){
         console.error(error);
-        return res.status(500).json({error : 'Error accessing posts'});
+        return res.status(500).json({error : 'Error accessing posts\n\n'});
     }
+});
 
-})
+// Gets a post by ID
+router.get('/:id', async (req, res) =>{
+    console.log(req.params.id);
+    try{
+        let post = await postHandler.getPostById(req.params.id);
+        console.log(post);
+        res.status(201).json(pets);
+    } catch(error){
+        console.error(error);
+        res.status(500).json({error : 'Failed to get post\n\n'});
+    }
+});
+
+// Gets featured posts 
+router.get('/featured', async (req, res) => {
+
+    const { filter } = req.query;
+
+    var content = [];
+
+    try{
+        if(filter){
+
+            //content = await postHandler.getFilteredPosts();
+
+            if(!content){
+                return res.status(404).json({ error: `Invalid filter. Filter: ${filter} not found\n`});
+            }
+
+            res.status(200).send(content);
+        } else{
+            
+            const content = await postHandler.getFeaturedPosts();
+
+            return res.status(200).send(content);
+        }
+    } catch(error){
+        console.error(error);
+        return res.status(500).json({error : 'Error accessing posts\n\n'});
+    }
+});
+
+// Gets for sale posts
+router.get('/for_sale', async (req, res) => {
+
+    const { filter } = req.query;
+
+    var content = [];
+
+    try{
+        if(filter){
+
+            //content = await postHandler.getFilteredPosts();
+
+            if(!content){
+                return res.status(404).json({ error: `Invalid filter. Filter: ${filter} not found\n`});
+            }
+
+            res.status(200).send(content);
+        } else{
+            
+            const content = await postHandler.getForSalePosts();
+
+            return res.status(200).send(content);
+        }
+    } catch(error){
+        console.error(error);
+        return res.status(500).json({error : 'Error accessing posts\n\n'});
+    }
+});
+
+// Gets job posts
+router.get('/job', async (req, res) => {
+
+    const { filter } = req.query;
+
+    var content = [];
+
+    try{
+        if(filter){
+
+            //content = await postHandler.getFilteredPosts();
+
+            if(!content){
+                return res.status(400).json({ error: `Invalid filter. Filter: ${filter} not found\n`});
+            }
+
+            res.status(200).send(content);
+        } else{
+            
+            const content = await postHandler.getForSalePosts();
+
+            return res.status(200).send(content);
+        }
+    } catch(error){
+        console.error(error);
+        return res.status(500).json({error : 'Error accessing posts\n\n'});
+    }
+});
 
 module.exports = router;

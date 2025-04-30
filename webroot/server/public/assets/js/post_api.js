@@ -14,7 +14,7 @@
 async function getAll(Axios){
 
     try{
-        let posts = await axios.get('http://127.0.0.1:3000/api/posts');
+        let posts = await axios.get('http://localhost:3000/api/posts');
 
         console.log(posts.data);
 
@@ -25,12 +25,30 @@ async function getAll(Axios){
     }
 }
 
-async function getFeaturedPosts(Axios, lowerLimit, upperLimit){
+async function getPostById(Axios, id){
+    try{
+        let post = await Axios.get(`http://localhost:3000/api/posts?id=${id}`);
 
+        //console.log(post);
+
+        return post;
+    }catch(error){
+        console.error('Error getting featured post by ID' + error);
+    }
 }
 
-async function getFeaturedById(Axios, lowerLimit, upperLimit){
+//  Get all featured posts 
+async function getFeaturedPosts(Axios, lowerLimit, upperLimit){
+    try{
+        let posts = await Axios.get('http://localhost:3000/api/posts/featured');
 
+        console.log(posts.data);
+
+        return posts.data;
+
+    } catch(error){
+        console.error('Error getting featured posts' + error);
+    }
 }
 
 async function getUserFeatured(Axios, user){
@@ -38,11 +56,16 @@ async function getUserFeatured(Axios, user){
 }
 
 async function getForSale(Axios, lowerLimit, upperLimit){
+    try{
+        let posts = await Axios.get('http://localhost:3000/api/posts/for_sale');
 
-}
+        console.log(posts.data);
 
-async function getForSaleByID(Axios, id){
+        return posts.data;
 
+    } catch(error){
+        console.error('Error getting for sale posts' + error);
+    }
 }
 
 async function getUserForSale(Axios, user){
@@ -50,18 +73,24 @@ async function getUserForSale(Axios, user){
 }
 
 async function getJobs(Axios, lowerLimit, upperLimit){
+    try{
+        let posts = await Axios.get('http://localhost:3000/api/posts/jobs');
 
+        console.log(posts.data);
+
+        return posts.data;
+
+    } catch(error){
+        console.error('Error getting job posts' + error);
+    }
 }
 
-async function getJobsByID(Axios, id){
-
-}
 
 async function getUserJobs(Axios, user){
 
 }
 
-/*          POST METHODS            */
+/*          PUT METHODS            */
 
 async function addNewForSale(Axios, data){
 

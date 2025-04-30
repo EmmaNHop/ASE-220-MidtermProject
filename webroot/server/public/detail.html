@@ -350,15 +350,13 @@
             .then(featured => { 
                 var html = "";
 
-                //console.log(featured);
+                console.log(featured);
 
                 for(let i = 0; i < featured.length; i++){
 
                     //console.log(featured[i]);
 
                     var htmlSegment = "";
-
-                    
 
                         htmlSegment =
                             `<div class="item list-group-item">
@@ -376,7 +374,7 @@
                                         <div class="item-info">
                                             <div class="info-inner">
                                                 <div class="item-title">
-                                                    <a href="itemDetail.html?id=${featured[i].id}&type=f">
+                                                    <a href="itemDetail.html?id=${featured[i]._id}&type=f">
                                                     ${featured[i].post_title} 
                                                     </a>
                                                 </div>
@@ -408,7 +406,6 @@
                                 </div>
                             </div>`;
                         
-
                         /*
 
                         else if(featured[i].is_job == true){
@@ -416,7 +413,7 @@
                             console.log("Featured Job");
 
                             htmlSegment =
-                                `<div id="${featured[i].id}" class="latestblog-content owl-carousel owl-theme"
+                                `<div id="${featured[i]._id}" class="latestblog-content owl-carousel owl-theme"
                                     style="display: inline-block">
                                     <div class="item">
                                         <div class="blog-page list-group-item">
@@ -425,7 +422,7 @@
                                                 <p class="text2">JAN</p>
                                             </div>
                                             <div class="blog-right">
-                                                <p class="style1"><a href="itemDetail.html?id=${featured[i].id}&type=j">${featured[i].created_by}</a></p>
+                                                <p class="style1"><a href="itemDetail.html?id=${featured[i]._id}&type=j">${featured[i].created_by}</a></p>
                                                 <p class="style2">${featured[i].post_title}</p>
                                                 <p class="style3">${featured[i].post_content}</p>
                                             </div>
@@ -493,7 +490,7 @@
                     //console.log(jobs[i]);
 
                     let htmlSegment =
-                        `<div id="${jobs[i].id}" class="latestblog-content owl-carousel owl-theme"
+                        `<div id="${jobs[i]._id}" class="latestblog-content owl-carousel owl-theme"
                             style="display: inline-block">
                             <div class="item ">
                                 <div class="blog-page list-group-item">
@@ -502,7 +499,7 @@
                                         <p class="text2">JAN</p>
                                     </div>
                                     <div class="blog-right">
-                                        <p class="style1"><a href="itemDetail.html?id=${jobs[i].id}&type=j">${jobs[i].created_by}</a></p>
+                                        <p class="style1"><a href="itemDetail.html?id=${jobs[i]._id}&type=j">${jobs[i].created_by}</a></p>
                                         <p class="style2">${jobs[i].post_title}</p>
                                         <p class="style3">${jobs[i].post_content}</p>
                                     </div>
@@ -511,11 +508,8 @@
                         </div>`;
 
                     html += htmlSegment;
-
                 }
-
                 htmlBuilder("jobs", html);
-                
             });
 
             return jobLower += 5;
@@ -524,7 +518,6 @@
         /*
          *      WRITE COMMON POST
          */
-
         function writeForSale(lower){
                                                  // 5 per page
             let commonPost = getForSale(myAxios, lower, lower+5)
@@ -555,7 +548,7 @@
                                             <div class="item-info">
                                                 <div class="info-inner">
                                                     <div class="item-title">
-                                                        <a href="itemDetail.html?id=${posts[i].id}&type=s">
+                                                        <a href="itemDetail.html?id=${posts[i]._id}&type=s">
                                                         ${posts[i].post_title} 
                                                         </a>
                                                     </div>
@@ -590,11 +583,8 @@
                     html += htmlSegment;
 
                 }
-
                 htmlBuilder("for_sale", html);
-
                 //document.querySelector('#for-sale').innerHtml = html;
-
             });
             return forSaleLower += 5;
         }
@@ -615,25 +605,6 @@
             forSaleLower = writeForSale(forSaleLower);
         });
         
-
-            /*
-
-            created_by = String,
-
-            date_Created = (getYear()'-'getMonth()+1'-'getDate()),
-            time_created = (getHours()':'getMinutes()':'getSeconds()),
-
-            post_title = string,
-            post_content = string,
-            type [ Array ],
-            city = string,
-            state = string,
-            price = string,
-            post_views = int,
-
-
-            */
-
     </script>
 
 </body>

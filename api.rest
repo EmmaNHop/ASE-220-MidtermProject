@@ -1,55 +1,22 @@
 ### HTML ENDPOINT
 ### Designed for the web browser. Provide the GUI to the user
 ### Retrieve a document
-GET http://127.0.0.1:3000/
-###
-
-### Create a document
-POST http://127.0.0.1:3000/
-###
-
-### Modify a document
-PUT http://127.0.0.1:3000/
-###
-
-### Delete a document
-DELETE http://127.0.0.1:3000/
-###
-
-GET http://127.0.0.1:3000/detail
-###
 
 ### HTML API DOCUMENTATION
 GET http://127.0.0.1:3000/api/posts
 ###
 
+GET http://127.0.0.1:3000/api/posts/featured
+
+###
+
+GET http://127.0.0.1:3000/api/posts/featured?id=2
+
+###
+
 ### API ENDPOINTS
 ### Designed to provide data functionality to all apps (phone, web, thrid party websites)
 
-GET http://127.0.0.1:3000/api
-
-###
-
-POST http://127.0.0.1:3000/api
-Content-Type: application/json
-
-{
-    "days": 25
-}
-
-###
-
-PUT http://127.0.0.1:3000/api
-Content-Type: application/json
-
-{
-    "test": false
-}
-###
-
-DELETE http://127.0.0.1:3000/api
-
-###
 
 ###         TAGS API ENDPOINT
 

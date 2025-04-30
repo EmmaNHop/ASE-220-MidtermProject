@@ -5,6 +5,7 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const fs = require('fs');
+const path = require('path');
 
 // tells the 'app' that the data will be in JSON format 
 app.use(express.json());
@@ -21,7 +22,7 @@ app.use('/api/tags', tagRoutes);
 app.use('/api/posts', postRoutes);
 
 //      Static Routes
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 /*       Default route      */
 app.get('/', (req, res)=>{

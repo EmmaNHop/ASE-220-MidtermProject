@@ -8,10 +8,6 @@
 const fs = require('fs').promises;
 const path = require('path');
 
-const filePath = path.join(__dirname, '..', 'data', 'tags.json');
-
-// Common file writer to create and access Json
-const fileWriter = require('../utils/file_writer');
 
 // Will try and retrieve the tags from the JSON file
 exports.getTags = async () => {
