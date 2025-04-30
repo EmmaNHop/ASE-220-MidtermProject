@@ -1,0 +1,18 @@
+{
+  "name": "Greg's List",
+  "version": "1.0.0",
+  "description": "A simple Node.js app using Express",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "cohere-ai": "^7.16.0",
+    "dotenv": "^16.4.7",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.16.0",
+    "path": "^0.12.7"
+  }
+}

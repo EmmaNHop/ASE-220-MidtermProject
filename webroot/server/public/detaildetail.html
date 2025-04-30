@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <title>Detail Page</title>
+    <link href='https://fonts.googleapis.com/css?family=Poppins:300,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/customStyles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="assets/js/post_api.js"></script>
+</head>
+
+<body>
+    <div id="sns_wrapper">
+        <!-- HEADER -->
+        <div id="sns_header" class="wrap">
+            <div class="container">
+                <h2 class="page-title" id="itemTitle"></h2>
+            </div>
+        </div>
+        <!-- END HEADER -->
+
+        <!-- CONTENT -->
+        <div id="sns_content" class="wrap layout-m">
+            <div class="container">
+                <div class="row">
+                    <div id="sns_main" class="col-md-12">
+                        <div class="detail-container">
+                            <div class="item-img">
+                                <img id="itemImage" src="" alt="Item Image">
+                            </div>
+                            <div class="item-details">
+                                <br>
+                                <p><strong>Location:</strong> <span id="itemLocation"></span></p>
+                                <p><strong>Posted By:</strong> <span id="itemPostedBy"></span></p>
+                                <button class="btn btn-primary">Contact Seller</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END CONTENT -->
+
+        <!-- FOOTER -->
+        <div id="sns_footer" class="footer_style vesion2 wrap">
+            <div class="container">
+                <p class="text-center">&copy; 2025 Your Website. All rights reserved.</p>
+            </div>
+        </div>
+        <!-- END FOOTER -->
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="assets/js/post_api.js"></script>s
+    <script>
+        const myAxios = axios;
+
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const myParam = urlParams.get('id');
+
+        getJobPage(myAxios, id).then(job => {
+            jobData = job; // Store fetched jobs
+            console.log(jobData);
+        });
+
+           
+
+            const item = sampleData[itemType] || {};
+            document.getElementById("itemImage").src = item.img || "assets/images/default.jpg";
+            document.getElementById("itemTitle").textContent = item.post_title || "Item Not Found";
+            document.getElementById("itemDescription").textContent = item.post_content || "No description available.";
+            document.getElementById("itemLocation").textContent = item.city || "Unknown";
+            document.getElementById("itemPostedBy").textContent = item.created_by || "Anonymous";
+        
+    </script>
+</body>
+
+</html>
