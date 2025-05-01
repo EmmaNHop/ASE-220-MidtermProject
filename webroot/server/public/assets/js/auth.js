@@ -1,6 +1,6 @@
 import("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js");
 
-var storage_URL = 'https://jsonblob.com/api/jsonBlob/1342157028830928896';
+var storage_URL = 'http://127.0.0.1:3000/api/';
 var users=["EMPTY"];
 
 function createNewUser(username, password, email, number, birthday) {
@@ -14,7 +14,7 @@ function createNewUser(username, password, email, number, birthday) {
 
         users.push(temp);
 
-        axios.put(storage_URL, {
+        axios.put(storage_URL + "users", {
             users
         })
         .then(function (response) {
@@ -34,7 +34,7 @@ async function authenticate(username, password) {
 
     try{
 
-        const response = await axios.get(storage_URL, {})
+        const response = await axios.get(storage_URL + "users", {})
 
         var authError="";
         for(let i=0; i<response.data.users.length;i++) {
