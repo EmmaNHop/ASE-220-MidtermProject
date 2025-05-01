@@ -14,17 +14,17 @@ async function getAllPosts(){
     try{
         //const data = await 
     }catch(error){
-        console.error('Error handling posts\n\n' + 'error:\n' + error);
-        throw new Error('Error handling posts\n\n');
+        console.error('Error handling getting all posts. \n' + error);
+        throw new Error('Error handling posts. \n');
     }
 }
 
 async function getPostById(id){
     try{
-        const data = await db.getPostById();
+        const data = await db.getPostById(id);
     }catch(error){
-        console.error('Error handling pets\n\n' + 'error:\n' + error);
-        throw new Error('Error handling pets\n\n');
+        console.error('Error handling getting posts by ID. \n' + error);
+        throw new Error('Error handling posts. \n');
     }
 }
 
@@ -33,8 +33,8 @@ async function getFeaturedPosts(){
         const data = await db.getFeaturedPosts();
         return data;
     }catch(error){
-        console.error('Error handling featured posts\n\n' +'error:\n' + error);
-        throw new Error('Error handling featured posts\n\n');
+        console.error('Error handling featured posts. \n' + error);
+        throw new Error('Error handling featured posts. \n');
     }
 }
 
@@ -43,8 +43,8 @@ async function getForSalePosts(){
         const data = await db.getForSalePosts();
         return data;
     }catch(error){
-        console.error('Error handling for sale posts\n\n' +'error:\n' + error);
-        throw new Error('Error handling featured posts\n\n');
+        console.error('Error handling for sale posts. \n' + error);
+        throw new Error('Error handling for sale posts. \n');
     }
 }
 

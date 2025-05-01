@@ -10,7 +10,7 @@ GET http://127.0.0.1:3000/api/posts/featured
 
 ###
 
-GET http://127.0.0.1:3000/api/posts/featured?id=2
+GET http://127.0.0.1:3000/api/posts/id/6811109e65fd9a8ee7bb1b8c
 
 ###
 

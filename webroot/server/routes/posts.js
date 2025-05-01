@@ -35,7 +35,7 @@ router.get('/', async (req, res) => {
             //content = await postHandler.getFilteredPosts();
 
             if(!content){
-                return res.status(404).json({ error: `Invalid filter. Filter: ${filter} not found\n`});
+                return res.status(404).json({ error: `Invalid filter. Filter: ${filter} not found. \n`});
             }
 
             res.status(200).send(content);
@@ -46,22 +46,24 @@ router.get('/', async (req, res) => {
         }
     } catch(error){
         console.error(error);
-        return res.status(500).json({error : 'Error accessing posts\n\n'});
+        return res.status(500).json({error : 'Error accessing posts. \n'});
     }
 });
 
 // Gets a post by ID
-router.get('/:id', async (req, res) =>{
+
+router.get('/id/:id', async (req, res) =>{
     console.log(req.params.id);
     try{
         let post = await postHandler.getPostById(req.params.id);
         console.log(post);
-        res.status(201).json(pets);
+        res.status(201).json(post);
     } catch(error){
         console.error(error);
-        res.status(500).json({error : 'Failed to get post\n\n'});
+        res.status(500).json({error : 'Failed to get post. \n'});
     }
 });
+
 
 // Gets featured posts 
 router.get('/featured', async (req, res) => {
@@ -76,7 +78,7 @@ router.get('/featured', async (req, res) => {
             //content = await postHandler.getFilteredPosts();
 
             if(!content){
-                return res.status(404).json({ error: `Invalid filter. Filter: ${filter} not found\n`});
+                return res.status(404).json({ error: `Invalid filter. Filter: ${filter} not found. \n`});
             }
 
             res.status(200).send(content);
@@ -88,7 +90,7 @@ router.get('/featured', async (req, res) => {
         }
     } catch(error){
         console.error(error);
-        return res.status(500).json({error : 'Error accessing posts\n\n'});
+        return res.status(500).json({error : 'Error accessing posts. \n'});
     }
 });
 
@@ -105,7 +107,7 @@ router.get('/for_sale', async (req, res) => {
             //content = await postHandler.getFilteredPosts();
 
             if(!content){
-                return res.status(404).json({ error: `Invalid filter. Filter: ${filter} not found\n`});
+                return res.status(404).json({ error: `Invalid filter. Filter: ${filter} not found. \n`});
             }
 
             res.status(200).send(content);
@@ -117,7 +119,7 @@ router.get('/for_sale', async (req, res) => {
         }
     } catch(error){
         console.error(error);
-        return res.status(500).json({error : 'Error accessing posts\n\n'});
+        return res.status(500).json({error : 'Error accessing posts. \n'});
     }
 });
 
@@ -134,7 +136,7 @@ router.get('/job', async (req, res) => {
             //content = await postHandler.getFilteredPosts();
 
             if(!content){
-                return res.status(400).json({ error: `Invalid filter. Filter: ${filter} not found\n`});
+                return res.status(400).json({ error: `Invalid filter. Filter: ${filter} not found. \n`});
             }
 
             res.status(200).send(content);
@@ -146,7 +148,7 @@ router.get('/job', async (req, res) => {
         }
     } catch(error){
         console.error(error);
-        return res.status(500).json({error : 'Error accessing posts\n\n'});
+        return res.status(500).json({error : 'Error accessing posts. \n'});
     }
 });
 

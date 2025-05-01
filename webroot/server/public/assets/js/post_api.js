@@ -12,7 +12,6 @@
 /*          GET METHODS         */
 
 async function getAll(Axios){
-
     try{
         let posts = await axios.get('http://localhost:3000/api/posts');
 
@@ -21,19 +20,21 @@ async function getAll(Axios){
         return posts.data;
 
     } catch(error){
-        console.log(error);
+        console.log('Error getting recent posts. \n      ' + error);
     }
 }
 
 async function getPostById(Axios, id){
     try{
-        let post = await Axios.get(`http://localhost:3000/api/posts?id=${id}`);
+        console.log(id);
+
+        let post = await Axios.get(`http://localhost:3000/api/posts/id/${id}`);
 
         //console.log(post);
 
         return post;
     }catch(error){
-        console.error('Error getting featured post by ID' + error);
+        console.error('Error getting featured post by ID. \n    ' + error);
     }
 }
 
@@ -47,7 +48,7 @@ async function getFeaturedPosts(Axios, lowerLimit, upperLimit){
         return posts.data;
 
     } catch(error){
-        console.error('Error getting featured posts' + error);
+        console.error('Error getting featured posts. \n     ' + error);
     }
 }
 
@@ -64,7 +65,7 @@ async function getForSale(Axios, lowerLimit, upperLimit){
         return posts.data;
 
     } catch(error){
-        console.error('Error getting for sale posts' + error);
+        console.error('Error getting for sale posts. \n     ' + error);
     }
 }
 
@@ -81,7 +82,7 @@ async function getJobs(Axios, lowerLimit, upperLimit){
         return posts.data;
 
     } catch(error){
-        console.error('Error getting job posts' + error);
+        console.error('Error getting job posts. \n     ' + error);
     }
 }
 

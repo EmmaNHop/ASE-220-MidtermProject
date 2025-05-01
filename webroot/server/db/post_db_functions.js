@@ -1,6 +1,6 @@
 /**
  * 
- *      All functions pertaining to the database
+ *      All functions pertaining to the database in the posts collection
  * 
  */
 
@@ -13,12 +13,10 @@ async function getRecentPosts() {
     try{
 
         const recents = await client.db('GregsList').collection('Posts').find().sort({ timestamp : -1}).toArray();
-        //console.log(recents);
-
         return recents;
     }catch(error){
-        console.error('Error getting recent posts');
-        throw new Error('Error getting recent posts');
+        console.error('Error getting recent posts. \n');
+        throw new Error('       Error getting recent posts. \n');
     }
 }
 
@@ -27,8 +25,8 @@ async function getPostById(id) {
         const post = await client.db('GregsList').collection('Posts').find({_id: ObjectId(id)}).toArray();
         return post;
     }catch(error){
-        console.error('Error getting post from database\n\n');
-        throw new Error('Error getting post from database\n\n');
+        console.error('Error getting post by ID from database. \n');
+        throw new Error('       Error getting post from database. \n');
     }
 }
 
@@ -37,8 +35,8 @@ async function getFeaturedPosts() {
         const featured = await client.db('GregsList').collection('Posts').find({is_featured: true}).toArray();
         return featured;
     }catch(error){
-        console.error('Error getting featured posts from database\n\n');
-        throw new Error('Error getting featured posts from database\n\n');
+        console.error('Error getting featured posts from database. \n');
+        throw new Error('       Error getting featured posts from database. \n');
     }
 }
 
@@ -47,8 +45,8 @@ async function getForSalePosts() {
         const featured = await client.db('GregsList').collection('Posts').find({is_job: false}).toArray();
         return featured;
     }catch(error){
-        console.error('Error getting for sale posts from database\n\n');
-        throw new Error('Error getting for sale posts from database\n\n');
+        console.error('Error getting for sale posts from database. \n');
+        throw new Error('       Error getting for sale posts from database. \n');
     }
 }
 
@@ -57,8 +55,8 @@ async function getJobPosts() {
         const featured = await client.db('GregsList').collection('Posts').find({is_job: true}).toArray();
         return featured;
     }catch(error){
-        console.error('Error getting job posts from database\n\n');
-        throw new Error('Error getting job posts from database\n\n');
+        console.error('Error getting job posts from database. \n');
+        throw new Error('       Error getting job posts from database. \n');
     }
 }
 
