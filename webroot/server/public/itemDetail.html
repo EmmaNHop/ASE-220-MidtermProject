@@ -276,7 +276,8 @@
             getPostById(myAxios, postId)
             .then(post => {
 
-                post = post.data[0];
+                post = post.data;
+                console.log(post)
 
                 //document.getElementById("itemImage").src = job.img || "assets/images/default.jpg";
                 document.getElementById("title").innerText = post.post_title;
@@ -295,7 +296,7 @@
             getPostById(myAxios, postId)
             .then(post => {
 
-                post = post.data[0];
+                post = post.data;
 
                 //document.getElementById("itemImage").src = job.img || "assets/images/default.jpg";
                 document.getElementById("title").innerText = post.post_title;
@@ -318,7 +319,7 @@
             getPostById(myAxios, postId)
             .then(post => {
 
-                post = post.data[0];
+                post = post.data;
 
                 //document.getElementById("itemImage").src = job.img || "assets/images/default.jpg";
                 document.getElementById("title").innerText = post.post_title;

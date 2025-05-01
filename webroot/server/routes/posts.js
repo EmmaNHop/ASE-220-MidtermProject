@@ -12,6 +12,7 @@ const postHandler = require('../handlers/posts_handler');
 
 // Read/Write from cache
 const cache = require('../cache/cache_functions');
+const { ObjectId } = require('mongodb');
 
 
 /*      ENDPOINTS       */
@@ -53,11 +54,15 @@ router.get('/', async (req, res) => {
 // Gets a post by ID
 
 router.get('/id/:id', async (req, res) =>{
-    console.log(req.params.id);
     try{
+        if(!ObjectId.isValid(req.params.id)){
+            console.error(` Invalid Object ID: ${id}`);
+            return res.status(400).json({ error: ` Invalid Object ID: ${id}`});
+        }
         let post = await postHandler.getPostById(req.params.id);
+        console.log("Route");
         console.log(post);
-        res.status(201).json(post);
+        res.status(200).json(post);
     } catch(error){
         console.error(error);
         res.status(500).json({error : 'Failed to get post. \n'});

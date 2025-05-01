@@ -22,6 +22,7 @@ async function getAllPosts(){
 async function getPostById(id){
     try{
         const data = await db.getPostById(id);
+        return data;
     }catch(error){
         console.error('Error handling getting posts by ID. \n' + error);
         throw new Error('Error handling posts. \n');

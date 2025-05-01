@@ -30,8 +30,6 @@ async function getPostById(Axios, id){
 
         let post = await Axios.get(`http://localhost:3000/api/posts/id/${id}`);
 
-        //console.log(post);
-
         return post;
     }catch(error){
         console.error('Error getting featured post by ID. \n    ' + error);
