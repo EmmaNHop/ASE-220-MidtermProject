@@ -18,7 +18,7 @@ const userRoutes = require('./routes/users');
 const postRoutes = require('./routes/posts.js');
 
 app.use('/api/tags', tagRoutes);
-//app.use('/api/users', userRoutes);
+app.use('/api/users', userRoutes);
 app.use('/api/posts', postRoutes);
 
 //      Static Routes

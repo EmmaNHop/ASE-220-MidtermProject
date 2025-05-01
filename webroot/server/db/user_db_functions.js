@@ -19,15 +19,28 @@ async function getUserById(id) {
 
 async function getUsers() {
     try{
-        const featured = await client.db('GregsList').collection('Users').findMany().toArray();
-        return featured;
+        const users = await client.db('GregsList').collection('Users').findMany().toArray();
+        return users;
     }catch(error){
         console.error('Error getting users from database. \n');
         throw new Error('       Error getting users from database. \n');
     }
 }
 
+async function checkEmail(userEmail) {
+    try{
+        const emailInDb = await client.db('GregsList').collection('Users').findOne({ email: userEmail });
+        if(emailInDb){
+            return false;
+        }
+        return true;
+    } catch(error) {
+        console.error('Error checking if email is in Database.  ')
+    }
+}
+
 module.exports = {
     getUserById,
-    getUsers
+    getUsers,
+    checkEmail
 }

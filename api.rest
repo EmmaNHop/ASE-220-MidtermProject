@@ -37,3 +37,15 @@ GET http://127.0.0.1:3000/api/tags
 Content-Type: application/json
 
 ###
+
+POST http://127.0.0.1:3000/api/users/signup
+Content-Type: application/json
+
+{
+    "content" : {
+        "email" : "bobjones1@gmail.com",
+        "password" : "!1234abcd!"
+    }
+}
+
+##

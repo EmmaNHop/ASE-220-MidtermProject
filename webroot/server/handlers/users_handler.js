@@ -13,7 +13,7 @@ async function getUsersById(id){
     try{
         const data = await db.getUsersById(id);
     }catch(error){
-        console.error('Error handling getting user by ID. \n' + error);
+        console.error('Error handling getting user by ID. \n    ' + error);
         throw new Error('Error handling users. \n');
     }
 }
@@ -22,12 +22,27 @@ async function getUsers(){
     try{
         const data = await db.getUsers();
     }catch(error){
-        console.error('Error handling getting users. \n' + error);
+        console.error('Error handling getting users. \n     ' + error);
         throw new Error('Error handling users. \n');
     }
 }
 
+async function hashPassword(){
+
+}
+
+async function createUser(userInfo){
+    
+    if(db.checkEmail(userInfo.email)){
+        return false;
+    }
+
+    // TODO: check the DB for user email to see if it is already in use
+    // 
+}
+
 module.exports = {
     getUsersById,
-    getUsers
+    getUsers,
+    createUser
 }
