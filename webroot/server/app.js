@@ -37,6 +37,10 @@ app.get('/detail', (req, res)=>{
     res.send('HTML ENDPOINT: details')
 });
 
+app.get('/login', (req, res) => {
+    res.redirect('/login.html');
+})
+
 
 /*      API ENDPOINTS       */
 

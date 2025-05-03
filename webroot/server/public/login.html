@@ -24,7 +24,7 @@
 						<h3 class="mb-4 text-center">Have an account?</h3>
 						<form action="#" class="signin-form">
 							<div class="form-group">
-								<input id="username" type="text" class="form-control" placeholder="Username" required>
+								<input id="email" type="text" class="form-control" placeholder="Email" required>
 							</div>
 							<div class="form-group">
 								<input id="password" type="password" class="form-control" placeholder="Password"
@@ -75,17 +75,15 @@
 
 	<script>
 		document.getElementById("signIn").addEventListener("click", function() {
-			let username=document.getElementById("username").value;
+			let email=document.getElementById("email").value;
 			let password=document.getElementById("password").value;
 
-			let response = authenticate(username,password)
+			let response = authenticate(email,password)
 			.then(user => {
 
 				if(user == true){
-					window.location.replace("dashboard.html");
+					//window.location.replace("dashboard.html");
 				}
-
-				localStorage.setItem('username', username);
 				
 			});
 		});

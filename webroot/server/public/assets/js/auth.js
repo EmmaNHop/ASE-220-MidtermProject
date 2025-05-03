@@ -1,65 +1,71 @@
 import("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js");
 
-var storage_URL = 'http://127.0.0.1:3000/api/';
-var users=["EMPTY"];
+//var storage_URL = 'http://localhost:3000/api/users/signup';
+var users={};
 
-function createNewUser(username, password, email, number, birthday) {
-    axios.get(storage_URL, {})
-    .then(function (response) {
-        console.log(response.data);
-        console.log(username + " " + password + " " + email + " " + number + " " + birthday);
-        users=response.data.users;
-
-        let temp = [username, password, email, number, birthday];
-
-        users.push(temp);
-
-        axios.put(storage_URL + "users", {
-            users
-        })
-        .then(function (response) {
+async function createNewUser(username, password, email, number, birthday) {
+        try{
+        const response = await axios.post('http://localhost:3000/api/users/signup', {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            content:{
+                username: username,
+                password: password,
+                email: email,
+                number: number,
+                birthday: birthday
+            }
+        }).then( function (response){
             console.log(response);
-            window.location.replace("login.html");
-        })
-        .catch(function (error) {
-            console.log(error);
+            window.location.replace('./login.html');
         });
-    })
-    .catch(function (error) {
+    } catch (error){
         console.log(error);
-    });
+        console.log(response);
+    }
 }
 
-async function authenticate(username, password) {
-
+async function authenticate(email, password) {
     try{
-
-        const response = await axios.get(storage_URL + "users", {})
-
-        var authError="";
-        for(let i=0; i<response.data.users.length;i++) {
-            if(username == response.data.users[i][0]) {
-                if(password == response.data.users[i][1]) {
-                    return true;
-                }
-                else {
-                    authError="password is incorrect";
-                }
+        const response = await axios.post('http://localhost:3000/api/users/signin', {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            content:{
+                email: email,
+                password: password,
             }
-        }
-        if(authError.length==0) {
-            authError="account not found";
-        }
+        }).then( function (response){
+            /*
+             *  !RESPONSE FORMAT!
+             *  JSON
+             * 
+             *  token: '123',
+             *  user{
+             *      email: 'e@mail.com',
+             *      id: 'id123'
+             *  }
+             */
+
+
+            // TODO: Retrieve user data and set data to sessionStorage.
+            console.log(response)
+            sessionStorage.setItem('token', response.token);
+            sessionStorage.setItem('email', response.email);
+            sessionStorage.setItem('id', response.id);
+
+            window.location.replace('./detail.html');
+            
+        });
         // Reloads page when clicking okay on the reload to force a user credentials re-entry
         if(alert(authError)){}
         else {window.location.reload(); }
     }
-    catch{
+    catch(error){
         console.log(error)
     }
-
     return false;
-
 }
 
 

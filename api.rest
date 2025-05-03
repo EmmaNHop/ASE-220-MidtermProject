@@ -43,9 +43,24 @@ Content-Type: application/json
 
 {
     "content" : {
-        "email" : "bobjones1@gmail.com",
-        "password" : "!1234abcd!"
+        "username": "TestUser",
+        "password": "!123ABC!",
+        "email":"test@user.com",
+        "number":"111-111-1111",
+        "birthday":"01-01-2001"
     }
 }
 
-##
+###
+
+POST http://127.0.0.1:3000/api/users/signin
+Content-Type: application/json
+
+{
+    "content" : {
+        "email" : "test@user.com",
+        "password": "!123ABC!"
+    }
+}
+
+###

@@ -30,17 +30,46 @@ async function getUsers() {
 async function checkEmail(userEmail) {
     try{
         const emailInDb = await client.db('GregsList').collection('Users').findOne({ email: userEmail });
-        if(emailInDb){
+        if(emailInDb !== null){
             return false;
         }
         return true;
     } catch(error) {
-        console.error('Error checking if email is in Database.  ')
+        console.error('Error checking if email is in Database.  \n');
+    }
+}
+
+async function createNewUser(userInfo){
+    try{
+
+        const newUser = await client.db('GregsList').collection('Users').insertOne({ 
+            username : userInfo.username,
+            password : userInfo.password,
+            email: userInfo.email,
+            number: userInfo.number,
+            birthday: userInfo.birthday
+        });
+
+    } catch(error){
+        console.error('Error Creating New User. \n');
+    }
+}
+
+async function getUserByEmail(userEmail){
+    try{
+        const user = await client.db('GregsList').collection('Users').findOne({ email: userEmail });
+
+        return user;
+    } catch(error){
+        console.error('Error getting user from database: \n');
+        throw new Error('       Error getting user by Email! \n');
     }
 }
 
 module.exports = {
     getUserById,
     getUsers,
-    checkEmail
+    checkEmail,
+    createNewUser,
+    getUserByEmail
 }
