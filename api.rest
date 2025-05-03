@@ -64,3 +64,14 @@ Content-Type: application/json
 }
 
 ###
+
+POST http://127.0.0.1:3000/api/users/auth
+Content-Type: application/json
+
+{
+    "content": {
+        "token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6IiIsInVzZXIiOnsiZW1haWwiOiJ0ZXN0QHVzZXIuY29tIiwiaWQiOiI2ODE1NTQ4M2VjODkwMGNjZjRlNTIzYWYifSwiaWF0IjoxNzQ2MzEyNDI1LCJleHAiOjE3NDYzMTYwMjV9.Gv5J3Iv6U7vkKDaBlVg_fZMPKYheRuifQVN9PumQ0Bo"
+    }
+}
+
+###

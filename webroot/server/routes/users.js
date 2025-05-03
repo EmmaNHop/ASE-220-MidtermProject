@@ -89,7 +89,7 @@ router.post('/signup', async (req, res) => {
         console.error('Error during signup: \n' + error);
         res.status(401).json({ error: 'Error signing up. '});
     }
-})
+});
 
 // Sign-In
 router.post('/signin', async (req, res) => {
@@ -97,7 +97,7 @@ router.post('/signin', async (req, res) => {
         // TODO:
         // verify the information is formated correctly here.
 
-        let content = req.body.content;
+        const content = req.body.content;
 
         const userInfo = await userHandler.verifyUser(content);
 
@@ -119,10 +119,30 @@ router.post('/signin', async (req, res) => {
 router.post('/signout', async (req, res) => {
     try{
         // TODO: verify JWT and revoke current JWT
-    }catch(error){
+
+        const request = req.body.content;
+
+
+
+    } catch(error){
         res.status(500).json({ error: 'Error Signing out.' })
     }
-})
+});
+
+// Authenticate user
+router.post('/auth', async(req, res) => {
+    try{
+
+        const request = req.body.content;
+
+        console.log(request);
+
+        console.log(userHandler.authenticateToken(request.token));
+
+    } catch(error){
+
+    }
+});
 
 // Exports this router to be used in app.js
 module.exports = router;    

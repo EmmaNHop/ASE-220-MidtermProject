@@ -80,7 +80,6 @@ async function createUser(userInfo){
     // Check DB to see if email is already registered
 
     if(!await db.checkEmail(userInfo.email)){
-        //console.log("Email is already registered");
         return false;
     }
     userInfo.password = await hashPassword(userInfo.password);
@@ -90,9 +89,23 @@ async function createUser(userInfo){
     return true;
 }
 
+async function authenticateToken(token){
+
+    try{
+
+        console.log(JWT.verifyToken(token));
+
+    } catch(error){
+        console.error('Error handling authentication token: \n' + error);
+        throw new Error('       Issue handling token. ');
+    }
+
+}
+
 module.exports = {
     getUsersById,
     getUsers,
     createUser,
-    verifyUser
+    verifyUser,
+    authenticateToken
 }

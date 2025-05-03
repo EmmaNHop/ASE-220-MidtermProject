@@ -1,6 +1,5 @@
 import("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js");
 
-//var storage_URL = 'http://localhost:3000/api/users/signup';
 var users={};
 
 async function createNewUser(username, password, email, number, birthday) {
@@ -36,15 +35,17 @@ async function authenticate(email, password) {
                 email: email,
                 password: password,
             }
+            
         }).then( function (response){
             /*
              *  !RESPONSE FORMAT!
              *  JSON
              * 
-             *  token: '123',
+             *  token: 'string',
+             *  expires: int,
              *  user{
-             *      email: 'e@mail.com',
-             *      id: 'id123'
+             *      email: 'string',
+             *      id: 'string'
              *  }
              */
 
@@ -69,35 +70,10 @@ async function authenticate(email, password) {
     return false;
 }
 
+function checkLoginStatus(){
 
-/*
-    var isUser = false;
-    axios.get(storage_URL, {})
-    .then(function (response) {
-        var authError="";
-        for(let i=0; i<response.data.users.length;i++) {
-            if(username == response.data.users[i][0]) {
-                if(password == response.data.users[i][1]) {
+    if(sessionStorage.length > 0 || localStorage.length > 0){
+        
+    }
 
-                    // Keeps the user stored in local storage
-                    localStorage.setItem('username', username);
-                    //window.location.replace("dashboard.html");
-                    isUser = true;
-                    return true;
-                }
-                else {
-                    authError="password is incorrect";
-                }
-            }
-        }
-        if(authError.length==0) {
-            authError="account not found";
-        }
-            alert(authError);
-    })
-    .catch(function (error) {
-        console.log(error);
-    });
-    return isUser;
 }
-*/
