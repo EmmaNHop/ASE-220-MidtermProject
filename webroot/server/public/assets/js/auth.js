@@ -49,20 +49,21 @@ async function authenticate(email, password) {
              */
 
 
-            // TODO: Retrieve user data and set data to sessionStorage.
-            console.log(response)
-            sessionStorage.setItem('token', response.token);
-            sessionStorage.setItem('email', response.email);
-            sessionStorage.setItem('id', response.id);
-
-            window.location.replace('./detail.html');
-            
+            // Handle Successful login
+            console.log(response);
+            if(response.status === 200){
+                return response.data;
+            }
         });
-        // Reloads page when clicking okay on the reload to force a user credentials re-entry
-        if(alert(authError)){}
-        else {window.location.reload(); }
+
+        console.log(response);
+        return response;
+
     }
     catch(error){
+        // Reloads page when clicking okay on the reload to force a user credentials re-entry
+        if(alert(error.response.status === 401)){}
+        else {window.location.reload(); }
         console.log(error)
     }
     return false;

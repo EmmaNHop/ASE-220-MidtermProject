@@ -118,7 +118,7 @@ router.post('/signin', async (req, res) => {
 // Sign-Out
 router.post('/signout', async (req, res) => {
     try{
-        // TODO: Get user info and verify JWT
+        // TODO: verify JWT and revoke current JWT
     }catch(error){
         res.status(500).json({ error: 'Error Signing out.' })
     }
