@@ -3,7 +3,7 @@ import("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js");
 var users={};
 
 async function createNewUser(username, password, email, number, birthday) {
-        try{
+    try{
         const response = await axios.post('http://localhost:3000/api/users/signup', {
             headers: {
                 'Content-Type': 'application/json'
@@ -70,10 +70,27 @@ async function authenticate(email, password) {
     return false;
 }
 
-function checkLoginStatus(){
+async function checkLoginStatus(){
 
-    if(sessionStorage.length > 0 || localStorage.length > 0){
-        
+    const token = sessionStorage.getItem('token') || localStorage.getItem('token');
+    
+    if(!token){
+        // TODO: add UNAUTH-ED ERROR
+    }
+
+    try{
+        const response = await axios.post('http://localhost:3000/api/users/auth', {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        // TODO: Handle response
+        return response;
+    } catch(error){
+        // TODO: Login Error
+        console.log(error);
     }
 
 }
