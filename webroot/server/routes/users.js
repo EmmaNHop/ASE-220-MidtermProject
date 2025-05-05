@@ -17,7 +17,6 @@ const validator = require('validator');
 
 // This is were the data will be sent to
 const userHandler = require('../handlers/users_handler');
-const { getUserById } = require('../db/user_db_functions');
 //const { create } = require('domain');
 
 const { ObjectId } = require('mongodb');
@@ -35,11 +34,11 @@ router.get('/user/:userid', async (req, res) => {
     console.log(req.params.userid);
 
     try{
-        if(!ObjectId.isValid(req.params.id)){
+        if(!ObjectId.isValid(req.params.userid)){
             console.error(` Invalid Object ID: ${id}`);
             return res.status(400).json({ error: ` Invalid Object ID: ${id}`});
         }
-        let user = getUserById(req.params.userid);
+        let user = userHandler.getUsersById(req.params.userid);
         console.log("Route");
         console.log(user);
         res.status(200).json(user);
