@@ -33,7 +33,7 @@ async function authenticate(email, password) {
             },
             content:{
                 email: email,
-                password: password,
+                password: password
             }
             
         }).then( function (response){
@@ -56,7 +56,6 @@ async function authenticate(email, password) {
                 return response.data;
             }
         });
-
         console.log(response);
         return response;
 

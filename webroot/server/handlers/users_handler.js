@@ -18,6 +18,7 @@ const { resourceUsage } = require('process');
 async function getUsersById(id){
     try{
         const data = await db.getUsersById(id);
+        return data;
     }catch(error){
         console.error('Error handling getting user by ID: \n    ' + error);
         throw new Error('       Error handling users. \n');
