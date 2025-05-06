@@ -41,7 +41,7 @@ router.get('/user/:userid', async (req, res) => {
             console.error(` Invalid Object ID: ${id}`);
             return res.status(400).json({ error: ` Invalid Object ID: ${id}`});
         }
-        let user = userHandler.getUsersById(req.params.userid);
+        let user = await userHandler.getUsersById(req.params.userid);
         console.log("Route");
         console.log(user);
         res.status(200).json(user);
@@ -123,7 +123,11 @@ router.post('/signin', async (req, res) => {
 
         //Debug - Grab user token
         console.log(userInfo);
-        res.status(200).json(userInfo);
+        try{
+            res.redirect('/detail.html');
+        } catch(error){
+            return res.status(404).json({error : 'Page not Found' });
+        }
 
     } catch(error){
         console.error('Error Signing in: \n' + error);

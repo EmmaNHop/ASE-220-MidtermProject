@@ -16,7 +16,7 @@ const bcrypt = require('bcrypt');
 
 async function getUsersById(id){
     try{
-        const data = await db.getUsersById(id);
+        const data = await db.getUserById(id);
         return data;
     }catch(error){
         console.error('Error handling getting user by ID: \n    ' + error);
@@ -27,6 +27,7 @@ async function getUsersById(id){
 async function getUsers(){
     try{
         const data = await db.getUsers();
+        return data;
     }catch(error){
         console.error('Error handling getting users: \n' + error);
         throw new Error('       Error handling users. ');
