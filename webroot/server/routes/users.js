@@ -124,8 +124,9 @@ router.post('/signin', async (req, res) => {
         //Debug - Grab user token
         console.log(userInfo);
         try{
-            res.redirect('/detail.html');
+            res.status(200).json(userInfo);
         } catch(error){
+            console.log('Page not found: \n' + error);
             return res.status(404).json({error : 'Page not Found' });
         }
 
@@ -138,11 +139,17 @@ router.post('/signin', async (req, res) => {
 // Sign-Out
 router.post('/signout', async (req, res) => {
     try{
-        // TODO: verify JWT and revoke current JWT
 
-        const request = req.body.content;
+        const token = req.headers.authorization;
 
+        console.log(req.headers);
 
+        const authenticated = await auth.authenticateUser(token);
+
+        if(!authenticated){
+            res.status(401).json({ error: 'Unauthorized Access! '});
+            return;
+        };
 
     } catch(error){
         res.status(500).json({ error: 'Error Signing out.' });
@@ -155,9 +162,10 @@ router.post('/auth', async(req, res) => {
 
         const token = req.headers.authorization;
 
-        console.log(token);
+        const authenticated = await auth.authenticateUser(token);
+        //console.log(token);
 
-        if(!auth.authenticateUser(token)){
+        if(!authenticated){
             res.status(401).json({ error: 'Unauthorized Access! '});
             return;
         };
@@ -176,8 +184,6 @@ router.post('/reauth', async(req, res) => {
 
         const token = req.headers.authorization;
 
-        console.log(token);
-
         const authenticated = await auth.authenticateUser(token);
 
         if(!authenticated){
@@ -186,13 +192,7 @@ router.post('/reauth', async(req, res) => {
             return;
         };
 
-        console.log(authenticated.user);
-
-        const newToken = auth.generateNewToken(authenticated.user);
-
-        res.status(201).json({
-            token: newToken
-        });
+        res.status(200).json({ });
 
     } catch(error){
         console.log('Error reauthenticating user: \n' + error);

@@ -1,5 +1,33 @@
 import("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js");
 
+function checkLoginStatus(){
+    if(sessionStorage.length > 0){
+        document.getElementById('user-state').innerHTML = 
+        `<a id="log-out" title="Log Out" href="">Log Out</a>`;
+
+        document.getElementById('my-account').innerHTML =
+        `<a class="top-link-myaccount" title="My Account" href="dashboard.html">My Account</a>`;
+
+        document.getElementById('log-out').addEventListener('click', function() {
+
+            logout(sessionStorage.getItem('token')).then(function (response){
+                if(response === true){
+                    sessionStorage.clear();
+                    localStorage.clear();
+                    window.replace('./detail.html');
+                }
+            });
+        });
+    }
+    else{
+        document.getElementById('user-state').innerHTML = 
+        `<a id="log-in" title="Log In" href="login.html">Login</a>`;
+        document.getElementById('my-account').innerHTML =
+        ``;
+
+    }
+}
+
 async function createNewUser(username, password, email, number, birthday) {
         try{
         const response = await axios.post('http://localhost:3000/api/users/signup', {
@@ -46,9 +74,6 @@ async function checkTokenExp(){
 async function authenticate(email, password) {
     try{
         const response = await axios.post('http://localhost:3000/api/users/signin', {
-            headers: {
-                'Content-Type': 'application/json'
-            },
             content:{
                 email: email,
                 password: password
@@ -66,18 +91,14 @@ async function authenticate(email, password) {
              *      id: 'string'
              *  }
              */
-
-
-            // Handle Successful login
             console.log(response);
             if(response.status === 200){
 
-                sessionStorage.setItem('token', response.token);
-                sessionStorage.setItem('email', response.user.email);
-				sessionStorage.setItem('username', response.user.username)
-				sessionStorage.setItem('id', response.user.id);
+                sessionStorage.setItem('token', response.data.token);
+                sessionStorage.setItem('email', response.data.user.email);
+				sessionStorage.setItem('username', response.data.user.username)
+				sessionStorage.setItem('id', response.data.user.id);
 
-                // Decode token to get Exp
                 getExpFromToken();
 
                 return response.data;
@@ -89,12 +110,12 @@ async function authenticate(email, password) {
     }
     catch(error){
         // Reloads page when clicking okay on the reload to force a user credentials re-entry
-        if(error.response.status === 401){
+        if(error.status === 401){
             alert("Credentials Invalid!");
         }
         else {
             console.log(error);
-            window.location.reload();
+            //window.location.reload();
         }
     }
     return false;
@@ -102,9 +123,9 @@ async function authenticate(email, password) {
 
 async function reauthenticate(){
     try{
-        const response = axios.post('http://localhost:3000/api/users/reauth', {
+        const response = axios.post('http://localhost:3000/api/users/reauth', {}, {
             headers: {
-                'Authorization': sessionStorage.getItem('token')
+                'Authorization':'Bearer ' + sessionStorage.getItem('token')
             }
         }).then(function (response) {
             console.log(response);
@@ -124,5 +145,21 @@ async function reauthenticate(){
         });
     } catch(error){
         console.log(resposne)
+    }
+}
+
+async function logout(token) {
+    try{
+        const response = axios.post('http://localhost:3000/api/users/signout', {},{
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        }).then(function (response){
+            if(response.status == 200){
+                return true;
+            }
+        });
+    } catch(error){
+        alert(error);
     }
 }
