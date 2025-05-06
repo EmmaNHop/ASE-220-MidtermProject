@@ -9,7 +9,10 @@ const { client } = require('./db');
 
 async function getUserById(id) {
     try{
-        const user = await client.db('GregsList').collection('Users').find({_id: ObjectId(id)}).toArray();
+        const user = await client.db('GregsList').collection('Users').findOne({_id: new ObjectId(id)});
+        if(!user){
+            throw new Error(`user with ID:${id} was not found.\n`);
+        }
         return user;
     }catch(error){
         console.error('Error getting user by ID from database. \n');

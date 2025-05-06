@@ -34,13 +34,13 @@
 							</div>
 							<div class="form-group">
 								<!--<a href="" id="signIn" type="submit" class="form-control btn btn-primary submit px-3">Sign Up</a>-->
-								<button id="signIn" type="submit" class="form-control btn btn-primary submit px-3">Sign In</button>
+								<button id="signIn" type="button" class="form-control btn btn-primary px-3">Sign In</button>
 							</div>
 							
 							<div class="form-group d-md-flex">
 								<div class="w-50">
 									<label class="checkbox-wrap checkbox-primary">Remember Me
-										<input id="remeber-me" type="checkbox" checked>
+										<input id="remember-me" type="checkbox" checked>
 										<span class="checkmark"></span>
 									</label>
 								</div>
@@ -81,7 +81,7 @@
 			.then(response => {
 				if(response.token){
 
-					if(document.getElementById('remeber-me').checked == true){
+					if(document.getElementById('remember-me').checked == true){
 						localStorage.setItem('token', response.token);
 						localStorage.setItem('email', response.user.email);
 						localStorage.setItem('id', response.user.id);
@@ -106,7 +106,7 @@
 			}
 		});
 
-		// Remeber me
+		// Remember me
 
 	</script>
 </body>

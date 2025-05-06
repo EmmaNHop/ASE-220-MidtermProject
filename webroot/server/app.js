@@ -13,13 +13,13 @@ app.use(express.json());
 /*
  *          Define Routes
  */
-const tagRoutes = require('./routes/tags.js');
-const userRoutes = require('./routes/users');
 const postRoutes = require('./routes/posts.js');
+const tagRoutes = require('./routes/tags.js');
+const userRoutes = require('./routes/users.js');
 
+app.use('/api/posts', postRoutes);
 app.use('/api/tags', tagRoutes);
 app.use('/api/users', userRoutes);
-app.use('/api/posts', postRoutes);
 
 //      Static Routes
 app.use(express.static(path.join(__dirname, 'public')));
