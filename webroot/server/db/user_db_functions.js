@@ -38,7 +38,7 @@ async function checkEmail(userEmail) {
         }
         return true;
     } catch(error) {
-        console.error('Error checking if email is in Database.  \n');
+        console.error('Error checking if email is in Database. \n' + error);
     }
 }
 
@@ -53,8 +53,12 @@ async function createNewUser(userInfo){
             birthday: userInfo.birthday
         });
 
+        if(!newUser){
+            throw new Error('Could not enter user into database! \n');
+        }
+
     } catch(error){
-        console.error('Error Creating New User. \n');
+        console.error('Error Creating New User: \n' + error);
     }
 }
 
@@ -64,7 +68,7 @@ async function getUserByEmail(userEmail){
 
         return user;
     } catch(error){
-        console.error('Error getting user from database: \n');
+        console.error('Error getting user from database: \n' + error);
         throw new Error('       Error getting user by Email! \n');
     }
 }

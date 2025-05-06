@@ -16,10 +16,13 @@ const fs = require('fs');
 const validator = require('validator');
 
 // This is were the data will be sent to
-const userHandler = require('../handlers/users_handler');
+const userHandler = require('../handlers/users_handler.js');
 //const { create } = require('domain');
 
 const { ObjectId } = require('mongodb');
+
+// validates token
+const auth = require('../middleware/auth.js');
 
 /*        GET Methods       */
 
@@ -91,6 +94,7 @@ router.post('/signup', async (req, res) => {
             return;
         }
 
+        // Try to redirect 
         try{
             res.redirect('/login.html');
         } catch(error){
@@ -117,6 +121,7 @@ router.post('/signin', async (req, res) => {
             return;
         }
 
+        //Debug - Grab user token
         console.log(userInfo);
         res.status(200).json(userInfo);
 
@@ -136,24 +141,60 @@ router.post('/signout', async (req, res) => {
 
 
     } catch(error){
-        res.status(500).json({ error: 'Error Signing out.' })
+        res.status(500).json({ error: 'Error Signing out.' });
     }
 });
 
-// Authenticate user
+// Example auth
 router.post('/auth', async(req, res) => {
     try{
 
-        const request = req.body.content;
+        const token = req.headers.authorization;
 
-        console.log(request);
+        console.log(token);
 
-        console.log(userHandler.authenticateToken(request.token));
+        if(!auth.authenticateUser(token)){
+            res.status(401).json({ error: 'Unauthorized Access! '});
+            return;
+        };
+
+        // TODO: return something here
 
     } catch(error){
-
+        console.log('Error sending to auth: \n' + error);
+        res.status(500).json({ error: 'Oopsie dasies!. '});
     }
 });
+
+// Will generate a new token for the user if they are signed in and using the app
+router.post('/reauth', async(req, res) => {
+    try{
+
+        const token = req.headers.authorization;
+
+        console.log(token);
+
+        const authenticated = await auth.authenticateUser(token);
+
+        if(!authenticated){
+            console.log('User unauthorized');
+            res.status(401).json({ error: 'Unauthorized Access! '});
+            return;
+        };
+
+        console.log(authenticated.user);
+
+        const newToken = auth.generateNewToken(authenticated.user);
+
+        res.status(201).json({
+            token: newToken
+        });
+
+    } catch(error){
+        console.log('Error reauthenticating user: \n' + error);
+        res.status(500).json({ error: 'Error reauthenticating user '});
+    }
+})
 
 // Exports this router to be used in app.js
 module.exports = router;    

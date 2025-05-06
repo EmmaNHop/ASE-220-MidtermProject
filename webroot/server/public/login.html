@@ -80,18 +80,7 @@
 			const response = authenticate(email,password)
 			.then(response => {
 				if(response.token){
-
-					if(document.getElementById('remember-me').checked == true){
-						localStorage.setItem('token', response.token);
-						localStorage.setItem('email', response.user.email);
-						localStorage.setItem('id', response.user.id);
-					} else{
-						sessionStorage.setItem('token', response.token);
-                		sessionStorage.setItem('email', response.user.email);
-						sessionStorage.setItem('id', response.user.id);
-					}
-
-                window.location.replace('./detail.html');
+                	window.location.replace('./detail.html');
 				}
 			});
 		});

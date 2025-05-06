@@ -1,7 +1,5 @@
 import("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js");
 
-var users={};
-
 async function createNewUser(username, password, email, number, birthday) {
         try{
         const response = await axios.post('http://localhost:3000/api/users/signup', {
@@ -25,6 +23,26 @@ async function createNewUser(username, password, email, number, birthday) {
     }
 }
 
+async function getExpFromToken(){
+    const decoded = JSON.parse(atob(token.split('.')[1]));
+    
+    const exp = decoded.exp * 1000; // Convert to milliseconds
+
+    sessionStorage.setItem('token_exp', exp);
+}
+
+// Check token experation to see if it is about to expire so the user can get a new one
+async function checkTokenExp(){
+    if(sessionStorage.length > 0){
+        const fiveMin = 5 * 60 * 1000; // In milliseconds
+        if (sessionStorage.getItem('token_exp') - Date.now() < fiveMin){
+            reauthenticate();
+        }
+    }
+
+    // TODO: Throw error or something
+}
+
 async function authenticate(email, password) {
     try{
         const response = await axios.post('http://localhost:3000/api/users/signin', {
@@ -36,15 +54,15 @@ async function authenticate(email, password) {
                 password: password
             }
             
-        }).then( function (response){
+        }).then(function (response){
             /*
              *  !RESPONSE FORMAT!
              *  JSON
              * 
              *  token: 'string',
-             *  expires: int,
              *  user{
              *      email: 'string',
+             *      username: 'string',
              *      id: 'string'
              *  }
              */
@@ -53,6 +71,15 @@ async function authenticate(email, password) {
             // Handle Successful login
             console.log(response);
             if(response.status === 200){
+
+                sessionStorage.setItem('token', response.token);
+                sessionStorage.setItem('email', response.user.email);
+				sessionStorage.setItem('username', response.user.username)
+				sessionStorage.setItem('id', response.user.id);
+
+                // Decode token to get Exp
+                getExpFromToken();
+
                 return response.data;
             }
         });
@@ -62,17 +89,40 @@ async function authenticate(email, password) {
     }
     catch(error){
         // Reloads page when clicking okay on the reload to force a user credentials re-entry
-        if(alert(error.response.status === 401)){}
-        else {window.location.reload(); }
-        console.log(error)
+        if(error.response.status === 401){
+            alert("Credentials Invalid!");
+        }
+        else {
+            console.log(error);
+            window.location.reload();
+        }
     }
     return false;
 }
 
-function checkLoginStatus(){
+async function reauthenticate(){
+    try{
+        const response = axios.post('http://localhost:3000/api/users/reauth', {
+            headers: {
+                'Authorization': sessionStorage.getItem('token')
+            }
+        }).then(function (response) {
+            console.log(response);
+            if(response.status === 200){
 
-    if(sessionStorage.length > 0 || localStorage.length > 0){
-        
+                sessionStorage.setItem('token', response.token);
+                sessionStorage.setItem('email', response.user.email);
+				sessionStorage.setItem('username', response.user.username)
+				sessionStorage.setItem('id', response.user.id);
+
+                // Decode token to get Exp time
+                getExpFromToken();
+
+                return;
+            }
+
+        });
+    } catch(error){
+        console.log(resposne)
     }
-
 }
