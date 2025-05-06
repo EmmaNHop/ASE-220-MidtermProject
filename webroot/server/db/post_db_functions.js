@@ -26,6 +26,7 @@ async function getPostById(id) {
         if(!post){
             throw new Error(`Post with ID:${id} was not found.\n`);
         }
+        console.log("post!:" + post);
         return post;
     }catch(error){
         console.error('Error getting post by ID from database. \n       ' + error);
@@ -39,7 +40,7 @@ async function getFeaturedPosts() {
         return featured;
     }catch(error){
         console.error('Error getting featured posts from database. \n       ' + error);
-        throw new Error('Error getting featured posts from database. \n');
+        throw new Error('       Error getting featured posts from database. \n');
     }
 }
 
@@ -49,7 +50,7 @@ async function getForSalePosts() {
         return featured;
     }catch(error){
         console.error('Error getting for sale posts from database. \n       ' + error);
-        throw new Error('Error getting for sale posts from database. \n');
+        throw new Error('       Error getting for sale posts from database. \n');
     }
 }
 
@@ -59,8 +60,32 @@ async function getJobPosts() {
         return featured;
     }catch(error){
         console.error('Error getting job posts from database. \n        ' + error);
-        throw new Error('Error getting job posts from database. \n');
+        throw new Error('       Error getting job posts from database. \n');
     }
+}
+
+async function createNewPost(post) {
+    try{
+        const newPost = await client.db('GregsList').collection('Posts').insertOne({
+            created_by : post.user,
+            date_created : post.date,
+            time_created : post.timestamp,
+            post_title : post.title,
+            type : post.type,
+            city : post.city,
+            state : post.state,
+            price : post.price,
+            post_views : 0,
+            is_job : post.job,
+            img : post.img,
+            post_content : post.content,
+            is_featured : post.featured
+        });
+    }catch(error){
+        console.error('Error inserting post to database. \n        ' + error);
+        throw new Error('       Error inserting post to database. \n');
+    }
+
 }
 
 // Export all the functions that will be called outside of this file
@@ -69,5 +94,6 @@ module.exports = {
     getPostById,
     getFeaturedPosts,
     getForSalePosts,
-    getJobPosts
+    getJobPosts,
+    createNewPost
 }

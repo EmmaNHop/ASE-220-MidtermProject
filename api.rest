@@ -10,7 +10,7 @@ GET http://127.0.0.1:3000/api/posts/featured
 
 ###
 
-GET http://127.0.0.1:3000/api/users/user/68139679e941dc7da6a7cf83
+GET http://127.0.0.1:3000/api/users/user/6814f96c6d6b4ef6e3209b1b
 
 ###
 
@@ -71,6 +71,30 @@ Content-Type: application/json
 {
     "content": {
         "token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6IiIsInVzZXIiOnsiZW1haWwiOiJ0ZXN0QHVzZXIuY29tIiwiaWQiOiI2ODE1NTQ4M2VjODkwMGNjZjRlNTIzYWYifSwiaWF0IjoxNzQ2MzEyNDI1LCJleHAiOjE3NDYzMTYwMjV9.Gv5J3Iv6U7vkKDaBlVg_fZMPKYheRuifQVN9PumQ0Bo"
+    }
+}
+
+###
+
+POST http://127.0.0.1:3000/api/posts/post
+Content-Type: application/json
+
+{
+    "content": {
+        "_id": "new ObjectId('6811109e65fd9a8ee7bb1b8c')",
+        "created_by": "Joe Schmoe",
+        "date_created": "",
+        "time_created": "new Timestamp({ t: 1745949536, i: 8 })",
+        "post_title": "Yeet",
+        "type": "Post",
+        "city": "Babylon",
+        "state": "Sumeria",
+        "price": "N/A",
+        "post_views": "1000",
+        "is_job": "false",
+        "img": "./assets/images/avatar1.jpg",
+        "post_content": "",
+        "is_featured": "true"
     }
 }
 
