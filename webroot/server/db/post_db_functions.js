@@ -26,7 +26,6 @@ async function getPostById(id) {
         if(!post){
             throw new Error(`Post with ID:${id} was not found.\n`);
         }
-        console.log("post!:" + post);
         return post;
     }catch(error){
         console.error('Error getting post by ID from database. \n       ' + error);
@@ -67,20 +66,21 @@ async function getJobPosts() {
 async function createNewPost(post) {
     try{
         const newPost = await client.db('GregsList').collection('Posts').insertOne({
-            created_by : post.user,
-            date_created : post.date,
-            time_created : post.timestamp,
-            post_title : post.title,
+            created_by : post.created_by,
+            date_created : post.date_created,
+            time_created : post.time_created,
+            post_title : post.post_title,
             type : post.type,
             city : post.city,
             state : post.state,
             price : post.price,
             post_views : 0,
-            is_job : post.job,
+            is_job : post.is_job,
             img : post.img,
-            post_content : post.content,
-            is_featured : post.featured
+            post_content : post.post_content,
+            is_featured : post.is_featured
         });
+        return newPost;
     }catch(error){
         console.error('Error inserting post to database. \n        ' + error);
         throw new Error('       Error inserting post to database. \n');

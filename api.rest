@@ -74,27 +74,24 @@ Content-Type: application/json
     }
 }
 
-###
+### 
 
 POST http://127.0.0.1:3000/api/posts/post
 Content-Type: application/json
 
 {
     "content": {
-        "_id": "new ObjectId('6811109e65fd9a8ee7bb1b8c')",
+        "user_id" : "681a3252697ff9b8110229b6",
         "created_by": "Joe Schmoe",
-        "date_created": "",
-        "time_created": "new Timestamp({ t: 1745949536, i: 8 })",
-        "post_title": "Yeet",
+        "post_title": "TEST",
         "type": "Post",
         "city": "Babylon",
         "state": "Sumeria",
-        "price": "N/A",
-        "post_views": "1000",
+        "price": "$1",
         "is_job": "false",
         "img": "./assets/images/avatar1.jpg",
-        "post_content": "",
-        "is_featured": "true"
+        "post_content": "Lorem Ipsum",
+        "is_featured": "false"
     }
 }
 

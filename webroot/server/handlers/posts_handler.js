@@ -15,7 +15,7 @@ async function getAllPosts(){
         //const data = await 
     }catch(error){
         console.error('Error handling getting all posts. \n' + error);
-        throw new Error('Error handling posts. \n');
+        throw new Error('       Error handling posts. \n');
     }
 }
 
@@ -25,7 +25,7 @@ async function getPostById(id){
         return data;
     }catch(error){
         console.error('Error handling getting posts by ID. \n' + error);
-        throw new Error('Error handling posts. \n');
+        throw new Error('       Error handling posts. \n');
     }
 }
 
@@ -35,7 +35,7 @@ async function getFeaturedPosts(){
         return data;
     }catch(error){
         console.error('Error handling featured posts. \n' + error);
-        throw new Error('Error handling featured posts. \n');
+        throw new Error('       Error handling featured posts. \n');
     }
 }
 
@@ -45,7 +45,35 @@ async function getForSalePosts(){
         return data;
     }catch(error){
         console.error('Error handling for sale posts. \n' + error);
-        throw new Error('Error handling for sale posts. \n');
+        throw new Error('       Error handling for sale posts. \n');
+    }
+}
+
+async function createNewPost(post) {
+    try{
+        const postDate = new Date();
+
+        const data = await db.createNewPost({
+            user_id : post.user_id,
+            created_by : post.created_by,
+            date_created : `${postDate.getFullYear()}-${postDate.getMonth()+1}-${postDate.getDate()}`,
+            time_created : `${postDate.getHours()}-${postDate.getMinutes()}-${postDate.getSeconds()}`,
+            post_title : post.post_title,
+            type : post.type,
+            city : post.city,
+            state : post.state,
+            price : post.price,
+            post_views : 0,
+            is_job : post.is_job,
+            img : post.img,
+            post_content : post.post_content,
+            is_featured : post.is_featured
+        });
+
+        return data;
+    }catch(error) {
+        console.error('Error handling for new post. \n' + error);
+        throw new Error('       Error handling for new post. \n');
     }
 }
 
@@ -53,5 +81,6 @@ module.exports = {
     getAllPosts,
     getPostById,
     getFeaturedPosts,
-    getForSalePosts
+    getForSalePosts,
+    createNewPost
 }

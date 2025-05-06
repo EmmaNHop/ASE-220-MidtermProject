@@ -313,7 +313,7 @@
 <script src="assets/bundles/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js --> 
 <script src="assets/bundles/vendorscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js --> 
 
-<script src="assets/bundles/jvectormap.bundle.js"></script>  <!--JVectorMap Plugin Js || I don't think we need this for anything other than the maps-->
+<!--<script src="assets/bundles/jvectormap.bundle.js"></script>  JVectorMap Plugin Js || I don't think we need this for anything other than the maps-->
 <script src="assets/bundles/morrisscripts.bundle.js"></script><!-- Morris Plugin Js -->
 <script src="assets/bundles/sparkline.bundle.js"></script> <!-- Sparkline Plugin Js -->
 <script src="assets/bundles/knob.bundle.js"></script> <!-- Jquery Knob Plugin Js -->
@@ -331,10 +331,11 @@
     // Makes axios passable
     const myAxios = axios;
 
-    const form = document.getElementById('new_post');
-
-    document.getElementById('submit_new_post').addEventListener('click', function() {
-
+    //set front-end variables
+    const form = document.getElementById('new_post').then(result => {
+        // Gets user name || sessionStorage hasn't been made yet 
+        //const userId = sessionStorage.getItem('id');
+        //const userName = sessionStorage.getItem('username');
         const post_title = form.elements.title.value;
         const post_content = form.elements.content.value;
         const type = form.elements.type.value;
@@ -342,67 +343,56 @@
         const city = form.elements.city.value;
         const state = form.elements.state.value;
         const price = form.elements.price.value;
-        const feature = form.elements.feature.value;
 
-        // For time stamps
-        const date = new Date();
-
-        // Gets user name
-        const userName = localStorage.getItem('username');
-
-        post = {
-            "id" : "",
-            "created_by" : userName,  
-            "date_created" : date.getFullYear() + "-" + parseInt(date.getMonth() + 1) + "-" + date.getDate(),
-            "time_created" : date.getHours() + "-" + date.getMinutes() + "-" + date.getSeconds(),
-            "post_title" : post_title,
-            "post_content" : post_content,
-            "img" : img,
-            "type" : type,
-            "city" : city,
-            "state" : state,
-            "price" : price,
-            "post_views" : 0,
-            "is_job" : false
-        };
-
-        // Boolean to show if it will be featured. will deterimine where it is stored
-        var isFeatured;
-
+        //determine job and featured data points
         const isJobButton = document.querySelectorAll('input[name="typeCheck"]');
-
         const featuredButton = document.querySelectorAll('input[name="feature"]');
+    });
+    console.log("hello");
+
+    async function checkButtons() {
+        isJob = false;
+        isFeatured = false;
 
         // Job radio button
         if(isJobButton[0].checked){
-            post.is_job = true;  
-        } 
-        // For sale radio button
-        else if(isJobButton[1].checked){
-            post.is_job = false;
+            isJob = true;  
         }
-
-        console.log(post.is_job);
-
-        if(post.is_job == false){
-            if(featuredButton[0].checked){
-                addNewFeaturedPost(myAxios, post);
-            }
-            else{
-                console.log("here");
-                addNewForSale(myAxios, post);
-            }
+        //featured check box
+        if(featuredButton.checked) {
+            isFeatured = true;
         }
-        else{
-            if(featuredButton[0].checked){
-                addNewFeaturedJob(myAxios, post);
-            }
-            else{
-                addNewCommonJob(myAxios, post);
-            }
-        }
+    }
 
-        window.location.replace("detail.html");
+    async function setVars() {
+
+        checkButtons().then( result => {
+            post = {
+                "user_id" : "681a3252697ff9b8110229b6",
+                "created_by" : "Joe Schoe",  
+                "post_title" : post_title,
+                "type" : type,
+                "city" : city,
+                "state" : state,
+                "price" : price,
+                "img" : img,
+                "post_content" : post_content,
+                "is_job" : false,
+                "is_featured" : false 
+            };
+        })       
+
+        return await post;
+    }
+
+    document.getElementById('submit_new_post').addEventListener('click', function() {
+
+        setVars().then(result => {
+            console.log("result" + result);
+            addNewPost(myAxios, result);
+        });
+
+        //window.location.replace("detail.html");
 
         // if no error return to window.location.replace("detail.html");
 

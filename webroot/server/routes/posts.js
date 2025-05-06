@@ -157,14 +157,13 @@ router.get('/job', async (req, res) => {
     }
 });
 
+//creates a post
 router.post('/post', async (req, res) => {
     try{
-        console.log(req.body);
         const content = req.body.content; 
-        //createNewPost();
+        postHandler.createNewPost(content);
 
-
-        return res.status(200);
+        return res.status(200).send(content);
 
     }catch(error) {
         console.error(error);

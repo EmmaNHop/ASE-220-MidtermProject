@@ -91,6 +91,18 @@ async function getUserJobs(Axios, user){
 
 /*          PUT METHODS            */
 
+async function addNewPost(Axios, data){
+    try{
+        console.log(data);
+        let post = await Axios.post('http://localhost:3000/api/posts/post', data);
+
+        return post;
+    }catch(error) {
+        console.error('Error making post. \n' + error);
+        throw new Error('       Error making post. \n');
+    }
+}
+
 async function addNewForSale(Axios, data){
 
 }

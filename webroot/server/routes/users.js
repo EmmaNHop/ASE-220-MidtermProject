@@ -118,7 +118,11 @@ router.post('/signin', async (req, res) => {
         }
 
         console.log(userInfo);
-        res.status(200).json(userInfo);
+        try{
+            res.redirect('/detail.html');
+        } catch(error){
+            return res.status(404).json({error : 'Page not Found' });
+        }
 
     } catch(error){
         console.error('Error Signing in: \n' + error);
