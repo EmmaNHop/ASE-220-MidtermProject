@@ -365,8 +365,8 @@
 
     async function setVars() {
         // Gets user name || sessionStorage hasn't been made yet 
-        //const userId = sessionStorage.getItem('id');
-        //const userName = sessionStorage.getItem('username');
+        const userId = sessionStorage.getItem('id');
+        const userName = sessionStorage.getItem('username');
         const post_title = form.elements.title.value;
         const post_content = form.elements.content.value;
         const type = form.elements.type.value;
@@ -377,8 +377,8 @@
 
         const isJobOrFeat = await checkButtons();
         let post = { 
-            user_id : "681a3252697ff9b8110229b6",
-            created_by : "Joe Schmoe",  
+            user_id : await userId,
+            created_by : await userName,  
             post_title : await post_title,
             type : await type,
             city : await city,
