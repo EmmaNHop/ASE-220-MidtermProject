@@ -45,8 +45,17 @@ app.get('/login', (req, res) => {
 /*      API ENDPOINTS       */
 
 app.get('/api', (req, res)=>{
-    let content = fs.existsSync('./data.json') ? JSON.parse(fs.readFileSync('./data.json', 'utf-8')) : 
-    res.send(JSON.stringify(content));
+    let content;
+    // Check if the file exists
+    if (fs.existsSync('./data.json')) {
+        content = JSON.parse(fs.readFileSync('./data.json', 'utf-8'));
+    } else {
+        // If the file doesn't exist, send an error or empty content
+        content = { error: 'File not found' };
+    }
+
+    // Send the response
+    res.json(content);
 });
 
 app.post('/api', (req, res)=>{

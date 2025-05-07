@@ -17,7 +17,7 @@
     <!-- Custom Css -->
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/color_skins.css">
-    <link href="assets/css/customStyle.css">
+    <link rel="stylesheet" href="assets/css/customStyles.css">
 </head>
 
 <body class="theme-orange">
@@ -83,7 +83,7 @@
                 <img src="assets/images/avatar1.jpg" width="48" height="48" alt="User" />
             </div>
             <div class="info-container">
-                <div class="name" data-toggle="dropdown">John Doe</div>
+                <div id="display-username" class="name" data-toggle="dropdown"></div>
                 <div class="btn-group user-helper-dropdown">
                     <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" role="button"> keyboard_arrow_down </i>
                     <ul class="dropdown-menu slideUp">
@@ -96,7 +96,7 @@
                         <li><a href="sign-out.html"><i class="material-icons">input</i>Sign Out</a></li>
                     </ul>
                 </div>
-                <div class="email">john.doe@example.com</div>
+                <div id="display-email" class="email" ></div>
             </div>
         </div>
         <!-- #User Info --> 
@@ -340,6 +340,17 @@
 
         checkUserStatus();
 
+        document.addEventListener("DOMContentLoaded", function() {
+            const username = sessionStorage.getItem('username');
+            const email = sessionStorage.getItem('email');
+
+            if (username) {
+                document.getElementById('display-username').textContent = username;
+            }
+            if (email) {
+                document.getElementById('display-email').textContent = email;
+            }
+        });
     </script>
 
 </body>
