@@ -1,5 +1,9 @@
 import("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js");
 
+async function timeer(){
+    
+}
+
 async function createNewUser(username, password, email, number, birthday) {
         try{
         const response = await axios.post('http://localhost:3000/api/users/signup', {
@@ -22,6 +26,8 @@ async function createNewUser(username, password, email, number, birthday) {
 }
 
 async function getExpFromToken(){
+    const token = sessionStorage.getItem('token');
+
     const decoded = JSON.parse(atob(token.split('.')[1]));
     
     const exp = decoded.exp * 1000; // Convert to milliseconds
@@ -35,6 +41,10 @@ async function checkTokenExp(){
         const fiveMin = 5 * 60 * 1000; // In milliseconds
         if (sessionStorage.getItem('token_exp') - Date.now() < fiveMin){
             reauthenticate();
+        }
+        else{
+            sessionStorage.clear();
+            localStorage.clear();
         }
     }
 
@@ -75,10 +85,7 @@ async function authenticate(email, password) {
             }
         });
 
-        //not sure what this is supposed to do, but it returns the entire HTML of a page. I don't think we want this.
-        //console.log(response);
-        //return response;
-
+        return response;
     }
     catch(error){
         // Reloads page when clicking okay on the reload to force a user credentials re-entry
@@ -137,4 +144,47 @@ async function logout(token) {
     } catch(error){
         alert(error);
     }
+}
+
+async function checkToken(token){
+    try{
+        const response = await axios.post('http://localhost:3000/api/users/reauth', {}, {
+            headers: {
+                'Authorization':'Bearer ' + token
+            }
+        }).then(response => {
+            if(response.status === 200){
+                return true;
+            }
+        });
+        if(response === true){
+            return true;
+        }
+        return false;
+    } catch(error){
+        alert(error);
+    }
+}
+
+async function checkUserStatus() {
+    if(sessionStorage.length < 0){
+
+        // Redundant ik but just in case
+        sessionStorage.clear();
+        localStorage.clear();
+
+        window.location.replace('./login.html');
+        return false;
+    }
+    else if(sessionStorage.getItem('token')){
+        const isLoggedIn = checkToken(sessionStorage.getItem('token'));
+
+        if(isLoggedIn === true){
+            return true;
+        }
+
+        //window.location.replace('./login.html');
+        return false;
+    }
+
 }

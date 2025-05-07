@@ -77,9 +77,9 @@
 			let email=document.getElementById("email").value;
 			let password=document.getElementById("password").value;
 
-			console.log()
 			const response = authenticate(email,password)
 			.then(response => {
+				console.log('response.token: ' + response);
 				if(response.token){
                 	window.location.replace('./detail.html');
 				}

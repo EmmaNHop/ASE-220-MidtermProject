@@ -1,5 +1,3 @@
-
-// Makes axios passable
 const token = sessionStorage.getItem('token');
 
 const myAxios = axios.create({

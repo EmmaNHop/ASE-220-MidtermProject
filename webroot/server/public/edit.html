@@ -326,7 +326,11 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <!-- post API Script -->
 <script src="assets/js/post_api.js"></script>
+
+<script src="assets/js/auth.js"></script>
 <script>
+
+    checkUserStatus();
 
     const urlParams = new URLSearchParams(window.location.search);
     const postId = urlParams.get('id');
