@@ -341,7 +341,7 @@
                         if(response === true){
                             sessionStorage.clear();
                             localStorage.clear();
-                            window.replace('./detail.html');
+                            window.location.replace('./detail.html');
                         }
                     });
                 });
@@ -626,8 +626,6 @@
         document.getElementById('load_more_for_sale').addEventListener('click', function(){
             forSaleLower = writeForSale(forSaleLower);
         });
-
-        document.getElementById('user-state')
         
     </script>
 

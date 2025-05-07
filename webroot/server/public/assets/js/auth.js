@@ -1,35 +1,7 @@
 import("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js");
 
-function checkLoginStatus(){
-    if(sessionStorage.length > 0){
-        document.getElementById('user-state').innerHTML = 
-        `<a id="log-out" title="Log Out" href="">Log Out</a>`;
-
-        document.getElementById('my-account').innerHTML =
-        `<a class="top-link-myaccount" title="My Account" href="dashboard.html">My Account</a>`;
-
-        document.getElementById('log-out').addEventListener('click', function() {
-
-            logout(sessionStorage.getItem('token')).then(function (response){
-                if(response === true){
-                    sessionStorage.clear();
-                    localStorage.clear();
-                    window.replace('./detail.html');
-                }
-            });
-        });
-    }
-    else{
-        document.getElementById('user-state').innerHTML = 
-        `<a id="log-in" title="Log In" href="login.html">Login</a>`;
-        document.getElementById('my-account').innerHTML =
-        ``;
-
-    }
-}
-
 async function createNewUser(username, password, email, number, birthday) {
-    try{
+        try{
         const response = await axios.post('http://localhost:3000/api/users/signup', {
             headers: {
                 'Content-Type': 'application/json'
@@ -42,12 +14,10 @@ async function createNewUser(username, password, email, number, birthday) {
                 birthday: birthday
             }
         }).then( function (response){
-            console.log(response);
             window.location.replace('./login.html');
         });
     } catch (error){
         console.log(error);
-        console.log(response);
     }
 }
 
@@ -117,7 +87,6 @@ async function authenticate(email, password) {
         }
         else {
             console.log(error);
-            //window.location.reload();
         }
     }
     return false;
@@ -146,21 +115,25 @@ async function reauthenticate(){
 
         });
     } catch(error){
-        console.log(resposne)
+        console.log(error)
     }
 }
 
 async function logout(token) {
     try{
-        const response = axios.post('http://localhost:3000/api/users/signout', {},{
+        const response = await axios.post('http://localhost:3000/api/users/signout', {},{
             headers: {
                 'Authorization': 'Bearer ' + token
             }
         }).then(function (response){
-            if(response.status == 200){
+            if(response.status === 200){
                 return true;
             }
         });
+
+        if(response === true){
+            return true;
+        }
     } catch(error){
         alert(error);
     }
