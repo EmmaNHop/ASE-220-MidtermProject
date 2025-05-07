@@ -157,4 +157,18 @@ router.get('/job', async (req, res) => {
     }
 });
 
+//creates a post
+router.post('/post', async (req, res) => {
+    try{
+        const content = req.body.content; 
+        postHandler.createNewPost(content);
+
+        return res.status(200).send(content);
+
+    }catch(error) {
+        console.error(error);
+        return res.status(500).json({error : 'Error inserting post. \n'});
+    }
+});
+
 module.exports = router;

@@ -10,7 +10,7 @@ GET http://127.0.0.1:3000/api/posts/featured
 
 ###
 
-GET http://127.0.0.1:3000/api/users/user/68139679e941dc7da6a7cf83
+GET http://127.0.0.1:3000/api/users/user/6814f96c6d6b4ef6e3209b1b
 
 ###
 
@@ -66,11 +66,36 @@ Content-Type: application/json
 ###
 
 POST http://127.0.0.1:3000/api/users/auth
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoidGVzdEB1c2VyLmNvbSIsInVzZXJuYW1lIjoiVGVzdFVzZXIiLCJpZCI6IjY4MTU1NDgzZWM4OTAwY2NmNGU1MjNhZiJ9LCJpYXQiOjE3NDY1NTY3MzcsImV4cCI6MTc0NjU2MDMzN30.r7tizKkGaK44BYX_-HOffaivgFCPlSGvtz1RJ-d7e8Q
+Content-Type: application/json
+
+{
+    "content": "test"
+}
+
+###
+
+POST http://127.0.0.1:3000/api/users/reauth
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoidGVzdEB1c2VyLmNvbSIsInVzZXJuYW1lIjoiVGVzdFVzZXIiLCJpZCI6IjY4MTU1NDgzZWM4OTAwY2NmNGU1MjNhZiJ9LCJpYXQiOjE3NDY1NTY3MzcsImV4cCI6MTc0NjU2MDMzN30.r7tizKkGaK44BYX_-HOffaivgFCPlSGvtz1RJ-d7e8Q
+Content-Type: application/json
+### 
+
+POST http://127.0.0.1:3000/api/posts/post
 Content-Type: application/json
 
 {
     "content": {
-        "token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6IiIsInVzZXIiOnsiZW1haWwiOiJ0ZXN0QHVzZXIuY29tIiwiaWQiOiI2ODE1NTQ4M2VjODkwMGNjZjRlNTIzYWYifSwiaWF0IjoxNzQ2MzEyNDI1LCJleHAiOjE3NDYzMTYwMjV9.Gv5J3Iv6U7vkKDaBlVg_fZMPKYheRuifQVN9PumQ0Bo"
+        "user_id" : "681a3252697ff9b8110229b6",
+        "created_by": "Joe Schmoe",
+        "post_title": "TEST",
+        "type": "Post",
+        "city": "Babylon",
+        "state": "Sumeria",
+        "price": "$1",
+        "is_job": "false",
+        "img": "./assets/images/avatar1.jpg",
+        "post_content": "Lorem Ipsum",
+        "is_featured": "false"
     }
 }
 

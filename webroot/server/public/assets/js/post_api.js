@@ -51,7 +51,13 @@ async function getFeaturedPosts(Axios, lowerLimit, upperLimit){
 }
 
 async function getUserFeatured(Axios, user){
-
+    try {
+        let response = await Axios.get("http://localhost:3000/api/posts/featured");
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching featured posts:", error);
+        return []; // Always return an array to avoid crashing
+    }
 }
 
 async function getForSale(Axios, lowerLimit, upperLimit){
@@ -90,6 +96,18 @@ async function getUserJobs(Axios, user){
 }
 
 /*          PUT METHODS            */
+
+async function addNewPost(Axios, data){
+    try{
+        console.log(data);
+        let post = await Axios.post('http://localhost:3000/api/posts/post', data);
+
+        return post;
+    }catch(error) {
+        console.error('Error making post. \n' + error);
+        throw new Error('       Error making post. \n');
+    }
+}
 
 async function addNewForSale(Axios, data){
 

@@ -16,10 +16,13 @@ const fs = require('fs');
 const validator = require('validator');
 
 // This is were the data will be sent to
-const userHandler = require('../handlers/users_handler');
+const userHandler = require('../handlers/users_handler.js');
 //const { create } = require('domain');
 
 const { ObjectId } = require('mongodb');
+
+// validates token
+const auth = require('../middleware/auth.js');
 
 /*        GET Methods       */
 
@@ -38,7 +41,7 @@ router.get('/user/:userid', async (req, res) => {
             console.error(` Invalid Object ID: ${id}`);
             return res.status(400).json({ error: ` Invalid Object ID: ${id}`});
         }
-        let user = userHandler.getUsersById(req.params.userid);
+        let user = await userHandler.getUsersById(req.params.userid);
         console.log("Route");
         console.log(user);
         res.status(200).json(user);
@@ -91,6 +94,7 @@ router.post('/signup', async (req, res) => {
             return;
         }
 
+        // Try to redirect 
         try{
             res.redirect('/login.html');
         } catch(error){
@@ -117,8 +121,14 @@ router.post('/signin', async (req, res) => {
             return;
         }
 
+        //Debug - Grab user token
         console.log(userInfo);
-        res.status(200).json(userInfo);
+        try{
+            res.status(200).json(userInfo);
+        } catch(error){
+            console.log('Page not found: \n' + error);
+            return res.status(404).json({error : 'Page not Found' });
+        }
 
     } catch(error){
         console.error('Error Signing in: \n' + error);
@@ -129,31 +139,66 @@ router.post('/signin', async (req, res) => {
 // Sign-Out
 router.post('/signout', async (req, res) => {
     try{
-        // TODO: verify JWT and revoke current JWT
 
-        const request = req.body.content;
+        const token = req.headers.authorization;
 
+        console.log(req.headers);
 
+        const authenticated = await auth.authenticateUser(token);
+
+        if(!authenticated){
+            res.status(401).json({ error: 'Unauthorized Access! '});
+            return;
+        };
 
     } catch(error){
-        res.status(500).json({ error: 'Error Signing out.' })
+        res.status(500).json({ error: 'Error Signing out.' });
     }
 });
 
-// Authenticate user
+// Example auth
 router.post('/auth', async(req, res) => {
     try{
 
-        const request = req.body.content;
+        const token = req.headers.authorization;
 
-        console.log(request);
+        const authenticated = await auth.authenticateUser(token);
+        //console.log(token);
 
-        console.log(userHandler.authenticateToken(request.token));
+        if(!authenticated){
+            res.status(401).json({ error: 'Unauthorized Access! '});
+            return;
+        };
+
+        // TODO: return something here
 
     } catch(error){
-
+        console.log('Error sending to auth: \n' + error);
+        res.status(500).json({ error: 'Oopsie dasies!. '});
     }
 });
+
+// Will generate a new token for the user if they are signed in and using the app
+router.post('/reauth', async(req, res) => {
+    try{
+
+        const token = req.headers.authorization;
+
+        const authenticated = await auth.authenticateUser(token);
+
+        if(!authenticated){
+            console.log('User unauthorized');
+            res.status(401).json({ error: 'Unauthorized Access! '});
+            return;
+        };
+
+        res.status(200).json({ });
+
+    } catch(error){
+        console.log('Error reauthenticating user: \n' + error);
+        res.status(500).json({ error: 'Error reauthenticating user '});
+    }
+})
 
 // Exports this router to be used in app.js
 module.exports = router;    

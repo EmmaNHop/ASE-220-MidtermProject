@@ -39,7 +39,7 @@ async function getFeaturedPosts() {
         return featured;
     }catch(error){
         console.error('Error getting featured posts from database. \n       ' + error);
-        throw new Error('Error getting featured posts from database. \n');
+        throw new Error('       Error getting featured posts from database. \n');
     }
 }
 
@@ -49,7 +49,7 @@ async function getForSalePosts() {
         return featured;
     }catch(error){
         console.error('Error getting for sale posts from database. \n       ' + error);
-        throw new Error('Error getting for sale posts from database. \n');
+        throw new Error('       Error getting for sale posts from database. \n');
     }
 }
 
@@ -59,8 +59,33 @@ async function getJobPosts() {
         return featured;
     }catch(error){
         console.error('Error getting job posts from database. \n        ' + error);
-        throw new Error('Error getting job posts from database. \n');
+        throw new Error('       Error getting job posts from database. \n');
     }
+}
+
+async function createNewPost(post) {
+    try{
+        const newPost = await client.db('GregsList').collection('Posts').insertOne({
+            created_by : post.created_by,
+            date_created : post.date_created,
+            time_created : post.time_created,
+            post_title : post.post_title,
+            type : post.type,
+            city : post.city,
+            state : post.state,
+            price : post.price,
+            post_views : 0,
+            is_job : post.is_job,
+            img : post.img,
+            post_content : post.post_content,
+            is_featured : post.is_featured
+        });
+        return newPost;
+    }catch(error){
+        console.error('Error inserting post to database. \n        ' + error);
+        throw new Error('       Error inserting post to database. \n');
+    }
+
 }
 
 // Export all the functions that will be called outside of this file
@@ -69,5 +94,6 @@ module.exports = {
     getPostById,
     getFeaturedPosts,
     getForSalePosts,
-    getJobPosts
+    getJobPosts,
+    createNewPost
 }
