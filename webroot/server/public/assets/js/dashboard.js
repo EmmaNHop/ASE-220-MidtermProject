@@ -2,7 +2,7 @@ const token = sessionStorage.getItem('token');
 const username = sessionStorage.getItem('username');
 
 const myAxios = axios.create({}, {
-    baseURL: 'http://localhost:3000/',
+    baseURL: 'http://localhost:3000/api',
     headers: {
         Authorization: `Bearer ${token}`
     }
@@ -19,7 +19,7 @@ function htmlBuilder(query, html){
 
 async function getUserFeatured(Axios){
     try {
-        const response = await Axios.get('/api/posts/user_featured');
+        const response = await Axios.get('/posts/user_posts/:username?type=featured');
         console.log(response);
         return response.data;
     } catch (error) {

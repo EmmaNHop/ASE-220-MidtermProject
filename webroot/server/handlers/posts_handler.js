@@ -31,7 +31,7 @@ async function getPostById(id){
 
 async function getFeaturedPosts(){
     try{
-        const data = await db.getFeaturedPosts();
+        const data = await db.getUserFeaturedPosts();
         return data;
     }catch(error){
         console.error('Error handling featured posts. \n' + error);

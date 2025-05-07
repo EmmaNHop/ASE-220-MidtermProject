@@ -6,11 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="14c5eb51-edc3-4cee-8514-9fb2d073d8b1" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webroot/server/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/webroot/server/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webroot/server/db/post_db_functions.js" beforeDir="false" afterPath="$PROJECT_DIR$/webroot/server/db/post_db_functions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webroot/server/handlers/posts_handler.js" beforeDir="false" afterPath="$PROJECT_DIR$/webroot/server/handlers/posts_handler.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webroot/server/public/assets/js/dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/webroot/server/public/assets/js/dashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webroot/server/public/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/webroot/server/public/dashboard.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webroot/server/public/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/webroot/server/public/login.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webroot/server/routes/posts.js" beforeDir="false" afterPath="$PROJECT_DIR$/webroot/server/routes/posts.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
