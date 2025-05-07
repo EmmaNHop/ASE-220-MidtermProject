@@ -79,7 +79,6 @@
 
 			const response = authenticate(email,password)
 			.then(response => {
-				console.log('response.token: ' + response);
 				if(response.token){
                 	window.location.replace('./detail.html');
 				}

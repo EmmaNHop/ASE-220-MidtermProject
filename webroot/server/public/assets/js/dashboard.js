@@ -7,6 +7,7 @@ const myAxios = axios.create({
     }
 });
 
+
 function htmlBuilder(query, html){
     let itemContainer = document.getElementById(query);
     itemContainer.insertAdjacentHTML("beforeend", html);
@@ -21,6 +22,7 @@ async function getUserFeatured(Axios){
         return [];
     }
 }
+
 
 //start test
 /*getUserFeatured(myAxios)
