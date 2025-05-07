@@ -1,6 +1,6 @@
 import("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js");
 
-async function createNewUser(username, password, email, number, birthday) {
+/*async function createNewUser(username, password, email, number, birthday) {
         try{
         const response = await axios.post('http://localhost:3000/api/users/signup', {
             headers: {
@@ -18,6 +18,31 @@ async function createNewUser(username, password, email, number, birthday) {
         });
     } catch (error){
         console.log(error);
+    }
+}*/
+
+async function createNewUser(username, password, email, number, birthday) {
+    try {
+        const response = await axios.post('http://localhost:3000/api/users/signup',
+            {
+                username: username,
+                password: password,
+                email: email,
+                number: number,
+                birthday: birthday
+            },
+            {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+        );
+
+        // Redirect after successful signup
+        window.location.replace('./login.html');
+
+    } catch (error) {
+        console.error('Signup failed:', error);
     }
 }
 
