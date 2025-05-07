@@ -583,10 +583,11 @@
                                                         <button class="btn-cart"
                                                             title="Add to Cart">
                                                             <i class="fa fa-shopping-cart"></i>
-                                                            <span><a href="#home"
-                                                                aria-controls="home" role="tab"
-                                                                data-toggle="tab">Message
-                                                                ${posts[i].created_by}</a></span>
+                                                            <span><a href="itemDetail.html?id=${featured[i]._id}&type=f"
+                                                                class="message-user"
+                                                                data-user="${featured[i].created_by}">
+                                                                Message ${featured[i].created_by}
+                                                               </a></span>
                                                         </button>
                                                     </div>
                                                 </div>
@@ -600,6 +601,15 @@
             });
             return forSaleLower += 5;
         }
+
+        document.addEventListener('click', function(e) {
+            const target = e.target.closest('.message-user');
+            if (target) {
+                const user = target.getAttribute('data-user');
+                sessionStorage.setItem('selectedUser', user);
+            }
+        });
+
 
         featuredLower = writeFeatured(featuredLower);
         jobLower -writeJobs(jobLower);

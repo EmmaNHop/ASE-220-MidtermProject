@@ -59,20 +59,27 @@
                                     <span style="--a:8">N</span>
                                     <span style="--a:9">!</span>
                                 </div>
-                                
-            
+
                                 <div class="subcribe-form mt-4 pt-2">
-                                    <form>
-                                        <input type="location" id="locationSearch" class="bg-white opacity-6 rounded shadow" required placeholder="Enter the location to search for listings">
-                                        <a href="detail.html"><button type="submit" class="btn btn-primary">Search</button></a>
+                                    <form class="d-flex flex-column align-items-center" action="detail.html" method="get" id="locationSearchForm">
+                                        <div class="d-flex w-100 mb-3" style="max-width: 600px;">
+                                            <input
+                                                    type="text"
+                                                    name="location"
+                                                    id="locationSearch"
+                                                    class="form-control me-2 bg-white opacity-6 rounded shadow w-100"
+                                                    placeholder="Enter the location to search for listings">
+                                            <button class="btn btn-primary" type="submit">Search</button>
+                                        </div>
+                                        <div class="form-check mt-3 align-items-center">
+                                            <input class="form-check-input mr-4 h1" type="checkbox" value="" id="checkLocation">
+                                            <label class="form-check-label text-white-50 h3 ms-2 ml-4" for="checkLocation">
+                                                Use my location
+                                            </label>
+                                        </div>
                                     </form>
                                 </div>
-                                <div class="form-check mt-3 align-items-center">
-                                    <input class="form-check-input mr-4 h1" type="checkbox" value="" id="flexCheckDefault">
-                                    <label class="form-check-label text-white-50 h3 ms-2 ml-4" for="flexCheckDefault">
-                                        Use my location
-                                    </label>
-                                </div>
+
                             </div>
                             <div class="text-center footer">
                                 <p class="mb-0 text-reset">© <script>document.write(new Date().getFullYear())</script> Wesoon. Design with <i class="mdi mdi-heart text-danger"></i> by <a href="https://shreethemes.in/" target="_blank" class="text-reset">Shreethemes</a>.</p>
@@ -90,5 +97,22 @@
         <script src="assets/js/ext/feather.min.js"></script>
 	    <!-- Custom -->
 	    <script src="assets/js/ext/app.js"></script>
+        <script src="assets/js/cookies.js"></script>
+        <script>
+            document.getElementById('locationSearchForm').addEventListener('submit', function(event) {
+                const field1 = document.getElementById('locationSearch');
+                const checkbox = document.getElementById('checkLocation');
+
+
+                if (field1.value.length === 0 && !checkbox.checked) {
+                    event.preventDefault(); // Prevent form submission
+                    alert('Please enter a location or check "Use my location".'); // Display an error message
+                    return;
+                }
+                // If either field is filled, allow submission
+            });
+
+        </script>
+
     </body>
 </html>
