@@ -66,6 +66,7 @@ async function getJobPosts() {
 async function createNewPost(post) {
     try{
         const newPost = await client.db('GregsList').collection('Posts').insertOne({
+            user_id : post.user_id,
             created_by : post.created_by,
             date_created : post.date_created,
             time_created : post.time_created,

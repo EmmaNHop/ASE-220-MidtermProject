@@ -332,7 +332,38 @@
     const myAxios = axios;
 
     //set front-end variables
-    const form = document.getElementById('new_post').then(result => {
+    const form = document.getElementById('new_post');
+
+
+    async function checkButtons() {
+    
+        //determine job and featured data points
+        const isJobButton = document.querySelectorAll('input[name="typeCheck"]');
+        const featuredButton = document.querySelectorAll('input[name="feature"]');
+
+        isJob = false;
+        isFeatured = false;
+        jobOrFeat = [];
+
+        // Job radio button
+        if(isJobButton[0].checked){
+            jobOrFeat[0] = true;  
+        }
+        // item radio button
+        else if(isJobButton[1].checked){
+            jobOrFeat[0] = false;  
+        }
+        //featured check box
+        if(featuredButton.checked) {
+            jobOrFeat[1] = true;
+        }
+        else {
+            jobOrFeat[1] = false;
+        }
+        return await jobOrFeat;
+    }
+
+    async function setVars() {
         // Gets user name || sessionStorage hasn't been made yet 
         //const userId = sessionStorage.getItem('id');
         //const userName = sessionStorage.getItem('username');
@@ -344,52 +375,28 @@
         const state = form.elements.state.value;
         const price = form.elements.price.value;
 
-        //determine job and featured data points
-        const isJobButton = document.querySelectorAll('input[name="typeCheck"]');
-        const featuredButton = document.querySelectorAll('input[name="feature"]');
-    });
-    console.log("hello");
-
-    async function checkButtons() {
-        isJob = false;
-        isFeatured = false;
-
-        // Job radio button
-        if(isJobButton[0].checked){
-            isJob = true;  
-        }
-        //featured check box
-        if(featuredButton.checked) {
-            isFeatured = true;
-        }
-    }
-
-    async function setVars() {
-
-        checkButtons().then( result => {
-            post = {
-                "user_id" : "681a3252697ff9b8110229b6",
-                "created_by" : "Joe Schoe",  
-                "post_title" : post_title,
-                "type" : type,
-                "city" : city,
-                "state" : state,
-                "price" : price,
-                "img" : img,
-                "post_content" : post_content,
-                "is_job" : false,
-                "is_featured" : false 
-            };
-        })       
+        const isJobOrFeat = await checkButtons();
+        let post = { 
+            user_id : "681a3252697ff9b8110229b6",
+            created_by : "Joe Schmoe",  
+            post_title : await post_title,
+            type : await type,
+            city : await city,
+            state : await state,
+            price : await price,
+            img : await img,
+            post_content : await post_content,
+            is_job : await isJobOrFeat[0],
+            is_featured : await isJobOrFeat[1]
+        };
 
         return await post;
     }
 
     document.getElementById('submit_new_post').addEventListener('click', function() {
 
-        setVars().then(result => {
-            console.log("result" + result);
-            addNewPost(myAxios, result);
+        setVars().then(post => {
+            addNewPost(myAxios, post);
         });
 
         //window.location.replace("detail.html");

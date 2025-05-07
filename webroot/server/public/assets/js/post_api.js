@@ -93,10 +93,26 @@ async function getUserJobs(Axios, user){
 
 async function addNewPost(Axios, data){
     try{
-        console.log(data);
-        let post = await Axios.post('http://localhost:3000/api/posts/post', data);
-
-        return post;
+        let post = await Axios.post('http://localhost:3000/api/posts/post', {
+            header: {'Content-Type': 'application/json'}, 
+            content: {
+                user_id : data.user_id,
+                created_by : data.created_by,
+                post_title : data.post_title,
+                type : data.type,
+                city : data.city,
+                state : data.state,
+                price : data.price,
+                is_job : data.is_job,
+                img : data.img,
+                post_content : data.post_content,
+                is_featured : data.is_featured 
+            }
+        }).then( function (response){
+            console.log(response);
+            //the post page
+            //window.location.replace('./login.html');
+        });
     }catch(error) {
         console.error('Error making post. \n' + error);
         throw new Error('       Error making post. \n');

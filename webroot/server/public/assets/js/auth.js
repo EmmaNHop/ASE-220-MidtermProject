@@ -56,8 +56,10 @@ async function authenticate(email, password) {
                 return response.data;
             }
         });
-        console.log(response);
-        return response;
+
+        //not sure what this is supposed to do, but it returns the entire HTML of a page. I don't think we want this.
+        //console.log(response);
+        //return response;
 
     }
     catch(error){

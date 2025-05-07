@@ -160,8 +160,7 @@ router.get('/job', async (req, res) => {
 //creates a post
 router.post('/post', async (req, res) => {
     try{
-        const content = req.body.content; 
-        postHandler.createNewPost(content);
+        const content = await postHandler.createNewPost(req.body.content);
 
         return res.status(200).send(content);
 
