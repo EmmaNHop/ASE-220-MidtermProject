@@ -1,9 +1,11 @@
 import("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js");
 
-
 async function createNewUser(username, password, email, number, birthday) {
-    try{
+        try{
         const response = await axios.post('http://localhost:3000/api/users/signup', {
+            headers: {
+                'Content-Type': 'application/json'
+            },
             content:{
                 username: username,
                 password: password,
@@ -11,8 +13,7 @@ async function createNewUser(username, password, email, number, birthday) {
                 number: number,
                 birthday: birthday
             }
-        }).then(function (response){
-            console.log(response);
+        }).then( function (response){
             window.location.replace('./login.html');
         });
     } catch (error){
@@ -73,6 +74,7 @@ async function authenticate(email, password) {
                 return response.data;
             }
         });
+        console.log(response);
         return response;
 
     }
@@ -83,7 +85,6 @@ async function authenticate(email, password) {
         }
         else {
             console.log(error);
-            //window.location.reload();
         }
     }
     return false;
@@ -112,7 +113,7 @@ async function reauthenticate(){
 
         });
     } catch(error){
-        console.log(error);
+        console.log(error)
     }
 }
 

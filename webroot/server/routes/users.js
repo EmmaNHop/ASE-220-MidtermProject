@@ -76,25 +76,25 @@ router.post('/signup', async (req, res) => {
 
         const specialCharacter = /^(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).+$/;
 
-        if(specialCharacter.test(content.password)){
+        if(!specialCharacter.test(content.password)){
             console.log('Password needs at least one special character! ');
             throw new Error('Password needs at least one speical character! ');
         }
 
         const uppercaseRegex = /^(?=.*[A-Z]).+$/;
-        if(uppercaseRegex.test(content.password)){
+        if(!uppercaseRegex.test(content.password)){
             console.log('Password needs at least one uppercase character! ');
             throw new Error('Password needs at least one uppercase character! ');
         }
 
         const lowercaseRegex = /^(?=.*[a-z]).+$/;
-        if(lowercaseRegex.test(content.password)){
+        if(!lowercaseRegex.test(content.password)){
             console.log('Password needs at least one lowercase character! ');
             throw new Error('Password needs at least one lowercase character! ');
         }
 
         const digitRegex = /^(?=.*\d).+$/;
-        if(digitRegex.test(content.password)){
+        if(!digitRegex.test(content.password)){
             console.log('Password needs at least one number! ');
             throw new Error('Password needs at least one number! ');
         }
