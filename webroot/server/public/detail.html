@@ -5,11 +5,10 @@
     <title>Home Page</title>
     <link href='https://fonts.googleapis.com/css?family=Poppins:300,700' rel='stylesheet' type='text/css'>
     <!-- Style Sheet-->
-    <link rel="stylesheet" type="text/css" href="font/font-awesome/css/font-awesome.min.css" />
     <link rel="stylesheet" href="assets/css/bootstrap.css">
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/owl-carousel/owl.carousel.css">
-    <link rel="stylesheet" href="assets/css/owl-carousel/owl.theme.css">
+    <link rel="stylesheet" href="assets/css/owl.carousel.css">
+    <link rel="stylesheet" href="assets/css/owl.theme.css">
     <link rel="shortcut icon" href="images/favicon.ico">
     <!-- META TAGS -->
     <meta name="viewport" content="width=device-width" />
@@ -37,14 +36,12 @@
                                     <div class="myaccount">
                                         <div class="customer-ct content">
                                             <ul class="links">
-                                                <li class="first">
-                                                    <a class="top-link-myaccount" title="My Account" href="dashboard.html">My Account</a>
+                                                <li id="my-account" class="first">
                                                 </li>
                                                 <li>
                                                     <a href="index.html">location</a>
                                                 </li>
                                                 <li id="user-state" class="last">
-                                                    <a title="Log In" href="login.html">Login</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -315,16 +312,50 @@
     <script src="assets/js/ext/jquery-1.9.1.min.js"></script>
     <script src="assets/js/ext/bootstrap.min.js"></script>
     <script src="assets/js/ext/less.min.js"></script>
-    <script src="assets/js/ext/owl-carousel/owl.carousel.min.js"></script>
+    <script src="assets/js/ext/owl.carousel.min.js"></script>
     <script src="assets/js/ext/sns-extend.js"></script>
-    <script src="assets/js/custom.js"></script>
+    <script src="assets/js/ext/custom.js"></script>
     <!-- JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <!-- Axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <!-- post API Script -->
     <script src="assets/js/post_api.js"></script>
+    <!--Authentication-->
+    <script src="assets/js/auth.js"></script>
+
     <script>
+
+        // Check user logged status
+        function checkLoginStatus(){
+            if(sessionStorage.length > 0){
+                document.getElementById('user-state').innerHTML = 
+                `<a id="log-out" title="Log Out" href="">Log Out</a>`;
+
+                document.getElementById('my-account').innerHTML =
+                `<a class="top-link-myaccount" title="My Account" href="dashboard.html">My Account</a>`;
+
+                document.getElementById('log-out').addEventListener('click', function() {
+
+                    logout(sessionStorage.getItem('token')).then(function (response){
+                        if(response === true){
+                            sessionStorage.clear();
+                            localStorage.clear();
+                            window.replace('./detail.html');
+                        }
+                    });
+                });
+            }
+            else{
+                document.getElementById('user-state').innerHTML = 
+                `<a id="log-in" title="Log In" href="login.html">Login</a>`;
+                document.getElementById('my-account').innerHTML =
+                ``;
+
+            }
+        }
+
+        checkLoginStatus();
 
         var featuredLower = 0;
 
@@ -344,17 +375,11 @@
             *      WRITE FEATURED 
             */
         function writeFeatured(lower){
-
             let featuredPosts = getFeaturedPosts(myAxios, lower, lower+5)
             .then(featured => { 
                 var html = "";
 
-                console.log(featured);
-
                 for(let i = 0; i < featured.length; i++){
-
-                    //console.log(featured[i]);
-
                     var htmlSegment = "";
 
                         htmlSegment =
@@ -406,7 +431,7 @@
                             </div>`;
                         
                         /*
-
+                            TODO: 
                         else if(featured[i].is_job == true){
 
                             console.log("Featured Job");
@@ -445,14 +470,9 @@
          *      WRITE JOBS 
          */
         function writeJobs(lower){; 
-
-            //console.log(lower);
-
             getJobs(myAxios, lower, lower+5)
             .then(jobs => { 
                 var html = "";
-
-                //console.log(jobs);
 
                 for(let i = 0; i < jobs.length; i++){
 
@@ -524,11 +544,7 @@
             .then(posts => { 
                 var html = "";
 
-                //console.log(posts);
-
                 for(let i = 0; i < posts.length; i++){
-
-                    //console.log(posts[i]);
 
                     let htmlSegment =
                         `
@@ -567,10 +583,11 @@
                                                         <button class="btn-cart"
                                                             title="Add to Cart">
                                                             <i class="fa fa-shopping-cart"></i>
-                                                            <span><a href="#home"
-                                                                aria-controls="home" role="tab"
-                                                                data-toggle="tab">Message
-                                                                ${posts[i].created_by}</a></span>
+                                                            <span><a href="itemDetail.html?id=${featured[i]._id}&type=f"
+                                                                class="message-user"
+                                                                data-user="${featured[i].created_by}">
+                                                                Message ${featured[i].created_by}
+                                                               </a></span>
                                                         </button>
                                                     </div>
                                                 </div>
@@ -578,15 +595,21 @@
                                         </div>
                                     </div>
                                 </div>`;
-
                     html += htmlSegment;
-
                 }
                 htmlBuilder("for_sale", html);
-                //document.querySelector('#for-sale').innerHtml = html;
             });
             return forSaleLower += 5;
         }
+
+        document.addEventListener('click', function(e) {
+            const target = e.target.closest('.message-user');
+            if (target) {
+                const user = target.getAttribute('data-user');
+                sessionStorage.setItem('selectedUser', user);
+            }
+        });
+
 
         featuredLower = writeFeatured(featuredLower);
         jobLower -writeJobs(jobLower);

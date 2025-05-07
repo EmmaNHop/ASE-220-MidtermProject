@@ -44,14 +44,6 @@
                                     Sign Up
                                 </button></a>
                             </div>
-                            <div class="form-group d-md-flex">
-                                <div class="w-50">
-                                    <label class="checkbox-wrap checkbox-primary">Remember Me
-                                        <input type="checkbox" checked />
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div>
-                            </div>
                         </form>
                         <p class="w-100 text-center">
                             &mdash; Already have an account? &mdash;
@@ -89,6 +81,16 @@
 
             createNewUser(username,password,email,number,birthday);
         });
+
+        // Toggle Show/Hide password
+		document.getElementById("toggle-password").addEventListener("click", function() {
+			var input = document.getElementById("password");
+			if (input.type === "password") {
+				input.type = "text";
+			} else {
+				input.type = "password";
+			}
+		});
     </script>
 </body>
 

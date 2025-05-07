@@ -51,7 +51,13 @@ async function getFeaturedPosts(Axios, lowerLimit, upperLimit){
 }
 
 async function getUserFeatured(Axios, user){
-
+    try {
+        let response = await Axios.get("http://localhost:3000/api/posts/featured");
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching featured posts:", error);
+        return []; // Always return an array to avoid crashing
+    }
 }
 
 async function getForSale(Axios, lowerLimit, upperLimit){
