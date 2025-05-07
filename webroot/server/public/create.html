@@ -332,6 +332,8 @@
 <script>
 
     checkUserStatus();
+                                // Two Min
+    setInterval(checkTokenExp(), 2*60*1000);
 
     // Makes axios passable
     const myAxios = axios;

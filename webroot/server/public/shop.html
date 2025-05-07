@@ -172,12 +172,7 @@
                     </div>
                 </div>
             </div>
-        
-
-<!-- END HEADER -->
-
-
-
+            <!-- END HEADER -->
 
             <!-- CONTENT -->
             <div id="sns_content" class="wrap layout-m">
@@ -231,8 +226,6 @@
                 </div>
                 <!-- END CONTENT -->
 
-
-
                 <!-- FOOTER -->
                 <div id="sns_footer" class="footer_style vesion2 wrap">
                     <div id="sns_footer_top" class="footer" style="background: #2f3546;">
@@ -282,7 +275,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- AND FOOTER -->
+                                <!-- END FOOTER -->
                             </div>
                         </div>
                     </div>
@@ -303,7 +296,11 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <!-- post API Script -->
     <script src="assets/js/post_api.js"></script>
+    <script src="assets/js/auth.js"></script>
     <script>
+
+                                    // Two Min
+        setInterval(checkTokenExp(), 2*60*1000);
 
         function htmlBuilder(query, html){
             let itemContainer = document.getElementById(query);
