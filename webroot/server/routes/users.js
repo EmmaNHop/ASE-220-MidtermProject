@@ -42,8 +42,6 @@ router.get('/user/:userid', async (req, res) => {
             return res.status(400).json({ error: ` Invalid Object ID: ${id}`});
         }
         let user = await userHandler.getUsersById(req.params.userid);
-        console.log("Route");
-        console.log(user);
         res.status(200).json(user);
 
     } catch(error){
