@@ -302,7 +302,14 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <!-- post API Script -->
     <script src="assets/js/post_api.js"></script>
+    <script src="assets/js/auth.js"></script>
     <script>
+
+        if(checkUserStatus() === true){
+		    // TODO: change page to reflect being logged in
+	    }
+                                    // Two Min
+        setInterval(checkTokenExp(), 2*60*1000);
 
         function htmlBuilder(query, html){
             let itemContainer = document.getElementById(query);

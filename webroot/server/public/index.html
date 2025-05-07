@@ -98,7 +98,16 @@
 	    <!-- Custom -->
 	    <script src="assets/js/ext/app.js"></script>
         <script src="assets/js/cookies.js"></script>
+        <script src="assets/js/auth.js"></script>
         <script>
+
+            if(checkUserStatus() === true){
+                // TODO: change page to reflect being logged in
+            }
+
+                                        // Two Min
+            setInterval(checkTokenExp(), 2*60*1000);
+
             document.getElementById('locationSearchForm').addEventListener('submit', function(event) {
                 const field1 = document.getElementById('locationSearch');
                 const checkbox = document.getElementById('checkLocation');

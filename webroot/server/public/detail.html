@@ -329,6 +329,9 @@
         // Check user logged status
         function checkLoginStatus(){
             if(sessionStorage.length > 0){
+                
+                checkTokenExp();
+
                 document.getElementById('user-state').innerHTML = 
                 `<a id="log-out" title="Log Out" href="">Log Out</a>`;
 
@@ -356,6 +359,8 @@
         }
 
         checkLoginStatus();
+                                    // Two Min
+        setInterval(checkTokenExp(), 2*60*1000);
 
         var featuredLower = 0;
 

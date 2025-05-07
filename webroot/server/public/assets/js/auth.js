@@ -1,9 +1,5 @@
 import("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js");
 
-async function timeer(){
-    
-}
-
 /*
 async function createNewUser(username, password, email, number, birthday) {
 /*async function createNewUser(username, password, email, number, birthday) {
@@ -67,16 +63,13 @@ async function getExpFromToken(){
 // Check token experation to see if it is about to expire so the user can get a new one
 async function checkTokenExp(){
     if(sessionStorage.length > 0){
-        const fiveMin = 5 * 60 * 1000; // In milliseconds
-        if (sessionStorage.getItem('token_exp') - Date.now() < fiveMin){
+        const twoMin = 2 * 60 * 1000; // In milliseconds
+        if (sessionStorage.getItem('token_exp') - Date.now() < twoMin){
             reauthenticate();
+            return true;
         }
-        else{
-            sessionStorage.clear();
-            localStorage.clear();
-        }
+        return false;
     }
-
     // TODO: Throw error or something
 }
 
@@ -205,14 +198,27 @@ async function checkUserStatus() {
         window.location.replace('./login.html');
         return false;
     }
+
     else if(sessionStorage.getItem('token')){
-        const isLoggedIn = checkToken(sessionStorage.getItem('token'));
+
+        const expired = await checkTokenExp();
+
+        // If the token is expired, it will have created a new one and will not need to auth here
+        if(expired){
+            var isLoggedIn = checkToken(sessionStorage.getItem('token'));
+        }
+        else if(!expired){
+            var isLoggedIn = true;
+        }
+        else{
+            // Uh Oh, should not reach this point
+            alert("ERROR: Something went wrong with checking the user status!!!!");
+        }
 
         if(isLoggedIn === true){
             return true;
         }
-
-        //window.location.replace('./login.html');
+        window.location.replace('./login.html');
         return false;
     }
 

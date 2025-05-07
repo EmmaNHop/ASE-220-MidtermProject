@@ -72,6 +72,10 @@
 
     <script>
 
+        if(checkUserStatus() === true){
+			window.location.replace('./detail.html');
+		}
+
         document.getElementById('signUpButton').addEventListener('click', function() {
             let username=document.getElementById("username").value;
             let password=document.getElementById("password").value;

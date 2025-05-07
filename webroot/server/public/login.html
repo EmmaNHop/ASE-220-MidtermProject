@@ -73,6 +73,11 @@
 		crossorigin="anonymous"></script>
 
 	<script>
+
+		if(checkUserStatus() === true){
+			window.location.replace('./detail.html');
+		}
+
 		document.getElementById("signIn").addEventListener("click", function() {
 			let email=document.getElementById("email").value;
 			let password=document.getElementById("password").value;
