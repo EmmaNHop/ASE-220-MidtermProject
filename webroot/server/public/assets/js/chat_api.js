@@ -11,11 +11,19 @@ async function getChatById(Axios, id){
     try{
         console.log(id);
 
-        let post = await Axios.get(`http://localhost:3000/api/chats/chat/${id}`, {
-            // TODO: handle response here
-        });
+        let post = await Axios.get(`http://localhost:3000/api/chats/chat/${id}`);
 
-        return post;
+        return await post;
+    }catch(error){
+        console.error('Error getting featured post by ID. \n    ' + error);
+    }
+}
+
+async function getUsersChats(Axios, id){
+    try{
+        let post = await Axios.get(`http://localhost:3000/api/chats/${id}`);
+
+        return await post;
     }catch(error){
         console.error('Error getting featured post by ID. \n    ' + error);
     }

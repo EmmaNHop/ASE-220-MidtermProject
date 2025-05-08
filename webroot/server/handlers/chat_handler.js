@@ -7,7 +7,7 @@
 const fs = require('fs').promises;
 const path = require('path');
 
-const db = require('../db/post_db_functions.js');
+const db = require('../db/chat_db_functions.js');
 
 
 async function getChatById(id){
@@ -20,6 +20,17 @@ async function getChatById(id){
     }
 }
 
+async function getUsersChats(id){
+    try{
+        const data = await db.getUsersChats(id);
+        return data;
+    }catch(error){
+        console.error('Error handling getting user\'s chats. \n' + error);
+        throw new Error('       Error handling chats. \n');
+    }
+}
+
 module.exports = {
-    getChatById
+    getChatById,
+    getUsersChats
 }

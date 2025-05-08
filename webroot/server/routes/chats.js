@@ -31,7 +31,23 @@ router.get('/chat/:chatid', async (req, res) => {
 
     } catch(error){
         console.error(error);
-        res.status(500).json({error: 'Failed to get user.'});
+        res.status(500).json({error: 'Failed to get chat.'});
     }
 });
 
+router.get('/:userid', async (req, res) => {
+    try{
+        if(!ObjectId.isValid(req.params.userid)){
+            console.error(` Invalid Object ID: ${id}`);
+            return res.status(400).json({ error: ` Invalid Object ID: ${id}`});
+        }
+        let chats = await userHandler.getUsersChats(req.params.userid);
+        res.status(200).json(chats);
+
+    } catch(error){
+        console.error(error);
+        res.status(500).json({error: 'Failed to get user\'s chats.'});
+    }
+});
+
+module.exports = router;

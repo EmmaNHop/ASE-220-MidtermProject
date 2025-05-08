@@ -18,6 +18,14 @@ GET http://127.0.0.1:3000/api/posts/id/6811109e65fd9a8ee7bb1b8c
 
 ###
 
+GET http://127.0.0.1:3000/api/chats/chat/681b9801de5e1fff96a3805b
+
+###
+
+GET http://127.0.0.1:3000/api/chats/681ad0d684940469a86b4dad
+
+###
+
 ### API ENDPOINTS
 ### Designed to provide data functionality to all apps (phone, web, thrid party websites)
 

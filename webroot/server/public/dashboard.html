@@ -191,22 +191,23 @@
     </aside>
 
     <!-- Chat-launcher-->
-    <div class="chat-launcher"></div>
+    <div id="Chat" class="chat-launcher"></div>
     <div class="chat-wrapper">
         <div class="card">
             <div class="header">
                 <h2>Chat</h2>                    
             </div>
-            <div class="scrollmenu">
-                <a href="">Joe Schmoe</a>
-                <a href="">bob</a>
-                <a href="">MORE</a>
-                <a href="">MORE</a>
-                ...
+            <div id="user-scrollmenu" class="scrollmenu">
+                
+                <!-- populates when chat button is pressed -->
+                
               </div>
             <div class="body">
                 <div class="chat-widget">
-                <ul class="chat-scroll-list clearfix">
+                <ul id="chat-messages" class="chat-scroll-list clearfix">
+
+
+                    <!--
                     <li class="left float-left">
                         <img src="" class="rounded-circle" alt="">
                         <div class="chat-info">
@@ -230,6 +231,7 @@
                         <li class="right">
                         <div class="chat-info"><span class="datetime">7:02</span> <span class="message">Hello, <br>Michael</span> </div>
                     </li>
+                    -->
                 </ul>
                 </div>
                 <div class="input-group">
@@ -332,6 +334,8 @@
     <!-- post API Script -->
     <script src="assets/js/post_api.js"></script>
 
+    <script src="assets/js/chat_api.js"></script>
+
     <script src="assets/js/dashboard.js"></script>
 
     <script src="assets/js/auth.js"></script>
@@ -341,6 +345,8 @@
         checkUserStatus();
                                     // Two Min
         setInterval(checkTokenExp(), 2*60*1000);
+
+        const userId = '681ad0d684940469a86b4dad';//sessionStorage.getItem('id');
 
         document.addEventListener("DOMContentLoaded", function() {
             const username = sessionStorage.getItem('username');
@@ -352,6 +358,56 @@
             if (email) {
                 document.getElementById('display-email').textContent = email;
             }
+        });
+
+        async function showMessages(index) {
+            console.log("???: " + index);
+            document.getElementById("chat-messages").innerHTML = ``;
+            const chat = await getUsersChats(myAxios, userId);
+
+            for(i=0;i<chat.data[index].messages.length;i++) {
+                if(chat.data[index].messages[i].sender_id == userId) {
+                    document.getElementById("chat-messages").innerHTML += `<li class="right">
+                        <div class="chat-info"><span class="datetime">${chat.data[index].messages[i].time}</span> 
+                        <span class="message">${chat.data[index].messages[i].content}</span> </div>
+                    </li>`;
+                }else {
+                    document.getElementById("chat-messages").innerHTML += `<li class="left float-left"> 
+                        <img src="" class="rounded-circle" alt=""> <div class="chat-info">
+                        <span class="datetime">${chat.data[index].messages[i].time}</span> 
+                        <span class="message">${chat.data[index].messages[i].content}</span> </div>
+                    </li>`;
+                }
+            }
+        }
+
+        async function loadPeople() {
+            document.getElementById("user-scrollmenu").innerHTML = ``;
+            const chat = await getUsersChats(myAxios, userId);
+
+            
+            for(i=0;i<chat.data.length;i++) {
+                //finds how the users are ordered in the data
+                if(chat.data[i].userA_id == userId) {
+                    document.getElementById("user-scrollmenu").innerHTML += `<a id="${i}" class="chat-name">${chat.data[i].userB_name}</a>`;
+                }else {
+                    document.getElementById("user-scrollmenu").innerHTML += `<a id="${i}" class="chat-name">${chat.data[i].userA_name}</a>`;
+                }
+
+                if(i == chat.data.length-1) {
+                    let names = document.querySelectorAll(".chat-name");
+                    for(j=0;i<chat.data.length;j++) {
+                        console.log("J: " + j)
+                        names[j].addEventListener("click", function(e) {
+                            showMessages(e.target.id);
+                        });
+                    }
+                }
+            }
+        }
+
+        document.getElementById("Chat").addEventListener("click", function() {
+            loadPeople();
         });
     </script>
 

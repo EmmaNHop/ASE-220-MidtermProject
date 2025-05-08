@@ -13,10 +13,12 @@ app.use(express.json());
 /*
  *          Define Routes
  */
+const chatRoutes = require('./routes/chats.js');
 const postRoutes = require('./routes/posts.js');
 const tagRoutes = require('./routes/tags.js');
 const userRoutes = require('./routes/users.js');
 
+app.use('/api/chats', chatRoutes);
 app.use('/api/posts', postRoutes);
 app.use('/api/tags', tagRoutes);
 app.use('/api/users', userRoutes);
