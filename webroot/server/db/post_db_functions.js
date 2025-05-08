@@ -33,13 +33,48 @@ async function getPostById(id) {
     }
 }
 
+async function getPostsUserFeatured(username, type) {
+    try {
+        const db = client.db('GregsList');
+        const posts = await db.collection('Posts').find({
+            created_by: username,
+            type: type
+        }).toArray();
+        return posts;
+    } catch (err) {
+        console.error("DB error:", err);
+        throw new Error('Database fetch failed');
+    }
+}
+
 async function getFeaturedPosts() {
-    try{
+    /*try{
         const featured = await client.db('GregsList').collection('Posts').find({is_featured: true}).toArray();
+        console.log("featured array created" + featured);
         return featured;
     }catch(error){
         console.error('Error getting featured posts from database. \n       ' + error);
         throw new Error('       Error getting featured posts from database. \n');
+    }*/
+
+    const db = require('../db/db'); // adjust this to match how you connect to your DB
+
+    async function getUserFeaturedPosts(username) {
+        try {
+            const collection = await db.getCollection('posts'); // or whatever your collection is named
+
+            const query = {
+                created_by: username,
+                is_featured: true // assuming there's a flag to identify featured posts
+            };
+
+            const posts = await collection.find(query).toArray();
+            return posts;
+
+        } catch (error) {
+            console.error("Error fetching user featured posts:", error);
+            throw error;
+        }
     }
 }
 
@@ -93,8 +128,9 @@ async function createNewPost(post) {
 module.exports = {
     getRecentPosts,
     getPostById,
-    getFeaturedPosts,
+    getPostsUserFeatured,
     getForSalePosts,
     getJobPosts,
-    createNewPost
+    createNewPost,
+    getUserFeaturedPosts
 }

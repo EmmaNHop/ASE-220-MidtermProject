@@ -1,13 +1,14 @@
 /**
- * 
+ *
  *          Handler for data coming from '../routes/posts.js' All CRUD operations for posts are done here
- * 
+ *
  */
 
 const fs = require('fs').promises;
 const path = require('path');
 
 const db = require('../db/post_db_functions.js');
+const {client} = require("../db/db");
 
 
 async function getAllPosts(){
@@ -29,14 +30,12 @@ async function getPostById(id){
     }
 }
 
-async function getFeaturedPosts(){
-    try{
-        const data = await db.getFeaturedPosts();
-        return data;
-    }catch(error){
-        console.error('Error handling featured posts. \n' + error);
-        throw new Error('       Error handling featured posts. \n');
+async function getUserPostsFeatured(username, type) {
+    if (!username || !type) {
+        throw new Error('Missing username or type');
     }
+
+    return await postDB.getUserFeaturedPosts(username, type);
 }
 
 async function getForSalePosts(){
@@ -82,5 +81,6 @@ module.exports = {
     getPostById,
     getFeaturedPosts,
     getForSalePosts,
-    createNewPost
+    createNewPost,
+    getUserPostsFeatured
 }

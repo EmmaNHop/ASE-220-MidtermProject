@@ -71,31 +71,16 @@ router.get('/id/:id', async (req, res) =>{
 
 
 // Gets featured posts 
-router.get('/featured', async (req, res) => {
+router.get('/user_posts/:username', async (req, res) => {
+    const { username } = req.params;
+    const { type } = req.query;
 
-    const { filter } = req.query;
-
-    var content = [];
-
-    try{
-        if(filter){
-
-            //content = await postHandler.getFilteredPosts();
-
-            if(!content){
-                return res.status(404).json({ error: `Invalid filter. Filter: ${filter} not found. \n`});
-            }
-
-            res.status(200).send(content);
-        } else{
-            
-            const content = await postHandler.getFeaturedPosts();
-
-            return res.status(200).send(content);
-        }
-    } catch(error){
-        console.error(error);
-        return res.status(500).json({error : 'Error accessing posts. \n'});
+    try {
+        const posts = await postHandler.getUserPostsFeatured(username, type);
+        res.status(200).json(posts);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Failed to get user posts.' });
     }
 });
 
@@ -167,6 +152,23 @@ router.post('/post', async (req, res) => {
     }catch(error) {
         console.error(error);
         return res.status(500).json({error : 'Error inserting post. \n'});
+    }
+});
+
+//get user posts
+router.get('/user_featured', async (req, res) => {
+    try {
+        const { username } = req.query;
+        const content = await postHandler.getFeaturedPosts(username);
+
+        if (!content) {
+            return res.status(404).json({ error: 'No posts found for user.' });
+        }
+
+        return res.status(200).json(content);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: 'Failed to fetch user featured posts.' });
     }
 });
 
