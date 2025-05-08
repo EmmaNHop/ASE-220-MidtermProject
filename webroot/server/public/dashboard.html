@@ -343,8 +343,16 @@
     <script>
 
         checkUserStatus();
-                                    // Two Min
-        setInterval(checkTokenExp(), 2*60*1000);
+        setInterval(async () => {
+            try{
+                checkTokenExp();
+            } catch(error) {
+                alert("Big MF issue");
+            }
+        }   , 2*60*1000); // Two Min
+
+        document.addEventListener("DOMContentLoaded", getUserFeatured);
+
 
         const userId = '681ad0d684940469a86b4dad';//sessionStorage.getItem('id');
 

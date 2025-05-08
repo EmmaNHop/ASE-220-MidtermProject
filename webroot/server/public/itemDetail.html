@@ -271,9 +271,14 @@
         if(checkUserStatus() === true){
 		    // TODO: change page to reflect being logged
 	    }
-                                    // Two Min
-        setInterval(checkTokenExp(), 2*60*1000);
-
+        setInterval(async () => {
+            try{
+                checkTokenExp();
+            } catch(error) {
+                alert("Big MF issue");
+            }
+        }   , 2*60*1000); // Two Min
+        
         const myAxios = axios;
 
         const urlParams = new URLSearchParams(window.location.search);
