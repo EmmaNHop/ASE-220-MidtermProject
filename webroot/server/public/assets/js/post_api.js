@@ -113,7 +113,7 @@ async function addNewPost(Axios, data){
                 img : data.img,
                 post_content : data.post_content,
                 is_featured : data.is_featured 
-            }
+            }, 
         }).then( function (response){
             console.log(response);
             //the post page

@@ -542,14 +542,14 @@
         /*
          *      WRITE COMMON POST
          */
-        function writeForSale(lower){
-                                                 // 5 per page
-            getForSale(myAxios, lower, lower+5)
+
+        function writeForSale(lower){              
+            getForSale(myAxios, lower, lower+5)  // 5 per page
             // This waits for the promise then plucks the array (posts) will treat the data in the html constructor as an array
             .then(posts => { 
                 var html = "";
 
-                for(let i = 0; i < posts.length; i++){
+                for(let i = 0; i < lower; i++){
 
                     let htmlSegment =
                         `
@@ -588,10 +588,10 @@
                                                         <button class="btn-cart"
                                                             title="Add to Cart">
                                                             <i class="fa fa-shopping-cart"></i>
-                                                            <span><a href="itemDetail.html?id=${featured[i]._id}&type=f"
+                                                            <span><a href="itemDetail.html?id=${posts[i]._id}&type=f"
                                                                 class="message-user"
-                                                                data-user="${featured[i].created_by}">
-                                                                Message ${featured[i].created_by}
+                                                                data-user="${posts[i].created_by}">
+                                                                Message ${posts[i].created_by}
                                                                </a></span>
                                                         </button>
                                                     </div>
@@ -606,6 +606,7 @@
             });
             return forSaleLower += 5;
         }
+            
 
         document.addEventListener('click', function(e) {
             const target = e.target.closest('.message-user');

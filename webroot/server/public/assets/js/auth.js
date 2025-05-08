@@ -4,17 +4,14 @@ async function createNewUser(username, password, email, number, birthday) {
     try {
         const response = await axios.post('http://localhost:3000/api/users/signup',
             {
-                username: username,
-                password: password,
-                email: email,
-                number: number,
-                birthday: birthday
-            },
-            {
-                headers: {
-                    'Content-Type': 'application/json'
+                content: {
+                    username: username,
+                    password: password,
+                    email: email,
+                    number: number,
+                    birthday: birthday
                 }
-            }
+            },
         );
 
         // Redirect after successful signup
