@@ -229,7 +229,33 @@ router.post('/user/:userId/newPost', async (req, res) => {
 
 // Edits a post
 router.put('/user/:userId/edit/:postId', async (req, res) => {
+    try{
+        const token = req.headers.authorization;
+    
+        const authenticated = await auth.authenticateUser(token);
+    
+        if(!authenticated){
+            console.error('User unauthorized');
+            res.status(401).json({ error: 'Unauthorized Access! '});
+            return;
+        };
 
+        const userId = req.params.userId;
+
+        const postId = req.params.postId;
+
+        console.log(postId);
+
+        console.log("route:  ", req.body.content.data)
+
+        const content = await postHandler.editPost(req.body.content.data, postId);
+
+        return res.status(200).json(content);
+
+    }catch(error) {
+        console.error(error);
+        return res.status(500).json({error : 'Error inserting post. \n'});
+    }
 });
 
 //          DELETE          //

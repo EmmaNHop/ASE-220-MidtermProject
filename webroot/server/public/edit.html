@@ -347,69 +347,77 @@
 
     const userId = sessionStorage.getItem('id');
     const token = sessionStorage.getItem('token');
+    const userName = sessionStorage.getItem('username');
 
     // Makes axios passable
     const myAxios = axios;
 
-    var post = getPostById(myAxios, postId).then(userPost => {
+    getPostById(myAxios, postId).then(userPost => {
 
-        userPost = userPost.data;
+        post = userPost.data;
 
-        document.querySelector('#title').setAttribute('value', userPost.post_title);
-        document.querySelector('#content').setAttribute('value', userPost.post_content);
-        document.querySelector('#type').setAttribute('value', userPost.type);
-        document.querySelector('#picture').setAttribute('value', userPost.img);
-        document.querySelector('#city').setAttribute('value', userPost.city);
-        document.querySelector('#state').setAttribute('value', userPost.state);
-        document.querySelector('#price').setAttribute('value', userPost.price);
-        document.querySelector('#is_job').setAttribute('checked', userPost.is_job);
+        document.querySelector('#title').setAttribute('value', post.post_title);
+        document.querySelector('#content').setAttribute('value', post.post_content);
+        document.querySelector('#type').setAttribute('value', post.type);
+        document.querySelector('#picture').setAttribute('value', post.img);
+        document.querySelector('#city').setAttribute('value', post.city);
+        document.querySelector('#state').setAttribute('value', post.state);
+        document.querySelector('#price').setAttribute('value', post.price);
+        document.querySelector('#is_job').setAttribute('checked', post.is_job);
 
-    });
+    }).then(post => {
 
-     document.getElementById('edit_post_button').addEventListener('click', function() {
+        document.getElementById('edit_post_button').addEventListener('click', function() {
 
-        const post_title = form.elements.title.value;
-        const post_content = form.elements.content.value;
-        const type = form.elements.type.value;
-        const img = form.elements.picture.value;
-        const city = form.elements.city.value;
-        const state = form.elements.state.value;
-        const price = form.elements.price.value;
-        const feature = form.elements.feature.value;
+            const post_title = form.elements.title.value;
+            const post_content = form.elements.content.value;
+            const type = form.elements.type.value;
+            const img = form.elements.picture.value;
+            const city = form.elements.city.value;
+            const state = form.elements.state.value;
+            const price = form.elements.price.value;
+            const feature = form.elements.feature.value;
 
-        post = {
-            "id" : postId,
-            "created_by" : userName,  
-            "post_title" : post_title,
-            "post_content" : post_content,
-            "img" : img,
-            "type" : type,
-            "city" : city,
-            "state" : state,
-            "price" : price,
-            "post_views" : 0,
-            "is_job": ""
-        };
+            var newPost = {
+                "user_id" : userId,
+                "created_by" : userName,
+                //"date_created" : date_created,
+                //"time_created" : time_created,
+                "post_title" : post_title,
+                "post_content" : post_content,
+                "img" : img,
+                "type" : type,
+                "city" : city,
+                "state" : state,
+                "price" : price,
+                "post_views" : 0,
+                "is_job": "",
+                "is_featured": ""
+            };
 
-        const isJobButton = document.querySelectorAll('input[name="typeCheck"]');
+            const isJobButton = document.querySelectorAll('input[name="typeCheck"]');
 
-        const featuredButton = document.querySelectorAll('input[name="feature"]');
+            const featuredButton = document.querySelectorAll('input[name="feature"]');
 
-        // Job radio button
-        if(isJobButton[0].checked){
-            post.is_job = true;    
-        } 
-        // For sale radio button
-        else if(isJobButton[1].checked){
-            post.is_job = false;
-        }
+            // Job radio button
+            if(isJobButton[0].checked){
+                newPost.is_job = true;    
+            } 
+            // For sale radio button
+            else if(isJobButton[1].checked){
+                newPost.is_job = false;
+            }
 
-        if(post.is_job == false){
+            if(featuredButton.checked){
+                newPost.is_featured = true;
+            }
+            else{
+                newPost.is_featured = false;
+            }
 
-        }
-        else{
+            const updatedPost = editPost (myAxios, newPost, postId);
 
-        }
+        });
     });
 
 

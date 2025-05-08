@@ -193,7 +193,7 @@ async function checkUserStatus() {
 
         const expired = await checkTokenExp();
 
-        // If the token is expired, it will have created a new one and will not need to auth here
+        // If the token is about to expire, it will have created a new one and will not need to auth here
         if(expired){
             var isLoggedIn = checkToken(sessionStorage.getItem('token'));
         }

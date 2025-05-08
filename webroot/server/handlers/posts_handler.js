@@ -11,7 +11,7 @@ const db = require('../db/post_db_functions.js');
 const {client} = require("../db/db");
 
 
-async function getAllPosts(){
+async function getAllPosts() {
     try{
         //const data = await 
     }catch(error){
@@ -20,7 +20,7 @@ async function getAllPosts(){
     }
 }
 
-async function getPostById(id){
+async function getPostById(id) {
     try{
         const data = await db.getPostById(id);
         return data;
@@ -30,7 +30,7 @@ async function getPostById(id){
     }
 }
 
-async function getJobPosts(){
+async function getJobPosts() {
     try{
         const data = await db.getJobPosts();
         return data;
@@ -40,7 +40,7 @@ async function getJobPosts(){
     }
 }
 
-async function getFeaturedPosts(){
+async function getFeaturedPosts() {
     try{
         const data = await db.getFeaturedPosts();
         return data;
@@ -70,7 +70,7 @@ async function getUserPosts(userId, type) {
     }
 }
 
-async function getForSalePosts(){
+async function getForSalePosts() {
     try{
         const data = await db.getForSalePosts();
         return data;
@@ -109,6 +109,33 @@ async function createNewPost(post) {
     }
 }
 
+async function editPost(post, postId) {
+        const editDate = new Date();
+
+        console.log(post)
+
+        const data = await db.editPost({
+            user_id : post.user_id,
+            created_by : post.created_by,
+            date_created : post.date_created,
+            time_created : post.time_created,
+            post_title : post.post_title,
+            type : post.type,
+            city : post.city,
+            state : post.state,
+            price : post.price,
+            post_views : 0,
+            is_job : post.is_job,
+            img : post.img,
+            post_content : post.post_content,
+            is_featured : post.is_featured,
+            tags: post.tags,
+            date_edited: `${editDate.getFullYear()}-${editDate.getMonth()+1}-${editDate.getDate()}`,
+            time_edited: `${editDate.getHours()}-${editDate.getMinutes()}-${editDate.getSeconds()}`
+        }, postId);
+        // I wanted to make a logging util, but I did not have enough time :'(
+}
+
 module.exports = {
     getAllPosts,
     getPostById,
@@ -117,5 +144,6 @@ module.exports = {
     getForSalePosts,
     createNewPost,
     getUserFeaturedPosts,
-    getUserPosts
+    getUserPosts,
+    editPost
 }

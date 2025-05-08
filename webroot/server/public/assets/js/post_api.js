@@ -152,7 +152,7 @@ async function addNewPost(Axios, data){
 }
 
 /*          PUT METHOD              */
-async function editPost(Axios, data){
+async function editPost(Axios, data, postId){
     try{
         let tags = await Axios.post('http://localhost:3000/api/tags/create', {
             content: {
@@ -165,20 +165,14 @@ async function editPost(Axios, data){
             }
         });
 
-        let post = await Axios.post(`http://localhost:3000/api/posts/user/${data.user_id}/newPost`, {
-            content: {
-                user_id : data.user_id,
-                created_by : data.created_by,
-                post_title : data.post_title,
-                type : data.type,
-                city : data.city,
-                state : data.state,
-                price : data.price,
-                is_job : data.is_job,
-                img : data.img,
-                post_content : data.post_content,
-                is_featured : data.is_featured, 
-                tags: tags.data.tags
+        // Add new tags
+        data.tags = tags.data.tags;
+
+        console.log(data);
+
+        let post = await Axios.put(`http://localhost:3000/api/posts/user/${data.user_id}/edit/${postId}`, {
+            content: { 
+                data 
             }
         },
         {
@@ -189,7 +183,7 @@ async function editPost(Axios, data){
 
             // TODO: Maybe a loading screen in here?
 
-            window.location.replace(`./itemDetail.html?id=${response.data}&type=f`);
+            window.location.replace(`./itemDetail.html?id=${postId}&type=f`);
         });
     }catch(error) {
         console.error('Error making post. \n' + error);

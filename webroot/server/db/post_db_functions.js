@@ -123,6 +123,22 @@ async function createNewPost(post) {
 
 }
 
+async function editPost(post, postId) {
+    try{
+
+        const query = { _id: new ObjectId(postId) };
+
+        const newPost = await client.db('GregsList').collection('Posts').replaceOne(query, post);
+
+        console.log(newPost);
+
+    }catch(error){
+        console.error('Error inserting post to database. \n        ' + error);
+        throw new Error('       Error inserting post to database. \n');
+    }
+
+}
+
 // Export all the functions that will be called outside of this file
 module.exports = {
     getRecentPosts,
@@ -133,5 +149,6 @@ module.exports = {
     createNewPost,
     getFeaturedPosts, 
     getUserFeaturedPosts,
-    getUserPosts
+    getUserPosts,
+    editPost
 }
