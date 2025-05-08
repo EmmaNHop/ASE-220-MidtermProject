@@ -19,7 +19,7 @@ function htmlBuilder(query, html) {
 
 async function getUserFeatured(Axios) {
     try {
-        const response = await myAxios.get(`/posts/user_posts/${username}?type=featured`, {}, {
+        const response = await Axios.get(`http://localhost:3000/api/posts/user_posts/${userId}`, {}, {
             headers: {
                 Authorization: 'Bearer ' + sessionStorage.getItem('token')
             }

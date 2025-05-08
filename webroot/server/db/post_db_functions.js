@@ -60,7 +60,6 @@ async function getFeaturedPosts() {
 async function getUserFeaturedPosts(id) {
     try {
         const posts = await client.db('GregsList').collection('Posts').find({user_id: id, is_featured: true}).toArray(); // or whatever your collection is named;
-        console.log(posts);
         return posts;
 
     } catch (error) {
@@ -72,11 +71,9 @@ async function getUserFeaturedPosts(id) {
 async function getUserPosts(userId, type) {
     try {
         if(type == "jobs") {
-            console.log("JOBS | TYPE:" + type);
             const posts = await client.db('GregsList').collection('Posts').find({user_id : userId, is_job: true}).toArray(); // or whatever your collection is named
             return posts;
         } else {
-            console.log("FORSALE | TYPE:" + type);
             const posts = await client.db('GregsList').collection('Posts').find({user_id : userId, is_job: false}).toArray();
             return posts
         }
