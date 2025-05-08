@@ -54,7 +54,7 @@ router.get('/user/:userid', async (req, res) => {
 
 router.post('/signup', async (req, res) => {
     try{
-        //console.log(req.body);
+        console.log(req.body);
         const content = req.body.content; 
 
         /*       Verify email         */

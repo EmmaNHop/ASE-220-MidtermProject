@@ -52,8 +52,8 @@ Content-Type: application/json
 {
     "content" : {
         "username": "TestUser",
-        "password": "!123ABC!",
-        "email":"asd@user.com",
+        "password": "!123aBC!",
+        "email":"TEST1@user.com",
         "number":"111-111-1111",
         "birthday":"01-01-2001"
     }
