@@ -327,11 +327,9 @@
     <script>
 
         // Check user logged status
-        function checkLoginStatus(){
-            if(sessionStorage.length > 0){
-                
-                checkTokenExp();
 
+        checkUserStatus().then(isLogged =>{
+            if(isLogged === true){
                 document.getElementById('user-state').innerHTML = 
                 `<a id="log-out" title="Log Out" href="">Log Out</a>`;
 
@@ -352,15 +350,17 @@
             else{
                 document.getElementById('user-state').innerHTML = 
                 `<a id="log-in" title="Log In" href="login.html">Login</a>`;
-                document.getElementById('my-account').innerHTML =
-                ``;
-
+                document.getElementById('my-account').innerHTML =``;
             }
-        }
+        });
 
-        checkLoginStatus();
-                                    // Two Min
-        setInterval(checkTokenExp(), 2*60*1000);
+        setInterval(async () => {
+            try{
+                checkTokenExp();
+            } catch(error) {
+                alert("Big MF issue");
+            }
+        }   , 2*60*1000); // Two Min
 
         var featuredLower = 0;
 

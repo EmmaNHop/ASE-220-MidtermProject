@@ -1,30 +1,5 @@
 import("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js");
 
-/*
-async function createNewUser(username, password, email, number, birthday) {
-/*async function createNewUser(username, password, email, number, birthday) {
-        try{
-        const response = await axios.post('http://localhost:3000/api/users/signup', {
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            content:{
-                username: username,
-                password: password,
-                email: email,
-                number: number,
-                birthday: birthday
-            }
-        }).then( function (response){
-            window.location.replace('./login.html');
-        });
-    } catch (error){
-        console.log(error);
-    }
-}
-*/
-
-
 async function createNewUser(username, password, email, number, birthday) {
     try {
         const response = await axios.post('http://localhost:3000/api/users/signup',
@@ -62,13 +37,22 @@ async function getExpFromToken(){
 
 // Check token experation to see if it is about to expire so the user can get a new one
 async function checkTokenExp(){
+    alert("Suprise Token Check!");
     if(sessionStorage.length > 0){
         const twoMin = 2 * 60 * 1000; // In milliseconds
         if (sessionStorage.getItem('token_exp') - Date.now() < twoMin){
-            reauthenticate();
+            if(!reauthenticate()){
+                alert("Error reauthenticating token");
+                sessionStorage.clear();
+                return false;
+            }
+            alert("Congrats you got a new token!");
             return true;
         }
         return false;
+    } else{
+        sessionStorage.clear();
+        alert("Naughty Naughty - You didn't have a token!");
     }
     // TODO: Throw error or something
 }
@@ -131,6 +115,8 @@ async function reauthenticate(){
             console.log(response);
             if(response.status === 200){
 
+                sessionStorage.clear();
+
                 sessionStorage.setItem('token', response.token);
                 sessionStorage.setItem('email', response.user.email);
 				sessionStorage.setItem('username', response.user.username)
@@ -141,8 +127,13 @@ async function reauthenticate(){
 
                 return;
             }
-
+            else{
+                return false;
+            }
         });
+        if(response === false){
+            return false;
+        }
     } catch(error){
         console.log(error)
     }
@@ -156,15 +147,16 @@ async function logout(token) {
             }
         }).then(function (response){
             if(response.status === 200){
+                sessionStorage.clear();
+                localStorage.clear();
                 return true;
             }
         });
-
         if(response === true){
             return true;
         }
     } catch(error){
-        alert(error);
+        //alert(error);
     }
 }
 
@@ -182,24 +174,29 @@ async function checkToken(token){
         if(response === true){
             return true;
         }
+        sessionStorage.clear();
+        localStorage.clear();
+
         return false;
     } catch(error){
-        alert(error);
+        sessionStorage.clear();
+        localStorage.clear();
+        alert('Your token has expired: \n', error);
+        console.error('Your token has expired: \n', error);
     }
 }
 
 async function checkUserStatus() {
-    if(sessionStorage.length < 0){
+    if(sessionStorage.length < 1){
 
         // Redundant ik but just in case
         sessionStorage.clear();
         localStorage.clear();
 
-        window.location.replace('./login.html');
+        //window.location.replace('./login.html');
         return false;
     }
-
-    else if(sessionStorage.getItem('token')){
+    else if(sessionStorage.getItem('token') !== null){
 
         const expired = await checkTokenExp();
 
@@ -218,7 +215,7 @@ async function checkUserStatus() {
         if(isLoggedIn === true){
             return true;
         }
-        window.location.replace('./login.html');
+        //window.location.replace('./login.html');
         return false;
     }
 

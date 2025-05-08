@@ -299,8 +299,13 @@
     <script src="assets/js/auth.js"></script>
     <script>
 
-                                    // Two Min
-        setInterval(checkTokenExp(), 2*60*1000);
+        setInterval(async () => {
+            try{
+                checkTokenExp();
+            } catch(error) {
+                alert("Big MF issue");
+            }
+        }   , 2*60*1000);// Two Min
 
         function htmlBuilder(query, html){
             let itemContainer = document.getElementById(query);

@@ -309,7 +309,7 @@
 		    // TODO: change page to reflect being logged in
 	    }
                                     // Two Min
-        setInterval(checkTokenExp(), 2*60*1000);
+        setInterval(checkTokenExp, 2*60*1000);
 
         function htmlBuilder(query, html){
             let itemContainer = document.getElementById(query);
