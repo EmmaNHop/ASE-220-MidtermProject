@@ -367,7 +367,6 @@
     <script src="assets/js/auth.js"></script>
 
     <script>
-
         checkUserStatus();
         setInterval(async () => {
             try{
@@ -377,10 +376,12 @@
             }
         }   , 2*60*1000); // Two Min
 
-        document.addEventListener("DOMContentLoaded", getUserFeatured);
 
+        // Makes axios passable
+        const myAxios = axios;
+        loadPage(myAxios)
 
-        const userId = sessionStorage.getItem('id');
+        //const userId = sessionStorage.getItem('id');
 
         document.addEventListener("DOMContentLoaded", function() {
             const username = sessionStorage.getItem('username');
