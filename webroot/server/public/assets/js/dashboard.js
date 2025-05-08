@@ -1,5 +1,5 @@
 const token = sessionStorage.getItem('token');
-const username = sessionStorage.getItem('username');
+const userId = sessionStorage.getItem('id');
 
 const myAxios = axios.create({}, {
     baseURL: 'http://localhost:3000/api',
@@ -17,46 +17,41 @@ function htmlBuilder(query, html) {
     }
 }
 
-async function getUserFeatured() {
+async function getUserFeatured(Axios) {
     try {
-        const response = await myAxios.get(`/posts/user_posts/${username}?type=featured`);
+        const response = await Axios.get(`http://localhost:3000/api/posts/user_posts/${userId}`);
         const posts = response.data;
 
         if (!Array.isArray(posts)) {
             console.error("Unexpected response format:", posts);
-            return;
         }
-
-        let html = "";
-        posts.forEach(post => {
-            html += `<div class="card"><h3>${post.post_title}</h3><p>${post.post_content}</p></div>`;
-        });
-
-        htmlBuilder("user_featured", html);
+        return posts;
     } catch (error) {
         console.error("Error fetching user featured posts:", error);
+        throw error;
     }
 }
 
 
 async function getUserJobs(Axios){
     try {
-        const response = await Axios.get('/api/posts/user-jobs');
+        const response = await Axios.get(`http://localhost:3000/api/posts/user-jobs/${userId}`);
         return response.data;
+        
     } catch (error) {
         console.error("Error fetching user featured posts:", error);
-        return [];
+        throw error;
     }
 }
 
 
 async function getUserForSale(Axios){
     try {
-        const response = await Axios.get('/api/posts/user_posts_for_sale');
+        const response = await Axios.get(`http://localhost:3000/api/posts/user_posts_for_sale/${userId}`);
         return response.data;
     } catch (error) {
         console.error("Error fetching user featured posts:", error);
-        return [];
+        throw error;
     }
 }
 

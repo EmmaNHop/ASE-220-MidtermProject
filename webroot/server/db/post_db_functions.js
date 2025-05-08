@@ -33,11 +33,11 @@ async function getPostById(id) {
     }
 }
 
-async function getPostsUserFeatured(username, type) {
+async function getPostsUserFeatured(userId, type) {
     try {
         const db = client.db('GregsList');
         const posts = await db.collection('Posts').find({
-            created_by: username,
+            user_id: userId,
             type: type
         }).toArray();
         return posts;
@@ -50,7 +50,6 @@ async function getPostsUserFeatured(username, type) {
 async function getFeaturedPosts() {
     try{
         const featured = await client.db('GregsList').collection('Posts').find({is_featured: true}).toArray();
-        console.log("featured array created" + featured);
         return featured;
     }catch(error){
         console.error('Error getting featured posts from database. \n       ' + error);
@@ -58,29 +57,29 @@ async function getFeaturedPosts() {
     }
 }
 
-async function getUserFeaturedPosts(username) {
+async function getUserFeaturedPosts(id) {
     try {
-        const collection = await db.getCollection('posts'); // or whatever your collection is named
-
-        const query = {
-            created_by: username,
-            is_featured: true // assuming there's a flag to identify featured posts
-        };
-
-        const posts = await collection.find(query).toArray();
+        const posts = await client.db('GregsList').collection('Posts').find({user_id: id, is_featured: true}).toArray(); // or whatever your collection is named;
+        console.log(posts);
         return posts;
 
     } catch (error) {
-        console.error("Error fetching user featured posts:", error);
-        throw error;
+        console.error("Error fetching user featured posts: \n", error);
+        throw new Error('       Error getting user\'s featured posts from database. \n');
     }
 }
 
-async function getUserPosts(username) {
+async function getUserPosts(userId, type) {
     try {
-        const posts = await db.getCollection('posts').find({created_by : username}).toArray(); // or whatever your collection is named
-        return posts;
-
+        if(type == "jobs") {
+            console.log("JOBS | TYPE:" + type);
+            const posts = await client.db('GregsList').collection('Posts').find({user_id : userId, is_job: true}).toArray(); // or whatever your collection is named
+            return posts;
+        } else {
+            console.log("FORSALE | TYPE:" + type);
+            const posts = await client.db('GregsList').collection('Posts').find({user_id : userId, is_job: false}).toArray();
+            return posts
+        }
     } catch (error) {
         console.error("Error fetching user featured posts:", error);
         throw error;
