@@ -108,3 +108,8 @@ Content-Type: application/json
 }
 
 ###
+
+POST http://localhost:3000/api/users/reauth
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoidGVzdEB1c2VyLmNvbSIsInVzZXJuYW1lIjoiVGVzdFVzZXIiLCJpZCI6IjY4MTU1NDgzZWM4OTAwY2NmNGU1MjNhZiJ9LCJpYXQiOjE3NDY3MTg4ODUsImV4cCI6MTc0NjcxOTE4NX0.O9jteydIWMlRhBWwKN-JFL246K-R9UbjtZWtUpHi6LE
+
+###

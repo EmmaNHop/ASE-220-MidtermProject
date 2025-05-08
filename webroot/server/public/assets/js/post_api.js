@@ -99,8 +99,20 @@ async function getUserJobs(Axios, user){
 
 async function addNewPost(Axios, data){
     try{
+        let tags = await Axios.post('http://localhost:3000/api/tags/create', {
+            content: {
+                post_content : data.post_content
+            }
+        }, 
+        {
+            headers: {
+                Authorization: 'Bearer ' + sessionStorage.getItem('token')
+            }
+        });
+
+        console.log(tags.data.tags);
+
         let post = await Axios.post('http://localhost:3000/api/posts/post', {
-            header: {'Content-Type': 'application/json'}, 
             content: {
                 user_id : data.user_id,
                 created_by : data.created_by,
@@ -112,347 +124,19 @@ async function addNewPost(Axios, data){
                 is_job : data.is_job,
                 img : data.img,
                 post_content : data.post_content,
-                is_featured : data.is_featured 
+                is_featured : data.is_featured, 
+                tags: tags.data.tags
+            }
+        },
+        {
+            headers: {
+                Authorization: 'Bearer ' + sessionStorage.getItem('token')
             }
         }).then( function (response){
             console.log(response);
-            //the post page
-            //window.location.replace('./login.html');
         });
     }catch(error) {
         console.error('Error making post. \n' + error);
         throw new Error('       Error making post. \n');
     }
 }
-
-async function addNewForSale(Axios, data){
-
-}
-
-async function addNewFeaturedPost(Axios, data){
-
-}
-
-async function addNewCommonJob(Axios, data){
-
-}
-
-async function addNewFeaturedJob(Axios, data){
-
-}
-
-async function addForSaleByID(Axios, data){
-
-}
-
-async function addJobByID(Axios, data){
-
-}
-
-/*
-
-async function getForSale(Axios, lowerLimit, upperLimit){
-
-    try{
-        const response = await Axios.get(posts_URL, {});
-        //console.log(response.data.posts);
-
-        var forSale = [];
-
-        for(let i = lowerLimit; i < upperLimit; i++){
-
-            //console.log(response.data.json.for_sale[i]);
-
-            if(response.data.json.for_sale[i] == undefined){
-                return forSale;
-            }
-
-            forSale.push(response.data.json.for_sale[i]);
-        }
-
-        return response.data.json.for_sale;
-    }
-    catch(error){
-        console.log(error);
-    }
-}
-
-async function getForSaleByID(Axios, id){
-    
-    try{
-        const response = await Axios.get(posts_URL, {});
-
-        return response.data.json.for_sale[id];
-    }
-    catch(error){
-        console.log(error);
-    }
-}
-
-async function getJobs(Axios, lowerLimit, upperLimit){
-    
-    try{
-        const response = await Axios.get(posts_URL, {});
-        //console.log(response.data.json.job);
-
-        var jobs = [];
-
-        for(let i = lowerLimit; i < upperLimit; i++){
-
-            //console.log(response.data.json.job[i]);
-
-            if(response.data.json.job[i] == undefined){
-                return jobs;
-            }
-
-            jobs.push(response.data.json.job[i]);
-        }
-
-        //console.log(jobs);
-
-        return jobs;
-    }
-    catch(error){
-        console.log(error);
-    }
-}
-
-async function getUserJobs(Axios, lowerLimit, upperLimit){
-    
-    try{
-        const response = await Axios.get(posts_URL, {});
-        //console.log(response.data.json.job);
-
-
-        return response.data.json.jobs;
-
-    }
-    catch(error){
-        console.log(error);
-    }
-}
-
-async function getJobByID(Axios, id){
-    
-    try{
-        const response = await Axios.get(posts_URL, {});
-
-        return response.data.json.job[id];
-    }
-    catch(error){
-        console.log(error);
-    }
-}
-
-async function getFeaturedPosts(Axios){
-    
-    try{
-        const response = await Axios.get(posts_URL, {});
-        //console.log(response.data.featured);
-        return response.data.json.featured;
-    }
-    catch(error){
-        console.log(error);
-    }
-}
-
-async function getFeaturedByID(Axios, id){
-    
-    try{
-        const response = await Axios.get(posts_URL, {});
-
-        return response.data.json.featured[id];
-    }
-    catch(error){
-        console.log(error);
-    }
-}
-
-async function getUserFeatured(Axios){
-    try{
-        const response = await Axios.get(posts_URL, {});
-        //console.log(response.data.json.featured);
-        var userFeatured = [];
-        var featured = response.data.json.featured;
-
-        featured.forEach(feature => {
-            if(feature.created_by == localStorage.getItem('username')){
-                userFeatured.push(feature);
-            }
-        });
-        return userFeatured;
-    }
-    catch(error){
-        console.log(error);
-    }
-}
-
-async function getUserJobs(Axios){
-    try{
-        const response = await Axios.get(posts_URL, {});
-        //console.log(response.data.json.job);
-        var userJobs = [];
-        var jobs = response.data.json.job;
-
-        jobs.forEach(job => {
-            if(job.created_by == localStorage.getItem('username')){
-                userJobs.push(job);
-            }
-
-        });
-        return userJobs;
-    }
-    catch(error){
-        console.log(error);
-    }
-}
-
-async function getUserForSale(Axios){
-    try{
-        var userPosts = [];
-        const response = await Axios.get(posts_URL, {});
-        //console.log(response.data.posts);
-        var posts = response.data.json.for_sale;
-
-
-        posts.forEach((post) => 
-            userPosts.push(post)
-        )
-        return userPosts;
-    }
-    catch(error){
-        console.log(error);
-    }
-}
-
-//          END GET METHODS     //
-
-
-
-//          PUT METHODS        //
-
-async function addNewForSale(Axios, data){
-
-    try{
-        fullJson = getAll(Axios)
-        .then(json => {
-
-            //console.log(json.for_sale[json.for_sale.length-1]);
-
-            data.id = json.for_sale.length;
-
-            json.for_sale.push(data);
-
-            const response = Axios.put(posts_URL, {json});
-            //posts_URL = response.headers.location;
-
-        })
-        //console.log(posts_URL);
-    }
-    catch(error){
-        alert(console.log(error));
-    }
-    
-
-}
-
-async function addNewFeaturedPost(Axios, data){
-
-    try{
-        fullJson = getAll(Axios)
-        .then(json => {
-
-            data.id = json.featured.length;
-
-            json.for_sale.push(data);
-
-            const response = Axios.put(posts_URL, {json});
-            //posts_URL = response.headers.location;
-
-        })
-    }
-    catch(error){
-        alert(console.log(error));
-    }
-}
-
-async function addNewCommonJob(Axios, data){
-
-    try{
-        fullJson = getAll(Axios)
-        .then(json => {
-
-            data.id = json.job.length;
-
-            json.job.push(data);
-
-            const response = Axios.put(posts_URL, {json});
-            //posts_URL = response.headers.location;
-
-        })
-    }
-    catch(error){
-        alert(console.log(error));
-    }
-}
-
-async function addNewFeaturedJob(Axios, data){
-
-    try{
-        fullJson = getAll(Axios)
-        .then(json => {
-
-
-            json.featured[data.id] = data;
-
-            const response = Axios.put(posts_URL, {json});
-            //posts_URL = response.headers.location;
-
-        })
-        const response = await Axios.put(posts_URL, {data});
-        posts_URL = response.headers.location;
-        //console.log(posts_URL);
-        }
-    catch(error){
-        alert(console.log(error));
-    }
-    
-
-}
-
-async function addForSaleByID(Axios, data){
-    try{
-        fullJson = getAll(Axios)
-        .then(json => {
-
-            json.for_sale[data.id] = data;
-
-            const response = Axios.put(posts_URL, {json});
-            //posts_URL = response.headers.location;
-
-        })
-        //console.log(posts_URL);
-    }
-    catch(error){
-        alert(console.log(error));
-    }
-}
-
-async function addJobByID(Axios, data){
-    try{
-        fullJson = getAll(Axios)
-        .then(json => {
-
-            json.job[data.id] = data;
-
-            const response = Axios.put(posts_URL, {json});
-            //posts_URL = response.headers.location;
-
-        })
-    }
-    catch(error){
-        alert(console.log(error));
-    }
-}
-
-*/

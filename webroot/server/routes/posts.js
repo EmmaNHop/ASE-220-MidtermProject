@@ -42,7 +42,6 @@ router.get('/', async (req, res) => {
             res.status(200).send(content);
         } else{
             content = await cache.readFromServerCache();
-            console.log(content);
             return res.status(200).json(content);
         }
     } catch(error){
@@ -60,8 +59,6 @@ router.get('/id/:id', async (req, res) =>{
             return res.status(400).json({ error: ` Invalid Object ID: ${id}`});
         }
         let post = await postHandler.getPostById(req.params.id);
-        console.log("Route");
-        console.log(post);
         res.status(200).json(post);
     } catch(error){
         console.error(error);
@@ -156,6 +153,7 @@ router.get('/jobs', async (req, res) => {
 //creates a post
 router.post('/post', async (req, res) => {
     try{
+
         const content = await postHandler.createNewPost(req.body.content);
 
         return res.status(200).send(content);
@@ -169,7 +167,6 @@ router.post('/post', async (req, res) => {
 //get user posts
 router.get('/user_posts/:username', async (req, res) => {
     try {
-        console.log(`getUserPosts(${req.params})`);
         const { username } = req.params;
         const content = await postHandler.getUserPosts(username);
 

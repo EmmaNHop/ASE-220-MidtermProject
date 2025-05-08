@@ -105,7 +105,8 @@ async function createNewPost(post) {
             is_job : post.is_job,
             img : post.img,
             post_content : post.post_content,
-            is_featured : post.is_featured
+            is_featured : post.is_featured,
+            tags: post.tags
         });
 
         return data;
