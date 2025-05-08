@@ -19,9 +19,19 @@ const { ObjectId } = require('mongodb');
 
 
 router.get('/chat/:chatid', async (req, res) => {
-    console.log(req.params.chatid);
-
     try{
+        console.log(req.params.chatid);
+
+        const token = req.headers.authorization;
+        
+        const authenticated = await auth.authenticateUser(token);
+        
+        if(!authenticated){
+            console.log('User unauthorized');
+            res.status(401).json({ error: 'Unauthorized Access! '});
+            return;
+        };
+
         if(!ObjectId.isValid(req.params.chatid)){
             console.error(` Invalid Object ID: ${id}`);
             return res.status(400).json({ error: ` Invalid Object ID: ${id}`});
@@ -37,6 +47,17 @@ router.get('/chat/:chatid', async (req, res) => {
 
 router.get('/:userid', async (req, res) => {
     try{
+
+        const token = req.headers.authorization;
+        
+        const authenticated = await auth.authenticateUser(token);
+        
+        if(!authenticated){
+            console.log('User unauthorized');
+            res.status(401).json({ error: 'Unauthorized Access! '});
+            return;
+        };
+
         if(!ObjectId.isValid(req.params.userid)){
             console.error(` Invalid Object ID: ${id}`);
             return res.status(400).json({ error: ` Invalid Object ID: ${id}`});

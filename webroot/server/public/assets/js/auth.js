@@ -108,35 +108,29 @@ async function authenticate(email, password) {
 
 async function reauthenticate(){
     try{
-        const response = axios.post('http://localhost:3000/api/users/reauth', {}, {
+        const response = await axios.post('http://localhost:3000/api/users/reauth', {}, {
             headers: {
                 'Authorization':'Bearer ' + sessionStorage.getItem('token')
             }
-        }).then(function (response) {
-            console.log(response);
-            if(response.status === 200){
-
-                sessionStorage.clear();
-
-                sessionStorage.setItem('token', response.token);
-                sessionStorage.setItem('email', response.user.email);
-				sessionStorage.setItem('username', response.user.username)
-				sessionStorage.setItem('id', response.user.id);
-
-                // Decode token to get Exp time
-                getExpFromToken();
-
-                return true;
-            }
-            else{
-                return false;
-            }
-
         });
-        if(response === false){
+        console.log(response.data);
+        if(response.status === 200){
+
+            sessionStorage.clear();
+
+            sessionStorage.setItem('token', response.data.returnObj.token);
+            sessionStorage.setItem('email', response.data.returnObj.user.email);
+			sessionStorage.setItem('username', response.data.returnObj.user.username)
+			sessionStorage.setItem('id', response.data.returnObj.user.id);
+
+            // Decode token to get Exp time
+            getExpFromToken();
+
+            return true;
+        }
+        else{
             return false;
         }
-        return true;
     } catch(error){
         console.log(error)
     }

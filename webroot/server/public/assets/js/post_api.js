@@ -106,7 +106,7 @@ async function addNewPost(Axios, data){
         }, 
         {
             headers: {
-                Authorization: 'Bearer ' + sessionStorage.getItem('token')
+                Authorization:'Bearer ' + sessionStorage.getItem('token')
             }
         });
 

@@ -51,7 +51,6 @@ router.get('/', async (req, res) => {
 });
 
 // Gets a post by ID
-
 router.get('/id/:id', async (req, res) =>{
     try{
         if(!ObjectId.isValid(req.params.id)){
@@ -69,6 +68,17 @@ router.get('/id/:id', async (req, res) =>{
 
 // Gets user's featured posts 
 router.get('/user_posts/:username', async (req, res) => {
+
+    const token = req.headers.authorization;
+    
+    const authenticated = await auth.authenticateUser(token);
+    
+    if(!authenticated){
+        console.error('User unauthorized');
+        res.status(401).json({ error: 'Unauthorized Access! '});
+        return;
+    };
+
     const { username } = req.params;
     const { type } = req.query;
 
@@ -154,6 +164,16 @@ router.get('/jobs', async (req, res) => {
 router.post('/post', async (req, res) => {
     try{
 
+        const token = req.headers.authorization;
+    
+        const authenticated = await auth.authenticateUser(token);
+    
+        if(!authenticated){
+            console.error('User unauthorized');
+            res.status(401).json({ error: 'Unauthorized Access! '});
+            return;
+        };
+
         const content = await postHandler.createNewPost(req.body.content);
 
         return res.status(200).send(content);
@@ -167,6 +187,17 @@ router.post('/post', async (req, res) => {
 //get user posts
 router.get('/user_posts/:username', async (req, res) => {
     try {
+
+        const token = req.headers.authorization;
+    
+        const authenticated = await auth.authenticateUser(token);
+    
+        if(!authenticated){
+            console.error('User unauthorized');
+            res.status(401).json({ error: 'Unauthorized Access! '});
+            return;
+        };
+        
         const { username } = req.params;
         const content = await postHandler.getUserPosts(username);
 
