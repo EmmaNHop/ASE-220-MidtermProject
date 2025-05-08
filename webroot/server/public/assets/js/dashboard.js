@@ -21,8 +21,8 @@ async function getUserFeatured(Axios) {
     try {
         const response = await Axios.get(`http://localhost:3000/api/posts/user_posts/${userId}`, {}, {
             headers: {
-                Authorization: 'Bearer ' + sessionStorage.getItem('token')
-            }
+                'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+              }
         });
         const posts = response.data;
 

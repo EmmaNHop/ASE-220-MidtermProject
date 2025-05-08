@@ -14,6 +14,8 @@ const postHandler = require('../handlers/posts_handler');
 const cache = require('../cache/cache_functions');
 const { ObjectId } = require('mongodb');
 
+const auth = require('../middleware/auth');
+
 
 /*      ENDPOINTS       */
 
@@ -70,6 +72,8 @@ router.get('/id/:id', async (req, res) =>{
 router.get('/user_posts/:userId', async (req, res) => {
 
     const token = req.headers.authorization;
+    console.log("TOKEN: " + req.headers.authorization);
+    console.log("ALL: ", req.headers);
     
     const authenticated = await auth.authenticateUser(token);
     

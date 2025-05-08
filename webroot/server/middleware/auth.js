@@ -3,7 +3,6 @@ const JWT = require('../utils/jwt.js');
 
 async function authenticateUser(token){
     try{
-
         const splitToken = token.split(' ')[1];
 
         const data = JWT.verifyToken(splitToken);
