@@ -30,12 +30,51 @@ async function getPostById(id){
     }
 }
 
-async function getUserPostsFeatured(username, type) {
+async function getJobPosts(){
+    try{
+        const data = await db.getJobPosts();
+        return data;
+    }catch(error){
+        console.error('Error handling for featured posts. \n' + error);
+        throw new Error('       Error handling for featured posts. \n');
+    }
+}
+
+async function getFeaturedPosts(){
+    try{
+        const data = await db.getFeaturedPosts();
+        return data;
+    }catch(error){
+        console.error('Error handling for featured posts. \n' + error);
+        throw new Error('       Error handling for featured posts. \n');
+    }
+}
+
+async function getUserFeaturedPosts(username, type) {
+    /* Why doesn't this have a try block? Also, this is not a user function why would we need a missing params message?
     if (!username || !type) {
         throw new Error('Missing username or type');
     }
 
-    return await postDB.getUserFeaturedPosts(username, type);
+    return await postDB.getUserFeaturedPosts(username, type);*/
+
+    try{
+        const data = await postDB.getUserFeaturedPosts(username, type);
+        return data;
+    }catch(error){
+        console.error('Error handling for user\'s featured posts. \n' + error);
+        throw new Error('       Error handling for user\'s featured posts. \n');
+    }
+}
+
+async function getUserPosts(username) {
+    try{
+        const data = await postDB.getUserPosts(username);
+        return data;
+    }catch(error){
+        console.error('Error handling for user\'s featured posts. \n' + error);
+        throw new Error('       Error handling for user\'s featured posts. \n');
+    }
 }
 
 async function getForSalePosts(){
@@ -79,8 +118,10 @@ async function createNewPost(post) {
 module.exports = {
     getAllPosts,
     getPostById,
+    getJobPosts,
     getFeaturedPosts,
     getForSalePosts,
     createNewPost,
-    getUserPostsFeatured
+    getUserFeaturedPosts,
+    getUserPosts
 }

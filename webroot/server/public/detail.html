@@ -544,7 +544,7 @@
          */
         function writeForSale(lower){
                                                  // 5 per page
-            let commonPost = getForSale(myAxios, lower, lower+5)
+            getForSale(myAxios, lower, lower+5)
             // This waits for the promise then plucks the array (posts) will treat the data in the html constructor as an array
             .then(posts => { 
                 var html = "";
@@ -617,7 +617,7 @@
 
 
         featuredLower = writeFeatured(featuredLower);
-        jobLower -writeJobs(jobLower);
+        jobLower = writeJobs(jobLower);
         forSaleLower = writeForSale(forSaleLower);
 
         document.getElementById('load_more_featured').addEventListener('click', function(){

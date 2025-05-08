@@ -48,33 +48,42 @@ async function getPostsUserFeatured(username, type) {
 }
 
 async function getFeaturedPosts() {
-    /*try{
+    try{
         const featured = await client.db('GregsList').collection('Posts').find({is_featured: true}).toArray();
         console.log("featured array created" + featured);
         return featured;
     }catch(error){
         console.error('Error getting featured posts from database. \n       ' + error);
         throw new Error('       Error getting featured posts from database. \n');
-    }*/
+    }
+}
 
-    const db = require('../db/db'); // adjust this to match how you connect to your DB
+async function getUserFeaturedPosts(username) {
+    try {
+        const collection = await db.getCollection('posts'); // or whatever your collection is named
 
-    async function getUserFeaturedPosts(username) {
-        try {
-            const collection = await db.getCollection('posts'); // or whatever your collection is named
+        const query = {
+            created_by: username,
+            is_featured: true // assuming there's a flag to identify featured posts
+        };
 
-            const query = {
-                created_by: username,
-                is_featured: true // assuming there's a flag to identify featured posts
-            };
+        const posts = await collection.find(query).toArray();
+        return posts;
 
-            const posts = await collection.find(query).toArray();
-            return posts;
+    } catch (error) {
+        console.error("Error fetching user featured posts:", error);
+        throw error;
+    }
+}
 
-        } catch (error) {
-            console.error("Error fetching user featured posts:", error);
-            throw error;
-        }
+async function getUserPosts(username) {
+    try {
+        const posts = await db.getCollection('posts').find({created_by : username}).toArray(); // or whatever your collection is named
+        return posts;
+
+    } catch (error) {
+        console.error("Error fetching user featured posts:", error);
+        throw error;
     }
 }
 
@@ -132,5 +141,7 @@ module.exports = {
     getForSalePosts,
     getJobPosts,
     createNewPost,
-    getUserFeaturedPosts
+    getFeaturedPosts, 
+    getUserFeaturedPosts,
+    getUserPosts
 }

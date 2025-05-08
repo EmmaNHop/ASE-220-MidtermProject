@@ -70,17 +70,28 @@ router.get('/id/:id', async (req, res) =>{
 });
 
 
-// Gets featured posts 
+// Gets user's featured posts 
 router.get('/user_posts/:username', async (req, res) => {
     const { username } = req.params;
     const { type } = req.query;
 
     try {
-        const posts = await postHandler.getUserPostsFeatured(username, type);
+        const posts = await postHandler.getUserFeaturedPosts(username, type);
         res.status(200).json(posts);
     } catch (err) {
         console.error(err);
-        res.status(500).json({ error: 'Failed to get user posts.' });
+        res.status(500).json({ error: 'Failed to get user\'s featured posts.' });
+    }
+});
+
+// Gets featured posts 
+router.get('/featured', async (req, res) => {
+    try {
+        const posts = await postHandler.getFeaturedPosts();
+        res.status(200).json(posts);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Failed to get featured posts.' });
     }
 });
 
@@ -114,7 +125,7 @@ router.get('/for_sale', async (req, res) => {
 });
 
 // Gets job posts
-router.get('/job', async (req, res) => {
+router.get('/jobs', async (req, res) => {
 
     const { filter } = req.query;
 
@@ -132,7 +143,7 @@ router.get('/job', async (req, res) => {
             res.status(200).send(content);
         } else{
             
-            const content = await postHandler.getForSalePosts();
+            const content = await postHandler.getJobPosts();
 
             return res.status(200).send(content);
         }
@@ -156,10 +167,11 @@ router.post('/post', async (req, res) => {
 });
 
 //get user posts
-router.get('/user_featured', async (req, res) => {
+router.get('/user_posts/:username', async (req, res) => {
     try {
-        const { username } = req.query;
-        const content = await postHandler.getFeaturedPosts(username);
+        console.log(`getUserPosts(${req.params})`);
+        const { username } = req.params;
+        const content = await postHandler.getUserPosts(username);
 
         if (!content) {
             return res.status(404).json({ error: 'No posts found for user.' });
