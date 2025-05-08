@@ -1,12 +1,4 @@
-const token = sessionStorage.getItem('token');
 const userId = sessionStorage.getItem('id');
-
-const myAxios = axios.create({}, {
-    baseURL: 'http://localhost:3000/api',
-    headers: {
-        Authorization: `Bearer ${token}`
-    }
-});
 
 function htmlBuilder(query, html) {
     const container = document.getElementById(query);
@@ -17,11 +9,11 @@ function htmlBuilder(query, html) {
     }
 }
 
-async function getUserFeatured(Axios) {
+async function getUserFeatured(Axios, userId) {
     try {
         const response = await Axios.get(`http://localhost:3000/api/posts/user_posts/${userId}`, {}, {
             headers: {
-                Authorization: 'Bearer ' + sessionStorage.getItem('token')
+                'Authorization': 'Bearer ' + sessionStorage.getItem('token')
             }
         });
         const posts = response.data;
@@ -59,21 +51,9 @@ async function getUserForSale(Axios){
     }
 }
 
-//start test
-/*getUserFeatured(myAxios)
-    .then(response => {
-        console.log("Raw response from getUserFeatured:", response);
-
-        // If it's nested under data, extract it:
-        const userFeatured = Array.isArray(response) ? response : response?.data;
-
-        if (!Array.isArray(userFeatured)) {
-            console.error("userFeatured is not defined or not an array", userFeatured);
-            return;
-        }*/
-document.addEventListener("DOMContentLoaded", function () {
+function loadPage (Axios) {
     // Fetch and render user featured posts
-    getUserFeatured(myAxios).then(userFeatured => {
+    getUserFeatured(Axios).then(userFeatured => {
         let html = "";
         if (Array.isArray(userFeatured)) {
             userFeatured.forEach(featured => {
@@ -97,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // Fetch and render user jobs
-    getUserJobs(myAxios).then(userJobs => {
+    getUserJobs(Axios).then(userJobs => {
         let html = "";
         userJobs.forEach(job => {
             let htmlSegment = `
@@ -119,7 +99,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // Fetch and render user posts for sale
-    getUserForSale(myAxios).then(userPosts => {
+    getUserForSale(Axios).then(userPosts => {
         let html = "";
         userPosts.forEach(post => {
             let htmlSegment = `
@@ -139,7 +119,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
         htmlBuilder("user_for_sale", html);
     });
-});
+}
 // DELETE BUTTONS
 document.querySelector('#user_featured').addEventListener('click', (event) => {
     console.log(event.target.closest('a').dataset.id);
