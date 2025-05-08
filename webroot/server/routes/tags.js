@@ -85,8 +85,6 @@ router.post('/create', (req, res) => {
 
         content = JSON.parse(content);
 
-        console.log(content);
-
         res.status(201).json(content);
 
     })();

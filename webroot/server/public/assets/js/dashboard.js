@@ -11,8 +11,7 @@ function htmlBuilder(query, html) {
 
 async function getUserFeatured(Axios, userId) {
     try {
-        console.log(sessionStorage.getItem('token'));
-        const response = await Axios.get(`http://localhost:3000/api/posts/user_posts/${userId}`, {
+        const response = await Axios.get(`http://localhost:3000/api/posts/user/featured/${userId}`, {
             headers: {
                 'Authorization':'Bearer ' + sessionStorage.getItem('token')
             }
@@ -32,7 +31,7 @@ async function getUserFeatured(Axios, userId) {
 
 async function getUserJobs(Axios){
     try {
-        const response = await Axios.get(`http://localhost:3000/api/posts/user-jobs/${userId}`);
+        const response = await Axios.get(`http://localhost:3000/api/posts/user/jobs/${userId}`);
         return response.data;
         
     } catch (error) {
@@ -44,7 +43,7 @@ async function getUserJobs(Axios){
 
 async function getUserForSale(Axios){
     try {
-        const response = await Axios.get(`http://localhost:3000/api/posts/user_posts_for_sale/${userId}`);
+        const response = await Axios.get(`http://localhost:3000/api/posts/user/for_sale/${userId}`);
         return response.data;
     } catch (error) {
         console.error("Error fetching user featured posts:", error);
@@ -59,12 +58,12 @@ function loadPage (Axios) {
         if (Array.isArray(userFeatured)) {
             userFeatured.forEach(featured => {
                 let htmlSegment = `
-                    <div id="${featured.id}" class="card product-report">
+                    <div id="${featured._id}" class="card product-report">
                         <div class="header">
                             <h2>${featured.post_title} <small>Posted: ${featured.date_created}</small></h2>
                             <ul class="header-dropdown">
-                                <li><a href="edit.html?id=${featured.id}">Edit</a></li>
-                                <li><a class="delete_user_featured" data-value="${featured.id}">Delete</a></li>
+                                <li><a href="edit.html?id=${featured._id}">Edit</a></li>
+                                <li><a class="delete_user_featured" data-value="${featured._id}">Delete</a></li>
                             </ul>
                         </div>
                         <div class="body">
@@ -82,12 +81,12 @@ function loadPage (Axios) {
         let html = "";
         userJobs.forEach(job => {
             let htmlSegment = `
-                <div id="${job.id}" class="card product-report">
+                <div id="${job._id}" class="card product-report">
                     <div class="header">
                         <h2>${job.post_title} <small>Posted: ${job.date_created}</small></h2>
                         <ul class="header-dropdown">
-                            <li><a href="edit.html?id=${job.id}">Edit</a></li>
-                            <li><a class="delete_user_job" data-value="${job.id}">Delete</a></li>
+                            <li><a href="edit.html?id=${job._id}">Edit</a></li>
+                            <li><a class="delete_user_job" data-value="${job._id}">Delete</a></li>
                         </ul>
                     </div>
                     <div class="body">
@@ -104,12 +103,12 @@ function loadPage (Axios) {
         let html = "";
         userPosts.forEach(post => {
             let htmlSegment = `
-                <div id="${post.id}" class="card product-report">
+                <div id="${post._id}" class="card product-report">
                     <div class="header">
                         <h2>${post.post_title} <small>Posted: ${post.date_created}</small></h2>
                         <ul class="header-dropdown">
-                            <li><a href="edit.html?id=${post.id}">Edit</a></li>
-                            <li><a class="delete_user_for_sale" data-value="${post.id}">Delete</a></li>
+                            <li><a href="edit.html?id=${post._id}">Edit</a></li>
+                            <li><a class="delete_user_for_sale" data-value="${post._id}">Delete</a></li>
                         </ul>
                     </div>
                     <div class="body">
@@ -123,7 +122,7 @@ function loadPage (Axios) {
 }
 // DELETE BUTTONS
 document.querySelector('#user_featured').addEventListener('click', (event) => {
-    console.log(event.target.closest('a').dataset.id);
+    console.log(event.target.closest('a').dataset._id);
 })
 
 document.querySelector('#user_featured').addEventListener('click', (event) => {

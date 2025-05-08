@@ -239,7 +239,7 @@
                     <div class="col-lg-12 col-md-12">
                         <div class="card product-report">
                             <div class="header">
-                                <h3>Create Post:</h3>
+                                <h3>Edit Post:</h3>
                             </div>
                             <div class="body">
                                 <form id="edit_post">    
@@ -338,107 +338,35 @@
             } catch(error) {
                 alert("Big MF issue");
             }
-        }   , 2*60*1000); // Two Min
+        }, 2*60*1000); // Two Min
 
     const urlParams = new URLSearchParams(window.location.search);
     const postId = urlParams.get('id');
-    const type = urlParams.get('type');
-
 
     const form = document.getElementById('edit_post');
-    const userName = localStorage.getItem('username');
 
-    console.log(postId);
-    console.log(type);
+    const userId = sessionStorage.getItem('id');
+    const token = sessionStorage.getItem('token');
 
     // Makes axios passable
     const myAxios = axios;
 
-    var post = {};
-    // If Featured
-    if(type == 'f'){
-        getFeaturedPosts(myAxios, 1000, 1000)
+    var post = getPostById(myAxios, postId).then(userPost => {
 
-        .then(featuredPosts => {
+        userPost = userPost.data;
 
-            feature = featuredPosts[postId];
-
-            document.querySelector('#title').setAttribute('value', feature.post_title);
-            document.querySelector('#content').setAttribute('value', feature.post_content);
-            document.querySelector('#type').setAttribute('value', feature.type);
-            document.querySelector('#picture').setAttribute('value', feature.img);
-            document.querySelector('#city').setAttribute('value', feature.city);
-            document.querySelector('#state').setAttribute('value', feature.state);
-            document.querySelector('#price').setAttribute('value', feature.price);
-            document.querySelector('#is_job').setAttribute('checked', feature.is_job);
-
-
-        });
-    }
-    // If Job
-
-    else if(type == 'j'){   // not permanent
-        getUserJobs(myAxios, 1000, 1000)
-        .then(jobs => {
-
-            job = jobs[postId];
-
-            document.querySelector('#title').setAttribute('value', job.post_title);
-            document.querySelector('#content').setAttribute('value', job.post_content);
-            document.querySelector('#type').setAttribute('value', job.type);
-            document.querySelector('#picture').setAttribute('value', job.img);
-            document.querySelector('#city').setAttribute('value', job.city);
-            document.querySelector('#state').setAttribute('value', job.state);
-            document.querySelector('#price').setAttribute('value', job.price);
-            document.querySelector('#is_job').setAttribute('checked', true);
-
-        });
-
-    }
-    // If For Sale
-    else if(type == 's'){
-        getForSale(myAxios, 10000000, 100000000000)
-
-        .then(for_sale_posts => {
-
-            for_sale = for_sale_posts[postId];
-
-            document.querySelector('#title').setAttribute('value', for_sale.post_title);
-            document.querySelector('#content').setAttribute('value', for_sale.post_content);
-            document.querySelector('#type').setAttribute('value', for_sale.type);
-            document.querySelector('#picture').setAttribute('value', for_sale.img);
-            document.querySelector('#city').setAttribute('value', for_sale.city);
-            document.querySelector('#state').setAttribute('value', for_sale.state);
-            document.querySelector('#price').setAttribute('value', for_sale.price);
-            document.querySelector('#is_job').setAttribute('checked', false);
+        document.querySelector('#title').setAttribute('value', userPost.post_title);
+        document.querySelector('#content').setAttribute('value', userPost.post_content);
+        document.querySelector('#type').setAttribute('value', userPost.type);
+        document.querySelector('#picture').setAttribute('value', userPost.img);
+        document.querySelector('#city').setAttribute('value', userPost.city);
+        document.querySelector('#state').setAttribute('value', userPost.state);
+        document.querySelector('#price').setAttribute('value', userPost.price);
+        document.querySelector('#is_job').setAttribute('checked', userPost.is_job);
 
     });
 
-}
-
-        // For time stamps
-    const date = new Date();
-
-        /*
-        var post = {
-                "id" : "",
-                "created_by" : "",//data.created_by,  
-                "date_created" : date.getFullYear() + "-" + parseInt(date.getMonth() + 1) + "-" + date.getDate(),
-                "time_created" : date.getHours() + "-" + date.getMinutes() + "-" + date.getSeconds(),
-                "post_title" : post_title,
-                "post_content" : post_content,
-                "img" : img,
-                "type" : type,
-                "city" : city,
-                "state" : state,
-                "price" : price,
-                "post_views" : 0,
-                "is_job" : ""
-            };
-        */
-
      document.getElementById('edit_post_button').addEventListener('click', function() {
-
 
         const post_title = form.elements.title.value;
         const post_content = form.elements.content.value;
@@ -452,8 +380,6 @@
         post = {
             "id" : postId,
             "created_by" : userName,  
-            "date_created" : date.getFullYear() + "-" + parseInt(date.getMonth() + 1) + "-" + date.getDate(),
-            "time_created" : date.getHours() + "-" + date.getMinutes() + "-" + date.getSeconds(),
             "post_title" : post_title,
             "post_content" : post_content,
             "img" : img,
@@ -479,27 +405,12 @@
         }
 
         if(post.is_job == false){
-            if(featuredButton[0].checked){
-                addNewFeaturedPost(myAxios, post);
-            }
-            else{
-                addNewCommonPost(myAxios, post);
-            }
+
         }
         else{
-            if(featuredButton[0].checked){
-                addNewFeaturedJob(myAxios, post);
-            }
-            else{
-                addJobByID(myAxios, post);
-            }
+
         }
-
-            //window.location.replace("detail.html");
-
-            // if no error return to window.location.replace("detail.html");
-
-        });
+    });
 
 
 </script>

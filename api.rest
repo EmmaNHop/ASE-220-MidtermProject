@@ -30,6 +30,11 @@ GET http://127.0.0.1:3000/api/posts/user_posts/681ad0d684940469a86b4dad
 
 ###
 
+POST http://127.0.0.1:3000/api/posts/user_posts/681ad0d684940469a86b4dad
+Authorization: 
+
+###
+
 ### API ENDPOINTS
 ### Designed to provide data functionality to all apps (phone, web, thrid party websites)
 

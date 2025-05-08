@@ -1,7 +1,3 @@
-/*          JSON BLOB URLS          */
-// POST API URL: https://jsonblob.com/1348018515168387072
-//var posts_URL = "https://jsonblob.com/api/jsonBlob/1348018515168387072";
-
 /* 
 *
 *           API URLS    
@@ -15,7 +11,7 @@ async function getAll(Axios){
     try{
         let posts = await axios.get('http://localhost:3000/api/posts');
 
-        console.log(posts.data);
+        //console.log(posts.data);
 
         return posts.data;
 
@@ -26,9 +22,9 @@ async function getAll(Axios){
 
 async function getPostById(Axios, id){
     try{
-        console.log(id);
-
         let post = await Axios.get(`http://localhost:3000/api/posts/id/${id}`);
+
+        console.log(post);
 
         return post;
     }catch(error){
@@ -97,7 +93,6 @@ async function getJobs(Axios, lowerLimit, upperLimit){
     }
 }
 
-
 async function getUserJobs(Axios, user){
     try{
         let posts = await Axios.get(`http://localhost:3000/api/posts/user_posts/${user}`);
@@ -109,7 +104,7 @@ async function getUserJobs(Axios, user){
     }
 }
 
-/*          PUT METHODS            */
+/*          POST METHODS            */
 
 async function addNewPost(Axios, data){
     try{
@@ -124,9 +119,7 @@ async function addNewPost(Axios, data){
             }
         });
 
-        console.log(tags.data.tags);
-
-        let post = await Axios.post('http://localhost:3000/api/posts/post', {
+        let post = await Axios.post(`http://localhost:3000/api/posts/user/${data.user_id}/newPost`, {
             content: {
                 user_id : data.user_id,
                 created_by : data.created_by,
@@ -147,7 +140,56 @@ async function addNewPost(Axios, data){
                 Authorization: 'Bearer ' + sessionStorage.getItem('token')
             }
         }).then( function (response){
-            console.log(response);
+
+            // TODO: Maybe a loading screen in here?
+
+            window.location.replace(`./itemDetail.html?id=${response.data}&type=f`);
+        });
+    }catch(error) {
+        console.error('Error making post. \n' + error);
+        throw new Error('       Error making post. \n');
+    }
+}
+
+/*          PUT METHOD              */
+async function editPost(Axios, data){
+    try{
+        let tags = await Axios.post('http://localhost:3000/api/tags/create', {
+            content: {
+                post_content : data.post_content
+            }
+        }, 
+        {
+            headers: {
+                Authorization:'Bearer ' + sessionStorage.getItem('token')
+            }
+        });
+
+        let post = await Axios.post(`http://localhost:3000/api/posts/user/${data.user_id}/newPost`, {
+            content: {
+                user_id : data.user_id,
+                created_by : data.created_by,
+                post_title : data.post_title,
+                type : data.type,
+                city : data.city,
+                state : data.state,
+                price : data.price,
+                is_job : data.is_job,
+                img : data.img,
+                post_content : data.post_content,
+                is_featured : data.is_featured, 
+                tags: tags.data.tags
+            }
+        },
+        {
+            headers: {
+                Authorization: 'Bearer ' + sessionStorage.getItem('token')
+            }
+        }).then( function (response){
+
+            // TODO: Maybe a loading screen in here?
+
+            window.location.replace(`./itemDetail.html?id=${response.data}&type=f`);
         });
     }catch(error) {
         console.error('Error making post. \n' + error);

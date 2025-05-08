@@ -34,8 +34,6 @@ router.get('/', async (req, res) => {
 
 // Get a certain user
 router.get('/user/:userid', async (req, res) => {
-    console.log(req.params.userid);
-
     try{
         if(!ObjectId.isValid(req.params.userid)){
             console.error(` Invalid Object ID: ${id}`);
@@ -54,7 +52,6 @@ router.get('/user/:userid', async (req, res) => {
 
 router.post('/signup', async (req, res) => {
     try{
-        console.log(req.body);
         const content = req.body.content; 
 
         /*       Verify email         */
@@ -75,25 +72,25 @@ router.post('/signup', async (req, res) => {
         const specialCharacter = /^(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).+$/;
 
         if(!specialCharacter.test(content.password)){
-            console.log('Password needs at least one special character! ');
+            console.error('Password needs at least one special character! ');
             throw new Error('Password needs at least one speical character! ');
         }
 
         const uppercaseRegex = /^(?=.*[A-Z]).+$/;
         if(!uppercaseRegex.test(content.password)){
-            console.log('Password needs at least one uppercase character! ');
+            console.error('Password needs at least one uppercase character! ');
             throw new Error('Password needs at least one uppercase character! ');
         }
 
         const lowercaseRegex = /^(?=.*[a-z]).+$/;
         if(!lowercaseRegex.test(content.password)){
-            console.log('Password needs at least one lowercase character! ');
+            console.error('Password needs at least one lowercase character! ');
             throw new Error('Password needs at least one lowercase character! ');
         }
 
         const digitRegex = /^(?=.*\d).+$/;
         if(!digitRegex.test(content.password)){
-            console.log('Password needs at least one number! ');
+            console.error('Password needs at least one number! ');
             throw new Error('Password needs at least one number! ');
         }
 
@@ -139,7 +136,7 @@ router.post('/signin', async (req, res) => {
         try{
             res.status(200).json(userInfo);
         } catch(error){
-            console.log('Page not found: \n' + error);
+            console.error('Page not found: \n' + error);
             return res.status(404).json({error : 'Page not Found' });
         }
 
@@ -154,8 +151,6 @@ router.post('/signout', async (req, res) => {
     try{
 
         const token = req.headers.authorization;
-
-        console.log(req.headers.authorization);
 
         const authenticated = await auth.authenticateUser(token);
 
@@ -178,7 +173,6 @@ router.post('/auth', async(req, res) => {
         const token = req.headers.authorization;
 
         const authenticated = await auth.authenticateUser(token);
-        //console.log(token);
 
         if(!authenticated){
             res.status(401).json({ error: 'Unauthorized Access! '});
@@ -188,7 +182,7 @@ router.post('/auth', async(req, res) => {
         // TODO: return something here
 
     } catch(error){
-        console.log('Error sending to auth: \n' + error);
+        console.error('Error sending to auth: \n' + error);
         res.status(500).json({ error: 'Oopsie dasies!. '});
     }
 });
@@ -202,19 +196,17 @@ router.post('/reauth', async(req, res) => {
         const authenticated = await auth.authenticateUser(token);
 
         if(!authenticated){
-            console.log('User unauthorized');
+            console.error('User unauthorized');
             res.status(401).json({ error: 'Unauthorized Access! '});
             return;
         };
 
         const returnObj = await userHandler.reauth(authenticated);
 
-        console.log(returnObj);
-
         res.status(200).json({returnObj});
 
     } catch(error){
-        console.log('Error reauthenticating user: \n' + error);
+        console.error('Error reauthenticating user: \n' + error);
         res.status(500).json({ error: 'Error reauthenticating user '});
     }
 })

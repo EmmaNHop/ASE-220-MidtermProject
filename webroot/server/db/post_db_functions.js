@@ -6,6 +6,7 @@
 
 const { ObjectId } = require('mongodb');
 const { client } = require('./db');
+const { object } = require('cohere-ai/core/schemas');
 
 // Client will call this as when the page is first loaded and store it in cache 
 async function getRecentPosts() {
@@ -105,24 +106,16 @@ async function getJobPosts() {
 
 async function createNewPost(post) {
     try{
-        const newPost = await client.db('GregsList').collection('Posts').insertOne({
-            user_id : post.user_id,
-            created_by : post.created_by,
-            date_created : post.date_created,
-            time_created : post.time_created,
-            post_title : post.post_title,
-            type : post.type,
-            city : post.city,
-            state : post.state,
-            price : post.price,
-            post_views : 0,
-            is_job : post.is_job,
-            img : post.img,
-            post_content : post.post_content,
-            is_featured : post.is_featured,
-            tags: post.tags
+
+
+        const newPost = await client.db('GregsList').collection('Posts').insertOne(post, function(err){
+            if(err) throw new Error('       Error communicating with MongoDB');
+
+            var objectId = post._id;
         });
-        return newPost;
+
+        return newPost.insertedId.toString();
+
     }catch(error){
         console.error('Error inserting post to database. \n        ' + error);
         throw new Error('       Error inserting post to database. \n');

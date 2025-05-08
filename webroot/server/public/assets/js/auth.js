@@ -74,7 +74,6 @@ async function authenticate(email, password) {
              *      id: 'string'
              *  }
              */
-            console.log(response);
             if(response.status === 200){
 
                 sessionStorage.setItem('token', response.data.token);
@@ -96,7 +95,7 @@ async function authenticate(email, password) {
             alert("Credentials Invalid!");
         }
         else {
-            console.log(error);
+            console.error(error);
         }
     }
     return false;
@@ -109,7 +108,6 @@ async function reauthenticate(){
                 'Authorization':'Bearer ' + sessionStorage.getItem('token')
             }
         });
-        console.log(response.data);
         if(response.status === 200){
 
             sessionStorage.clear();
@@ -128,7 +126,7 @@ async function reauthenticate(){
             return false;
         }
     } catch(error){
-        console.log(error)
+        console.error(error)
     }
 }
 
