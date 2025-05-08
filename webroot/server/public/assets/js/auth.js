@@ -35,19 +35,15 @@ async function getExpFromToken(){
 // Check token experation to see if it is about to expire so the user can get a new one
 async function checkTokenExp(){
 
-    alert("Suprise Token Check!");
     if(sessionStorage.length > 0){
         const twoMin = 2 * 60 * 1000; // In milliseconds
         if (sessionStorage.getItem('token_exp') - Date.now() < twoMin || sessionStorage.getItem('token_exp') === null){
             const response = await reauthenticate();
-            alert(response);
             if(response == false){
                 alert("Error reauthenticating token");
                 sessionStorage.clear();
                 return false;
             }
-
-            alert("Congrats you got a new token!");
             return true;
         }
         return false;

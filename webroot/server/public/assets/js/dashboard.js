@@ -11,9 +11,10 @@ function htmlBuilder(query, html) {
 
 async function getUserFeatured(Axios, userId) {
     try {
-        const response = await Axios.get(`http://localhost:3000/api/posts/user_posts/${userId}`, {}, {
+        console.log(sessionStorage.getItem('token'));
+        const response = await Axios.get(`http://localhost:3000/api/posts/user_posts/${userId}`, {
             headers: {
-                'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+                'Authorization':'Bearer ' + sessionStorage.getItem('token')
             }
         });
         const posts = response.data;

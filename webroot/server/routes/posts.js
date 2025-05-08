@@ -71,6 +71,8 @@ router.get('/id/:id', async (req, res) =>{
 // Gets user's featured posts 
 router.get('/user_posts/:userId', async (req, res) => {
 
+    console.log(req);
+    
     const token = req.headers.authorization;
     console.log("TOKEN: " + req.headers.authorization);
     console.log("ALL: ", req.headers);
