@@ -71,24 +71,16 @@ router.get('/id/:id', async (req, res) =>{
 
 
 // Gets featured posts 
-router.get('/user_posts', async (req, res) => {
+router.get('/user_posts/:username', async (req, res) => {
+    const { username } = req.params;
+    const { type } = req.query;
+
     try {
-        const { username } = req.params.username;
-
-        if (!username) {
-            return res.status(400).json({ error: 'Username is required.' });
-        }
-
-        const content = await getFeaturedPosts.getUserFeaturedPosts(username);
-
-        if (!content || content.length === 0) {
-            return res.status(404).json({ error: 'No posts found for user.' });
-        }
-
-        return res.status(200).json(content);
-    } catch (error) {
-        console.error(error);
-        return res.status(500).json({ error: 'Failed to fetch user featured posts.' });
+        const posts = await postHandler.getUserPostsFeatured(username, type);
+        res.status(200).json(posts);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Failed to get user posts.' });
     }
 });
 

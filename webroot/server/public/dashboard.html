@@ -341,6 +341,7 @@
         checkUserStatus();
                                     // Two Min
         setInterval(checkTokenExp(), 2*60*1000);
+        document.addEventListener("DOMContentLoaded", getUserFeatured);
 
         document.addEventListener("DOMContentLoaded", function() {
             const username = sessionStorage.getItem('username');

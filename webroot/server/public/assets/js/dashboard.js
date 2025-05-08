@@ -8,25 +8,36 @@ const myAxios = axios.create({}, {
     }
 });
 
-function htmlBuilder(query, html){
-    const itemContainer = document.getElementById(query);
-    if (itemContainer) {
-        itemContainer.insertAdjacentHTML("beforeend", html);
+function htmlBuilder(query, html) {
+    const container = document.getElementById(query);
+    if (container) {
+        container.innerHTML = html;
     } else {
-        console.error(`Element with ID '${query}' not found in the DOM.`);
+        console.error(`Element #${query} not found`);
     }
 }
 
-async function getUserFeatured(Axios){
+async function getUserFeatured() {
     try {
-        const response = await Axios.get('/posts/user_posts/:username?type=featured');
-        console.log(response);
-        return response.data;
+        const response = await myAxios.get(`/posts/user_posts/${username}?type=featured`);
+        const posts = response.data;
+
+        if (!Array.isArray(posts)) {
+            console.error("Unexpected response format:", posts);
+            return;
+        }
+
+        let html = "";
+        posts.forEach(post => {
+            html += `<div class="card"><h3>${post.post_title}</h3><p>${post.post_content}</p></div>`;
+        });
+
+        htmlBuilder("user_featured", html);
     } catch (error) {
         console.error("Error fetching user featured posts:", error);
-        return [];
     }
 }
+
 
 async function getUserJobs(Axios){
     try {
