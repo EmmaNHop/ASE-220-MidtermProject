@@ -97,9 +97,21 @@ async function createUser(userInfo){
     }
 }
 
+async function reauth(decodedToken){
+    const user = decodedToken.user;
+
+    const returnObj = {
+        user
+    }
+    returnObj.token = JWT.generateToken(returnObj);
+
+    return returnObj;
+}
+
 module.exports = {
     getUsersById,
     getUsers,
     createUser,
     verifyUser,
+    reauth
 }

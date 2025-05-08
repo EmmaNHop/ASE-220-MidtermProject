@@ -207,7 +207,11 @@ router.post('/reauth', async(req, res) => {
             return;
         };
 
-        res.status(200).json({ });
+        const returnObj = await userHandler.reauth(authenticated);
+
+        console.log(returnObj);
+
+        res.status(200).json({returnObj});
 
     } catch(error){
         console.log('Error reauthenticating user: \n' + error);

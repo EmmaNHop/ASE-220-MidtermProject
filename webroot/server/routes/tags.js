@@ -50,15 +50,18 @@ const { CohereClientV2 } = require('cohere-ai');
 // AI models
 const { models } = require('cohere-ai/api');
 
+// Validates token
+const auth = require('../middleware/auth.js');
+
 // Establish connection to the Cohere API and authenticate the API Key
 const cohere = new CohereClientV2({
     token: COHERE_API_KEY
 });
 
 
-router.post('/', (req, res) => {
-    let userContent = req.body;
-    userContent = userContent.content;
+router.post('/create', (req, res) => {
+    let userContent = req.body.content;
+    userContent = userContent.post_content;
 
     (async() => {
         const response = await cohere.chat({
@@ -75,7 +78,7 @@ router.post('/', (req, res) => {
                     content: userContent,
                 }
             ],
-            respose_format : responseFormat,
+            response_format : responseFormat,
             temperature : 0,
         })
         let content = response.message.content[0].text;
@@ -84,7 +87,8 @@ router.post('/', (req, res) => {
 
         console.log(content);
 
-        tagsHandler.createTags(content);
+        res.status(201).json(content);
+
     })();
 });
 
