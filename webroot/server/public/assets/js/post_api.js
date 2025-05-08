@@ -74,7 +74,14 @@ async function getForSale(Axios, lowerLimit, upperLimit){
 }
 
 async function getUserForSale(Axios, user){
+    try{
+        let posts = await Axios.get(`http://localhost:3000/api/posts/user_posts/${user}`);
 
+        return posts.data;
+
+    } catch(error){
+        console.error('Error getting job posts. \n     ' + error);
+    }
 }
 
 async function getJobs(Axios, lowerLimit, upperLimit){
@@ -92,7 +99,14 @@ async function getJobs(Axios, lowerLimit, upperLimit){
 
 
 async function getUserJobs(Axios, user){
+    try{
+        let posts = await Axios.get(`http://localhost:3000/api/posts/user_posts/${user}`);
 
+        return posts.data;
+
+    } catch(error){
+        console.error('Error getting job posts. \n     ' + error);
+    }
 }
 
 /*          PUT METHODS            */

@@ -67,7 +67,7 @@ router.get('/id/:id', async (req, res) =>{
 
 
 // Gets user's featured posts 
-router.get('/user_posts/:username', async (req, res) => {
+router.get('/user_posts/:userId', async (req, res) => {
 
     const token = req.headers.authorization;
     
@@ -79,15 +79,43 @@ router.get('/user_posts/:username', async (req, res) => {
         return;
     };
 
-    const { username } = req.params;
+    const { userId } = req.params;
     const { type } = req.query;
 
     try {
-        const posts = await postHandler.getUserFeaturedPosts(username, type);
+        const posts = await postHandler.getUserFeaturedPosts(userId, type);
         res.status(200).json(posts);
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: 'Failed to get user\'s featured posts.' });
+    }
+});
+
+// Gets user's job posts 
+router.get('/user-jobs/:userId', async (req, res) => {
+    const { userId } = req.params;
+    const type = "jobs"; 
+
+    try {
+        const posts = await postHandler.getUserPosts(userId, type);
+        res.status(200).json(posts);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Failed to get user\'s job posts.' });
+    }
+});
+
+// Gets user's forSale posts 
+router.get('/user_posts_for_sale/:userId', async (req, res) => {
+    const { userId } = req.params;
+    const type = "forSale";
+
+    try {
+        const posts = await postHandler.getUserPosts(userId, type);
+        res.status(200).json(posts);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Failed to get user\'s forSale posts.' });
     }
 });
 
@@ -181,34 +209,6 @@ router.post('/post', async (req, res) => {
     }catch(error) {
         console.error(error);
         return res.status(500).json({error : 'Error inserting post. \n'});
-    }
-});
-
-//get user posts
-router.get('/user_posts/:username', async (req, res) => {
-    try {
-
-        const token = req.headers.authorization;
-    
-        const authenticated = await auth.authenticateUser(token);
-    
-        if(!authenticated){
-            console.error('User unauthorized');
-            res.status(401).json({ error: 'Unauthorized Access! '});
-            return;
-        };
-        
-        const { username } = req.params;
-        const content = await postHandler.getUserPosts(username);
-
-        if (!content) {
-            return res.status(404).json({ error: 'No posts found for user.' });
-        }
-
-        return res.status(200).json(content);
-    } catch (error) {
-        console.error(error);
-        return res.status(500).json({ error: 'Failed to fetch user featured posts.' });
     }
 });
 
