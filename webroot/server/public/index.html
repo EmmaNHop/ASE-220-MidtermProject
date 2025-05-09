@@ -106,8 +106,6 @@
                     document.getElementById('user-state').innerHTML = 
                     `<a id="log-out" title="Log Out" href="">Log Out</a>`;
 
-                    document.getElementById('my-account').href="dashboard.html";
-
                     document.getElementById('log-out').addEventListener('click', function() {
 
                         logout(sessionStorage.getItem('token')).then(function (response){
