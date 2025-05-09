@@ -23,9 +23,7 @@
     -webkit-font-smoothing: antialiased
 }
 
-body {
-    background-color: #1d2332
-}
+
 
 body.inverse {
     background: #333333

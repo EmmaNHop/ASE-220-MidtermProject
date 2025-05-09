@@ -40,36 +40,15 @@
 
     <!-- Top Bar -->
     <nav class="navbar">
-        <div class="col-12">        
+        <div class="col-12 grey">
             <div class="navbar-header">
                 <a href="javascript:void(0);" class="bars"></a>
                 <a class="navbar-brand" href="index.html">Greg's List</a>  <!--PLACEHOLDER NAME-->
+                <a href="javascript:void(0);" class="ls-toggle-btn" data-close="true"><i class="material-icons">swap_horiz</i></a>
             </div>
-            <ul class="nav navbar-nav navbar-left">
-                <li><a href="javascript:void(0);" class="ls-toggle-btn" data-close="true"><i class="material-icons">swap_horiz</i></a></li>
-            </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="javascript:void(0);" class="js-search" data-close="true"><i class="zmdi zmdi-search"></i></a></li>
-                <li class="dropdown">
-                    <a href="javascript:void(0);" class="dropdown-toggle xs-hide" data-toggle="dropdown" role="button"><i class="material-icons">notifications</i>
-                        <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
-                    </a>
-                    <ul class="dropdown-menu slideDown">
-                        <li class="header">NOTIFICATIONS</li>
-                        <li class="body">
-                            <ul class="menu list-unstyled">
-                                <li><a href="javascript:void(0);">
-                                    <div class="icon-circle l-coral"> <i class="material-icons">person_add</i> </div>
-                                    <div class="menu-info">
-                                        <h4>TEST NOTIFICATION</h4>
-                                        <p> <i class="material-icons">access_time</i> 14 mins ago </p>
-                                    </div>
-                                    </a></li>
-                            </ul>
-                        </li>
-                        <li class="footer"><a href="javascript:void(0);">View All Notifications</a></li>
-                    </ul>
-                </li>
+
+
                 <li><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i class="material-icons zmdi-hc-spin">settings</i></a></li>
             </ul>
         </div>
@@ -92,7 +71,7 @@
             <ul class="list">
                 <li class="">MAIN NAVIGATION</li>
                 <li><a href="detail.html"><i class="zmdi zmdi-home"></i><span>Home</span> </a></li>  
-                <li class="active open"><a href="javascript:void(0);"><i class="zmdi zmdi-account"></i><span>Account</span></a></li>
+                <li class="active open"><a href="dashboard.html"><i class="zmdi zmdi-account"></i><span>Account</span></a></li>
                 <li><a href=""><i class="zmdi zmdi-email"></i><span>Inbox</span> </a></li>           
                 <li><a href="index.html"><i class="zmdi zmdi-navigation"></i><span>Map</span> </a></li>
             </ul>
@@ -148,11 +127,7 @@
                     </ul>
                     <p class="text-left">System Settings</p>
                     <ul class="setting-list">
-                        <li><span>Notifications</span>
-                            <div class="switch">
-                                <label><input type="checkbox" checked><span class="lever"></span></label>
-                            </div>
-                        </li>
+
                         <li><span>Auto Updates</span>
                             <div class="switch">
                                 <label><input type="checkbox" checked><span class="lever"></span></label>
@@ -252,7 +227,7 @@
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12">
                     <div class="card product-report">
-                        <div class="header new" style="">
+                        <div class="header new post-form" style="">
                             <h2>Create New Post: <a class="create" href="create.html"><i class="zmdi zmdi-plus"></i></a></h2>
                         </div>
                     </div>
@@ -285,10 +260,10 @@
                                     <h3><a>Your Jobs</a></h3>
                                 </div>
                             </div>
-                            <div id="user_job" class="d-flex flex-wrap">
-
-                                <!-- INSERT USER JOB HERE -->
-        
+                            <div class="row ml-3">
+                                <div id="user_job" class="d-flex flex-wrap">
+                                    <!-- INSERT USER JOB HERE -->
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -300,17 +275,16 @@
                                     <h3><a>Your For Sale</a></h3>
                                 </div>
                                 <div class="row ml-3">
-                                    <div id="user_for_sale">
+                                    <div id="user_for_sale" class="d-flex flex-wrap">
 
                                         <!-- INSERT USER FOR SALE HERE -->
 
                                     </div>
-                                </divrow>
+                                </div>
                             </div>
 
                         </div>
                     </div>
-                    <button class="m-b-15">Load More</button>
                 </div>
             </div>               
         </div>     
