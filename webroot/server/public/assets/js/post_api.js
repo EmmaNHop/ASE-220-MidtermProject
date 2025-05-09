@@ -4,9 +4,6 @@
 *      
 */
 
-const { readableStreamAsyncIterable } = require("cohere-ai/core/streaming-fetcher/Stream");
-
-
 /*          GET METHODS         */
 
 async function getAll(Axios) {
@@ -34,10 +31,9 @@ async function getPostById(Axios, id) {
     }
 }
 
-//  Get all featured posts 
 async function getFeaturedPosts(Axios, lowerLimit, upperLimit) {
     try{
-        let posts = await Axios.get('http://localhost:3000/api/posts/featured');
+        let posts = await Axios.get(`http://localhost:3000/api/posts/featured?lower=${lowerLimit}&upper=${upperLimit}`);
 
         console.log(posts.data);
 
@@ -47,6 +43,38 @@ async function getFeaturedPosts(Axios, lowerLimit, upperLimit) {
         console.error('Error getting featured posts. \n     ' + error);
     }
 }
+
+async function getForSale(Axios, lowerLimit, upperLimit) {
+    try{
+        let posts = await Axios.get(`http://localhost:3000/api/posts/for_sale?lower=${lowerLimit}&upper=${upperLimit}`);
+
+         console.log(posts.data);
+
+        return posts.data;
+    } catch(error){
+        console.error('Error getting for sale posts. \n     ' + error);
+    }
+}
+
+async function getJobs(Axios, lowerLimit, upperLimit) {
+    try{
+        let posts = await Axios.get(`http://localhost:3000/api/posts/jobs?lower=${lowerLimit}&upper=${upperLimit}`);
+
+         console.log(posts.data);
+
+        return posts.data;
+
+    } catch(error){
+        console.error('Error getting job posts. \n     ' + error);
+    }
+}
+
+
+/**
+ * 
+ *          User only 
+ * 
+ */
 
 async function getUserFeatured(Axios, user) {
     try {
@@ -58,35 +86,9 @@ async function getUserFeatured(Axios, user) {
     }
 }
 
-async function getForSale(Axios, lowerLimit, upperLimit) {
-    try{
-        let posts = await Axios.get('http://localhost:3000/api/posts/for_sale');
-
-        console.log(posts.data);
-
-        return posts.data;
-
-    } catch(error){
-        console.error('Error getting for sale posts. \n     ' + error);
-    }
-}
-
 async function getUserForSale(Axios, user) {
     try{
         let posts = await Axios.get(`http://localhost:3000/api/posts/user_posts/${user}`);
-
-        return posts.data;
-
-    } catch(error){
-        console.error('Error getting job posts. \n     ' + error);
-    }
-}
-
-async function getJobs(Axios, lowerLimit, upperLimit) {
-    try{
-        let posts = await Axios.get('http://localhost:3000/api/posts/jobs');
-
-        console.log(posts.data);
 
         return posts.data;
 
@@ -156,7 +158,7 @@ async function addNewPost(Axios, data) {
 /*          PUT METHOD              */
 async function editPost(Axios, data, postId) {
     try{
-        let tags = await Axios.post('http://localhost:3000/api/tags/create', {
+        const tags = await Axios.post('http://localhost:3000/api/tags/create', {
             content: {
                 post_content : data.post_content
             }
@@ -172,7 +174,7 @@ async function editPost(Axios, data, postId) {
 
         console.log(data);
 
-        let post = await Axios.put(`http://localhost:3000/api/posts/user/${data.user_id}/edit/${postId}`, {
+        const response = await Axios.put(`http://localhost:3000/api/posts/user/${data.user_id}/edit/${postId}`, {
             content: { 
                 data 
             }
@@ -181,12 +183,22 @@ async function editPost(Axios, data, postId) {
             headers: {
                 Authorization: 'Bearer ' + sessionStorage.getItem('token')
             }
-        }).then( function (response){
-
-            // TODO: Maybe a loading screen in here?
-
-            window.location.replace(`./itemDetail.html?id=${postId}&type=f`);
+        }).then(res => {
+            console.log(res);
+            if(res.status === 201){
+            console.log("here");
+                if(data.is_featured === true){
+                    window.location.replace(`itemDetail.html?id=${postId}&type=f`);
+                }
+                else if(data.is_job === true){
+                    window.location.replace(`itemDetail.html?id=${postId}&type=j`);
+                }
+                else if(data.is_job === false){
+                    window.location.replace(`itemDetail.html?id=${postId}&type=s`);
+                }
+            }
         });
+
     }catch(error) {
         console.error('Error making post. \n' + error);
         throw new Error('       Error making post. \n');

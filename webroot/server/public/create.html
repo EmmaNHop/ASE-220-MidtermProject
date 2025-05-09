@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html class="no-js " lang="en">
 <head>
@@ -6,9 +7,9 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
 
-    <title>Create Post</title>
+    <title>Your Account</title>
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.x.x/font/bootstrap-icons.css"> 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.x.x/font/bootstrap-icons.css">
 
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/plugins/jvectormap/jquery-jvectormap-2.0.3.css"/>
@@ -16,220 +17,139 @@
     <!-- Custom Css -->
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/color_skins.css">
-    <link href="assets/css/customStyle.css">
+    <link rel="stylesheet" href="assets/css/customStyles.css">
 </head>
-<body class="theme-orange">
-    <!-- Page Loader -->
-    <div class="page-loader-wrapper">
-        <div class="loader">        
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-            <p>Please wait...</p>
-            <div class="m-t-30"><img src="" width="48" height="48" alt="Nexa"></div>
-        </div>
+
+<body class="body">
+<!-- Page Loader -->
+<div class="page-loader-wrapper">
+    <div class="loader">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <p>Please wait...</p>
     </div>
-    <!-- Overlay For Sidebars -->
-    <div class="overlay"></div><!-- Search  -->
-    <div class="search-bar">
-        <div class="search-icon"> <i class="material-icons">search</i> </div>
-        <input type="text" placeholder="Explore Nexa...">
-        <div class="close-search"> <i class="material-icons">close</i> </div>
-    </div>
-    
-    <!-- Top Bar -->
-    <nav class="navbar">
-        <div class="col-12">        
-            <div class="navbar-header">
-                <a href="javascript:void(0);" class="bars"></a>
-                <a class="navbar-brand" href="index.html">Website Name</a>  <!--PLACEHOLDER NAME-->
-            </div>
-            <ul class="nav navbar-nav navbar-left">
-                <li><a href="javascript:void(0);" class="ls-toggle-btn" data-close="true"><i class="material-icons">swap_horiz</i></a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="javascript:void(0);" class="js-search" data-close="true"><i class="zmdi zmdi-search"></i></a></li>
-                <li class="dropdown">
-                    <a href="javascript:void(0);" class="dropdown-toggle xs-hide" data-toggle="dropdown" role="button"><i class="material-icons">notifications</i>
-                        <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
-                    </a>
-                    <ul class="dropdown-menu slideDown">
-                        <li class="header">NOTIFICATIONS</li>
-                        <li class="body">
-                            <ul class="menu list-unstyled">
-                                <li><a href="javascript:void(0);">
-                                    <div class="icon-circle l-coral"> <i class="material-icons">person_add</i> </div>
-                                    <div class="menu-info">
-                                        <h4>12 new members joined</h4>
-                                        <p> <i class="material-icons">access_time</i> 14 mins ago </p>
-                                    </div>
-                                    </a></li>
-                                <li><a href="javascript:void(0);">
-                                    <div class="icon-circle l-turquoise"> <i class="material-icons">add_shopping_cart</i> </div>
-                                    <div class="menu-info">
-                                        <h4>4 sales made</h4>
-                                        <p> <i class="material-icons">access_time</i> 22 mins ago </p>
-                                    </div>
-                                    </a></li>
-                                <li><a href="javascript:void(0);">
-                                    <div class="icon-circle g-bg-cyan"> <i class="material-icons">delete_forever</i> </div>
-                                    <div class="menu-info">
-                                        <h4><b>Nancy Doe</b> deleted account</h4>
-                                        <p> <i class="material-icons">access_time</i> 3 hours ago </p>
-                                    </div>
-                                    </a></li>
-                                <li><a href="javascript:void(0);">
-                                    <div class="icon-circle g-bg-blue"> <i class="material-icons">mode_edit</i> </div>
-                                    <div class="menu-info">
-                                        <h4><b>Nancy</b> changed name</h4>
-                                        <p> <i class="material-icons">access_time</i> 2 hours ago </p>
-                                    </div>
-                                    </a></li>
-                                <li><a href="javascript:void(0);">
-                                    <div class="icon-circle l-slategray"> <i class="material-icons">comment</i> </div>
-                                    <div class="menu-info">
-                                        <h4><b>John</b> commented your post</h4>
-                                        <p> <i class="material-icons">access_time</i> 4 hours ago </p>
-                                    </div>
-                                    </a></li>
-                                <li><a href="javascript:void(0);">
-                                    <div class="icon-circle l-seagreen"> <i class="material-icons">cached</i> </div>
-                                    <div class="menu-info">
-                                        <h4><b>John</b> updated status</h4>
-                                        <p> <i class="material-icons">access_time</i> 3 hours ago </p>
-                                    </div>
-                                    </a></li>
-                                <li><a href="javascript:void(0);">
-                                    <div class="icon-circle l-blue"> <i class="material-icons">settings</i> </div>
-                                    <div class="menu-info">
-                                        <h4>Settings updated</h4>
-                                        <p> <i class="material-icons">access_time</i> Yesterday </p>
-                                    </div>
-                                    </a></li>
-                            </ul>
-                        </li>
-                        <li class="footer"><a href="javascript:void(0);">View All Notifications</a></li>
-                    </ul>
-                </li>
-                <li><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i class="material-icons zmdi-hc-spin">settings</i></a></li>
-            </ul>
+</div>
+<!-- Overlay For Sidebars -->
+<div class="overlay"></div><!-- Search  -->
+<div class="search-bar">
+    <div class="search-icon"> <i class="material-icons">search</i> </div>
+    <input type="text" placeholder="Search">
+    <div class="close-search"> <i class="material-icons">close</i> </div>
+</div>
+
+<!-- Top Bar -->
+<nav class="navbar">
+    <div class="col-12 grey">
+        <div class="navbar-header">
+            <a href="javascript:void(0);" class="bars"></a>
+            <a class="navbar-brand" href="index.html">Greg's List</a>  <!--PLACEHOLDER NAME-->
+            <a href="javascript:void(0);" class="ls-toggle-btn" data-close="true"><i class="material-icons">swap_horiz</i></a>
         </div>
-    </nav>
-    
-    <!-- Left Sidebar -->
-    <aside id="leftsidebar" class="sidebar">
-        <!-- User Info -->
-        <div class="user-info">
-            <div class="image">
-                <img src="assets/images/avatar1.jpg" width="48" height="48" alt="User" />
-            </div>
-            <div class="info-container">
-                <div class="name" data-toggle="dropdown">John Doe</div>
-                <div class="btn-group user-helper-dropdown">
-                    <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" role="button"> keyboard_arrow_down </i>
-                    <ul class="dropdown-menu slideUp">
-                        <li><a href="profile.html"><i class="material-icons">person</i>Profile</a></li>
-                        <li class="divider"></li>
-                        <li><a href="javascript:void(0);"><i class="material-icons">group</i>Followers</a></li>
-                        <li><a href="javascript:void(0);"><i class="material-icons">shopping_cart</i>Sales</a></li>
-                        <li><a href="javascript:void(0);"><i class="material-icons">favorite</i>Likes</a></li>
-                        <li class="divider"></li>
-                        <li><a href="sign-in.html"><i class="material-icons">input</i>Sign Out</a></li>
-                    </ul>
-                </div>
-                <div class="email">john.doe@example.com</div>
-            </div>
-        </div>
-        <!-- #User Info --> 
-        <!-- Menu on left bar -->
-        <div class="menu">
-            <ul class="list">
-                <li class="header">MAIN NAVIGATION</li>
-                <li><a href="detail.html"><i class="zmdi zmdi-home"></i><span>Home</span> </a></li>  
-                <li class="active open"><a href="javascript:void(0);"><i class="zmdi zmdi-account"></i><span>Account</span></a></li>
-                <li><a href=""><i class="zmdi zmdi-email"></i><span>Inbox</span> </a></li>           
-                <li><a href="index.html"><i class="zmdi zmdi-navigation"></i><span>Map</span> </a></li>
-            </ul>
-        </div>
-        <!-- #Menu --> 
-    </aside>
-    
-    <!-- Right Sidebar -->
-    <aside id="rightsidebar" class="right-sidebar">
-        <ul class="nav nav-tabs">
-            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#skins">Skins</a></li>
-            <!--<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#chat">Chat</a></li>-->
-            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#settings">Settings</a></li>
+
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i class="material-icons zmdi-hc-spin">settings</i></a></li>
         </ul>
-        <!--We could use this for dark and light mode, or other options-->
-        <div class="tab-content">
-            <div role="tabpanel" class="tab-pane in active in active slideRight" id="skins">
-                <div class="slim_scroll">
-                    <h6>Flat Color</h6>
-                    <ul class="choose-skin">                   
-                        <li data-theme="purple"><div class="purple"></div><span>Purple</span></li>
-                        <li data-theme="blue"><div class="blue"></div><span>Blue</span></li>
-                        <li data-theme="cyan"><div class="cyan"></div><span>Cyan</span></li>
-                    </ul>                    
-                    <h6>Multi Color</h6>
-                    <ul class="choose-skin">                        
-                        <li data-theme="black"><div class="black"></div><span>Black</span></li>
-                        <li data-theme="deep-purple"><div class="deep-purple"></div><span>Deep Purple</span></li>
-                        <li data-theme="red"><div class="red"></div><span>Red</span></li>
-                    </ul>                    
-                    <h6>Gradient Color</h6>
-                    <ul class="choose-skin">
-                        <li data-theme="green"><div class="green"></div><span>Green</span> </li>
-                        <li data-theme="orange" class="active"><div class="orange"></div><span>Orange</span></li>
-                        <li data-theme="blush"><div class="blush"></div><span>Blush</span></li>
-                    </ul>
-                </div>                
-            </div>
-            <div role="tabpanel" class="tab-pane slideLeft" id="settings">
-                <div class="settings slim_scroll">
-                    <p class="text-left">General Settings</p>
-                    <ul class="setting-list">
-                        <li><span>Report Panel Usage</span>
-                            <div class="switch">
-                                <label><input type="checkbox" checked><span class="lever"></span></label>
-                            </div>
-                        </li>
-                        <li><span>Email Redirect</span>
-                            <div class="switch">
-                                <label><input type="checkbox"><span class="lever"></span></label>
-                            </div>
-                        </li>
-                    </ul>
-                    <p class="text-left">System Settings</p>
-                    <ul class="setting-list">
-                        <li><span>Notifications</span>
-                            <div class="switch">
-                                <label><input type="checkbox" checked><span class="lever"></span></label>
-                            </div>
-                        </li>
-                        <li><span>Auto Updates</span>
-                            <div class="switch">
-                                <label><input type="checkbox" checked><span class="lever"></span></label>
-                            </div>
-                        </li>
-                    </ul>
-                    <p class="text-left">Account Settings</p>
-                    <ul class="setting-list">
-                        <li><span>Offline</span>
-                            <div class="switch">
-                                <label><input type="checkbox"><span class="lever"></span></label>
-                            </div>
-                        </li>
-                        <li><span>Location Permission</span>
-                            <div class="switch">
-                                <label><input type="checkbox" checked><span class="lever"></span></label>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+    </div>
+</nav>
+
+<!-- Left Sidebar -->
+<aside id="leftsidebar" class="sidebar">
+    <!-- User Info -->
+    <div class="user-info">
+
+        <div class="info-container">
+            <div id="display-username" class="name" data-toggle="dropdown"></div>
+
+            <div id="display-email" class="email" ></div>
+        </div>
+    </div>
+    <!-- #User Info -->
+    <!-- Menu on left bar -->
+    <div class="menu">
+        <ul class="list">
+            <li class="">MAIN NAVIGATION</li>
+            <li><a href="detail.html"><i class="zmdi zmdi-home"></i><span>Home</span> </a></li>
+            <li class="active open"><a href="dashboard.html"><i class="zmdi zmdi-account"></i><span>Account</span></a></li>
+            <li><a href=""><i class="zmdi zmdi-email"></i><span>Inbox</span> </a></li>
+            <li><a href="index.html"><i class="zmdi zmdi-navigation"></i><span>Map</span> </a></li>
+        </ul>
+    </div>
+    <!-- #Menu -->
+</aside>
+
+<!-- Right Sidebar -->
+<aside id="rightsidebar" class="right-sidebar">
+    <ul class="nav nav-tabs">
+        <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#skins">Skins</a></li>
+        <!--<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#chat">Chat</a></li>-->
+        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#settings">Settings</a></li>
+    </ul>
+    <!--We could use this for dark and light mode, or other options-->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane in active in active slideRight" id="skins">
+            <div class="slim_scroll">
+                <h6>Flat Color</h6>
+                <ul class="choose-skin">
+                    <li data-theme="purple"><div class="purple"></div><span>Purple</span></li>
+                    <li data-theme="blue"><div class="blue"></div><span>Blue</span></li>
+                    <li data-theme="cyan"><div class="cyan"></div><span>Cyan</span></li>
+                </ul>
+                <h6>Multi Color</h6>
+                <ul class="choose-skin">
+                    <li data-theme="black"><div class="black"></div><span>Black</span></li>
+                    <li data-theme="deep-purple"><div class="deep-purple"></div><span>Deep Purple</span></li>
+                    <li data-theme="red"><div class="red"></div><span>Red</span></li>
+                </ul>
+                <h6>Gradient Color</h6>
+                <ul class="choose-skin">
+                    <li data-theme="green"><div class="green"></div><span>Green</span> </li>
+                    <li data-theme="orange" class="active"><div class="orange"></div><span>Orange</span></li>
+                    <li data-theme="blush"><div class="blush"></div><span>Blush</span></li>
+                </ul>
             </div>
         </div>
-    </aside>
+        <div role="tabpanel" class="tab-pane slideLeft" id="settings">
+            <div class="settings slim_scroll">
+                <p class="text-left">General Settings</p>
+                <ul class="setting-list">
+                    <li><span>Report Panel Usage</span>
+                        <div class="switch">
+                            <label><input type="checkbox" checked><span class="lever"></span></label>
+                        </div>
+                    </li>
+                    <li><span>Email Redirect</span>
+                        <div class="switch">
+                            <label><input type="checkbox"><span class="lever"></span></label>
+                        </div>
+                    </li>
+                </ul>
+                <p class="text-left">System Settings</p>
+                <ul class="setting-list">
+
+                    <li><span>Auto Updates</span>
+                        <div class="switch">
+                            <label><input type="checkbox" checked><span class="lever"></span></label>
+                        </div>
+                    </li>
+                </ul>
+                <p class="text-left">Account Settings</p>
+                <ul class="setting-list">
+                    <li><span>Offline</span>
+                        <div class="switch">
+                            <label><input type="checkbox"><span class="lever"></span></label>
+                        </div>
+                    </li>
+                    <li><span>Location Permission</span>
+                        <div class="switch">
+                            <label><input type="checkbox" checked><span class="lever"></span></label>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</aside>
 
     <!--Main Content-->
     <section class="content home">
@@ -237,37 +157,37 @@
             <div class="container-fluid">    
                 <div class="row clearfix">
                     <div class="col-lg-12 col-md-12">
-                        <div class="card product-report">
-                            <div class="header">
+                        <div class="  post-form">
+                            <div class="header " style="border-bottom: 1px solid #ccc;">
                                 <h3>Create Post:</h3>
                             </div>
-                            <div class="body">
+                            <div class="body mt-3">
                                 <form id="new_post">    
                                     <div class="row clearfix m-b-15">
                                         <div class="col-lg-4 col-md-6 col-sm-12">
                                             <h5>Title:</h5>
-                                            <input class="form-control m-1" id="title" type="text" >
+                                            <input class="form-control m-1" id="title" type="text" required>
                                         </div>
                                         <div class="col-lg-4 col-md-6 col-sm-12">
                                             <h5>Content:</h5>
-                                            <input class="form-control m-1" id="content" type="text" >
+                                            <input class="form-control m-1" id="content" type="text" required>
                                         </div>
                                         <div class="col-lg-4 col-md-6 col-sm-12">
                                             <h5>Type:</h5>                      <!--Will probably have a dropdown for this-->
-                                            <input class="form-control m-1" id="type" type="text" ><br>
+                                            <input class="form-control m-1" id="type" type="text" required><br>
                                         </div>
                                         <div class="col-lg-4 col-md-6 col-sm-12">
                                             <h5>Picture:</h5>
-                                            <input class="form-control m-1" id="picture" type="text" ><br>
+                                            <input class="form-control m-1" id="picture" type="text" required><br>
                                         </div>
                                         <div class="col-lg-4 col-md-6 col-sm-12">
                                             <h5>Location:</h5>                  <!--Might just use user location or something-->
-                                            <input class="form-control m-1" id="city" type="text" placeholder="Enter City"><br>
-                                            <input class="form-control m-1" id="state" type="text" placeholder="Enter State"><br>
+                                            <input class="form-control m-1" id="city" type="text" placeholder="Enter City" required><br>
+                                            <input class="form-control m-1" id="state" type="text" placeholder="Enter State" required><br>
                                         </div>
                                         <div class="col-lg-4 col-md-6 col-sm-12">
                                             <h5>Price:</h5>
-                                            <input class="form-control m-1" id="price" type="text"><br>
+                                            <input class="form-control m-1" id="price" type="text" required><br>
                                         </div>
                                         <div class="col-lg-4 col-md-6 col-sm-12">
                                             <h5>Job or Item For Sale?</h5>
@@ -286,9 +206,9 @@
                                         username, date of creation...
                                     -->
                                     </div>
+                                    <p><button style="margin-top: 20px;" id="submit_new_post" type="submit">Submit</button></p>
                                 </form>
                             </div>
-                            <p><button style="margin-top: 20px;" id="submit_new_post" type="submit">Submit</button></p>
                         </div>
                     </div>
                 </div>
@@ -331,7 +251,7 @@
 
 <script>
 
-    checkUserStatus();
+    checkUserStatusRestricted();
     
     setInterval(async () => {
             try{
@@ -406,7 +326,23 @@
         return await post;
     }
 
-    document.getElementById('submit_new_post').addEventListener('click', function() {
+    document.getElementById('submit_new_post').addEventListener('click', function(e) {
+
+        e.preventDefault();
+
+        const form = document.getElementById('new_post');
+        const title = form.elements.title.value.trim();
+        const content = form.elements.content.value.trim();
+        const type = form.elements.type.value.trim();
+        const picture = form.elements.picture.value.trim();
+        const city = form.elements.city.value.trim();
+        const state = form.elements.state.value.trim();
+        const price = form.elements.price.value.trim();
+
+        if (!title || !content || !type || !picture || !city || !state || !price) {
+            alert("Please fill out all required fields.");
+            return;
+        }
 
         setVars().then(post => {
             addNewPost(myAxios, post);

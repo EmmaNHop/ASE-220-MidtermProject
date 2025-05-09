@@ -177,7 +177,7 @@ async function checkToken(token){
     }
 }
 
-async function checkUserStatus() {
+async function checkUserStatusRestricted() {
     if(sessionStorage.length < 1){
 
         // Redundant ik but just in case
@@ -213,6 +213,40 @@ async function checkUserStatus() {
 
         if(!document.URL.includes("login.html") && !isLoggedIn){
             window.location.replace('./login.html');
+        }
+        return false;
+    }
+}
+
+async function checkUserStatus() {
+    if(sessionStorage.length < 1){
+
+        // Redundant ik but just in case
+        sessionStorage.clear();
+        localStorage.clear();
+
+        return false;
+    }
+    else if(sessionStorage.getItem('token') !== null){
+
+        const expired = await checkTokenExp();
+        
+        var isLoggedIn;
+
+        // If the token is about to expire, it will have created a new one and will not need to auth here
+        if(expired){
+            isLoggedIn = checkToken(sessionStorage.getItem('token'));
+        }
+        else if(!expired){
+            isLoggedIn = true;
+        }
+        else{
+            // Uh Oh, should not reach this point
+            alert("ERROR: Something went wrong with checking the user status!!!!");
+        }
+
+        if(isLoggedIn === true){
+            return true;
         }
         return false;
     }

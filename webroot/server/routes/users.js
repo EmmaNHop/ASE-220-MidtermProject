@@ -94,8 +94,6 @@ router.post('/signup', async (req, res) => {
             throw new Error('Password needs at least one number! ');
         }
 
-        // TODO: return user to login page so they can verify info by logging in
-
         // Will return false if the email is in the DB
         const isInDB = await userHandler.createUser(content);
 
@@ -119,8 +117,6 @@ router.post('/signup', async (req, res) => {
 // Sign-In
 router.post('/signin', async (req, res) => {
     try{
-        // TODO:
-        // verify the information is formated correctly here.
 
         const content = req.body.content;
 

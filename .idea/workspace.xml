@@ -5,12 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="14c5eb51-edc3-4cee-8514-9fb2d073d8b1" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webroot/server/db/post_db_functions.js" beforeDir="false" afterPath="$PROJECT_DIR$/webroot/server/db/post_db_functions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webroot/server/handlers/posts_handler.js" beforeDir="false" afterPath="$PROJECT_DIR$/webroot/server/handlers/posts_handler.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webroot/server/public/assets/js/dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/webroot/server/public/assets/js/dashboard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webroot/server/public/assets/css/customStyles.css" beforeDir="false" afterPath="$PROJECT_DIR$/webroot/server/public/assets/css/customStyles.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webroot/server/public/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/webroot/server/public/dashboard.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webroot/server/routes/posts.js" beforeDir="false" afterPath="$PROJECT_DIR$/webroot/server/routes/posts.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +35,9 @@
     &quot;accountId&quot;: &quot;0fa970b6-0ff9-4234-9a4f-fdedb32485f2&quot;
   }
 }</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
 }</component>
@@ -61,6 +60,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.appearance&quot;,
     &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\WebStorm 2024.3.5\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -88,6 +88,7 @@
       <updated>1746566494353</updated>
       <workItem from="1746566495958" duration="11709000" />
       <workItem from="1746634818366" duration="3796000" />
+      <workItem from="1746749141823" duration="1066000" />
     </task>
     <servers />
   </component>

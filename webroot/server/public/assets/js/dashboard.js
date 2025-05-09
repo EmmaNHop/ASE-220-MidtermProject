@@ -9,7 +9,7 @@ function htmlBuilder(query, html) {
     }
 }
 
-async function getUserFeatured(Axios, userId) {
+async function getUserFeatured(Axios) {
     try {
         const response = await Axios.get(`http://localhost:3000/api/posts/user/featured/${userId}`, {
             headers: {
@@ -17,6 +17,8 @@ async function getUserFeatured(Axios, userId) {
             }
         });
         const posts = response.data;
+
+        console.log(response);
 
         if (!Array.isArray(posts)) {
             console.error("Unexpected response format:", posts);
@@ -58,17 +60,19 @@ function loadPage (Axios) {
         if (Array.isArray(userFeatured)) {
             userFeatured.forEach(featured => {
                 let htmlSegment = `
-                    <div id="${featured._id}" class="card product-report">
-                        <div class="header">
-                            <h2>${featured.post_title} <small>Posted: ${featured.date_created}</small></h2>
-                            <ul class="header-dropdown">
-                                <li><a href="edit.html?id=${featured._id}">Edit</a></li>
-                                <li><a class="delete_user_featured" data-value="${featured._id}">Delete</a></li>
-                            </ul>
+                    <div id="${featured._id}" class="card-item p-2  m-2" >
+                        <div class="" style="color:white">
+                            <h4>${featured.post_title}</h4>
+                            <img src="${featured.img}" alt="Job Image" class="img-responsive"/>
                         </div>
-                        <div class="body">
-                            <p>${featured.post_content}</p>
+                        <div class="header" style="color:white">
+                            <p style="color:white">${featured.post_content} <small>Posted: ${featured.date_created}</small></p>
+                            <div class="card-button">
+                                <a href="edit.html?id=${featured._id}" class="edit mr-1 edit-link">Edit</a>
+                                <a class="delete_user_featured " data-value="${featured._id}" class="ml-1" style="color: black;">Delete</a>
+                            </div>
                         </div>
+                    
                     </div>`;
                 html += htmlSegment;
             });
@@ -81,17 +85,19 @@ function loadPage (Axios) {
         let html = "";
         userJobs.forEach(job => {
             let htmlSegment = `
-                <div id="${job._id}" class="card product-report">
-                    <div class="header">
-                        <h2>${job.post_title} <small>Posted: ${job.date_created}</small></h2>
-                        <ul class="header-dropdown">
-                            <li><a href="edit.html?id=${job._id}">Edit</a></li>
-                            <li><a class="delete_user_job" data-value="${job._id}">Delete</a></li>
-                        </ul>
+                <div id="${job._id}" class="card-item p-2  m-2" >
+                    <div class="" style="color:white">
+                        <h4>${job.post_title}</h4>
+                        <img src="${job.img}" alt="Job Image" class="img-responsive"/>
                     </div>
-                    <div class="body">
-                        <p>${job.post_content}</p>
+                    <div class="header" style="color:white">
+                        <p style="color:white">${job.post_content} <small>Posted: ${job.date_created}</small></p>
+                        <div class="card-button">
+                            <a href="edit.html?id=${job._id}" class="edit mr-1 edit-link">Edit</a>
+                            <a class="delete_user_job " data-value="${job._id}" class="ml-1" style="color: black;">Delete</a>
+                        </div>
                     </div>
+                    
                 </div>`;
             html += htmlSegment;
         });
@@ -103,18 +109,20 @@ function loadPage (Axios) {
         let html = "";
         userPosts.forEach(post => {
             let htmlSegment = `
-                <div id="${post._id}" class="card product-report">
-                    <div class="header">
-                        <h2>${post.post_title} <small>Posted: ${post.date_created}</small></h2>
-                        <ul class="header-dropdown">
-                            <li><a href="edit.html?id=${post._id}">Edit</a></li>
-                            <li><a class="delete_user_for_sale" data-value="${post._id}">Delete</a></li>
-                        </ul>
+                <div id="${post._id}" class="card-item p-2  m-2" >
+                    <div class="" style="color:white">
+                        <h4>${post.post_title}</h4>
+                        <img src="${post.img}" alt="Job Image" class="img-responsive"/>
                     </div>
-                    <div class="body">
-                        <p>${post.post_content}</p>
+                    <div class="header" style="color:white">
+                        <p style="color:white">${post.post_content} <small>Posted: ${post.date_created}</small></p>
+                        <div class="card-button">
+                            <a href="edit.html?id=${post._id}" class="edit mr-1 edit-link">Edit</a>
+                            <a class="delete_user_for_sale " data-value="${post._id}" class="ml-1" style="color: black;">Delete</a>
+                        </div>
                     </div>
-                </div>`;
+                    
+                </div>                `;
             html += htmlSegment;
         });
         htmlBuilder("user_for_sale", html);

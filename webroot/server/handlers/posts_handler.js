@@ -30,53 +30,58 @@ async function getPostById(id) {
     }
 }
 
-async function getJobPosts() {
+async function getForSalePosts(lower, upper) {
     try{
-        const data = await db.getJobPosts();
-        return data;
-    }catch(error){
-        console.error('Error handling for featured posts. \n' + error);
-        throw new Error('       Error handling for featured posts. \n');
-    }
-}
-
-async function getFeaturedPosts() {
-    try{
-        const data = await db.getFeaturedPosts();
-        return data;
-    }catch(error){
-        console.error('Error handling for featured posts. \n' + error);
-        throw new Error('       Error handling for featured posts. \n');
-    }
-}
-
-async function getUserFeaturedPosts(userId, type) {
-    try{
-        const data = await db.getUserFeaturedPosts(userId, type);
-        return data;
-    }catch(error){
-        console.error('Error handling for user\'s featured posts. \n' + error);
-        throw new Error('       Error handling for user\'s featured posts. \n');
-    }
-}
-
-async function getUserPosts(userId, type) {
-    try{
-        const data = await db.getUserPosts(userId, type);
-        return data;
-    }catch(error){
-        console.error('Error handling for user\'s featured posts. \n' + error);
-        throw new Error('       Error handling for user\'s featured posts. \n');
-    }
-}
-
-async function getForSalePosts() {
-    try{
-        const data = await db.getForSalePosts();
+        const data = await db.getForSalePosts(parseInt(lower), parseInt(upper));
         return data;
     }catch(error){
         console.error('Error handling for sale posts. \n' + error);
         throw new Error('       Error handling for sale posts. \n');
+    }
+}
+
+async function getJobPosts(lower, upper) {
+    try{
+        const data = await db.getJobPosts(parseInt(lower), parseInt(upper));
+        return data;
+    }catch(error){
+        console.error('Error handling for featured posts. \n' + error);
+        throw new Error('       Error handling for featured posts. \n');
+    }
+}
+
+async function getFeaturedPosts(lower, upper) {
+    try{
+        const data = await db.getFeaturedPosts(parseInt(lower), parseInt(upper));
+        return data;
+    }catch(error){
+        console.error('Error handling for featured posts. \n' + error);
+        throw new Error('       Error handling for featured posts. \n');
+    }
+}
+
+/**
+ * 
+ *          USER FUNCTIONS
+ * 
+ */
+
+
+async function getUserPosts(userId, type) {
+    try{
+
+        var data;
+
+        if(type == 'featured'){
+            data = await db.getUserFeaturedPosts(userId);
+        }
+        else{
+            data = await db.getUserPosts(userId, type);
+        }
+        return data;
+    }catch(error){
+        console.error('Error handling for user\'s featured posts. \n' + error);
+        throw new Error('       Error handling for user\'s featured posts. \n');
     }
 }
 
@@ -112,9 +117,7 @@ async function createNewPost(post) {
 async function editPost(post, postId) {
     try{
         const editDate = new Date();
-
-        console.log(post)
-
+        
         const data = await db.editPost({
             user_id : post.user_id,
             created_by : post.created_by,
@@ -159,7 +162,6 @@ module.exports = {
     getFeaturedPosts,
     getForSalePosts,
     createNewPost,
-    getUserFeaturedPosts,
     getUserPosts,
     editPost,
     deletePost

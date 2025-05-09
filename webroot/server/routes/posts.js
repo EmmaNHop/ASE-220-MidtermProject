@@ -33,10 +33,7 @@ router.get('/', async (req, res) => {
 
     try{
         if(filter){
-
-            // TODO: filtered post handler
-            //content = await postHandler.getFilteredPosts();
-
+            
             if(!content){
                 return res.status(404).json({ error: `Invalid filter. Filter: ${filter} not found. \n`});
             }
@@ -70,7 +67,8 @@ router.get('/id/:id', async (req, res) =>{
 // Gets featured posts 
 router.get('/featured', async (req, res) => {
     try {
-        const posts = await postHandler.getFeaturedPosts();
+        const { lower, upper } = req.query;
+        const posts = await postHandler.getFeaturedPosts(lower, upper);
         res.status(200).json(posts);
     } catch (err) {
         console.error(err);
@@ -80,27 +78,10 @@ router.get('/featured', async (req, res) => {
 
 // Gets for sale posts
 router.get('/for_sale', async (req, res) => {
-
-    const { filter } = req.query;
-
-    var content = [];
-
     try{
-        if(filter){
-
-            //content = await postHandler.getFilteredPosts();
-
-            if(!content){
-                return res.status(404).json({ error: `Invalid filter. Filter: ${filter} not found. \n`});
-            }
-
-            res.status(200).send(content);
-        } else{
-            
-            const content = await postHandler.getForSalePosts();
-
-            return res.status(200).send(content);
-        }
+        const { lower, upper } = req.query; 
+        const content = await postHandler.getForSalePosts(lower, upper);
+        return res.status(200).send(content);
     } catch(error){
         console.error(error);s
         return res.status(500).json({error : 'Error accessing posts. \n'});
@@ -109,27 +90,10 @@ router.get('/for_sale', async (req, res) => {
 
 // Gets job posts
 router.get('/jobs', async (req, res) => {
-
-    const { filter } = req.query;
-
-    var content = [];
-
     try{
-        if(filter){
-
-            //content = await postHandler.getFilteredPosts();
-
-            if(!content){
-                return res.status(400).json({ error: `Invalid filter. Filter: ${filter} not found. \n`});
-            }
-
-            res.status(200).send(content);
-        } else{
-            
-            const content = await postHandler.getJobPosts();
-
-            return res.status(200).send(content);
-        }
+        const { lower, upper } = req.query; 
+        const content = await postHandler.getJobPosts(lower, upper);
+        return res.status(200).send(content);
     } catch(error){
         console.error(error);
         return res.status(500).json({error : 'Error accessing posts. \n'});
@@ -138,7 +102,7 @@ router.get('/jobs', async (req, res) => {
 
 /**
  * 
- *              User post functions
+ *              USER POST FUNCTIONS
  * 
  */
 
@@ -159,10 +123,10 @@ router.get('/user/featured/:userId', async (req, res) => {
     };
 
     const { userId } = req.params;
-    const { type } = req.query;
+    const type = 'featured';
 
     try {
-        const posts = await postHandler.getUserFeaturedPosts(userId, type);
+        const posts = await postHandler.getUserPosts(userId, type);
         res.status(200).json(posts);
     } catch (err) {
         console.error(err);
@@ -246,7 +210,7 @@ router.put('/user/:userId/edit/:postId', async (req, res) => {
 
         const content = await postHandler.editPost(req.body.content.data, postId);
 
-        return res.status(201);
+        return res.status(201).json({ status: 201 });
 
     } catch(error) {
         console.error('Error deleting post: \n' + error);
@@ -272,13 +236,11 @@ router.delete('/user/:userId/delete/:postId', async (req, res) => {
 
         const postId = req.params.postId;
 
-        console.log(postId);
-
         const deleted = await postHandler.deletePost(postId);
 
         if(deleted === true){
             console.log("Post was deleted!");
-            return res.status(201);
+            return res.status(201).json({ status: 201 });
         }
     } catch(error) {
         console.error('Error deleting post: \n' + error);
