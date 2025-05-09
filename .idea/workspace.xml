@@ -9,7 +9,6 @@
       <change beforePath="$PROJECT_DIR$/webroot/server/public/assets/css/customStyles.css" beforeDir="false" afterPath="$PROJECT_DIR$/webroot/server/public/assets/css/customStyles.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webroot/server/public/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/webroot/server/public/dashboard.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webroot/server/public/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/webroot/server/public/detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webroot/server/public/itemDetail.html" beforeDir="false" afterPath="$PROJECT_DIR$/webroot/server/public/itemDetail.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
