@@ -1,6 +1,6 @@
 # ASE-220 Midterm Project: Greg's List
 
-## **YOUTUBE LINK**: `https://youtu.be/z3pQ3kOTYlw`
+## **[YOUTUBE LINK](https://youtu.be/z3pQ3kOTYlw)**: `https://youtu.be/z3pQ3kOTYlw`
 
 ## Overview
 
