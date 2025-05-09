@@ -198,9 +198,9 @@
                 </div>
                 <div class="input-group">
                     <div class="form-line">
-                        <input type="text" class="form-control date" placeholder="Enter your message...">
+                        <input id="type-message" type="text" class="form-control date" placeholder="Enter your message...">
                     </div>
-                    <span class="input-group-addon"> <i class="material-icons">send</i> </span>
+                    <span id="send-message" class="input-group-addon"> <i class="material-icons">send</i> </span>
                 </div>
             </div>
         </div>
@@ -443,6 +443,12 @@
                 loadPage(myAxios);
             }
         });
+
+        document.querySelector('#send-message').addEventListener('click', (event) => {
+            sendMessage(myAxios, document.querySelector('#send-message').innerText);
+        });
+
+
     </script>
 
 </body>
