@@ -70,7 +70,8 @@ router.get('/id/:id', async (req, res) =>{
 // Gets featured posts 
 router.get('/featured', async (req, res) => {
     try {
-        const posts = await postHandler.getFeaturedPosts();
+        const { lower, upper } = req.query;
+        const posts = await postHandler.getFeaturedPosts(lower, upper);
         res.status(200).json(posts);
     } catch (err) {
         console.error(err);
@@ -80,27 +81,10 @@ router.get('/featured', async (req, res) => {
 
 // Gets for sale posts
 router.get('/for_sale', async (req, res) => {
-
-    const { filter } = req.query;
-
-    var content = [];
-
     try{
-        if(filter){
-
-            //content = await postHandler.getFilteredPosts();
-
-            if(!content){
-                return res.status(404).json({ error: `Invalid filter. Filter: ${filter} not found. \n`});
-            }
-
-            res.status(200).send(content);
-        } else{
-            
-            const content = await postHandler.getForSalePosts();
-
-            return res.status(200).send(content);
-        }
+        const { lower, upper } = req.query; 
+        const content = await postHandler.getForSalePosts(lower, upper);
+        return res.status(200).send(content);
     } catch(error){
         console.error(error);s
         return res.status(500).json({error : 'Error accessing posts. \n'});
@@ -109,27 +93,10 @@ router.get('/for_sale', async (req, res) => {
 
 // Gets job posts
 router.get('/jobs', async (req, res) => {
-
-    const { filter } = req.query;
-
-    var content = [];
-
     try{
-        if(filter){
-
-            //content = await postHandler.getFilteredPosts();
-
-            if(!content){
-                return res.status(400).json({ error: `Invalid filter. Filter: ${filter} not found. \n`});
-            }
-
-            res.status(200).send(content);
-        } else{
-            
-            const content = await postHandler.getJobPosts();
-
-            return res.status(200).send(content);
-        }
+        const { lower, upper } = req.query; 
+        const content = await postHandler.getJobPosts(lower, upper);
+        return res.status(200).send(content);
     } catch(error){
         console.error(error);
         return res.status(500).json({error : 'Error accessing posts. \n'});
@@ -271,8 +238,6 @@ router.delete('/user/:userId/delete/:postId', async (req, res) => {
         const userId = req.params.userId;
 
         const postId = req.params.postId;
-
-        console.log(postId);
 
         const deleted = await postHandler.deletePost(postId);
 

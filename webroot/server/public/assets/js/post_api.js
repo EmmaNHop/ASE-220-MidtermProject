@@ -31,10 +31,9 @@ async function getPostById(Axios, id) {
     }
 }
 
-//  Get all featured posts 
 async function getFeaturedPosts(Axios, lowerLimit, upperLimit) {
     try{
-        let posts = await Axios.get('http://localhost:3000/api/posts/featured');
+        let posts = await Axios.get(`http://localhost:3000/api/posts/featured?lower=${lowerLimit}&upper=${upperLimit}`);
 
         console.log(posts.data);
 
@@ -44,6 +43,38 @@ async function getFeaturedPosts(Axios, lowerLimit, upperLimit) {
         console.error('Error getting featured posts. \n     ' + error);
     }
 }
+
+async function getForSale(Axios, lowerLimit, upperLimit) {
+    try{
+        let posts = await Axios.get(`http://localhost:3000/api/posts/for_sale?lower=${lowerLimit}&upper=${upperLimit}`);
+
+         console.log(posts.data);
+
+        return posts.data;
+    } catch(error){
+        console.error('Error getting for sale posts. \n     ' + error);
+    }
+}
+
+async function getJobs(Axios, lowerLimit, upperLimit) {
+    try{
+        let posts = await Axios.get(`http://localhost:3000/api/posts/jobs?lower=${lowerLimit}&upper=${upperLimit}`);
+
+         console.log(posts.data);
+
+        return posts.data;
+
+    } catch(error){
+        console.error('Error getting job posts. \n     ' + error);
+    }
+}
+
+
+/**
+ * 
+ *          User only 
+ * 
+ */
 
 async function getUserFeatured(Axios, user) {
     try {
@@ -55,35 +86,9 @@ async function getUserFeatured(Axios, user) {
     }
 }
 
-async function getForSale(Axios, lowerLimit, upperLimit) {
-    try{
-        let posts = await Axios.get('http://localhost:3000/api/posts/for_sale');
-
-        console.log(posts.data);
-
-        return posts.data;
-
-    } catch(error){
-        console.error('Error getting for sale posts. \n     ' + error);
-    }
-}
-
 async function getUserForSale(Axios, user) {
     try{
         let posts = await Axios.get(`http://localhost:3000/api/posts/user_posts/${user}`);
-
-        return posts.data;
-
-    } catch(error){
-        console.error('Error getting job posts. \n     ' + error);
-    }
-}
-
-async function getJobs(Axios, lowerLimit, upperLimit) {
-    try{
-        let posts = await Axios.get('http://localhost:3000/api/posts/jobs');
-
-        console.log(posts.data);
 
         return posts.data;
 

@@ -353,11 +353,12 @@
             *      WRITE FEATURED 
             */
         function writeFeatured(lower){
-            let featuredPosts = getFeaturedPosts(myAxios, lower, lower+5)
+            var featuredPosts = getFeaturedPosts(myAxios, lower, lower+4)
             .then(featured => { 
                 var html = "";
 
                 for(let i = 0; i < featured.length; i++){
+
                     var htmlSegment = "";
 
                         htmlSegment =
@@ -368,7 +369,7 @@
                                             <a class="product-image have-additional" href="#">
                                                 <span class="post-img">
                                                     <!--leaving picture empty-->
-                                                    <img src="${featured[i].img}"
+                                                     <img src=${featured[i].img} 
                                                         style="height:7em; width:7em; border-radius:10%" alt="" class="">
                                                 </span>
                                             </a>
@@ -436,11 +437,9 @@
                         */
 
                     html += htmlSegment;
-
                 }
 
                 htmlBuilder("featured", html);
-
             });
             return featuredLower += 5;
         }
@@ -448,43 +447,12 @@
          *      WRITE JOBS 
          */
         function writeJobs(lower){; 
-            getJobs(myAxios, lower, lower+5)
+            var job = getJobs(myAxios, lower, lower+4)
             .then(jobs => { 
                 var html = "";
 
                 for(let i = 0; i < jobs.length; i++){
 
-                    /*
-
-                    let date = jobs[i].date_created;
-                    let day = "";
-                    var month =  "";
-
-                    // TODO: make below into a function
-
-                    // Gets the day and month number
-                    if(date.length == 10){
-
-                        day = date.slice(8);
-                        month = date.slice(5,8);
-
-                    }
-                    else if(date.length == 9){
-
-                        // TODO: get day and month. This one needs to make use of the fact that the month could be a length of one vis a vi the day can too. 
-
-                    }
-                    else if(date.length == 8){
-
-                        day = date.slice(7);
-                        month = date.slice(5, 7);
-
-                    }   
-                    // TODO: switch for month
-
-                    */
-
-                    //console.log(jobs[i]);
 
                     let htmlSegment =
                         `<div id="${jobs[i]._id}" class="latestblog-content owl-carousel owl-theme"
@@ -513,17 +481,16 @@
         }
 
         /*
-         *      WRITE COMMON POST
+         *      WRITE FOR SALE
          */
 
-        function writeForSale(lower){              
-            getForSale(myAxios, lower, lower+5)  // 5 per page
-            // This waits for the promise then plucks the array (posts) will treat the data in the html constructor as an array
+        function writeForSale(lower){                // 5 per page
+            var forSale = getForSale(myAxios, lower, lower+4)
             .then(posts => { 
                 var html = "";
+                for(let i = 0; i < posts.length; i++){
 
-                for(let i = 0; i < lower; i++){
-
+                    var imgHtml;
                     let htmlSegment =
                         `
                                 <div class="item list-group-item">
@@ -533,7 +500,7 @@
                                                 <a class="product-image have-additional" href="#">
                                                     <span class="img-main">
                                                         <!--leaving picture empty-->
-                                                        <img src="="${posts[i].img}
+                                                        <img src=${posts[i].img}
                                                             style="height:7em; width:7em;">
                                                     </span>
                                                 </a>
@@ -595,7 +562,8 @@
         forSaleLower = writeForSale(forSaleLower);
 
         document.getElementById('load_more_featured').addEventListener('click', function(){
-            featuredLower = writeJobs(featuredLower);
+            featuredLower = writeFeatured(featuredLower);
+
         });
 
         document.getElementById('load_more_jobs').addEventListener('click', function(){

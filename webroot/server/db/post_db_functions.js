@@ -34,9 +34,9 @@ async function getPostById(id) {
     }
 }
 
-async function getFeaturedPosts() {
+async function getFeaturedPosts(lower, upper) {
     try{
-        const featured = await client.db('GregsList').collection('Posts').find({is_featured: true}).toArray();
+        const featured = await client.db('GregsList').collection('Posts').find({is_featured: true}).skip(lower).limit(upper - lower+1).toArray();
         return featured;
     }catch(error){
         console.error('Error getting featured posts from database. \n       ' + error);
@@ -44,16 +44,31 @@ async function getFeaturedPosts() {
     }
 }
 
-async function getUserFeaturedPosts(id) {
-    try {
-        const posts = await client.db('GregsList').collection('Posts').find({user_id: id, is_featured: true}).toArray(); // or whatever your collection is named;
-        return posts;
-
-    } catch (error) {
-        console.error("Error fetching user featured posts: \n", error);
-        throw new Error('       Error getting user\'s featured posts from database. \n');
+async function getForSalePosts(lower, upper) {
+    try{
+        const featured = await client.db('GregsList').collection('Posts').find({is_job: false}).skip(lower).limit(upper - lower+1).toArray();
+        return featured;
+    }catch(error){
+        console.error('Error getting for sale posts from database. \n       ' + error);
+        throw new Error('       Error getting for sale posts from database. \n');
     }
 }
+
+async function getJobPosts(lower, upper) {
+    try{
+        const featured = await client.db('GregsList').collection('Posts').find({is_job: true}).skip(lower).limit(upper - lower+1).toArray();
+        return featured;
+    }catch(error){
+        console.error('Error getting job posts from database. \n        ' + error);
+        throw new Error('       Error getting job posts from database. \n');
+    }
+}
+
+/**
+ * 
+ *          USER SPECIFIC
+ * 
+ */
 
 async function getUserPosts(userId, type) {
     try {
@@ -70,23 +85,14 @@ async function getUserPosts(userId, type) {
     }
 }
 
-async function getForSalePosts() {
-    try{
-        const featured = await client.db('GregsList').collection('Posts').find({is_job: false}).toArray();
-        return featured;
-    }catch(error){
-        console.error('Error getting for sale posts from database. \n       ' + error);
-        throw new Error('       Error getting for sale posts from database. \n');
-    }
-}
+async function getUserFeaturedPosts(id) {
+    try {
+        const posts = await client.db('GregsList').collection('Posts').find({user_id: id, is_featured: true}).toArray(); // or whatever your collection is named;
+        return posts;
 
-async function getJobPosts() {
-    try{
-        const featured = await client.db('GregsList').collection('Posts').find({is_job: true}).toArray();
-        return featured;
-    }catch(error){
-        console.error('Error getting job posts from database. \n        ' + error);
-        throw new Error('       Error getting job posts from database. \n');
+    } catch (error) {
+        console.error("Error fetching user featured posts: \n", error);
+        throw new Error('       Error getting user\'s featured posts from database. \n');
     }
 }
 
@@ -112,11 +118,7 @@ async function createNewPost(post) {
 async function editPost(post, postId) {
     try{
         const query = { _id: new ObjectId(postId) };
-
         const newPost = await client.db('GregsList').collection('Posts').replaceOne(query, post);
-
-        console.log(newPost);
-
     }catch(error){
         console.error('Error putting edited post to database. \n        ' + error);
         throw new Error('       Error putting edited post to database. \n');

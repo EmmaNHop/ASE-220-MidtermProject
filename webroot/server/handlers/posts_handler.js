@@ -30,9 +30,9 @@ async function getPostById(id) {
     }
 }
 
-async function getForSalePosts() {
+async function getForSalePosts(lower, upper) {
     try{
-        const data = await db.getForSalePosts();
+        const data = await db.getForSalePosts(parseInt(lower), parseInt(upper));
         return data;
     }catch(error){
         console.error('Error handling for sale posts. \n' + error);
@@ -40,9 +40,9 @@ async function getForSalePosts() {
     }
 }
 
-async function getJobPosts() {
+async function getJobPosts(lower, upper) {
     try{
-        const data = await db.getJobPosts();
+        const data = await db.getJobPosts(parseInt(lower), parseInt(upper));
         return data;
     }catch(error){
         console.error('Error handling for featured posts. \n' + error);
@@ -50,9 +50,9 @@ async function getJobPosts() {
     }
 }
 
-async function getFeaturedPosts() {
+async function getFeaturedPosts(lower, upper) {
     try{
-        const data = await db.getFeaturedPosts();
+        const data = await db.getFeaturedPosts(parseInt(lower), parseInt(upper));
         return data;
     }catch(error){
         console.error('Error handling for featured posts. \n' + error);
@@ -117,9 +117,7 @@ async function createNewPost(post) {
 async function editPost(post, postId) {
     try{
         const editDate = new Date();
-
-        console.log(post)
-
+        
         const data = await db.editPost({
             user_id : post.user_id,
             created_by : post.created_by,
