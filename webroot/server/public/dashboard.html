@@ -168,39 +168,15 @@
                 <div class="chat-widget">
                 <ul id="chat-messages" class="chat-scroll-list clearfix">
 
-
-                    <!--
-                    <li class="left float-left">
-                        <img src="" class="rounded-circle" alt="">
-                        <div class="chat-info">
-                            <a class="name" href="javascript:void(0);">Alexander</a>
-                            <span class="datetime">6:12</span>
-                            <span class="message">Hello, John </span>
-                        </div>
-                    </li>
-                    <li class="right">
-                        <div class="chat-info"><span class="datetime">6:15</span> <span class="message">Hi, Alexander<br> How are you!</span> </div>
-                    </li>
-                    <li class="right">
-                        <div class="chat-info"><span class="datetime">6:16</span> <span class="message">There are many variations of passages of Lorem Ipsum available</span> </div>
-                    </li>
-                    <li class="left float-left"> <img src="" class="rounded-circle" alt="">
-                        <div class="chat-info"><a class="name" href="javascript:void(0);">Elizabeth</a> <span class="datetime">6:25</span> <span class="message">Hi, Alexander,<br> John <br> What are you doing?</span> </div>
-                    </li>
-                    <li class="left float-left"> <img src="" class="rounded-circle" alt="">
-                        <div class="chat-info"><a class="name" href="javascript:void(0);">Michael</a> <span class="datetime">6:28</span> <span class="message">I would love to join the team.</span> </div>
-                    </li>
-                        <li class="right">
-                        <div class="chat-info"><span class="datetime">7:02</span> <span class="message">Hello, <br>Michael</span> </div>
-                    </li>
-                    -->
                 </ul>
                 </div>
                 <div class="input-group">
                     <div class="form-line">
-                        <input type="text" class="form-control date" placeholder="Enter your message...">
+                        <input type="text" class="type-message form-control date" placeholder="Enter your message...">
                     </div>
-                    <span class="input-group-addon"> <i class="material-icons">send</i> </span>
+                    <div class="button-message">
+                        
+                    </div>
                 </div>
             </div>
         </div>
@@ -363,22 +339,29 @@
 
 
         async function showMessages(index) {
-            console.log("???: " + index);
             document.getElementById("chat-messages").innerHTML = ``;
-            const chat = await getUsersChats(myAxios, userId);
+            //const chat = await getUsersChats(myAxios, userId);
+            const chat = await getChatById(myAxios, index);
+            console.log("SOMETHING: ", chat, " | ", index);
 
-            for(i=0;i<chat.data[index].messages.length;i++) {
-                if(chat.data[index].messages[i].sender_id == userId) {
+            for(i=0;i<chat.data.messages.length;i++) {
+                if(chat.data.messages[i].sender_id == userId) {
                     document.getElementById("chat-messages").innerHTML += `<li class="right">
-                        <div class="chat-info"><span class="datetime">${chat.data[index].messages[i].time}</span>
-                        <span class="message">${chat.data[index].messages[i].content}</span> </div>
+                        <div class="chat-info"><span class="datetime">${chat.data.messages[i].time}</span>
+                        <span class="message">${chat.data.messages[i].content}</span> </div>
                     </li>`;
+
+                    document.querySelector(".button-message").innerHTML = `<span id="${index}" class="send-message input-group-addon"> <i class="material-icons">send</i> </span>`;
+                    
                 }else {
                     document.getElementById("chat-messages").innerHTML += `<li class="left float-left">
                         <img src="" class="rounded-circle" alt=""> <div class="chat-info">
-                        <span class="datetime">${chat.data[index].messages[i].time}</span>
-                        <span class="message">${chat.data[index].messages[i].content}</span> </div>
+                        <span class="datetime">${chat.data.messages[i].time}</span>
+                        <span class="message">${chat.data.messages[i].content}</span> </div>
                     </li>`;
+
+                    document.querySelector(".button-message").innerHTML = `<span id="${index}" class="send-message input-group-addon"> <i class="material-icons">send</i> </span>`;
+
                 }
             }
         }
@@ -387,14 +370,15 @@
             document.getElementById("user-scrollmenu").innerHTML = ``;
             const userId = sessionStorage.getItem('id')
             const chat = await getUsersChats(myAxios, userId);
+            console.log("load: ", chat, " | ", userId);
 
 
             for(i=0;i<chat.data.length;i++) {
                 //finds how the users are ordered in the data
                 if(chat.data[i].userA_id == userId) {
-                    document.getElementById("user-scrollmenu").innerHTML += `<a id="${i}" class="chat-name">${chat.data[i].userB_name}</a>`;
+                    document.getElementById("user-scrollmenu").innerHTML += `<a id="${chat.data[i]._id}" class="chat-name">${chat.data[i].userB_name}</a>`;
                 }else {
-                    document.getElementById("user-scrollmenu").innerHTML += `<a id="${i}" class="chat-name">${chat.data[i].userA_name}</a>`;
+                    document.getElementById("user-scrollmenu").innerHTML += `<a id="${chat.data[i]._id}" class="chat-name">${chat.data[i].userA_name}</a>`;
                 }
 
                 if(i == chat.data.length-1) {
@@ -443,6 +427,19 @@
                 loadPage(myAxios);
             }
         });
+
+        document.querySelector('.button-message').addEventListener('click', (event) => {
+            console.log("OFFSET: ", event.target.offsetParent.id);
+            message_content = {
+                chatId : event.target.offsetParent.id,
+                content : document.querySelector('.type-message').value,
+                sender_name : sessionStorage.getItem('username'),
+                sender_id : sessionStorage.getItem('id')
+            }
+            sendMessage(myAxios, message_content);
+        });
+
+
     </script>
 
 </body>
