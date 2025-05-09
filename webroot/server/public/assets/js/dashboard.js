@@ -120,16 +120,3 @@ function loadPage (Axios) {
         htmlBuilder("user_for_sale", html);
     });
 }
-// DELETE BUTTONS
-document.querySelector('#user_featured').addEventListener('click', (event) => {
-    console.log(event.target.closest('a').dataset._id);
-})
-
-document.querySelector('#user_featured').addEventListener('click', (event) => {
-    const deleteButton = event.target.closest('.delete_user_featured');
-    if (deleteButton) {
-        const postId = deleteButton.dataset.value;
-        console.log(`Delete post with ID: ${postId}`);
-        // Add delete logic here
-    }
-});

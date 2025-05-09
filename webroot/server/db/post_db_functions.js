@@ -125,7 +125,6 @@ async function createNewPost(post) {
 
 async function editPost(post, postId) {
     try{
-
         const query = { _id: new ObjectId(postId) };
 
         const newPost = await client.db('GregsList').collection('Posts').replaceOne(query, post);
@@ -133,10 +132,26 @@ async function editPost(post, postId) {
         console.log(newPost);
 
     }catch(error){
+        console.error('Error putting edited post to database. \n        ' + error);
+        throw new Error('       Error putting edited post to database. \n');
+    }
+}
+
+async function deletePost(postId){
+    try{
+        const result = await client.db('GregsList').collection('Posts').deleteOne({ _id: new ObjectId(postId)});
+
+        if(result.deletedCount === 1){
+            return true;
+        }
+        else{
+            throw new Error('Error accessing database! \n');
+        }
+
+    }catch(error){
         console.error('Error inserting post to database. \n        ' + error);
         throw new Error('       Error inserting post to database. \n');
     }
-
 }
 
 // Export all the functions that will be called outside of this file
@@ -150,5 +165,6 @@ module.exports = {
     getFeaturedPosts, 
     getUserFeaturedPosts,
     getUserPosts,
-    editPost
+    editPost,
+    deletePost
 }

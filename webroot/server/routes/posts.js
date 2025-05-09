@@ -244,20 +244,46 @@ router.put('/user/:userId/edit/:postId', async (req, res) => {
 
         const postId = req.params.postId;
 
-        console.log(postId);
-
-        console.log("route:  ", req.body.content.data)
-
         const content = await postHandler.editPost(req.body.content.data, postId);
 
-        return res.status(200).json(content);
+        return res.status(201);
 
-    }catch(error) {
-        console.error(error);
+    } catch(error) {
+        console.error('Error deleting post: \n' + error);
         return res.status(500).json({error : 'Error inserting post. \n'});
     }
 });
 
 //          DELETE          //
+
+router.delete('/user/:userId/delete/:postId', async (req, res) => {
+    try{
+        const token = req.headers.authorization;
+    
+        const authenticated = await auth.authenticateUser(token);
+    
+        if(!authenticated){
+            console.error('User unauthorized');
+            res.status(401).json({ error: 'Unauthorized Access! '});
+            return;
+        };
+
+        const userId = req.params.userId;
+
+        const postId = req.params.postId;
+
+        console.log(postId);
+
+        const deleted = await postHandler.deletePost(postId);
+
+        if(deleted === true){
+            console.log("Post was deleted!");
+            return res.status(201);
+        }
+    } catch(error) {
+        console.error('Error deleting post: \n' + error);
+        return res.status(500).json({error : 'Error deleting post. \n'});
+    }
+});
 
 module.exports = router;

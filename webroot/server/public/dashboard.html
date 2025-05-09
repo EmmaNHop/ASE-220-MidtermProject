@@ -379,7 +379,7 @@
 
         // Makes axios passable
         const myAxios = axios;
-        loadPage(myAxios)
+        loadPage(myAxios);
 
         //const userId = sessionStorage.getItem('id');
 
@@ -444,6 +444,38 @@
         document.getElementById("Chat").addEventListener("click", function() {
             console.log("HELLO");
             //loadPeople();
+        });
+
+        // DELETE BUTTONS
+        document.querySelector('#user_featured').addEventListener('click', (event) => {
+            const deleteButton = event.target.closest('.delete_user_featured');
+            console.log();
+            if (deleteButton) {
+                const postId = deleteButton.dataset.value;
+                console.log(`Delete post with ID: ${postId}`);
+                deletePost(myAxios, postId);
+                loadPage(myAxios);
+            }
+        });
+
+        document.querySelector('#user_job').addEventListener('click', (event) => {
+            const deleteButton = event.target.closest('.delete_user_job');
+            if (deleteButton) {
+                const postId = deleteButton.dataset.value;
+                console.log(`Delete post with ID: ${postId}`);
+                deletePost(myAxios, postId);
+                loadPage(myAxios);
+            }
+        });
+
+        document.querySelector('#user_for_sale').addEventListener('click', (event) => {
+            const deleteButton = event.target.closest('.delete_user_featured');
+            if (deleteButton) {
+                const postId = deleteButton.dataset.value;
+                console.log(`Delete post with ID: ${postId}`);
+                deletePost(myAxios, postId);
+                loadPage(myAxios);
+            }
         });
     </script>
 
