@@ -23,13 +23,13 @@ navbar{
 }
 
 /* Set the background color and rounded corners for the list group items */
-.list-group-item {
-    background-color:  rgba(100, 100, 100, 0.246);  /* Grey background for list items */
-    border-color: #6c757d;      /* Matching border color */
-    color: white;               /* Text color white */
-    border-radius: 0.375rem;    /* Rounded corners */
+/*.list-group-item {*/
+/*    background-color:  rgba(100, 100, 100, 0.246);  !* Grey background for list items *!*/
+/*    border-color: #6c757d;      !* Matching border color *!*/
+/*    color: white;               !* Text color white *!*/
+/*    border-radius: 0.375rem;    !* Rounded corners *!*/
 
-}
+/*}*/
 .card-container{
     display: flex;
     flex-direction: column;

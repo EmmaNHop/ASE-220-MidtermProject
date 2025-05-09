@@ -161,11 +161,13 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="col ">
 
-                                        <div class="tab-content ">
-                                            <div class="products-small owl-carousel owl-theme"
-                                                style="display: inline-block">
+                                            <div class="row">
+
                                                 <div id="featured">
+
+
     
                                                 <!-- INSERT FEATURED HERE -->
                                                        
@@ -186,8 +188,7 @@
                                                     <h3><a href="shop.html">For Sale</a></h3>
                                                 </div>
                                             </div>
-                                            <div class="products-small owl-carousel owl-theme"
-                                                style="display: inline-block">
+                                            <div class="row ml-3">
                                                 <div class="item-row">
                                                     <div id="for_sale">
                                                 
@@ -204,7 +205,7 @@
                                     <div class="sns-latestblog">
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <div class="block-title list-group-item">
+                                                <div class="">
                                                     <h3><a href="job.html" >Job Postings</a></h3>
                                                 </div>
                                             </div>
@@ -362,52 +363,66 @@
                     var htmlSegment = "";
 
                         htmlSegment =
-                            `<div class="item list-group-item">
-                                <div class="item-inner">
-                                    <div class="prd">
-                                        <div class="item-img clearfix">
-                                            <a class="product-image have-additional" href="#">
-                                                <span class="post-img">
-                                                    <!--leaving picture empty-->
-                                                     <img src=${featured[i].img} 
-                                                        style="height:7em; width:7em; border-radius:10%" alt="" class="">
-                                                </span>
-                                            </a>
-                                        </div>
-                                        <div class="item-info">
-                                            <div class="info-inner">
-                                                <div class="item-title">
-                                                    <a href="itemDetail.html?id=${featured[i]._id}&type=f">
-                                                    ${featured[i].post_title}
-                                                    </a>
-                                                </div>
-                                                <div class="item-price">
-                                                    <div class="price-box">
-                                                        <span class="regular-price">
-                                                            <span class="price">
-                                                                <span
-                                                                class="price1">${featured[i].price}</span>
-                                                            </span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="action-bot">
-                                                <div class="wrap-addtocart">
-                                                    <button class="btn-cart"
-                                                        title="Add to Cart">
-                                                        <i class="fa fa-shopping-cart"></i>
-                                                        <span><a href="#home"
-                                                            aria-controls="home" role="tab"
-                                                            data-toggle="tab">Message
-                                                            ${featured[i].created_by}</a></span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
+                             `
+                                <div id="${featured[i]._id}" class="card-item p-2  m-2" >
+                                    <div class="" style="color:white">
+                                        <h4><a href="itemDetail.html?id=${featured[i]._id}&type=f">${featured[i].post_title}</h4>
+                                        <img src="${featured[i].img} " alt="Job Image" class="img-responsive"/>
                                     </div>
-                                </div>
-                            </div>`;
+                                    <div class="header" style="color:white">
+                                        <a href="#home"aria-controls="home" role="tab"data-toggle="tab">Message ${featured[i].created_by}</a>
+
+                                        <span class="">${featured[i].price}</span>
+                                    </div>
+
+                                </div>`;
+
+//<                                   div class="item list-group-item">
+                            //     <div class="item-inner">
+                            //         <div class="prd">
+                            //             <div class="item-img clearfix">
+                            //                 <a class="product-image have-additional" href="#">
+                            //                     <span class="post-img">
+                            //                         <!--leaving picture empty-->
+                            //                          <img src=${featured[i].img}
+                            //                             style="height:7em; width:7em; border-radius:10%" alt="" class="">
+                            //                     </span>
+                            //                 </a>
+                            //             </div>
+                            //             <div class="item-info">
+                            //                 <div class="info-inner">
+                            //                     <div class="item-title">
+                            //                         <a href="itemDetail.html?id=${featured[i]._id}&type=f">
+                            //                         ${featured[i].post_title}
+                            //                         </a>
+                            //                     </div>
+                            //                     <div class="item-price">
+                            //                         <div class="price-box">
+                            //                             <span class="regular-price">
+                            //                                 <span class="price">
+                            //                                     <span
+                            //                                     class="price1">${featured[i].price}</span>
+                            //                                 </span>
+                            //                             </span>
+                            //                         </div>
+                            //                     </div>
+                            //                 </div>
+                            //                 <div class="action-bot">
+                            //                     <div class="wrap-addtocart">
+                            //                         <button class="btn-cart"
+                            //                             title="Add to Cart">
+                            //                             <i class="fa fa-shopping-cart"></i>
+                            //                             <span><a href="#home"
+                            //                                 aria-controls="home" role="tab"
+                            //                                 data-toggle="tab">Message
+                            //                                 ${featured[i].created_by}</a></span>
+                            //                         </button>
+                            //                     </div>
+                            //                 </div>
+                            //             </div>
+                            //         </div>
+                            //     </div>
+                            // </div>`;
 
                         /*
                             TODO: 
