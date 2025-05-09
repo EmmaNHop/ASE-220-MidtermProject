@@ -105,7 +105,7 @@ router.get('/jobs', async (req, res) => {
 
 /**
  * 
- *              User post functions
+ *              USER POST FUNCTIONS
  * 
  */
 

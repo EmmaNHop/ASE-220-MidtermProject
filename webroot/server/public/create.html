@@ -166,28 +166,28 @@
                                     <div class="row clearfix m-b-15">
                                         <div class="col-lg-4 col-md-6 col-sm-12">
                                             <h5>Title:</h5>
-                                            <input class="form-control m-1" id="title" type="text" >
+                                            <input class="form-control m-1" id="title" type="text" required>
                                         </div>
                                         <div class="col-lg-4 col-md-6 col-sm-12">
                                             <h5>Content:</h5>
-                                            <input class="form-control m-1" id="content" type="text" >
+                                            <input class="form-control m-1" id="content" type="text" required>
                                         </div>
                                         <div class="col-lg-4 col-md-6 col-sm-12">
                                             <h5>Type:</h5>                      <!--Will probably have a dropdown for this-->
-                                            <input class="form-control m-1" id="type" type="text" ><br>
+                                            <input class="form-control m-1" id="type" type="text" required><br>
                                         </div>
                                         <div class="col-lg-4 col-md-6 col-sm-12">
                                             <h5>Picture:</h5>
-                                            <input class="form-control m-1" id="picture" type="text" ><br>
+                                            <input class="form-control m-1" id="picture" type="text" required><br>
                                         </div>
                                         <div class="col-lg-4 col-md-6 col-sm-12">
                                             <h5>Location:</h5>                  <!--Might just use user location or something-->
-                                            <input class="form-control m-1" id="city" type="text" placeholder="Enter City"><br>
-                                            <input class="form-control m-1" id="state" type="text" placeholder="Enter State"><br>
+                                            <input class="form-control m-1" id="city" type="text" placeholder="Enter City" required><br>
+                                            <input class="form-control m-1" id="state" type="text" placeholder="Enter State" required><br>
                                         </div>
                                         <div class="col-lg-4 col-md-6 col-sm-12">
                                             <h5>Price:</h5>
-                                            <input class="form-control m-1" id="price" type="text"><br>
+                                            <input class="form-control m-1" id="price" type="text" required><br>
                                         </div>
                                         <div class="col-lg-4 col-md-6 col-sm-12">
                                             <h5>Job or Item For Sale?</h5>
@@ -206,9 +206,9 @@
                                         username, date of creation...
                                     -->
                                     </div>
+                                    <p><button style="margin-top: 20px;" id="submit_new_post" type="submit">Submit</button></p>
                                 </form>
                             </div>
-                            <p><button style="margin-top: 20px;" id="submit_new_post" type="submit">Submit</button></p>
                         </div>
                     </div>
                 </div>
@@ -326,7 +326,23 @@
         return await post;
     }
 
-    document.getElementById('submit_new_post').addEventListener('click', function() {
+    document.getElementById('submit_new_post').addEventListener('click', function(e) {
+
+        e.preventDefault();
+
+        const form = document.getElementById('new_post');
+        const title = form.elements.title.value.trim();
+        const content = form.elements.content.value.trim();
+        const type = form.elements.type.value.trim();
+        const picture = form.elements.picture.value.trim();
+        const city = form.elements.city.value.trim();
+        const state = form.elements.state.value.trim();
+        const price = form.elements.price.value.trim();
+
+        if (!title || !content || !type || !picture || !city || !state || !price) {
+            alert("Please fill out all required fields.");
+            return;
+        }
 
         setVars().then(post => {
             addNewPost(myAxios, post);
