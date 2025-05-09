@@ -76,14 +76,16 @@
 			window.location.replace('./detail.html');
 		}
 
-        document.getElementById('signUpButton').addEventListener('click', function() {
+        document.getElementById('signUpButton').addEventListener('click', function(e) {
+            e.preventDefault();
+
             let username=document.getElementById("username").value;
             let password=document.getElementById("password").value;
             let email=document.getElementById("email").value;
             let number=document.getElementById("number").value;
             let birthday=document.getElementById("birthday").value;
 
-            createNewUser(username,password,email,number,birthday);
+            let created = createNewUser(username,password,email,number,birthday);
         });
 
         // Toggle Show/Hide password

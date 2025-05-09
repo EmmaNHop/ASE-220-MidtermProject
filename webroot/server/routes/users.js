@@ -82,12 +82,6 @@ router.post('/signup', async (req, res) => {
             throw new Error('Password needs at least one uppercase character! ');
         }
 
-        const lowercaseRegex = /^(?=.*[a-z]).+$/;
-        if(!lowercaseRegex.test(content.password)){
-            console.error('Password needs at least one lowercase character! ');
-            throw new Error('Password needs at least one lowercase character! ');
-        }
-
         const digitRegex = /^(?=.*\d).+$/;
         if(!digitRegex.test(content.password)){
             console.error('Password needs at least one number! ');
@@ -102,9 +96,8 @@ router.post('/signup', async (req, res) => {
             return;
         }
 
-        // Try to redirect 
         try{
-            res.redirect('/login.html');
+            res.status(200).json({ status: 200 });
         } catch(error){
             return res.status(404).json({error : 'Page not Found' });
         }

@@ -2,7 +2,7 @@ import("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js");
 
 async function createNewUser(username, password, email, number, birthday) {
     try {
-        const response = await axios.post('http://localhost:3000/api/users/signup',
+        axios.post('http://localhost:3000/api/users/signup',
             {
                 content: {
                     username: username,
@@ -11,13 +11,17 @@ async function createNewUser(username, password, email, number, birthday) {
                     number: number,
                     birthday: birthday
                 }
-            },
-        );
-
-        // Redirect after successful signup
-        window.location.replace('./login.html');
-
+            }
+        ).then(response =>{
+            // Redirect after successful signup
+            if(response.status == 200){
+                window.location.replace('login.html');
+            }
+        });
+    
+        
     } catch (error) {
+        alert(error.response.data.error);
         console.error('Signup failed:', error);
     }
 }
