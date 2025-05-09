@@ -23,8 +23,8 @@ async function getChatById(id) {
 
 async function getUsersChats(id) {
     try{
-        const post1 = await client.db('GregsList').collection('Chats').find({ userA_id: new ObjectId(id) }).toArray();
-        const post2 = await client.db('GregsList').collection('Chats').find({ userB_id: new ObjectId(id) }).toArray();
+        const post1 = await client.db('GregsList').collection('Chats').find({ userA_id: id }).toArray();
+        const post2 = await client.db('GregsList').collection('Chats').find({ userB_id: id }).toArray();
         const post = post1.concat(post2);
         if(!post){
             throw new Error(`Chats with ID:${id} was not found.\n`);

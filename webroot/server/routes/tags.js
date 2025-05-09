@@ -8,9 +8,6 @@
 const express = require('express');
 const router = express.Router();
 
-// This is were the data will be sent to
-const tagsHandler = require('../handlers/tags_handler');
-
 // The prompt for the AI to create the tags
 const systemPrompt = `Generate a JSON array of strings that are relevant keywords based on the following user post.  
     The keywords should be:

@@ -227,7 +227,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button class="btn btn-primary">Contact Seller</button>
+                                <button id="contact-seller" class="btn btn-primary">Contact Seller</button>
                             </div>
                         </div>
                     </div>               
@@ -266,6 +266,7 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <!-- post API Script -->
     <script src="assets/js/post_api.js"></script>
+    <script src="assets/js/chat_api.js"></script>
     <script src="assets/js/auth.js"></script>
     <script>
 
@@ -349,6 +350,8 @@
         const urlParams = new URLSearchParams(window.location.search);
         const postId = urlParams.get('id');
         const type = urlParams.get('type');
+        const username = sessionStorage.getItem('username');
+        const userId = sessionStorage.getItem('id');
 
         if(type == 'f'){
             getPostById(myAxios, postId)
@@ -414,6 +417,24 @@
                 
             });
         }
+
+        async function contactSeller() {
+            getPostById(myAxios, postId).then(post => {
+                console.log("Post: ", post);
+                createChat(myAxios, {
+                    userA_id : userId,
+                    userB_id : post.data.user_id,
+                    userA_name : username,
+                    userB_name : post.data.created_by,
+                    content : "Hi, I would like to talk to you about your post"
+                });
+            });
+        };
+
+        document.getElementById('contact-seller').addEventListener('click', function() {
+            console.log("Hello");
+            contactSeller();
+        });
 
     </script>
 

@@ -39,6 +39,7 @@ async function getUsersChats(Axios, id){
 
 async function createChat(Axios, chatInfo){
     try{
+        console.log("chat created: ", chatInfo)
         let post = await Axios.post(`http://localhost:3000/api/chats/newChat`, {
             content : {
                 userA_id : chatInfo.userA_id,
@@ -47,7 +48,7 @@ async function createChat(Axios, chatInfo){
                 userB_name : chatInfo.userB_name,
                 //will set initial message
                 messages : [{
-                    content : chatInfo.messages.content,
+                    content : chatInfo.content,
                     sender_name : chatInfo.userA_name,
                     sender_id : chatInfo.userA_id
                 }]
@@ -61,14 +62,16 @@ async function createChat(Axios, chatInfo){
 
         return await post;
     }catch(error){
-        console.error('Error getting featured post by ID. \n    ' + error);
+        console.error('Error creating chat. \n    ' + error);
     }
 }
 
 async function sendMessage(Axios, messageInfo){
     try{
-        let post = await Axios.put(`http://localhost:3000/api/chats/${id}`, {
+        console.log("HELLO ", messageInfo);
+        let post = await Axios.put(`http://localhost:3000/api/chats/${messageInfo.chatId}`, {
             content : {
+                chat_id : messageInfo.chatId, 
                 messages : [{
                     content : messageInfo.content,
                     sender_name : messageInfo.sender_name,
@@ -85,7 +88,7 @@ async function sendMessage(Axios, messageInfo){
 
         return await post;
     }catch(error){
-        console.error('Error getting featured post by ID. \n    ' + error);
+        console.error('Error sending message. \n    ' + error);
     }
 }
 
