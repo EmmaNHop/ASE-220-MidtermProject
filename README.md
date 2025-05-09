@@ -1,5 +1,7 @@
 # ASE-220 Midterm Project: Greg's List
 
+## **YOUTUBE LINK**: `https://youtu.be/z3pQ3kOTYlw`
+
 ## Overview
 
 Greg's List is a web application designed to allow users to create, view, and manage posts for jobs, items for sale, and featured content. The project integrates AI-powered tag generation using the Cohere API to enhance post discoverability. It also includes user authentication, dynamic content rendering, and a responsive UI.
