@@ -83,9 +83,7 @@ sup {
 sub {
   bottom: -.25em;
 }
-img {
-  border: 0;
-}
+
 svg:not(:root) {
   overflow: hidden;
 }
@@ -215,12 +213,8 @@ th {
     display: table-header-group;
   }
   tr,
-  img {
-    page-break-inside: avoid;
-  }
-  img {
-    max-width: 100% !important;
-  }
+
+
   p,
   h2,
   h3 {
@@ -304,18 +298,7 @@ a:focus {
 figure {
   margin: 0;
 }
-img {
-  vertical-align: middle;
-}
-.img-responsive,
-.thumbnail > img,
-.thumbnail a > img,
-.carousel-inner > .item > img,
-.carousel-inner > .item > a > img {
-  display: block;
-  max-width: 100%;
-  height: auto;
-}
+
 .img-rounded {
   border-radius: 6px;
 }
