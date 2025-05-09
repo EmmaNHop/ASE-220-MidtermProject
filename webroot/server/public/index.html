@@ -33,7 +33,7 @@
 
 	<body>
         <div class="back-to-home">
-            <a href="login.html?#" class="btn btn-icon btn-primary" ><i class="bi bi-person h3"></i></a>
+            <a id="user-state" href="" class="btn btn-icon btn-primary" ><i class="bi bi-person h3"></i></a>
         </div>
         
         <!-- Start -->
@@ -101,9 +101,28 @@
         <script src="assets/js/auth.js"></script>
         <script>
 
-            if(checkUserStatus() === true){
-                // TODO: change page to reflect being logged in
-            }
+            checkUserStatus().then(isLogged =>{
+                if(isLogged === true){
+                    document.getElementById('user-state').innerHTML = 
+                    `<a id="log-out" title="Log Out" href="">Log Out</a>`;
+
+                    document.getElementById('my-account').href="dashboard.html";
+
+                    document.getElementById('log-out').addEventListener('click', function() {
+
+                        logout(sessionStorage.getItem('token')).then(function (response){
+                            if(response === true){
+                                sessionStorage.clear();
+                                localStorage.clear();
+                                window.location.replace('./detail.html');
+                            }
+                        });
+                    });
+                }
+                else{
+                    document.getElementById('user-state').href ="login.html";
+                }
+            });
 
             setInterval(async () => {
             try{

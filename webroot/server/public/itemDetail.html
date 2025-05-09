@@ -211,7 +211,7 @@
                                                 <img id="img" src="">
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4">
-                                                
+
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4">
                                                 <h1>Location</h1>
@@ -221,9 +221,14 @@
                                                 <h3>$ : <small id="price"></small></h3>
                                             </div>
                                         </div>
+                                        
                                         <div>
-                                            <p id="item_description">
                                             </p>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <h1 id="tag-header">Tags</h1>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -268,9 +273,32 @@
     <script src="assets/js/auth.js"></script>
     <script>
 
-        if(checkUserStatus() === true){
-		    // TODO: change page to reflect being logged
-	    }
+        checkUserStatus().then(isLogged =>{
+            if(isLogged === true){
+                document.getElementById('user-state').innerHTML = 
+                `<a id="log-out" title="Log Out" href="">Log Out</a>`;
+
+                document.getElementById('my-account').innerHTML =
+                `<a class="top-link-myaccount" title="My Account" href="dashboard.html">My Account</a>`;
+
+                document.getElementById('log-out').addEventListener('click', function() {
+
+                    logout(sessionStorage.getItem('token')).then(function (response){
+                        if(response === true){
+                            sessionStorage.clear();
+                            localStorage.clear();
+                            window.location.replace('./detail.html');
+                        }
+                    });
+                });
+            }
+            else{
+                document.getElementById('user-state').innerHTML = 
+                `<a id="log-in" title="Log In" href="login.html">Login</a>`;
+                document.getElementById('my-account').innerHTML =``;
+            }
+        });
+
         setInterval(async () => {
             try{
                 checkTokenExp();
@@ -278,6 +306,21 @@
                 alert("Big MF issue");
             }
         }   , 2*60*1000); // Two Min
+
+
+        async function displayTags(tags){
+            const tagHead = document.getElementById("tag-header");
+
+            tags.forEach(tag => {
+                tagHead.insertAdjacentHTML("afterend",`
+                <div class="col-sm-2">
+                    <span> ${tag}</span>
+                </div>
+                `)
+            });
+        }
+
+
         
         const myAxios = axios;
 
@@ -290,9 +333,11 @@
             .then(post => {
 
                 post = post.data;
-                console.log(post)
 
-                //document.getElementById("itemImage").src = job.img || "assets/images/default.jpg";
+                displayTags(post.tags);
+
+                console.log(post);
+
                 document.getElementById("title").innerText = post.post_title;
                 document.getElementById("img").setAttribute("src", post.img)
                 document.getElementById("created_by").innerText = post.post_title;
