@@ -192,13 +192,15 @@ async function checkUserStatus() {
     else if(sessionStorage.getItem('token') !== null){
 
         const expired = await checkTokenExp();
+        
+        var isLoggedIn;
 
         // If the token is about to expire, it will have created a new one and will not need to auth here
         if(expired){
-            var isLoggedIn = checkToken(sessionStorage.getItem('token'));
+            isLoggedIn = checkToken(sessionStorage.getItem('token'));
         }
         else if(!expired){
-            var isLoggedIn = true;
+            isLoggedIn = true;
         }
         else{
             // Uh Oh, should not reach this point
@@ -209,7 +211,7 @@ async function checkUserStatus() {
             return true;
         }
 
-        if(!document.URL.includes("login.html")){
+        if(!document.URL.includes("login.html") && !isLoggedIn){
             window.location.replace('./login.html');
         }
         return false;

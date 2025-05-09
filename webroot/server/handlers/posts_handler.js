@@ -110,6 +110,7 @@ async function createNewPost(post) {
 }
 
 async function editPost(post, postId) {
+    try{
         const editDate = new Date();
 
         console.log(post)
@@ -134,6 +135,21 @@ async function editPost(post, postId) {
             time_edited: `${editDate.getHours()}-${editDate.getMinutes()}-${editDate.getSeconds()}`
         }, postId);
         // I wanted to make a logging util, but I did not have enough time :'(
+    } catch(error){
+        console.error('Error handling editing post. \n' + error);
+        throw new Error('       Error handling editing post. \n');
+    }
+}
+
+async function deletePost(postId){
+
+    try{
+        return db.deletePost(postId);
+    } catch(error){
+        console.error('Error handling deleting post. \n' + error);
+        throw new Error('       Error handling deleting post. \n');
+    }
+
 }
 
 module.exports = {
@@ -145,5 +161,6 @@ module.exports = {
     createNewPost,
     getUserFeaturedPosts,
     getUserPosts,
-    editPost
+    editPost,
+    deletePost
 }

@@ -4,10 +4,12 @@
 *      
 */
 
+const { readableStreamAsyncIterable } = require("cohere-ai/core/streaming-fetcher/Stream");
+
 
 /*          GET METHODS         */
 
-async function getAll(Axios){
+async function getAll(Axios) {
     try{
         let posts = await axios.get('http://localhost:3000/api/posts');
 
@@ -20,7 +22,7 @@ async function getAll(Axios){
     }
 }
 
-async function getPostById(Axios, id){
+async function getPostById(Axios, id) {
     try{
         let post = await Axios.get(`http://localhost:3000/api/posts/id/${id}`);
 
@@ -33,7 +35,7 @@ async function getPostById(Axios, id){
 }
 
 //  Get all featured posts 
-async function getFeaturedPosts(Axios, lowerLimit, upperLimit){
+async function getFeaturedPosts(Axios, lowerLimit, upperLimit) {
     try{
         let posts = await Axios.get('http://localhost:3000/api/posts/featured');
 
@@ -46,7 +48,7 @@ async function getFeaturedPosts(Axios, lowerLimit, upperLimit){
     }
 }
 
-async function getUserFeatured(Axios, user){
+async function getUserFeatured(Axios, user) {
     try {
         let response = await Axios.get(`http://localhost:3000/api/posts/user_posts/${user}`);
         return response.data;
@@ -56,7 +58,7 @@ async function getUserFeatured(Axios, user){
     }
 }
 
-async function getForSale(Axios, lowerLimit, upperLimit){
+async function getForSale(Axios, lowerLimit, upperLimit) {
     try{
         let posts = await Axios.get('http://localhost:3000/api/posts/for_sale');
 
@@ -69,7 +71,7 @@ async function getForSale(Axios, lowerLimit, upperLimit){
     }
 }
 
-async function getUserForSale(Axios, user){
+async function getUserForSale(Axios, user) {
     try{
         let posts = await Axios.get(`http://localhost:3000/api/posts/user_posts/${user}`);
 
@@ -80,7 +82,7 @@ async function getUserForSale(Axios, user){
     }
 }
 
-async function getJobs(Axios, lowerLimit, upperLimit){
+async function getJobs(Axios, lowerLimit, upperLimit) {
     try{
         let posts = await Axios.get('http://localhost:3000/api/posts/jobs');
 
@@ -93,7 +95,7 @@ async function getJobs(Axios, lowerLimit, upperLimit){
     }
 }
 
-async function getUserJobs(Axios, user){
+async function getUserJobs(Axios, user) {
     try{
         let posts = await Axios.get(`http://localhost:3000/api/posts/user_posts/${user}`);
 
@@ -106,7 +108,7 @@ async function getUserJobs(Axios, user){
 
 /*          POST METHODS            */
 
-async function addNewPost(Axios, data){
+async function addNewPost(Axios, data) {
     try{
         let tags = await Axios.post('http://localhost:3000/api/tags/create', {
             content: {
@@ -152,7 +154,7 @@ async function addNewPost(Axios, data){
 }
 
 /*          PUT METHOD              */
-async function editPost(Axios, data, postId){
+async function editPost(Axios, data, postId) {
     try{
         let tags = await Axios.post('http://localhost:3000/api/tags/create', {
             content: {
@@ -184,6 +186,27 @@ async function editPost(Axios, data, postId){
             // TODO: Maybe a loading screen in here?
 
             window.location.replace(`./itemDetail.html?id=${postId}&type=f`);
+        });
+    }catch(error) {
+        console.error('Error making post. \n' + error);
+        throw new Error('       Error making post. \n');
+    }
+}
+
+/*        DELETE METHOD             */
+async function deletePost(Axios, postId) {
+    try{
+        let response = await Axios.delete(`http://localhost:3000/api/posts/user/${data.user_id}/delete/${postId}`,
+        {
+            headers: {
+                Authorization: 'Bearer ' + sessionStorage.getItem('token')
+            }
+        }).then(response => {
+
+            // TODO: Maybe a loading screen in here?
+            if(response.status === 200) {
+                window.location.replace(`./dashboard.html`);
+            }
         });
     }catch(error) {
         console.error('Error making post. \n' + error);
