@@ -33,10 +33,7 @@ router.get('/', async (req, res) => {
 
     try{
         if(filter){
-
-            // TODO: filtered post handler
-            //content = await postHandler.getFilteredPosts();
-
+            
             if(!content){
                 return res.status(404).json({ error: `Invalid filter. Filter: ${filter} not found. \n`});
             }
