@@ -34,20 +34,6 @@ async function getPostById(id) {
     }
 }
 
-async function getPostsUserFeatured(userId, type) {
-    try {
-        const db = client.db('GregsList');
-        const posts = await db.collection('Posts').find({
-            user_id: userId,
-            type: type
-        }).toArray();
-        return posts;
-    } catch (err) {
-        console.error("DB error:", err);
-        throw new Error('Database fetch failed');
-    }
-}
-
 async function getFeaturedPosts() {
     try{
         const featured = await client.db('GregsList').collection('Posts').find({is_featured: true}).toArray();
@@ -158,7 +144,6 @@ async function deletePost(postId){
 module.exports = {
     getRecentPosts,
     getPostById,
-    getPostsUserFeatured,
     getForSalePosts,
     getJobPosts,
     createNewPost,

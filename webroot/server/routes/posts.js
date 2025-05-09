@@ -159,10 +159,10 @@ router.get('/user/featured/:userId', async (req, res) => {
     };
 
     const { userId } = req.params;
-    const { type } = req.query;
+    const type = 'featured';
 
     try {
-        const posts = await postHandler.getUserFeaturedPosts(userId, type);
+        const posts = await postHandler.getUserPosts(userId, type);
         res.status(200).json(posts);
     } catch (err) {
         console.error(err);
@@ -246,7 +246,7 @@ router.put('/user/:userId/edit/:postId', async (req, res) => {
 
         const content = await postHandler.editPost(req.body.content.data, postId);
 
-        return res.status(201);
+        return res.status(201).json({ status: 201 });
 
     } catch(error) {
         console.error('Error deleting post: \n' + error);
@@ -278,7 +278,7 @@ router.delete('/user/:userId/delete/:postId', async (req, res) => {
 
         if(deleted === true){
             console.log("Post was deleted!");
-            return res.status(201);
+            return res.status(201).json({ status: 201 });
         }
     } catch(error) {
         console.error('Error deleting post: \n' + error);

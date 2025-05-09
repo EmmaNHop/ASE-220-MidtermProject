@@ -9,7 +9,7 @@ function htmlBuilder(query, html) {
     }
 }
 
-async function getUserFeatured(Axios, userId) {
+async function getUserFeatured(Axios) {
     try {
         const response = await Axios.get(`http://localhost:3000/api/posts/user/featured/${userId}`, {
             headers: {
@@ -17,6 +17,8 @@ async function getUserFeatured(Axios, userId) {
             }
         });
         const posts = response.data;
+
+        console.log(response);
 
         if (!Array.isArray(posts)) {
             console.error("Unexpected response format:", posts);

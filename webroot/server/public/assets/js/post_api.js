@@ -4,9 +4,6 @@
 *      
 */
 
-const { readableStreamAsyncIterable } = require("cohere-ai/core/streaming-fetcher/Stream");
-
-
 /*          GET METHODS         */
 
 async function getAll(Axios) {
@@ -156,7 +153,7 @@ async function addNewPost(Axios, data) {
 /*          PUT METHOD              */
 async function editPost(Axios, data, postId) {
     try{
-        let tags = await Axios.post('http://localhost:3000/api/tags/create', {
+        const tags = await Axios.post('http://localhost:3000/api/tags/create', {
             content: {
                 post_content : data.post_content
             }
@@ -172,7 +169,7 @@ async function editPost(Axios, data, postId) {
 
         console.log(data);
 
-        let post = await Axios.put(`http://localhost:3000/api/posts/user/${data.user_id}/edit/${postId}`, {
+        const response = await Axios.put(`http://localhost:3000/api/posts/user/${data.user_id}/edit/${postId}`, {
             content: { 
                 data 
             }
@@ -181,12 +178,22 @@ async function editPost(Axios, data, postId) {
             headers: {
                 Authorization: 'Bearer ' + sessionStorage.getItem('token')
             }
-        }).then( function (response){
-
-            // TODO: Maybe a loading screen in here?
-
-            window.location.replace(`./itemDetail.html?id=${postId}&type=f`);
+        }).then(res => {
+            console.log(res);
+            if(res.status === 201){
+            console.log("here");
+                if(data.is_featured === true){
+                    window.location.replace(`itemDetail.html?id=${postId}&type=f`);
+                }
+                else if(data.is_job === true){
+                    window.location.replace(`itemDetail.html?id=${postId}&type=j`);
+                }
+                else if(data.is_job === false){
+                    window.location.replace(`itemDetail.html?id=${postId}&type=s`);
+                }
+            }
         });
+
     }catch(error) {
         console.error('Error making post. \n' + error);
         throw new Error('       Error making post. \n');
