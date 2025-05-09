@@ -1,8 +1,11 @@
 html{
-    background: #2A324B;
+    background: #1d2332;
     height:100%;
 }
-
+navbar{
+    background: #222222;
+    color: white;
+}
 .divider:after,
 .divider:before {
     content: "";
@@ -42,7 +45,7 @@ html{
 }
 
 /* Set the background for the list group container with rounded corners */
-.card {
+.card{
     background-color: rgba(55, 55, 55, 0.25);  /* Grey background for the whole list group */
     border-radius: 0.375rem;    /* Rounded corners */
 }
@@ -77,7 +80,7 @@ html{
 /*background-color: #8e9cc9;*/
 .new{
     background-color:  rgba(100, 100, 100, 0.246);  /* Grey background for list items */
-    border-color: #6c757d;      /* Matching border color */
+    border-color: #384150;      /* Matching border color */
     color: white;               /* Text color white */
     border-radius: 0.375rem;    /* Rounded corners */
 }
@@ -93,9 +96,54 @@ html{
 }
 
 .card-item{
+    color: #eeeeee;
+    background-color: #273451;
+    width: 200px;
+    height: 250px;
+    background-color: rgba(55, 55, 55, 0.25);  /* Grey background for the whole list group */
+    border-radius: 0.375rem;
+    text-align: center;
+}
+.card-item:hover{
+    background-color: rgba(112, 156, 188, 0.25);  /* Darker grey on hover */
+    border-color: #495057;      /* Matching border color */
+    border-radius: 0.375rem;
+}
 
-    background-color: #434c60;
-    width: 230px;
-    height: 230px;
 
+.grey{
+    background-color: #222222;
+}
+
+.delete_user_job:hover, .edit:hover{
+    background-color: #e14342;
+    color:white;
+    border-radius: 10%;
+
+
+
+}
+
+.delete_user_job, .edit{
+    background-color: #f9ccb4;
+    color: black;
+    border-radius: 10%;
+    padding: 1px;
+    font-size: 20px;
+
+
+}
+
+.card-button{
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.post-form{
+    background: #84899f;
+    color: white;
+    padding: 30px;
+    border-radius: 5px;
+    margin-bottom: 20px;
 }
