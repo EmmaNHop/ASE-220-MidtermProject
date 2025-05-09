@@ -22,7 +22,7 @@ GET http://127.0.0.1:3000/api/chats/chat/681b9801de5e1fff96a3805b
 
 ###
 
-GET http://127.0.0.1:3000/api/chats/681ad0d684940469a86b4dad
+GET http://127.0.0.1:3000/api/chats/681d68636d37e1a049f52271
 
 ###
 
@@ -120,6 +120,41 @@ Content-Type: application/json
 
 POST http://localhost:3000/api/users/reauth
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoidGVzdEB1c2VyLmNvbSIsInVzZXJuYW1lIjoiVGVzdFVzZXIiLCJpZCI6IjY4MTU1NDgzZWM4OTAwY2NmNGU1MjNhZiJ9LCJpYXQiOjE3NDY3MTg4ODUsImV4cCI6MTc0NjcxOTE4NX0.O9jteydIWMlRhBWwKN-JFL246K-R9UbjtZWtUpHi6LE
+
+###
+
+POST http://localhost:3000/api/chats/newChat
+Content-Type: application/json
+
+{
+    "content" : {
+        "userA_id" : "TEST4",
+        "userB_id" : "TEST4",
+        "userA_name" : "TEST4",
+        "userB_name" : "TEST4",
+        "messages" : [{
+            "content" : "TEST4",
+            "sender_name" : "TEST4",
+            "sender_id" : "TEST4"
+        }]
+    }
+}
+
+###
+
+PUT http://localhost:3000/api/chats/681d68636d37e1a049f52271
+Content-Type: application/json
+
+{
+    "content" : {
+        "chat_id" : "681d68636d37e1a049f52271",
+        "messages" : [{
+            "content" : "TEST5",
+            "sender_name" : "TEST5",
+            "sender_id" : "TEST5"
+        }]
+    }
+}
 
 ###
 

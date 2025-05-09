@@ -418,6 +418,7 @@
 
         async function loadPeople() {
             document.getElementById("user-scrollmenu").innerHTML = ``;
+            const userId = sessionStorage.getItem('id')
             const chat = await getUsersChats(myAxios, userId);
 
             
@@ -431,8 +432,7 @@
 
                 if(i == chat.data.length-1) {
                     let names = document.querySelectorAll(".chat-name");
-                    for(j=0;i<chat.data.length;j++) {
-                        console.log("J: " + j)
+                    for(j=0;j<chat.data.length;j++) {
                         names[j].addEventListener("click", function(e) {
                             showMessages(e.target.id);
                         });
@@ -442,8 +442,7 @@
         }
 
         document.getElementById("Chat").addEventListener("click", function() {
-            console.log("HELLO");
-            //loadPeople();
+            loadPeople();
         });
 
         // DELETE BUTTONS

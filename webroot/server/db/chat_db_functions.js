@@ -36,7 +36,39 @@ async function getUsersChats(id) {
     }
 }
 
+async function createChat(chatInfo) {
+    try{
+       const post = await client.db('GregsList').collection('Chats').insertOne(chatInfo);
+        if(!post){
+            throw new Error(`Could not create new chat. \n`);
+        }
+        return post;
+    }catch(error){
+        console.error('Error creating chat. \n       ' + error);
+        throw new Error('Error creating chat. \n');
+    }
+}
+
+async function sendMessage(messageInfo, chatId) {
+    try{
+
+        const query = { _id: new ObjectId(chatId) };
+
+        console.log("DB: ", messageInfo);
+
+        const post = await client.db('GregsList').collection('Chats').replaceOne(query, messageInfo);
+        return post;
+    }catch(error){
+        console.error('Error sending message. \n       ' + error);
+        throw new Error('Error sending message. \n');
+    }
+}
+
+
+
 module.exports = {
     getChatById,
-    getUsersChats
+    getUsersChats,
+    createChat,
+    sendMessage
 }
