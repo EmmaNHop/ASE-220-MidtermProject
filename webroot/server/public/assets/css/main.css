@@ -10872,7 +10872,7 @@ input[type=checkbox]:not(:disabled).tabbed:focus~.lever::after {
 }
 
 .sidebar .menu .list .toggled {
-    background-color: #e0e0e0
+    background-color: #8e9cc9
 }
 
 .sidebar .menu .list .ml-menu {

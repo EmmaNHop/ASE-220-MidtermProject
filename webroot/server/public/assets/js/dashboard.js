@@ -91,6 +91,7 @@ function loadPage (Axios) {
                     </div>
                     <div class="body">
                         <p>${job.post_content}</p>
+                        <img src="${job.img}" alt="Job Image" class="img-responsive"></img>
                     </div>
                 </div>`;
             html += htmlSegment;
@@ -103,10 +104,11 @@ function loadPage (Axios) {
         let html = "";
         userPosts.forEach(post => {
             let htmlSegment = `
-                <div id="${post._id}" class="card product-report">
-                    <div class="header">
-                        <h2>${post.post_title} <small>Posted: ${post.date_created}</small></h2>
-                        <ul class="header-dropdown">
+                <div id="${post._id} " class="card product-report card-item p-2">
+                    <div class="">
+                        <h2>${post.post_title} </h2>
+                        <small>Posted: ${post.date_created}</small>
+                        <ul class="">
                             <li><a href="edit.html?id=${post._id}">Edit</a></li>
                             <li><a class="delete_user_for_sale" data-value="${post._id}">Delete</a></li>
                         </ul>
